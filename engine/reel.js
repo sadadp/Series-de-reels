@@ -31,14 +31,26 @@
   const pasos = R.pasos.map(p => { const s = { ...p, inicio: t0 }; t0 += p.dur; return s; });
   const DURACION = t0;
   const BOWL = { x: 300, y: 1260 }, PAN = { x: 800, y: 1260 }, PLATE = { x: 300, y: 1260 };
-  const zonaDe = a => ({ drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate" }[a] || "wide");
+  const zonaDe = a => ({ drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", hook: "hook", rewind: "intro", intro: "intro" }[a] || "wide");
   const CAMS = {
     wide:  { x: 540, y: 1000, z: 1.22 },
     bowl:  { x: 400, y: 1060, z: 1.55 },
     pan:   { x: 740, y: 1060, z: 1.55 },
     plate: { x: 400, y: 1060, z: 1.55 },
+    hook:  { x: 300, y: 1150, z: 2.7 },
+    intro: { x: 540, y: 760, z: 1.15 },
   };
-  const CHEF_X = { wide: 560, bowl: 480, pan: 640, plate: 480 };
+  const CHEF_X = { wide: 560, bowl: 480, pan: 640, plate: 480, hook: 500, intro: 620 };
+  // repisa de ingredientes: cada paso "presenta" ocupa un lugar
+  const SHELF_Y = 1020;
+  const presentas = pasos.filter(p => p.accion === "presenta");
+  presentas.forEach((p, n) => { p.slot = 170 + n * 270; p.n = n; });
+  const camDe = p => p.accion === "presenta" ? { x: Math.max(380, p.slot + 110), y: 960, z: 1.6 } : CAMS[zonaDe(p.accion)];
+  const chefDe = p => p.accion === "presenta" ? p.slot + 190 : CHEF_X[zonaDe(p.accion)];
+  // ¿en qué paso se usa (cae al tazón) cada ingrediente presentado?
+  presentas.forEach(pr => {
+    pr.usoI = pasos.findIndex(s => s.accion === "drop" && (s.ingrediente === pr.ingrediente || (s.ingredientes || []).includes(pr.ingrediente)));
+  });
 
   function pasoEn(t) {
     let i = pasos.findIndex(p => t < p.inicio + p.dur);
@@ -89,23 +101,27 @@
 <g id="cam">
   <!-- pared -->
   <rect x="-600" y="-600" width="${W + 1200}" height="1900" fill="url(#azulejo)"/>
-  <!-- pizarrón -->
-  <g transform="translate(60,640)">
-    <rect width="420" height="270" rx="10" fill="${P.maderaOscura}"/>
-    <rect x="16" y="16" width="388" height="238" rx="6" fill="#263a33"/>
-    <text x="210" y="125" text-anchor="middle" font-family="Lilita" font-size="62" fill="#f6f1e4">${R.pizarron?.[0] || ""}</text>
-    <text x="210" y="195" text-anchor="middle" font-family="Lilita" font-size="44" fill="${P.amarillo}">${R.pizarron?.[1] || ""}</text>
+  <!-- letrero de la receta -->
+  <g transform="translate(540,330)">
+    <rect x="-330" y="-150" width="660" height="300" rx="26" fill="${P.maderaOscura}"/>
+    <rect x="-310" y="-130" width="620" height="260" rx="18" fill="#263a33" stroke="#f6f1e4" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
+    <text y="-58" text-anchor="middle" font-family="Lilita" font-size="40" letter-spacing="3" fill="#f6f1e4">${R.letrero || "RECETA DEL CHEF MICHI"}</text>
+    <text y="30" text-anchor="middle" font-family="Luckiest" font-size="86" fill="${P.amarillo}" stroke="#3a1f0d" stroke-width="10" paint-order="stroke">${R.pizarron?.[0] || ""}</text>
+    <text y="100" text-anchor="middle" font-family="Lilita" font-size="44" fill="#f6f1e4">${R.pizarron?.[1] || ""}</text>
   </g>
-  <!-- repisa con frascos -->
-  <g transform="translate(640,800)">
-    <rect x="0" y="0" width="380" height="26" rx="6" fill="${P.madera}"/>
-    <rect x="30" y="-110" width="80" height="110" rx="14" fill="#f8e7b0" stroke="${P.maderaOscura}" stroke-width="6"/>
-    <rect x="30" y="-130" width="80" height="26" rx="6" fill="${P.azul}"/>
-    <rect x="150" y="-150" width="70" height="150" rx="14" fill="#cfe6c8" stroke="${P.maderaOscura}" stroke-width="6"/>
-    <rect x="150" y="-170" width="70" height="26" rx="6" fill="#e65a7a"/>
-    <circle cx="300" cy="-55" r="55" fill="${P.amarillo}" stroke="${P.maderaOscura}" stroke-width="6"/>
-    <path d="M300,-110 q20,-30 40,-20" stroke="#4f8a3c" stroke-width="10" fill="none" stroke-linecap="round"/>
-  </g>
+  <!-- repisa de ingredientes -->
+  <rect x="-200" y="${SHELF_Y}" width="1500" height="26" rx="6" fill="${P.madera}"/>
+  <rect x="-200" y="${SHELF_Y + 22}" width="1500" height="10" fill="${P.maderaOscura}" opacity=".5"/>
+  ${[60, 520, 980].map(x => `<path d="M${x},${SHELF_Y + 26} l0,60 l-40,-60z" fill="${P.maderaOscura}"/>`).join("")}
+  ${presentas.map(pr => {
+    const cant = pr.cuantos || 1, et = (pr.etiqueta || "").toUpperCase(), ew = et.length * 21 + 44;
+    const arte = [...Array(cant)].map((_, j) => `<g transform="translate(${(j - (cant - 1) / 2) * 80},0)">${INGR[pr.ingrediente] || INGR.huevo}</g>`).join("");
+    return `<g id="item${pr.n}" opacity="0">
+      <line id="hilo${pr.n}" x1="0" y1="-2000" x2="0" y2="-60" stroke="#5a3a12" stroke-width="4"/>
+      <g transform="translate(0,-250)"><rect x="${-ew / 2}" y="-30" width="${ew}" height="60" rx="14" fill="#2a1a10" stroke="${P.amarillo}" stroke-width="4"/>
+      <text y="13" text-anchor="middle" font-family="Lilita" font-size="38" fill="${P.amarillo}">${et}</text></g>
+      <g transform="scale(0.85)">${arte}</g></g>`;
+  }).join("")}
 
   <!-- gabinetes -->
   <rect x="-600" y="1320" width="${W + 1200}" height="900" fill="${P.azul}"/>
@@ -162,6 +178,17 @@
 </g>
 
 <rect width="${W}" height="${H}" fill="url(#vineta)"/>
+
+<!-- rebobinar -->
+<g id="rew" opacity="0">
+  <rect width="${W}" height="${H}" fill="#0b1a33" opacity=".35"/>
+  ${[...Array(48)].map((_, i) => `<rect y="${i * 40}" width="${W}" height="6" fill="#fff" opacity=".07"/>`).join("")}
+  <rect id="rewBarra" x="0" y="0" width="${W}" height="70" fill="#fff" opacity=".18"/>
+  <g transform="translate(540,960)">
+    <rect x="-150" y="-80" width="300" height="160" rx="80" fill="#000" opacity=".55"/>
+    <path d="M-10,-45 L-90,0 L-10,45Z M80,-45 L0,0 L80,45Z" fill="#fff"/>
+  </g>
+</g>
 
 <!-- título -->
 <g id="titulo" transform="translate(540,220)" opacity="0">
@@ -243,7 +270,8 @@
   // ---------- subtítulos: grupos de hasta 3 palabras ----------
   const subs = [];
   pasos.forEach(p => {
-    const words = p.texto.split(/\s+/).filter(Boolean);
+    const words = (p.texto || "").split(/\s+/).filter(Boolean);
+    if (!words.length) return;
     const grupos = [];
     for (let i = 0; i < words.length;) {
       let n = Math.min(3, words.length - i);
@@ -262,6 +290,8 @@
     });
   });
 
+  // subtítulos arriba; abajo solo cuando se ve el título grande
+  const SUB_Y = t => { const a = pasoEn(t).p.accion; return a === "outro" || a === "intro" ? 1560 : 330; };
   let subActual = -1;
   function renderSubs(t) {
     const idx = subs.findIndex(s => t >= s.ini && t < s.fin);
@@ -277,9 +307,9 @@
       const lineas = largo > 13 && txt.length > 1 ? [txt.slice(0, Math.ceil(txt.length / 2)), txt.slice(Math.ceil(txt.length / 2))] : [txt];
       let k = 0;
       lineas.forEach((ln, li) => {
-        const y = (li - (lineas.length - 1) / 2) * 120;
+        const y = (li - (lineas.length - 1) / 2) * 100;
         ln.forEach(() => {}); // posiciones por tspan
-        const mk = (cls, extra) => `<text class="${cls}" y="${y}" text-anchor="middle" font-family="Baloo" font-weight="800" font-size="118" letter-spacing="-2" ${extra}>${ln.map((w, j) => `<tspan data-k="${k + j}">${w}${j < ln.length - 1 ? " " : ""}</tspan>`).join("")}</text>`;
+        const mk = (cls, extra) => `<text class="${cls}" y="${y}" text-anchor="middle" font-family="Baloo" font-weight="800" font-size="96" letter-spacing="-1" ${extra}>${ln.map((w, j) => `<tspan data-k="${k + j}">${w}${j < ln.length - 1 ? " " : ""}</tspan>`).join("")}</text>`;
         g.insertAdjacentHTML("beforeend", mk("sombra", `fill="#000" stroke="#000" stroke-width="30" stroke-linejoin="round" transform="translate(0,8)"`));
         g.insertAdjacentHTML("beforeend", mk("frente", `fill="#fff" stroke="#000" stroke-width="16" stroke-linejoin="round" paint-order="stroke"`));
         k += ln.length;
@@ -288,7 +318,7 @@
     if (idx < 0) return;
     const s = subs[idx];
     const pop = easeOutBack((t - s.ini) / 0.16);
-    g.setAttribute("transform", `translate(540,1560) scale(${lerp(0.7, 1, pop)})`);
+    g.setAttribute("transform", `translate(540,${SUB_Y(t)}) scale(${lerp(0.7, 1, pop)})`);
     g.querySelectorAll(".frente tspan").forEach(ts => {
       const w = s.palabras[+ts.dataset.k];
       ts.setAttribute("fill", t >= w.t && t < w.t + w.d ? P.amarillo : "#fff");
@@ -301,24 +331,25 @@
     const { i, p, u, k } = pasoEn(t);
 
     // cámara: transición suave al cambiar de zona
-    const zona = zonaDe(p.accion);
-    const prev = i > 0 ? zonaDe(pasos[i - 1].accion) : zona;
-    const ct = ease(u / 0.6);
-    const A = CAMS[prev], B = CAMS[zona];
+    const prevP = i > 0 ? pasos[i - 1] : p;
+    const ct = ease(u / (p.accion === "rewind" ? p.dur : 0.6));
+    const A = camDe(prevP), B = camDe(p);
     let cx = lerp(A.x, B.x, ct), cy = lerp(A.y, B.y, ct), cz = lerp(A.z, B.z, ct);
     cz *= 1 + 0.03 * k; // zoom lento tipo "Ken Burns"
-    if (p.accion === "intro") cz *= lerp(1.12, 1, ease(u / 1.2));
+    if (p.accion === "intro") cz *= lerp(1.08, 1, ease(u / 1.2));
+    if (p.accion === "hook") cz *= lerp(1.15, 1, ease(u / p.dur));
+    if (p.accion === "rewind") { cx += Math.sin(t * 90) * 10; cy += Math.cos(t * 70) * 6; }
     set("cam", { transform: `translate(540,960) scale(${cz}) translate(${-cx},${-cy})` });
 
     // chef: posición, rebote, parpadeo
-    const xA = CHEF_X[prev], xB = CHEF_X[zona];
+    const xA = chefDe(prevP), xB = chefDe(p);
     const chefX = lerp(xA, xB, ease(u / 0.6));
     const caminando = Math.abs(xA - xB) > 1 && u < 0.6;
     const bob = caminando ? Math.abs(Math.sin(t * 18)) * -14 : Math.sin(t * 3) * 4;
     set("chef", { transform: `translate(${chefX},${1262 + bob})` });
     set("cola", { d: `M60,-80 Q150,-90 ${140 + Math.sin(t * 4) * 18},-180` });
     const parpadeo = (t % 3.1) < 0.12;
-    const feliz = p.accion === "outro" || p.accion === "serve" || (p.accion === "intro" && u > 1.2);
+    const feliz = p.accion === "outro" || p.accion === "serve" || p.accion === "hook" || p.accion === "rewind" || (p.accion === "intro" && u > 1.2);
     set("ojoAbierto", { opacity: feliz ? 0 : 1, transform: parpadeo ? "translate(0,-8) scale(1,0.1) translate(0,8)" : "" });
     set("ojoFeliz", { opacity: feliz ? 1 : 0 });
     const hablando = subs.some(s => t >= s.ini && t < s.fin) && Math.sin(t * 22) > 0;
@@ -390,11 +421,13 @@
       flipS = Math.cos(2 * Math.PI * q);
       if (q > 0.5) colHC = P.dorado;
     } else if (flipI >= 0 && i > flipI) colHC = P.dorado;
-    const enPlato = p.accion === "serve" || p.accion === "outro";
+    const enHook = p.accion === "hook" || p.accion === "rewind";
+    const enPlato = p.accion === "serve" || p.accion === "outro" || enHook;
     set("hotcake", { transform: `translate(0,${-70 + flipY}) scale(${Math.max(r, 0.001)},${Math.max(r, 0.001) * (Math.abs(flipS) < 0.12 ? 0.12 * Math.sign(flipS || 1) : flipS)})`, opacity: enPlato ? 0 : 1 });
     set("hotcakeBody", { fill: colHC });
     for (let b = 0; b < 7; b++) set("bb" + b, { opacity: burb * (0.5 + 0.5 * Math.sin(t * 9 + b * 1.7) > 0.3 ? 1 : 0) });
     const fuego = pourI >= 0 && i >= pourI && !enPlato;
+    if (enHook) r = 0;
     set("flama", { opacity: fuego ? 0.55 + 0.25 * Math.sin(t * 20) : 0 });
     set("vapor", { opacity: fuego ? 0.7 : 0 });
     for (let v = 0; v < 3; v++) set("vp" + v, { transform: `translate(0,${-((t * 60 + v * 30) % 60)})`, opacity: 0.9 - ((t * 60 + v * 30) % 60) / 70 });
@@ -403,9 +436,10 @@
     const serveI = pasos.findIndex(s => s.accion === "serve");
     let plato = 0;
     if (serveI >= 0 && i >= serveI) plato = i > serveI ? 1 : easeOutBack(clamp((u - 0.2) / 0.5));
+    if (enHook) plato = 1;
     set("bowl", { opacity: plato > 0 ? 0 : 1 });
     set("plato", { opacity: plato > 0 ? 1 : 0, transform: `translate(${PLATE.x},${PLATE.y}) scale(${Math.max(plato, 0.001)})` });
-    const su = i > serveI ? 99 : u;
+    const su = i > serveI || enHook ? 99 : u;
     for (let n = 0; n < 4; n++) {
       const q = clamp((su - 0.4 - n * 0.18) / 0.25);
       set("pila" + n, { opacity: q > 0 ? 1 : 0, transform: `translate(0,${-120 * (1 - easeIn(q))})` });
@@ -416,7 +450,7 @@
     set("canelaPolvo", { opacity: topping.includes("canela") ? clamp((su - 1.9) / 0.3) : 0 });
 
     // destellos
-    const brillo = p.accion === "intro" || p.accion === "serve" || p.accion === "outro" ? 1 : 0.35;
+    const brillo = enHook || p.accion === "intro" || p.accion === "serve" || p.accion === "outro" ? 1 : 0.35;
     document.querySelectorAll("[id^=sp]").forEach(el => {
       const f = +el.dataset.f, s = +el.dataset.s;
       const tw = Math.max(0, Math.sin(t * 2.4 + f));
@@ -424,12 +458,26 @@
       el.setAttribute("transform", `translate(${el.dataset.x},${el.dataset.y}) rotate(${t * 40 + f * 30}) scale(${s * (0.4 + tw * 0.8)})`);
     });
 
+    // ingredientes presentados en la repisa
+    presentas.forEach(pr => {
+      const j = pasos.indexOf(pr);
+      const usado = pr.usoI >= 0 && i >= pr.usoI;
+      if (i < j || usado || enHook) { set("item" + pr.n, { opacity: 0 }); return; }
+      const q = i > j ? 1 : easeOutBack(clamp(u / 0.7));
+      const y = lerp(SHELF_Y - 1100, SHELF_Y - 62, q);
+      const sw = i === j ? Math.sin(u * 7) * 4 * (1 - clamp(u / 1.2)) : 0;
+      set("item" + pr.n, { opacity: 1, transform: `translate(${pr.slot},${y}) rotate(${sw})` });
+    });
+
+    // efecto rebobinar
+    set("rew", { opacity: p.accion === "rewind" ? 1 : 0 });
+    if (p.accion === "rewind") set("rewBarra", { y: (t * 2600) % H });
+
     // título
     let tit = 0;
-    if (p.accion === "intro") tit = easeOutBack(u / 0.5);
     if (p.accion === "outro") tit = easeOutBack(u / 0.5);
     const titWobble = Math.sin(t * 4) * 2;
-    set("titulo", { opacity: tit > 0 ? 1 : 0, transform: `translate(540,220) rotate(${titWobble}) scale(${Math.max(tit, 0.001)})` });
+    set("titulo", { opacity: tit > 0 ? 1 : 0, transform: `translate(540,480) rotate(${titWobble}) scale(${Math.max(tit, 0.001)})` });
 
     renderSubs(t);
   }

@@ -50,7 +50,10 @@ Cada paso tiene `accion`, `dur` (segundos) y `texto` (subtítulo / guion de voz)
 
 | accion  | qué pasa en pantalla                                   |
 |---------|--------------------------------------------------------|
-| intro   | plano abierto, título rebota, chef saluda              |
+| hook    | abre con el plato terminado en primer plano (gancho)    |
+| rewind  | efecto ⏪ de regreso al inicio (`texto: ""`)            |
+| intro   | letrero "Receta del chef Michi", chef saluda           |
+| presenta| ingrediente baja colgado a la repisa con etiqueta (`etiqueta`, `cuantos`) |
 | drop    | ingrediente cae al tazón (`ingrediente` o `ingredientes`) |
 | stir    | chef mezcla con cuchara                                 |
 | pour    | masa a la sartén, fuego y vapor                         |

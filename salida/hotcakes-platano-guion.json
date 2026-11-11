@@ -1,47 +1,72 @@
 [
  {
   "ini": 0,
-  "fin": 3,
-  "texto": "Hot cakes con solo tres ingredientes"
+  "fin": 2.6,
+  "texto": "¡Mira qué esponjositos!"
  },
  {
-  "ini": 3,
-  "fin": 6,
-  "texto": "Machaca un plátano bien maduro"
+  "ini": 2.6,
+  "fin": 3.5,
+  "texto": ""
  },
  {
-  "ini": 6,
-  "fin": 9,
-  "texto": "Agrega dos huevos"
+  "ini": 3.5,
+  "fin": 6.1,
+  "texto": "Receta del chef Michi"
  },
  {
-  "ini": 9,
-  "fin": 12,
-  "texto": "Y media taza de avena"
+  "ini": 6.1,
+  "fin": 8.1,
+  "texto": "Un plátano maduro"
  },
  {
-  "ini": 12,
-  "fin": 15.2,
+  "ini": 8.1,
+  "fin": 10.1,
+  "texto": "Dos huevos"
+ },
+ {
+  "ini": 10.1,
+  "fin": 12.3,
+  "texto": "Media taza de avena"
+ },
+ {
+  "ini": 12.3,
+  "fin": 14.700000000000001,
+  "texto": "Machaca el plátano"
+ },
+ {
+  "ini": 14.700000000000001,
+  "fin": 17.1,
+  "texto": "Agrega los huevos"
+ },
+ {
+  "ini": 17.1,
+  "fin": 19.3,
+  "texto": "Y la avena"
+ },
+ {
+  "ini": 19.3,
+  "fin": 22.3,
   "texto": "Mezcla hasta que quede suave"
  },
  {
-  "ini": 15.2,
-  "fin": 18.4,
+  "ini": 22.3,
+  "fin": 25.7,
   "texto": "Sartén a fuego bajo con poquita mantequilla"
  },
  {
-  "ini": 18.4,
-  "fin": 21.599999999999998,
+  "ini": 25.7,
+  "fin": 28.7,
   "texto": "Voltea cuando salgan burbujitas"
  },
  {
-  "ini": 21.599999999999998,
-  "fin": 24.999999999999996,
+  "ini": 28.7,
+  "fin": 31.9,
   "texto": "Sirve con miel y canela"
  },
  {
-  "ini": 24.999999999999996,
-  "fin": 27.999999999999996,
+  "ini": 31.9,
+  "fin": 36.1,
   "texto": "¡Listo! Sígueme para más recetas"
  }
 ]

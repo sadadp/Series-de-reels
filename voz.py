@@ -72,6 +72,8 @@ def main():
     guion = json.load(open(os.path.join(RAIZ, "salida", f"{o.receta}-guion.json")))
     total = np.zeros(int((guion[-1]["fin"] + 0.5) * SR), dtype=np.float32)
     for g in guion:
+        if not g["texto"].strip():
+            continue
         s = decir(g["texto"])
         largo, hueco = len(s) / SR, g["fin"] - g["ini"]
         if largo > hueco:
