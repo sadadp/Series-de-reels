@@ -4,6 +4,18 @@ Reels verticales (1080x1920, 30 fps) de recetas, estilo caricatura:
 cocina de azulejos, chef gato animado, título rayado tipo "sticker"
 y subtítulos grandes palabra por palabra (la palabra que suena se pinta amarilla).
 
+## Rápido (todo en un paso)
+
+```bash
+bash hacer-reel.sh hotcakes-platano          # 3D + voz Alonso + música → salida/<receta>-final.mp4
+```
+
+- **3D** (`engine3d/`, Three.js, estilo caricatura): chef gato, huevos que se rompen,
+  confeti, salpicaduras, vapor, cámara viva. `--2d` usa el motor plano anterior.
+- **Música** (`musica.py`): tema alegre propio (xilófono, piano, bajo, palmas) generado por código —
+  sin derechos de autor — con efectos (pop, ding, whoosh, chisporroteo) y la música baja cuando habla la voz.
+- Vista previa en navegador: `node render.js hotcakes-platano --serve` y abre la URL.
+
 ## Uso
 
 ```bash

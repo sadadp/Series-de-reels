@@ -1,14 +1,13 @@
-[0.0s] ¡Mira qué esponjositos!
-[2.6s] 
-[3.5s] Receta del chef Michi
-[6.1s] Un plátano maduro
-[8.1s] Dos huevos
-[10.1s] Media taza de avena
-[12.3s] Machaca el plátano
-[14.7s] Agrega los huevos
-[17.1s] Y la avena
-[19.3s] Mezcla hasta que quede suave
-[22.3s] Sartén a fuego bajo con poquita mantequilla
-[25.7s] Voltea cuando salgan burbujitas
-[28.7s] Sirve con miel y canela
-[31.9s] ¡Listo! Sígueme para más recetas
+[0.0s] ¡Mira nomás qué esponjositos!
+[3.5s] ¡Receta del chef Michi!
+[6.1s] ¡Un plátano bien maduro!
+[8.4s] ¡Dos huevitos!
+[10.4s] ¡Media taza de avena!
+[12.6s] ¡Machaca el plátano!
+[15.0s] ¡Ahora los huevos!
+[17.4s] ¡Y la avena!
+[19.6s] ¡Mezcla, mezcla, mezcla!
+[22.6s] Sartén a fuego bajito con mantequilla
+[26.0s] ¡Salen burbujitas y volteamos!
+[29.0s] ¡Con miel y canela, uff!
+[32.2s] ¡Listo! Guárdala y sígueme

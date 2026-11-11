@@ -487,7 +487,7 @@
   window.DURACION = DURACION;
   window.renderAt = renderAt;
   window.getSubs = () => subs.map(s => ({ ini: s.ini, fin: s.fin, texto: s.palabras.map(x => x.w).join(" ") }));
-  window.getGuion = () => pasos.map(p => ({ ini: p.inicio, fin: p.inicio + p.dur, texto: p.texto }));
+  window.getGuion = () => pasos.map(p => ({ ini: p.inicio, fin: p.inicio + p.dur, texto: p.texto || "", accion: p.accion }));
 
   document.fonts.ready.then(() => {
     renderAt(0);

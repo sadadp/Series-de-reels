@@ -6,3 +6,4 @@ salida/voz/
 salida/*-voz.wav
 herramientas/piper/*.onnx
 herramientas/piper/*.onnx.json
+node_modules/

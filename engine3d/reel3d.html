@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel 3D de cocina</title>
+<style>
+  @font-face { font-family: "Luckiest"; src: url("../engine/fonts/LuckiestGuy.ttf"); }
+  @font-face { font-family: "Lilita"; src: url("../engine/fonts/LilitaOne.ttf"); }
+  @font-face { font-family: "Baloo"; src: url("../engine/fonts/Baloo2-ExtraBold.ttf"); }
+  html, body { margin: 0; background: #111; }
+  #stage { width: 1080px; height: 1920px; position: relative; overflow: hidden; }
+  #stage canvas, #stage svg { position: absolute; left: 0; top: 0; display: block; }
+  body.preview { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px; }
+  body.preview #wrap { width: 405px; height: 720px; overflow: hidden; border-radius: 18px; }
+  body.preview #stage { transform: scale(0.375); transform-origin: 0 0; }
+  #controls { display: none; color: #eee; font: 14px sans-serif; gap: 8px; align-items: center; }
+  body.preview #controls { display: flex; }
+  #controls input[type=range] { width: 300px; }
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage"><canvas id="gl" width="1080" height="1920"></canvas><svg id="ov" width="1080" height="1920" viewBox="0 0 1080 1920"></svg></div></div>
+<div id="controls">
+  <button id="play">▶︎ / ❚❚</button>
+  <input id="scrub" type="range" min="0" max="1000" value="0">
+  <span id="time">0.0s</span>
+</div>
+<script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js" } }</script>
+<script>
+  const params = new URLSearchParams(location.search);
+  if (!params.has("render")) document.body.classList.add("preview");
+  const s = document.createElement("script");
+  s.src = "../recetas/" + (params.get("r") || "hotcakes-platano") + ".js";
+  s.onload = () => import("./reel3d.js");
+  document.body.appendChild(s);
+</script>
+</body>
+</html>

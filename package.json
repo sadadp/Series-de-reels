@@ -1,0 +1,23 @@
+{
+  "name": "series-de-reels",
+  "version": "1.0.0",
+  "description": "Reels verticales (1080x1920, 30 fps) de recetas, estilo caricatura: cocina de azulejos, chef gato animado, título rayado tipo \"sticker\" y subtítulos grandes palabra por palabra (la palabra que suena se pinta amarilla).",
+  "main": "render.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sadadp/Series-de-reels.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sadadp/Series-de-reels/issues"
+  },
+  "homepage": "https://github.com/sadadp/Series-de-reels#readme",
+  "dependencies": {
+    "three": "^0.170.0"
+  }
+}
