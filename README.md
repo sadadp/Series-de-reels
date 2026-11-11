@@ -24,7 +24,16 @@ ffmpeg -i salida/hotcakes-platano.mp4 -i salida/hotcakes-platano-voz.wav \
   -c:v copy -c:a aac -shortest salida/hotcakes-platano-con-voz.mp4
 ```
 
-Voces en español: `em_alex`, `ef_dora`, `em_santa`. Si una frase no cabe en su paso, `voz.py` avisa: sube `dur`.
+Tres motores (`--motor`):
+
+| motor  | voces en español | ejemplo |
+|--------|------------------|---------|
+| kokoro | em_alex, ef_dora, em_santa | `--motor kokoro --voz ef_dora` |
+| edge   | 45 voces neurales de 21 países (MX, US, ES, AR, CO…) | `--motor edge --voz es-MX-DaliaNeural` |
+| piper  | es_MX-claude-high, es_MX-ald-medium, es_AR-daniela-high, es_ES-davefx/sharvard/carlfm | `--motor piper --voz es_MX-claude-high` |
+
+Escucha muestras en `salida/voces/` (kokoro), `salida/voces/edge/` y `salida/voces/piper/`.
+Edge necesita red a `speech.platform.bing.com`; Piper baja modelos de Hugging Face. Si una frase no cabe en su paso, `voz.py` avisa: sube `dur`.
 También hay un servidor MCP (`.mcp.json` → `kokoro-tts`) con la herramienta `text_to_speech`.
 
 ## Skills instaladas (`.claude/skills/`)
