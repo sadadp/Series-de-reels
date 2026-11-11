@@ -4,6 +4,7 @@
 Uso:
   python3 voz.py hotcakes-platano                                  # Kokoro em_alex
   python3 voz.py hotcakes-platano --motor edge --voz es-MX-JorgeNeural
+  python3 voz.py hotcakes-platano --motor edge --voz es-US-AlonsoNeural --vel 1.2 --tono +45Hz
   python3 voz.py hotcakes-platano --motor piper --voz es_MX-claude-high
 
 Lee salida/<receta>-guion.json (lo crea render.js) y escribe salida/<receta>-voz.wav
@@ -35,12 +36,12 @@ def motor_kokoro(voz, vel):
     return decir
 
 
-def motor_edge(voz, vel):
+def motor_edge(voz, vel, tono="+0Hz"):
     proxy = os.environ.get("HTTPS_PROXY")
     pct = f"{round((vel - 1) * 100):+d}%"
     def decir(texto):
         with tempfile.NamedTemporaryFile(suffix=".mp3") as t:
-            cmd = ["edge-tts", "--voice", voz, f"--rate={pct}", "--text", texto, "--write-media", t.name]
+            cmd = ["edge-tts", "--voice", voz, f"--rate={pct}", f"--pitch={tono}", "--text", texto, "--write-media", t.name]
             if proxy: cmd += ["--proxy", proxy]
             subprocess.run(cmd, check=True, capture_output=True)
             return a_wav(t.name)
@@ -63,9 +64,10 @@ def main():
     a.add_argument("--motor", choices=["kokoro", "edge", "piper"], default="kokoro")
     a.add_argument("--voz")
     a.add_argument("--vel", type=float, default=1.1)
+    a.add_argument("--tono", default="+0Hz", help="solo edge, ej. +20Hz o -15Hz")
     o = a.parse_args()
     voz = o.voz or VOZ_DEF[o.motor]
-    decir = {"kokoro": motor_kokoro, "edge": motor_edge, "piper": motor_piper}[o.motor](voz, o.vel)
+    decir = motor_edge(voz, o.vel, o.tono) if o.motor == "edge" else {"kokoro": motor_kokoro, "piper": motor_piper}[o.motor](voz, o.vel)
 
     guion = json.load(open(os.path.join(RAIZ, "salida", f"{o.receta}-guion.json")))
     total = np.zeros(int((guion[-1]["fin"] + 0.5) * SR), dtype=np.float32)
