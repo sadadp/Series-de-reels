@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "kokoro-tts": {
+      "command": "bash",
+      "args": ["-c", "cd herramientas/kokoro-tts-mcp && exec python3 mcp-tts.py"],
+      "env": {
+        "TTS_VOICE": "em_alex",
+        "TTS_SPEED": "1.1",
+        "TTS_LANGUAGE": "es",
+        "S3_ENABLED": "false",
+        "MP3_FOLDER": "salida/voz"
+      }
+    }
+  }
+}

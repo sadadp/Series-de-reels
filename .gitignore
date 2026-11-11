@@ -1,0 +1,6 @@
+herramientas/kokoro-tts-mcp/*.onnx
+herramientas/kokoro-tts-mcp/*.bin
+__pycache__/
+salida/*.png
+salida/voz/
+salida/*-voz.wav

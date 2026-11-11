@@ -1,0 +1,47 @@
+[
+ {
+  "ini": 0,
+  "fin": 3,
+  "texto": "Hot cakes con solo tres ingredientes"
+ },
+ {
+  "ini": 3,
+  "fin": 6,
+  "texto": "Machaca un plátano bien maduro"
+ },
+ {
+  "ini": 6,
+  "fin": 9,
+  "texto": "Agrega dos huevos"
+ },
+ {
+  "ini": 9,
+  "fin": 12,
+  "texto": "Y media taza de avena"
+ },
+ {
+  "ini": 12,
+  "fin": 15.2,
+  "texto": "Mezcla hasta que quede suave"
+ },
+ {
+  "ini": 15.2,
+  "fin": 18.4,
+  "texto": "Sartén a fuego bajo con poquita mantequilla"
+ },
+ {
+  "ini": 18.4,
+  "fin": 21.599999999999998,
+  "texto": "Voltea cuando salgan burbujitas"
+ },
+ {
+  "ini": 21.599999999999998,
+  "fin": 24.999999999999996,
+  "texto": "Sirve con miel y canela"
+ },
+ {
+  "ini": 24.999999999999996,
+  "fin": 27.999999999999996,
+  "texto": "¡Listo! Sígueme para más recetas"
+ }
+]

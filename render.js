@@ -41,6 +41,7 @@ const srtTime = s => {
   const subs = await page.evaluate(() => window.getSubs());
   fs.writeFileSync(path.join(out, `${nombre}.srt`), subs.map((s, i) => `${i + 1}\n${srtTime(s.ini)} --> ${srtTime(s.fin)}\n${s.texto}\n`).join("\n"));
   const guion = await page.evaluate(() => window.getGuion());
+  fs.writeFileSync(path.join(out, `${nombre}-guion.json`), JSON.stringify(guion, null, 1));
   fs.writeFileSync(path.join(out, `${nombre}-guion.txt`), guion.map(g => `[${g.ini.toFixed(1)}s] ${g.texto}`).join("\n") + "\n");
 
   const mp4 = path.join(out, `${nombre}.mp4`);

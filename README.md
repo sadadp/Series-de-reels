@@ -14,6 +14,26 @@ node render.js hotcakes-platano --audio voz.mp3   # mezcla voz/música
 
 Vista previa en el navegador: abre `engine/reel.html?r=hotcakes-platano`.
 
+## Voz en off (Kokoro, gratis y local)
+
+```bash
+bash herramientas/setup-voz.sh             # una vez por sesión: deps + modelo (~350 MB)
+node render.js hotcakes-platano            # crea el video y salida/<receta>-guion.json
+python3 voz.py hotcakes-platano --voz em_alex   # voz alineada a cada paso
+ffmpeg -i salida/hotcakes-platano.mp4 -i salida/hotcakes-platano-voz.wav \
+  -c:v copy -c:a aac -shortest salida/hotcakes-platano-con-voz.mp4
+```
+
+Voces en español: `em_alex`, `ef_dora`, `em_santa`. Si una frase no cabe en su paso, `voz.py` avisa: sube `dur`.
+También hay un servidor MCP (`.mcp.json` → `kokoro-tts`) con la herramienta `text_to_speech`.
+
+## Skills instaladas (`.claude/skills/`)
+
+- **Diseño** (ui-ux-pro-max-skill): ui-ux-pro-max, design, design-system, brand, banner-design, slides, ui-styling
+- **Video** (Remotion): remotion-best-practices, -create, -render, -captions, -markup, -studio, -multimedia, …
+- **Voz**: speech (OpenAI TTS, pide `OPENAI_API_KEY`), voiceover-narration-studio y voice-cloning-studio (servicio de pago beatra.ai)
+- **OpenWhispr**: openwhispr-api, openwhispr-cli (solo sirven con la app OpenWhispr)
+
 ## Nueva receta
 
 Copia `recetas/hotcakes-platano.js` y cambia título, pasos y textos.
