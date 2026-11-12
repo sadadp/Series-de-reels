@@ -12,9 +12,9 @@ window.RECETA = {
   toppings: ["miel", "mantequilla", "canela"],
   voz: { motor: "edge", voz: "es-US-AlonsoNeural", vel: 1.25, tono: "+35Hz" },
   pasos: [
-    { accion: "hook", dur: 2.6, texto: "¡Miau! ¡Mira nomás qué esponjositos!" },
+    { accion: "hook", dur: 2.6, texto: "¡Mira nomás qué esponjositos!" },
     { accion: "rewind", dur: 0.9, texto: "" },
-    { accion: "intro", dur: 2.6, texto: "¡Hoy cocina el chef Michi!" },
+    { accion: "intro", dur: 2.6, texto: "¡Hoy hacemos hot cakes de plátano!" },
     { accion: "presenta", dur: 2.3, ingrediente: "platano", etiqueta: "1 plátano maduro", texto: "¡Un plátano bien maduro!" },
     { accion: "presenta", dur: 2.0, ingrediente: "huevo", cuantos: 2, etiqueta: "2 huevos", texto: "¡Dos huevitos!" },
     { accion: "presenta", dur: 2.2, ingrediente: "avena", etiqueta: "½ taza de avena", texto: "¡Media taza de avena!" },
@@ -24,7 +24,7 @@ window.RECETA = {
     { accion: "stir", dur: 3.0, texto: "¡Mezcla, mezcla, mezcla, yupi!" },
     { accion: "pour", dur: 3.4, texto: "¡Al sartén con mantequillita!" },
     { accion: "flip", dur: 3.0, texto: "¡Salen burbujitas y volteamos!" },
-    { accion: "serve", dur: 3.2, texto: "¡Con miel y canela! ¡Mmm, delicioso!" },
+    { accion: "serve", dur: 3.2, texto: "¡Con miel y canela! ¡Qué rico!" },
     { accion: "outro", dur: 4.2, texto: "¡Comenta qué receta quieres que haga Michi!" },
   ],
 };
