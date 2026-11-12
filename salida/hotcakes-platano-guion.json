@@ -1,86 +1,86 @@
 [
  {
   "ini": 0,
-  "fin": 2.6,
-  "texto": "¡Mira nomás qué esponjositos!",
+  "fin": 3.71,
+  "texto": "¡Miau! ¡Mira nomás qué esponjositos!",
   "accion": "hook"
  },
  {
-  "ini": 2.6,
-  "fin": 3.5,
+  "ini": 3.71,
+  "fin": 4.61,
   "texto": "",
   "accion": "rewind"
  },
  {
-  "ini": 3.5,
-  "fin": 6.1,
-  "texto": "¡Receta del chef Michi!",
+  "ini": 4.61,
+  "fin": 6.970000000000001,
+  "texto": "¡Hoy cocina el chef Michi!",
   "accion": "intro"
  },
  {
-  "ini": 6.1,
-  "fin": 8.399999999999999,
+  "ini": 6.970000000000001,
+  "fin": 9.21,
   "texto": "¡Un plátano bien maduro!",
   "accion": "presenta"
  },
  {
-  "ini": 8.399999999999999,
-  "fin": 10.399999999999999,
+  "ini": 9.21,
+  "fin": 11.38,
   "texto": "¡Dos huevitos!",
   "accion": "presenta"
  },
  {
-  "ini": 10.399999999999999,
-  "fin": 12.599999999999998,
+  "ini": 11.38,
+  "fin": 13.55,
   "texto": "¡Media taza de avena!",
   "accion": "presenta"
  },
  {
-  "ini": 12.599999999999998,
-  "fin": 14.999999999999998,
+  "ini": 13.55,
+  "fin": 15.72,
   "texto": "¡Machaca el plátano!",
   "accion": "drop"
  },
  {
-  "ini": 14.999999999999998,
-  "fin": 17.4,
+  "ini": 15.72,
+  "fin": 17.92,
   "texto": "¡Ahora los huevos!",
   "accion": "drop"
  },
  {
-  "ini": 17.4,
-  "fin": 19.599999999999998,
+  "ini": 17.92,
+  "fin": 20.090000000000003,
   "texto": "¡Y la avena!",
   "accion": "drop"
  },
  {
-  "ini": 19.599999999999998,
-  "fin": 22.599999999999998,
-  "texto": "¡Mezcla, mezcla, mezcla!",
+  "ini": 20.090000000000003,
+  "fin": 23.460000000000004,
+  "texto": "¡Mezcla, mezcla, mezcla, yupi!",
   "accion": "stir"
  },
  {
-  "ini": 22.599999999999998,
-  "fin": 25.999999999999996,
-  "texto": "Sartén a fuego bajito con mantequilla",
+  "ini": 23.460000000000004,
+  "fin": 25.940000000000005,
+  "texto": "¡Al sartén con mantequillita!",
   "accion": "pour"
  },
  {
-  "ini": 25.999999999999996,
-  "fin": 28.999999999999996,
+  "ini": 25.940000000000005,
+  "fin": 28.660000000000004,
   "texto": "¡Salen burbujitas y volteamos!",
   "accion": "flip"
  },
  {
-  "ini": 28.999999999999996,
-  "fin": 32.199999999999996,
-  "texto": "¡Con miel y canela, uff!",
+  "ini": 28.660000000000004,
+  "fin": 33.02,
+  "texto": "¡Con miel y canela! ¡Mmm, delicioso!",
   "accion": "serve"
  },
  {
-  "ini": 32.199999999999996,
-  "fin": 36.4,
-  "texto": "¡Listo! Guárdala y sígueme",
+  "ini": 33.02,
+  "fin": 36.02,
+  "texto": "¡Comenta qué receta quieres que haga Michi!",
   "accion": "outro"
  }
 ]

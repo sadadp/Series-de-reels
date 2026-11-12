@@ -14,6 +14,8 @@ import numpy as np, soundfile as sf
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 SR = 24000
+# duración mínima por acción para que la animación se vea completa
+MIN_DUR = {"hook": 1.8, "intro": 1.8, "presenta": 1.45, "drop": 1.7, "stir": 1.9, "pour": 2.0, "flip": 2.3, "serve": 2.7, "outro": 3.0}
 VOZ_DEF = {"kokoro": "em_alex", "edge": "es-MX-JorgeNeural", "piper": "es_MX-claude-high"}
 
 
@@ -65,20 +67,37 @@ def main():
     a.add_argument("--voz")
     a.add_argument("--vel", type=float, default=1.1)
     a.add_argument("--tono", default="+0Hz", help="solo edge, ej. +20Hz o -15Hz")
+    a.add_argument("--ajustar", action="store_true", help="ajusta la duración de cada paso a su frase (sin huecos)")
     o = a.parse_args()
     voz = o.voz or VOZ_DEF[o.motor]
     decir = motor_edge(voz, o.vel, o.tono) if o.motor == "edge" else {"kokoro": motor_kokoro, "piper": motor_piper}[o.motor](voz, o.vel)
 
     guion = json.load(open(os.path.join(RAIZ, "salida", f"{o.receta}-guion.json")))
+    clips = [decir(g["texto"]) if g["texto"].strip() else None for g in guion]
+
+    if o.ajustar:
+        # cada paso dura lo que dura su frase (+ respiro), sin bajar del mínimo de su animación
+        durs = []
+        for g, c in zip(guion, clips):
+            base = g["fin"] - g["ini"]
+            if c is None:
+                durs.append(round(base, 2)); continue
+            minimo = MIN_DUR.get(g["accion"], 1.5) + (0.5 if g["accion"] == "drop" and "huev" in g["texto"].lower() else 0)
+            durs.append(round(max(minimo, len(c) / SR + 0.3), 2))
+        json.dump(durs, open(os.path.join(RAIZ, "salida", f"{o.receta}-duraciones.json"), "w"))
+        t = 0
+        for g, d in zip(guion, durs):
+            g["ini"], g["fin"] = t, t + d; t += d
+        print(f"Duración ajustada: {t:.1f}s")
+
     total = np.zeros(int((guion[-1]["fin"] + 0.5) * SR), dtype=np.float32)
-    for g in guion:
-        if not g["texto"].strip():
+    for g, s in zip(guion, clips):
+        if s is None:
             continue
-        s = decir(g["texto"])
         largo, hueco = len(s) / SR, g["fin"] - g["ini"]
         if largo > hueco:
             print(f"  ojo: '{g['texto']}' dura {largo:.1f}s pero el paso {hueco:.1f}s (sube dur)")
-        i = int((g["ini"] + 0.1) * SR)
+        i = int((g["ini"] + 0.08) * SR)
         total[i:i + len(s)] += s[: len(total) - i]
     out = os.path.join(RAIZ, "salida", f"{o.receta}-voz.wav")
     sf.write(out, total, SR)

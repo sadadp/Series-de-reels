@@ -419,6 +419,10 @@ ov.innerHTML = `
   ${R.titulo.map((l, i) => `<text y="${i * 150}" text-anchor="middle" font-family="Luckiest" font-size="${l.length > 9 ? 128 : 160}" fill="#3a1f0d" stroke="#3a1f0d" stroke-width="44" stroke-linejoin="round" transform="translate(10,14)">${l}</text>
   <text y="${i * 150}" text-anchor="middle" font-family="Luckiest" font-size="${l.length > 9 ? 128 : 160}" fill="url(#rayas)" stroke="#3a1f0d" stroke-width="14" stroke-linejoin="round" paint-order="stroke">${l}</text>`).join("")}
 </g>
+<g id="cta" opacity="0">
+  <path d="M-200,-120 h400 a60,60 0 0 1 60,60 v110 a60,60 0 0 1 -60,60 h-230 l-80,70 l10,-70 h-100 a60,60 0 0 1 -60,-60 v-110 a60,60 0 0 1 60,-60z" fill="#fff" stroke="#3a1f0d" stroke-width="14" stroke-linejoin="round"/>
+  <circle cx="-110" cy="-5" r="26" fill="#ff5d73"/><circle cx="0" cy="-5" r="26" fill="${P.amarillo}"/><circle cx="110" cy="-5" r="26" fill="#3bceac"/>
+</g>
 <g id="subs"></g>
 <text x="540" y="1840" text-anchor="middle" font-family="Baloo" font-weight="800" font-size="40" fill="#fff" opacity=".6">${R.usuario || ""}</text>`;
 const $ = id => document.getElementById(id);
@@ -673,7 +677,9 @@ function renderAt(t) {
   let fl = 0;
   for (const s of pasos) if (["intro", "serve"].includes(s.accion) && t >= s.inicio) fl = Math.max(fl, 1 - clamp((t - s.inicio) / 0.25));
   set("flash", { opacity: fl * 0.7 });
-  const tit = p.accion === "outro" ? easeOutBack(u / 0.5) : 0;
+  const tit = 0;
+  const cta = p.accion === "outro" ? easeOutBack((u - 0.3) / 0.5) : 0;
+  set("cta", { opacity: cta > 0 ? 1 : 0, transform: `translate(${700 + Math.sin(t * 3) * 10},${1180 + Math.abs(Math.sin(t * 5)) * -30}) rotate(${Math.sin(t * 4) * 5}) scale(${Math.max(cta, 0.001)})` });
   set("titulo", { opacity: tit > 0 ? 1 : 0, transform: `translate(540,330) rotate(${Math.sin(t * 4) * 2}) scale(${Math.max(tit, 0.001)})` });
   renderSubs(t, p.accion);
 

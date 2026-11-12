@@ -207,6 +207,8 @@ def main():
         if v.ndim > 1: v = v.mean(axis=1)
         v = np.interp(np.arange(int(len(v) * SR / vsr)) / SR, np.arange(len(v)) / vsr, v)
         voz[: min(len(v), len(voz))] = v[: len(voz)]
+        voz = voz + 0.35 * pasa_altos(voz, 0.92)  # más brillo = suena más alegre
+        voz = np.tanh(voz / (np.abs(voz).max() + 1e-9) * 1.6)  # compresión suave, más presencia
         voz /= np.abs(voz).max() + 1e-9
 
     # "ducking": baja la música cuando habla la voz
