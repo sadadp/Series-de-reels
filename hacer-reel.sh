@@ -10,5 +10,5 @@ node render.js "$R"
 python3 voz.py "$R" --motor edge --voz "$VOZ" --vel "$VEL" --tono "$TONO"
 python3 musica.py "$R"
 ffmpeg -loglevel error -y -i "salida/$R.mp4" -i "salida/$R-mezcla.wav" -c:v copy \
-  -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 44100 -shortest "salida/$R-final.mp4"
+  -af "volume=3.6dB,alimiter=limit=0.89" -c:a aac -b:a 192k -ar 44100 -shortest "salida/$R-final.mp4"
 echo "Listo: salida/$R-final.mp4"

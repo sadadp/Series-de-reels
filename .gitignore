@@ -7,3 +7,4 @@ salida/*-voz.wav
 herramientas/piper/*.onnx
 herramientas/piper/*.onnx.json
 node_modules/
+salida/*-mezcla.wav
