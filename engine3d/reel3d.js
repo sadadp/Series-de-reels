@@ -679,7 +679,7 @@ function renderAt(t) {
   set("flash", { opacity: fl * 0.7 });
   const tit = 0;
   const cta = p.accion === "outro" ? easeOutBack((u - 0.3) / 0.5) : 0;
-  set("cta", { opacity: cta > 0 ? 1 : 0, transform: `translate(${700 + Math.sin(t * 3) * 10},${1180 + Math.abs(Math.sin(t * 5)) * -30}) rotate(${Math.sin(t * 4) * 5}) scale(${Math.max(cta, 0.001)})` });
+  set("cta", { opacity: cta > 0 ? 1 : 0, transform: `translate(${790 + Math.sin(t * 3) * 10},${740 + Math.abs(Math.sin(t * 5)) * -24}) rotate(${Math.sin(t * 4) * 5}) scale(${Math.max(cta, 0.001) * 0.75})` });
   set("titulo", { opacity: tit > 0 ? 1 : 0, transform: `translate(540,330) rotate(${Math.sin(t * 4) * 2}) scale(${Math.max(tit, 0.001)})` });
   renderSubs(t, p.accion);
 
