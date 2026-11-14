@@ -7,33 +7,33 @@ y subtítulos grandes palabra por palabra (la palabra que suena se pinta amarill
 ## Rápido (todo en un paso)
 
 ```bash
-bash hacer-reel.sh hotcakes-platano          # 3D + voz Alonso + música → salida/<receta>-final.mp4
+bash hacer-reel.sh panqueques-platano          # 3D + voz Alonso + música → salida/<receta>-final.mp4
 ```
 
 - **3D** (`engine3d/`, Three.js, estilo caricatura): chef gato, huevos que se rompen,
   confeti, salpicaduras, vapor, cámara viva. `--2d` usa el motor plano anterior.
 - **Música** (`musica.py`): tema alegre propio (xilófono, piano, bajo, palmas) generado por código —
   sin derechos de autor — con efectos (pop, ding, whoosh, chisporroteo) y la música baja cuando habla la voz.
-- Vista previa en navegador: `node render.js hotcakes-platano --serve` y abre la URL.
+- Vista previa en navegador: `node render.js panqueques-platano --serve` y abre la URL.
 
 ## Uso
 
 ```bash
-node render.js hotcakes-platano            # -> salida/hotcakes-platano.mp4 + .srt + guion
-node render.js hotcakes-platano --frame 12 # un solo cuadro PNG para revisar
-node render.js hotcakes-platano --audio voz.mp3   # mezcla voz/música
+node render.js panqueques-platano            # -> salida/panqueques-platano.mp4 + .srt + guion
+node render.js panqueques-platano --frame 12 # un solo cuadro PNG para revisar
+node render.js panqueques-platano --audio voz.mp3   # mezcla voz/música
 ```
 
-Vista previa en el navegador: abre `engine/reel.html?r=hotcakes-platano`.
+Vista previa en el navegador: abre `engine/reel.html?r=panqueques-platano`.
 
 ## Voz en off (Kokoro, gratis y local)
 
 ```bash
 bash herramientas/setup-voz.sh             # una vez por sesión: deps + modelo (~350 MB)
-node render.js hotcakes-platano            # crea el video y salida/<receta>-guion.json
-python3 voz.py hotcakes-platano --voz em_alex   # voz alineada a cada paso
-ffmpeg -i salida/hotcakes-platano.mp4 -i salida/hotcakes-platano-voz.wav \
-  -c:v copy -c:a aac -shortest salida/hotcakes-platano-con-voz.mp4
+node render.js panqueques-platano            # crea el video y salida/<receta>-guion.json
+python3 voz.py panqueques-platano --voz em_alex   # voz alineada a cada paso
+ffmpeg -i salida/panqueques-platano.mp4 -i salida/panqueques-platano-voz.wav \
+  -c:v copy -c:a aac -shortest salida/panqueques-platano-con-voz.mp4
 ```
 
 Tres motores (`--motor`):
@@ -57,7 +57,7 @@ También hay un servidor MCP (`.mcp.json` → `kokoro-tts`) con la herramienta `
 
 ## Nueva receta
 
-Copia `recetas/hotcakes-platano.js` y cambia título, pasos y textos.
+Copia `recetas/panqueques-platano.js` y cambia título, pasos y textos.
 Cada paso tiene `accion`, `dur` (segundos) y `texto` (subtítulo / guion de voz):
 
 | accion  | qué pasa en pantalla                                   |

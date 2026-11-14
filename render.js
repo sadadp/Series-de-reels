@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Renderiza una receta a MP4 vertical 1080x1920.
-// Uso: node render.js hotcakes-platano [--2d] [--fps 30] [--audio mezcla.wav] [--frame 5.2] [--serve]
+// Uso: node render.js panqueques-platano [--2d] [--fps 30] [--audio mezcla.wav] [--frame 5.2] [--serve]
 //   por defecto usa el motor 3D (engine3d); --2d usa el motor SVG plano (engine)
 //   --serve abre un servidor local para la vista previa en el navegador
 const { chromium } = require("playwright");
@@ -10,7 +10,7 @@ const fs = require("fs");
 const path = require("path");
 
 const args = process.argv.slice(2);
-const nombre = args.find((a, i) => !a.startsWith("--") && !(args[i - 1] || "").match(/^--(fps|audio|frame|port)$/)) || "hotcakes-platano";
+const nombre = args.find((a, i) => !a.startsWith("--") && !(args[i - 1] || "").match(/^--(fps|audio|frame|port)$/)) || "panqueques-platano";
 const opt = k => { const i = args.indexOf("--" + k); return i >= 0 ? args[i + 1] : null; };
 const flag = k => args.includes("--" + k);
 const FPS = +(opt("fps") || 30);

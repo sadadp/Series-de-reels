@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Todo en un paso: video 3D + voz + música + mezcla final.
-# Uso: bash hacer-reel.sh hotcakes-platano [voz] [vel] [tono]
+# Uso: bash hacer-reel.sh panqueques-platano
 set -e
-R=${1:-hotcakes-platano}; VOZ=${2:-es-US-AlonsoNeural}; VEL=${3:-1.25}; TONO=${4:-+35Hz}
+R=${1:-panqueques-platano}
 cd "$(dirname "$0")"
 [ -d node_modules/three ] || npm install --silent
 [ -f /root/.ccr/ca-bundle.crt ] && export SSL_CERT_FILE=/root/.ccr/ca-bundle.crt
 rm -f "salida/$R-duraciones.json"
 node render.js "$R" --frame 0 >/dev/null          # guion con textos
-python3 voz.py "$R" --motor edge --voz "$VOZ" --vel "$VEL" --tono "$TONO" --ajustar   # voz + duraciones sin huecos
+python3 voz.py "$R" --motor chatterbox --vel 1.07 --tono-factor 1.055 --exag 1.2 --ajustar   # voz michi + duraciones sin huecos
 node render.js "$R"
 python3 musica.py "$R"
 ffmpeg -loglevel error -y -i "salida/$R.mp4" -i "salida/$R-mezcla.wav" -c:v copy \

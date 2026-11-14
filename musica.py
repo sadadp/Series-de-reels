@@ -2,7 +2,7 @@
 """Música de fondo (pianito alegre generado por código, 100% propio) + efectos
 de sonido sincronizados + voz, todo mezclado en un solo audio.
 
-Uso: python3 musica.py hotcakes-platano [--bpm 116] [--vol 0.22] [--semilla 3]
+Uso: python3 musica.py panqueques-platano [--bpm 116] [--vol 0.22] [--semilla 3]
 Lee salida/<receta>-guion.json y salida/<receta>-voz.wav (si existe)
 Escribe salida/<receta>-mezcla.wav
 """
@@ -207,8 +207,8 @@ def main():
         if v.ndim > 1: v = v.mean(axis=1)
         v = np.interp(np.arange(int(len(v) * SR / vsr)) / SR, np.arange(len(v)) / vsr, v)
         voz[: min(len(v), len(voz))] = v[: len(voz)]
-        voz = voz + 0.35 * pasa_altos(voz, 0.92)  # más brillo = suena más alegre
-        voz = np.tanh(voz / (np.abs(voz).max() + 1e-9) * 1.6)  # compresión suave, más presencia
+        voz = voz + 0.15 * pasa_altos(voz, 0.92)  # más brillo = suena más alegre
+        voz = np.tanh(voz / (np.abs(voz).max() + 1e-9) * 1.1)  # compresión suave, más presencia
         voz /= np.abs(voz).max() + 1e-9
 
     # "ducking": baja la música cuando habla la voz

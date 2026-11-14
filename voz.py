@@ -2,10 +2,10 @@
 """Genera la voz en off de una receta, alineada a cada paso.
 
 Uso:
-  python3 voz.py hotcakes-platano                                  # Kokoro em_alex
-  python3 voz.py hotcakes-platano --motor edge --voz es-MX-JorgeNeural
-  python3 voz.py hotcakes-platano --motor edge --voz es-US-AlonsoNeural --vel 1.2 --tono +45Hz
-  python3 voz.py hotcakes-platano --motor piper --voz es_MX-claude-high
+  python3 voz.py panqueques-platano                                  # Kokoro em_alex
+  python3 voz.py panqueques-platano --motor edge --voz es-MX-JorgeNeural
+  python3 voz.py panqueques-platano --motor edge --voz es-US-AlonsoNeural --vel 1.2 --tono +45Hz
+  python3 voz.py panqueques-platano --motor piper --voz es_MX-claude-high
 
 Lee salida/<receta>-guion.json (lo crea render.js) y escribe salida/<receta>-voz.wav
 """
@@ -16,7 +16,7 @@ RAIZ = os.path.dirname(os.path.abspath(__file__))
 SR = 24000
 # duración mínima por acción para que la animación se vea completa
 MIN_DUR = {"hook": 1.8, "intro": 1.8, "presenta": 1.45, "drop": 1.7, "stir": 1.9, "pour": 2.0, "flip": 2.3, "serve": 2.7, "outro": 3.0}
-VOZ_DEF = {"kokoro": "em_alex", "edge": "es-MX-JorgeNeural", "piper": "es_MX-claude-high"}
+VOZ_DEF = {"chatterbox": "michi", "kokoro": "em_alex", "edge": "es-MX-JorgeNeural", "piper": "es_MX-claude-high"}
 
 
 def a_wav(entrada):
@@ -60,20 +60,51 @@ def motor_piper(voz, vel):
     return decir
 
 
+VENV_CB = os.environ.get("VENV_CB", "/home/user/venv-cb/bin/python")
+
+
+def motor_chatterbox_lote(textos, ref, exag, tono, vel):
+    """Genera todas las frases de una vez (carga el modelo una sola vez) y les da
+    el tono y la velocidad sin cambiar el timbre (rubberband con formantes)."""
+    tmp = tempfile.mkdtemp()
+    frases = [{"texto": t, "salida": os.path.join(tmp, f"{i}.wav")} for i, t in enumerate(textos)]
+    cfg = os.path.join(tmp, "cfg.json")
+    json.dump({"frases": frases, "ref": ref, "exageracion": exag}, open(cfg, "w"))
+    subprocess.run([VENV_CB, os.path.join(RAIZ, "herramientas", "chatterbox_tts.py"), cfg], check=True, capture_output=True)
+    salida = []
+    for f in frases:
+        pf = f["salida"] + ".pf.wav"
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f["salida"], "-af",
+                        f"rubberband=tempo={vel}:pitch={tono}:formant=preserved:transients=smooth,highshelf=f=3500:g=1.5,"
+                        "acompressor=threshold=-20dB:ratio=2:attack=10:release=120,silenceremove=start_periods=1:start_threshold=-45dB,"
+                        "areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", pf], check=True)
+        salida.append(a_wav(pf))
+    return salida
+
+
 def main():
     a = argparse.ArgumentParser()
     a.add_argument("receta")
-    a.add_argument("--motor", choices=["kokoro", "edge", "piper"], default="kokoro")
+    a.add_argument("--motor", choices=["kokoro", "edge", "piper", "chatterbox"], default="kokoro")
     a.add_argument("--voz")
     a.add_argument("--vel", type=float, default=1.1)
     a.add_argument("--tono", default="+0Hz", help="solo edge, ej. +20Hz o -15Hz")
+    a.add_argument("--ref", default=os.path.join(RAIZ, "herramientas", "voces", "michi-euforico.wav"), help="chatterbox: voz de referencia")
+    a.add_argument("--exag", type=float, default=1.2, help="chatterbox: emoción")
+    a.add_argument("--tono-factor", type=float, default=1.055, help="chatterbox: tono (1.0 = igual)")
     a.add_argument("--ajustar", action="store_true", help="ajusta la duración de cada paso a su frase (sin huecos)")
     o = a.parse_args()
     voz = o.voz or VOZ_DEF[o.motor]
-    decir = motor_edge(voz, o.vel, o.tono) if o.motor == "edge" else {"kokoro": motor_kokoro, "piper": motor_piper}[o.motor](voz, o.vel)
+    if o.motor != "chatterbox":
+        decir = motor_edge(voz, o.vel, o.tono) if o.motor == "edge" else {"kokoro": motor_kokoro, "piper": motor_piper}[o.motor](voz, o.vel)
 
     guion = json.load(open(os.path.join(RAIZ, "salida", f"{o.receta}-guion.json")))
-    clips = [decir(g["texto"]) if g["texto"].strip() else None for g in guion]
+    if o.motor == "chatterbox":
+        con = [g["texto"] for g in guion if g["texto"].strip()]
+        gen = iter(motor_chatterbox_lote(con, o.ref, o.exag, o.tono_factor, o.vel))
+        clips = [next(gen) if g["texto"].strip() else None for g in guion]
+    else:
+        clips = [decir(g["texto"]) if g["texto"].strip() else None for g in guion]
 
     if o.ajustar:
         # cada paso dura lo que dura su frase (+ respiro), sin bajar del mínimo de su animación

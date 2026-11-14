@@ -153,7 +153,7 @@ function cocina() {
     c.fillStyle = "#263a33"; c.beginPath(); c.roundRect(28, 28, w - 56, h - 56, 26); c.fill();
     c.setLineDash([4, 26]); c.lineCap = "round"; c.strokeStyle = "#f6f1e4"; c.lineWidth = 8; c.beginPath(); c.roundRect(44, 44, w - 88, h - 88, 20); c.stroke();
     c.textAlign = "center"; c.fillStyle = "#f6f1e4"; c.font = "54px Lilita"; c.fillText(R.letrero || "RECETA DEL CHEF MICHI", w / 2, 130);
-    c.font = "140px Luckiest"; c.lineWidth = 16; c.strokeStyle = "#3a1f0d"; c.setLineDash([]); c.strokeText(R.pizarron?.[0] || "", w / 2, 290); c.fillStyle = P.amarillo; c.fillText(R.pizarron?.[0] || "", w / 2, 290);
+    { let fs = 140; c.font = `${fs}px Luckiest`; while (c.measureText(R.pizarron?.[0] || "").width > w - 120 && fs > 60) { fs -= 6; c.font = `${fs}px Luckiest`; } } c.lineWidth = 16; c.strokeStyle = "#3a1f0d"; c.setLineDash([]); c.strokeText(R.pizarron?.[0] || "", w / 2, 290); c.fillStyle = P.amarillo; c.fillText(R.pizarron?.[0] || "", w / 2, 290);
     c.fillStyle = "#f6f1e4"; c.font = "70px Lilita"; c.fillText(R.pizarron?.[1] || "", w / 2, 395);
   });
   const letrero = new THREE.Mesh(new THREE.BoxGeometry(4.6, 2.1, 0.15), [M(P.maderaOscura), M(P.maderaOscura), M(P.maderaOscura), M(P.maderaOscura), new THREE.MeshToonMaterial({ map: tx, gradientMap: grad }), M(P.maderaOscura)]);

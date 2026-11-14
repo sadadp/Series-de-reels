@@ -30,11 +30,11 @@
   const params = new URLSearchParams(location.search);
   if (!params.has("render")) document.body.classList.add("preview");
   const s = document.createElement("script");
-  s.src = "../recetas/" + (params.get("r") || "hotcakes-platano") + ".js";
+  s.src = "../recetas/" + (params.get("r") || "panqueques-platano") + ".js";
   s.onload = async () => {
     // duraciones ajustadas a la voz (las crea voz.py --ajustar)
     try {
-      const r = await fetch("../salida/" + (params.get("r") || "hotcakes-platano") + "-duraciones.json");
+      const r = await fetch("../salida/" + (params.get("r") || "panqueques-platano") + "-duraciones.json");
       if (r.ok) (await r.json()).forEach((d, i) => { if (window.RECETA.pasos[i]) window.RECETA.pasos[i].dur = d; });
     } catch (e) {}
     import("./reel3d.js");
