@@ -1,0 +1,86 @@
+[
+ {
+  "ini": 0,
+  "fin": 2.6,
+  "texto": "¡Mira nomás qué esponjositos!",
+  "accion": "hook"
+ },
+ {
+  "ini": 2.6,
+  "fin": 3.5,
+  "texto": "",
+  "accion": "rewind"
+ },
+ {
+  "ini": 3.5,
+  "fin": 6.1,
+  "texto": "¡Hoy hacemos panqueques de plátano!",
+  "accion": "intro"
+ },
+ {
+  "ini": 6.1,
+  "fin": 8.399999999999999,
+  "texto": "¡Un plátano bien maduro!",
+  "accion": "presenta"
+ },
+ {
+  "ini": 8.399999999999999,
+  "fin": 10.399999999999999,
+  "texto": "¡Dos huevitos!",
+  "accion": "presenta"
+ },
+ {
+  "ini": 10.399999999999999,
+  "fin": 12.599999999999998,
+  "texto": "¡Media taza de avena!",
+  "accion": "presenta"
+ },
+ {
+  "ini": 12.599999999999998,
+  "fin": 14.999999999999998,
+  "texto": "¡Machaca el plátano!",
+  "accion": "drop"
+ },
+ {
+  "ini": 14.999999999999998,
+  "fin": 17.4,
+  "texto": "¡Ahora los huevos!",
+  "accion": "drop"
+ },
+ {
+  "ini": 17.4,
+  "fin": 19.599999999999998,
+  "texto": "¡Y la avena!",
+  "accion": "drop"
+ },
+ {
+  "ini": 19.599999999999998,
+  "fin": 22.599999999999998,
+  "texto": "¡Mezcla, mezcla, mezcla, yupi!",
+  "accion": "stir"
+ },
+ {
+  "ini": 22.599999999999998,
+  "fin": 25.999999999999996,
+  "texto": "¡Al sartén con mantequillita!",
+  "accion": "pour"
+ },
+ {
+  "ini": 25.999999999999996,
+  "fin": 28.999999999999996,
+  "texto": "¡Salen burbujitas y volteamos!",
+  "accion": "flip"
+ },
+ {
+  "ini": 28.999999999999996,
+  "fin": 32.199999999999996,
+  "texto": "¡Con miel y canela! ¡Qué rico!",
+  "accion": "serve"
+ },
+ {
+  "ini": 32.199999999999996,
+  "fin": 36.4,
+  "texto": "¡Comenta qué receta quieres que haga Michi!",
+  "accion": "outro"
+ }
+]
