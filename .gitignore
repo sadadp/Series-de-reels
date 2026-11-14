@@ -10,3 +10,5 @@ node_modules/
 salida/*-mezcla.wav
 salida/hotcakes-platano.mp4
 salida/*-voz.wav
+salida/*-duraciones.json
+salida/*-guion.json
