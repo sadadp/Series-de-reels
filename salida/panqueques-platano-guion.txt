@@ -1,13 +1,13 @@
 [0.0s] ¡Mira nomás qué esponjositos!
-[3.5s] ¡Hoy hacemos panqueques de plátano!
-[6.1s] Necesitas un plátano bien maduro,
-[8.4s] dos huevitos,
-[10.4s] y media taza de avena.
-[12.6s] ¡Primero machacamos el plátano!
-[15.0s] Luego agregamos los huevitos.
-[17.4s] Después, la avena.
-[19.6s] ¡Y mezclamos, mezclamos, mezclamos!
-[22.6s] Ahora, al sartén con mantequillita.
-[26.0s] Cuando salgan burbujitas, ¡volteamos!
-[29.0s] Y al final, ¡miel y canela! ¡Qué rico!
-[32.2s] ¡Comenta qué receta quieres que haga Michi!
+[4.0s] ¡Hoy hacemos panqueques de plátano!
+[5.8s] Necesitas un plátano bien maduro,
+[7.6s] dos huevitos,
+[9.1s] y media taza de avena.
+[10.5s] ¡Primero machacamos el plátano!
+[12.2s] Luego agregamos los huevitos.
+[14.4s] Después, la avena.
+[16.1s] ¡Y mezclamos, mezclamos, mezclamos!
+[19.0s] Ahora, al sartén con mantequillita.
+[21.0s] Cuando salgan burbujitas, ¡volteamos!
+[23.4s] Y al final, ¡miel y canela! ¡Qué rico!
+[26.1s] ¡Comenta qué receta quieres que haga Michi!
