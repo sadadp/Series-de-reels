@@ -1,6 +1,13 @@
 # Reglas del proyecto (Chef Michi)
 
 - La cuenta NO es solo de comida mexicana: recetas fáciles de todo el mundo (México incluido).
+- PRIORIDAD: explicar bien las recetas, con calidad. Que la gente realmente pueda seguir los pasos
+  en su cocina. Lo viral es secundario. Nada de decir las cosas rápido.
+  - Guion: todos los ingredientes con cantidad, cada paso con su "cómo" y su truco o el porqué
+    (ej. "mueve sin parar para que no se hagan grumos"), en orden, sin saltarse nada.
+  - Ritmo tranquilo: los tiempos se calculan con `python3 herramientas/guion.py <receta>`
+    (~11 letras por segundo + pausa). Duración libre (60-120 s está bien si se entiende).
+  - Cada receta tiene algo que la distinga (su secreto o truco) y se dice desde el inicio.
 - Habla en español. Nada de palabras en inglés en los videos (ej. "panqueques", no "hot cakes").
 - Cada vez que entregues un video terminado, entrega también su portada (`portadas/<video>-portada.png`
   1080×1920 y `portadas/<video>-youtube.png` 1280×720, con `node marca/generar.js portadas`) y sus captions para cada red

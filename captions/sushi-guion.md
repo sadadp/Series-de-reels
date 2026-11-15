@@ -1,31 +1,27 @@
-# Guion — Sushi en casa, paso a paso (≈51 s)
+# Guion — sushi (≈111 s)
 
-¡Mira nomás estos rollos de sushi! Hoy te enseño a hacer sushi en casa, paso a paso. Necesitas arroz para sushi y vinagre de arroz, hojas de alga nori, y para el relleno: pepino, aguacate, salmón y queso crema. Primero, lava el arroz hasta que el agua salga clarita. Cocínalo con un poquito más de agua que de arroz. Mezcla vinagre, azúcar y sal, y revuélvelo con el arroz caliente. Corta el pepino, el aguacate y el salmón en tiritas. Pon el alga sobre la esterilla, con el lado brillante abajo. Con las manos mojadas, extiende el arroz delgadito, dejando una orilla libre. Acomoda el relleno en una línea, a la mitad. Enrolla apretando con la esterilla y moja la orilla para sellar. Corta en ocho piezas con el cuchillo mojado. Sirve con salsa de soya, jengibre y wasabi. ¿Con queso crema o sin queso crema? ¡Comenta!
+¡Mira nomás estos rollos de sushi! Hoy te enseño a hacer sushi en casa, paso a paso. El secreto está en el arroz. Necesitas dos tazas de arroz para sushi, un cuarto de taza de vinagre de arroz, azúcar y sal, cuatro hojas de alga nori, y para el relleno: pepino, aguacate, salmón y queso crema. Primero, lava el arroz con agua fría, tallándolo suave, hasta que el agua salga clarita. Así no queda pegajoso. Cocínalo con dos tazas y media de agua, tapado y a fuego bajo, por quince minutos. Mientras, mezcla el vinagre con dos cucharadas de azúcar y una cucharadita de sal. Échalo al arroz caliente y revuelve con movimientos suaves, sin aplastarlo. Déjalo enfriar. Corta el pepino, el aguacate y el salmón en tiras largas y delgadas. Pon el alga sobre la esterilla de bambú, con el lado brillante hacia abajo. Mójate las manos para que el arroz no se pegue, y extiéndelo en una capa delgada, dejando dos dedos libres arriba. Acomoda el relleno en una línea, cerca de la orilla de abajo. No le pongas demasiado, o no va a cerrar. Levanta la esterilla y enrolla hacia adelante, apretando suave para que quede firme. Moja con un poco de agua la orilla libre del alga, y así se sella el rollo. Moja el cuchillo y corta en ocho piezas, con un solo movimiento, sin aplastar. Sirve con salsa de soya, jengibre y un poquito de wasabi. ¿Con queso crema o sin queso crema? ¡Comenta!
 
-| Seg. | Frase | En pantalla |
-|---|---|---|
-| 0.0 | ¡Mira nomás estos rollos de sushi! | Plato con piezas de sushi y soya |
-| 3.0 | (pausa 1 s) | Rebobinado |
-| 4.0 | Hoy te enseño a hacer sushi en casa, paso a paso. | Michi saluda, letrero |
-| 6.8 | Necesitas arroz para sushi y vinagre de arroz, | Baja el arroz y el vinagre |
-| 9.4 | hojas de alga nori, | Bajan las hojas de alga |
-| 11.8 | y para el relleno: pepino, aguacate, salmón y queso crema. | Baja el relleno |
-| 14.8 | Primero, lava el arroz hasta que el agua salga clarita. | Agua turbia → clara en el tazón |
-| 18.2 | Cocínalo con un poquito más de agua que de arroz. | Olla con vapor |
-| 21.4 | Mezcla vinagre, azúcar y sal, y revuélvelo con el arroz caliente. | Cae el vinagre, Michi revuelve |
-| 25.0 | Corta el pepino, el aguacate y el salmón en tiritas. | Cuchillo cortando tiras |
-| 28.0 | Pon el alga sobre la esterilla, con el lado brillante abajo. | Esterilla de bambú + alga |
-| 31.2 | Con las manos mojadas, extiende el arroz delgadito, dejando una orilla libre. | Arroz cubriendo el alga |
-| 34.8 | Acomoda el relleno en una línea, a la mitad. | Tiras en línea |
-| 37.8 | Enrolla apretando con la esterilla y moja la orilla para sellar. | Se enrolla el rollo |
-| 41.4 | Corta en ocho piezas con el cuchillo mojado. | Cuchillo corta 8 piezas |
-| 44.4 | Sirve con salsa de soya, jengibre y wasabi. | Plato servido |
-| 47.6 | ¿Con queso crema o sin queso crema? ¡Comenta! | Michi salta, globo |
-| 51.0 | (fin) | |
-
-## Receta completa (para Facebook)
-- 2 tazas de arroz para sushi + 2½ tazas de agua
-- ¼ taza de vinagre de arroz, 2 cdas de azúcar, 1 cdita de sal
-- 4 hojas de alga nori
-- 1 pepino, 1 aguacate, 200 g de salmón, queso crema
-- Para servir: salsa de soya, jengibre encurtido y wasabi
+| Seg. | Frase |
+|---|---|
+| 0.0 | ¡Mira nomás estos rollos de sushi! |
+| 3.2 | *(pausa 1 s)* |
+| 4.2 | Hoy te enseño a hacer sushi en casa, paso a paso. El secreto está en el arroz. |
+| 10.2 | Necesitas dos tazas de arroz para sushi, |
+| 14.0 | un cuarto de taza de vinagre de arroz, azúcar y sal, |
+| 18.4 | cuatro hojas de alga nori, |
+| 21.1 | y para el relleno: pepino, aguacate, salmón y queso crema. |
+| 25.9 | Primero, lava el arroz con agua fría, tallándolo suave, hasta que el agua salga clarita. Así no queda pegajoso. |
+| 34.5 | Cocínalo con dos tazas y media de agua, tapado y a fuego bajo, por quince minutos. |
+| 41.0 | Mientras, mezcla el vinagre con dos cucharadas de azúcar y una cucharadita de sal. |
+| 47.7 | Échalo al arroz caliente y revuelve con movimientos suaves, sin aplastarlo. Déjalo enfriar. |
+| 55.2 | Corta el pepino, el aguacate y el salmón en tiras largas y delgadas. |
+| 60.8 | Pon el alga sobre la esterilla de bambú, con el lado brillante hacia abajo. |
+| 66.9 | Mójate las manos para que el arroz no se pegue, y extiéndelo en una capa delgada, dejando dos dedos libres arriba. |
+| 75.7 | Acomoda el relleno en una línea, cerca de la orilla de abajo. No le pongas demasiado, o no va a cerrar. |
+| 83.5 | Levanta la esterilla y enrolla hacia adelante, apretando suave para que quede firme. |
+| 90.5 | Moja con un poco de agua la orilla libre del alga, y así se sella el rollo. |
+| 96.4 | Moja el cuchillo y corta en ocho piezas, con un solo movimiento, sin aplastar. |
+| 102.7 | Sirve con salsa de soya, jengibre y un poquito de wasabi. |
+| 107.5 | ¿Con queso crema o sin queso crema? ¡Comenta! |
+| 111.4 | *(fin)* |
