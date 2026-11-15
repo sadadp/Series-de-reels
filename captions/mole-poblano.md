@@ -10,11 +10,11 @@ Mole poblano casero 🍫🌶️ ¡bien brillosito!
 
 ## TikTok
 ```
-Mole poblano casero en 30 segundos 🍫🌶️ ¿Dulce o picoso? #molepoblano #recetasfaciles #chefmichi
+Mole poblano casero 🍫🌶️ ¿Dulce o picoso? #molepoblano #recetasfaciles #chefmichi
 ```
 
 ## YouTube Shorts
-**Título:** `Mole poblano casero en 30 segundos 🍫🌶️ #shorts`
+**Título:** `Mole poblano casero 🍫🌶️ #shorts`
 ```
 Chiles tostados, ajonjolí, almendras y chocolate de mesa. ¡Sobre pollo!
 #shorts #molepoblano #recetasfaciles
