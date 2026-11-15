@@ -10,13 +10,16 @@ const fs = require("fs");
 const path = require("path");
 
 const args = process.argv.slice(2);
-const nombre = args.find((a, i) => !a.startsWith("--") && !(args[i - 1] || "").match(/^--(fps|audio|frame|port)$/)) || "panqueques-platano";
+const nombre = args.find((a, i) => !a.startsWith("--") && !(args[i - 1] || "").match(/^--(fps|audio|frame|port|desde|hasta|salida)$/)) || "panqueques-platano";
 const opt = k => { const i = args.indexOf("--" + k); return i >= 0 ? args[i + 1] : null; };
 const flag = k => args.includes("--" + k);
 const FPS = +(opt("fps") || 30);
 const audio = opt("audio");
 const frameSolo = opt("frame");
 const modo2d = flag("2d");
+// tramo: --desde 3.5 --hasta 6 --salida clip --sin-subs (para montajes)
+const desde = opt("desde") !== null ? +opt("desde") : null, hasta = opt("hasta") !== null ? +opt("hasta") : null;
+const salida = opt("salida"), sinSubs = flag("sin-subs");
 const out = path.join(__dirname, "salida");
 fs.mkdirSync(out, { recursive: true });
 
@@ -50,13 +53,16 @@ const srtTime = s => {
   await page.goto(`${base}/${pagina}?r=${nombre}&render=1`);
   await page.waitForFunction(() => window.LISTO === true, null, { timeout: 120000 });
   const dur = await page.evaluate(() => window.DURACION);
+  if (sinSubs) await page.addStyleTag({ content: "#subs{display:none!important}" });
 
-  // subtítulos y guion para voz en off
+  // subtítulos y guion para voz en off (no en tramos sueltos)
+  if (desde === null) {
   const subs = await page.evaluate(() => window.getSubs());
   fs.writeFileSync(path.join(out, `${nombre}.srt`), subs.map((s, i) => `${i + 1}\n${srtTime(s.ini)} --> ${srtTime(s.fin)}\n${s.texto}\n`).join("\n"));
   const guion = await page.evaluate(() => window.getGuion());
   fs.writeFileSync(path.join(out, `${nombre}-guion.json`), JSON.stringify(guion, null, 1));
   fs.writeFileSync(path.join(out, `${nombre}-guion.txt`), guion.filter(g => g.texto).map(g => `[${g.ini.toFixed(1)}s] ${g.texto}`).join("\n") + "\n");
+  }
 
   if (frameSolo !== null) {
     await page.evaluate(t => window.renderAt(t), +frameSolo);
@@ -67,15 +73,16 @@ const srtTime = s => {
     return;
   }
 
-  const mp4 = path.join(out, `${nombre}.mp4`);
+  const mp4 = path.join(out, `${salida || nombre}.mp4`);
   const ff = ["-y", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-"];
   if (audio) ff.push("-i", audio, "-shortest", "-c:a", "aac", "-b:a", "192k");
   ff.push("-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "medium", "-crf", "18", "-movflags", "+faststart", mp4);
   const proc = spawn("ffmpeg", ff, { stdio: ["pipe", "ignore", "inherit"] });
 
-  const total = Math.ceil(dur * FPS), t0 = Date.now();
+  const ini = desde || 0, fin = hasta !== null ? Math.min(hasta, dur) : dur;
+  const total = Math.ceil((fin - ini) * FPS), t0 = Date.now();
   for (let f = 0; f < total; f++) {
-    await page.evaluate(t => window.renderAt(t), f / FPS);
+    await page.evaluate(t => window.renderAt(t), ini + f / FPS);
     const buf = await page.screenshot({ type: "jpeg", quality: 92 });
     if (!proc.stdin.write(buf)) await new Promise(r => proc.stdin.once("drain", r));
     if (f % FPS === 0) process.stdout.write(`\r${Math.round(f / total * 100)}%  (${((Date.now() - t0) / 1000).toFixed(0)}s)`);

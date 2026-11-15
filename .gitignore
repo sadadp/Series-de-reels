@@ -12,3 +12,7 @@ salida/hotcakes-platano.mp4
 salida/*-voz.wav
 salida/*-duraciones.json
 salida/*-guion.json
+salida/pres-*.mp4
+salida/presentacion.mp4
+salida/presentacion-final-video.mp4
+salida/*-voz.wav
