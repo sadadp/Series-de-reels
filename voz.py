@@ -63,22 +63,41 @@ def motor_piper(voz, vel):
 VENV_CB = os.environ.get("VENV_CB", "/home/user/venv-cb/bin/python")
 
 
-def motor_chatterbox_lote(textos, ref, exag, tono, vel):
-    """Genera todas las frases de una vez (carga el modelo una sola vez) y les da
-    el tono y la velocidad sin cambiar el timbre (rubberband con formantes)."""
-    tmp = tempfile.mkdtemp()
-    frases = [{"texto": t, "salida": os.path.join(tmp, f"{i}.wav")} for i, t in enumerate(textos)]
-    cfg = os.path.join(tmp, "cfg.json")
-    json.dump({"frases": frases, "ref": ref, "exageracion": exag}, open(cfg, "w"))
-    subprocess.run([VENV_CB, os.path.join(RAIZ, "herramientas", "chatterbox_tts.py"), cfg], check=True, capture_output=True)
-    salida = []
-    for f in frases:
-        pf = f["salida"] + ".pf.wav"
-        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f["salida"], "-af",
-                        f"rubberband=tempo={vel}:pitch={tono}:formant=preserved:transients=smooth,highshelf=f=3500:g=1.5,"
-                        "acompressor=threshold=-20dB:ratio=2:attack=10:release=120,silenceremove=start_periods=1:start_threshold=-45dB,"
-                        "areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", pf], check=True)
-        salida.append(a_wav(pf))
+def _largo_maximo(texto, vel):
+    """Duración razonable de una frase; si sale más larga, la IA metió ruido o se trabó."""
+    letras = sum(ch.isalnum() for ch in texto)
+    return (letras * 0.08 + 0.8) / vel
+
+
+def motor_chatterbox_lote(textos, ref, exag, tono, vel, intentos=3):
+    """Genera todas las frases (carga el modelo una vez), les da tono y velocidad sin cambiar
+    el timbre, y vuelve a generar las que salgan demasiado largas (frases trabadas)."""
+    def generar(lista):
+        tmp = tempfile.mkdtemp()
+        frases = [{"texto": t, "salida": os.path.join(tmp, f"{i}.wav")} for i, t in enumerate(lista)]
+        cfg = os.path.join(tmp, "cfg.json")
+        json.dump({"frases": frases, "ref": ref, "exageracion": exag}, open(cfg, "w"))
+        subprocess.run([VENV_CB, os.path.join(RAIZ, "herramientas", "chatterbox_tts.py"), cfg], check=True, capture_output=True)
+        out = []
+        for f in frases:
+            pf = f["salida"] + ".pf.wav"
+            subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f["salida"], "-af",
+                            f"rubberband=tempo={vel}:pitch={tono}:formant=preserved:transients=smooth,highshelf=f=3500:g=1.5,"
+                            "acompressor=threshold=-20dB:ratio=2:attack=10:release=120,silenceremove=start_periods=1:start_threshold=-45dB,"
+                            "areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", pf], check=True)
+            out.append(a_wav(pf))
+        return out
+
+    salida = generar(textos)
+    for ronda in range(intentos):
+        malas = [i for i, (t, c) in enumerate(zip(textos, salida)) if len(c) / SR > _largo_maximo(t, vel)]
+        if not malas:
+            break
+        for i in malas:
+            print(f"  regenero (salió de {len(salida[i]) / SR:.1f}s): {textos[i]}")
+        for i, c in zip(malas, generar([textos[i] for i in malas])):
+            if len(c) < len(salida[i]):
+                salida[i] = c
     return salida
 
 
