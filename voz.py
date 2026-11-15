@@ -15,7 +15,7 @@ import numpy as np, soundfile as sf
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 SR = 24000
 # duración mínima por acción para que la animación se vea completa
-MIN_DUR = {"hook": 1.8, "intro": 1.8, "presenta": 1.45, "drop": 1.7, "stir": 1.9, "pour": 2.0, "flip": 2.3, "serve": 2.7, "outro": 3.0}
+MIN_DUR = {"hook": 1.8, "intro": 1.8, "presenta": 1.45, "drop": 1.7, "stir": 1.9, "pour": 2.0, "flip": 2.3, "serve": 2.7, "outro": 3.0, "arma": 2.4, "baña": 1.9, "queso": 1.9, "hornea": 2.2}
 VOZ_DEF = {"chatterbox": "michi", "kokoro": "em_alex", "edge": "es-MX-JorgeNeural", "piper": "es_MX-claude-high"}
 
 
@@ -113,7 +113,7 @@ def main():
             base = g["fin"] - g["ini"]
             if c is None:
                 durs.append(round(base, 2)); continue
-            minimo = MIN_DUR.get(g["accion"], 1.5) + (0.5 if g["accion"] == "drop" and "huev" in g["texto"].lower() else 0)
+            minimo = MIN_DUR.get(g["accion"], 1.5) + (0.5 * max(0, g.get("items", 1) - 1) + (0.5 if "huev" in g["texto"].lower() else 0) if g["accion"] == "drop" else 0)
             durs.append(round(max(minimo, len(c) / SR + 0.3), 2))
         json.dump(durs, open(os.path.join(RAIZ, "salida", f"{o.receta}-duraciones.json"), "w"))
         t = 0

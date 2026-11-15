@@ -185,6 +185,12 @@ def efectos(guion, dur):
             for n in range(4): poner(buf, sfx_pop() * 0.6, t0 + 0.4 + n * 0.18 + 0.2)
             poner(buf, sfx_brillo(), t0 + 1.4)
         elif a == "outro": poner(buf, sfx_brillo(), t0 + 0.1)
+        elif a == "arma":
+            for n in range(4): poner(buf, sfx_pop() * 0.7, t0 + 0.75 + n * 0.4)
+        elif a == "baña": poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.1); poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
+        elif a == "queso":
+            for n in range(12): poner(buf, pasa_altos(ruido(0.04, 60, 40 + n)) * 0.12, t0 + 0.2 + n * 0.1)
+        elif a == "hornea": poner(buf, sfx_chisporroteo(d), t0); poner(buf, sfx_ding(), t0 + d - 0.5)
     return buf
 
 

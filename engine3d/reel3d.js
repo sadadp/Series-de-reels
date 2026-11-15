@@ -45,7 +45,7 @@ const SHELF_Y = 3.05, SHELF_Z = -1.9;
 const presentas = pasos.filter(p => p.accion === "presenta");
 presentas.forEach((p, n) => { p.n = n; p.slot = (n - (presentas.length - 1) / 2) * 2.6; });
 presentas.forEach(pr => {
-  pr.usoI = pasos.findIndex(s => s.accion === "drop" && (s.ingrediente === pr.ingrediente || (s.ingredientes || []).includes(pr.ingrediente)));
+  pr.usoI = pasos.findIndex(s => (s.accion === "drop" && (s.ingrediente === pr.ingrediente || (s.ingredientes || []).includes(pr.ingrediente))) || (s.usa || []).includes(pr.ingrediente));
 });
 
 // cámaras: [posición, mirar]
@@ -57,11 +57,14 @@ const CAMS = {
   pan:   [V3(1.0, 3.4, 8.6), V3(0.9, 1.0, 0)],
   plate: [V3(-0.7, 2.8, 7.4), V3(-0.8, 1.1, 0)],
   outro: [V3(0, 3.6, 13), V3(0, 2.7, 0)],
+  dish:  [V3(-1.0, 3.1, 6.6), V3(-1.45, 0.7, 0.2)],
+  horno: [V3(-1.0, 2.0, 4.6), V3(-1.5, 0.5, 0.2)],
 };
-const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro" }[a] || "wide");
-const camDe = p => p.accion === "presenta" ? [V3(p.slot + 0.6, 3.2, 7.6), V3(p.slot + 0.6, 2.5, 0)] : CAMS[zonaDe(p.accion)];
-const CHEF_X = { wide: 0, hook: 0.15, intro: 0, bowl: 0.1, pan: 0.15, plate: 0.15, outro: 0 };
-const chefDe = p => p.accion === "presenta" ? p.slot + 1.3 : CHEF_X[zonaDe(p.accion)];
+const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno" }[a] || "wide");
+const zonaPaso = p => (p.destino === "sarten" && ["drop", "stir"].includes(p.accion)) ? "pan" : zonaDe(p.accion);
+const camDe = p => p.accion === "presenta" ? [V3(p.slot + 0.6, 3.2, 7.6), V3(p.slot + 0.6, 2.5, 0)] : CAMS[zonaPaso(p)];
+const CHEF_X = { wide: 0, hook: 0.15, intro: 0, bowl: 0.1, pan: 0.15, plate: 0.15, outro: 0, dish: 0.25, horno: 0.35 };
+const chefDe = p => p.accion === "presenta" ? p.slot + 1.3 : CHEF_X[zonaPaso(p)];
 
 // ---------- renderer ----------
 const canvas = document.getElementById("gl");
@@ -219,6 +222,57 @@ for (let c = 0; c < 26; c++) { const p = new THREE.Mesh(new THREE.SphereGeometry
 plato.add(canelaPolvo);
 plato.position.copy(PLATE); plato.position.y = 0.06; scene.add(plato);
 
+// salsa / bechamel dentro del sartén
+const sartenRelleno = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 0.05, 40), M("#fbf6ea"));
+sartenRelleno.position.y = 0.14; sarten.add(sartenRelleno);
+const sartenRemolino = new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.03, 6, 30, Math.PI * 1.5), M("#e7dcc4")); sartenRemolino.rotation.x = -Math.PI / 2; sartenRemolino.position.y = 0.17; sarten.add(sartenRemolino);
+
+// enchiladas (rollos) reutilizables
+const COLOR_SALSA = "#5f9e3a", COLOR_BECH = "#fbf6ea";
+function rollo() {
+  const g = new THREE.Group();
+  const t = mesh(new THREE.CylinderGeometry(0.19, 0.19, 1.15, 20), "#f1dca0", { contorno: 1.04 }); t.rotation.x = Math.PI / 2; g.add(t);
+  for (const z of [-0.58, 0.58]) { const c = new THREE.Mesh(new THREE.CircleGeometry(0.15, 16), M("#e9cfa3")); c.position.z = z * 1.001; if (z < 0) c.rotation.y = Math.PI; g.add(c); }
+  return g;
+}
+// refractario (en el lugar del tazón)
+const refractario = new THREE.Group();
+const refBase = mesh(new THREE.BoxGeometry(2.5, 0.42, 1.55), "#fbfaf6", { contorno: 1.02 }); refBase.position.y = 0.21; refractario.add(refBase);
+const refFranja = mesh(new THREE.BoxGeometry(2.52, 0.08, 1.57), P.azul, { contorno: 0 }); refFranja.position.y = 0.33; refractario.add(refFranja);
+const refDentro = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.02, 1.35), M("#e6dccb")); refDentro.position.y = 0.43; refractario.add(refDentro);
+const rollosRef = [];
+for (let n = 0; n < 4; n++) { const r = rollo(); r.position.set(-0.78 + n * 0.52, 0.6, 0); refractario.add(r); rollosRef.push(r); }
+const capaSalsa = new THREE.Mesh(new THREE.BoxGeometry(2.25, 0.12, 1.3), M(COLOR_SALSA)); capaSalsa.position.y = 0.72; refractario.add(capaSalsa);
+const capaBech = new THREE.Group();
+for (let n = 0; n < 9; n++) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.42, 18, 10), M(COLOR_BECH)); b.scale.set(1, 0.22, 0.9); b.position.set(-0.85 + (n % 5) * 0.42 + (n > 4 ? 0.2 : 0), 0.8, n > 4 ? 0.25 : -0.2); capaBech.add(b); }
+refractario.add(capaBech);
+const quesoRef = new THREE.Group(), quesoPiezas = [];
+for (let n = 0; n < 70; n++) { const q = new THREE.Mesh(new THREE.CapsuleGeometry(0.025, 0.14, 3, 6), M("#ffd75e")); q.position.set((hash(n) - 0.5) * 2.1, 0.9 + hash(n + 9) * 0.05, (hash(n + 3) - 0.5) * 1.15); q.rotation.set(Math.PI / 2, 0, hash(n + 5) * 6); quesoRef.add(q); quesoPiezas.push(q); }
+refractario.add(quesoRef);
+const gratinado = new THREE.Group();
+for (let n = 0; n < 16; n++) { const g = new THREE.Mesh(new THREE.SphereGeometry(0.16 + hash(n) * 0.12, 14, 8), M(n % 2 ? "#e0a03a" : "#c97f2a")); g.scale.set(1, 0.15, 0.8); g.position.set((hash(n + 1) - 0.5) * 2.0, 0.93, (hash(n + 2) - 0.5) * 1.05); gratinado.add(g); }
+refractario.add(gratinado);
+const burbujasRef = [];
+for (let n = 0; n < 12; n++) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), M("#fff3c4")); b.position.set((hash(n + 4) - 0.5) * 1.9, 0.95, (hash(n + 6) - 0.5) * 1.0); refractario.add(b); burbujasRef.push(b); }
+const brilloHorno = new THREE.PointLight(0xff8a1f, 0, 6); brilloHorno.position.set(0, 2.2, 1.2); refractario.add(brilloHorno);
+refractario.position.copy(BOWL); refractario.visible = false; scene.add(refractario);
+
+// plato de enchiladas servido
+const platoEnch = new THREE.Group();
+const rollosPlato = [];
+for (let n = 0; n < 3; n++) { const r = rollo(); r.scale.setScalar(1.1); r.position.set(-0.45 + n * 0.45, 0.32, 0); r.rotation.y = 0.15; platoEnch.add(r); rollosPlato.push(r); }
+const salsaPlato = new THREE.Mesh(new THREE.SphereGeometry(0.85, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), M(COLOR_SALSA)); salsaPlato.scale.set(1.15, 0.35, 0.95); salsaPlato.position.y = 0.2; platoEnch.add(salsaPlato);
+const bechPlato = new THREE.Group();
+for (let n = 0; n < 5; n++) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.3, 14, 8), M(COLOR_BECH)); b.scale.set(1.2, 0.25, 0.8); b.position.set(-0.6 + n * 0.3, 0.5, (hash(n) - 0.5) * 0.3); bechPlato.add(b); }
+platoEnch.add(bechPlato);
+const cremaPlato = new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.05, 6, 30, Math.PI * 3), M("#ffffff")); cremaPlato.rotation.x = -Math.PI / 2; cremaPlato.position.y = 0.6; platoEnch.add(cremaPlato);
+const cebollas = [];
+for (let n = 0; n < 6; n++) { const c = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.022, 6, 16), M("#e9c7ef")); c.rotation.x = -Math.PI / 2 + 0.3; c.position.set((hash(n + 1) - 0.5) * 1.1, 0.62, (hash(n + 2) - 0.5) * 0.6); platoEnch.add(c); cebollas.push(c); }
+const cilantros = [];
+for (let n = 0; n < 10; n++) { const c = new THREE.Mesh(new THREE.CircleGeometry(0.06, 5), M("#3f9b3f", { side: THREE.DoubleSide })); c.rotation.x = -Math.PI / 2 + hash(n) * 0.6; c.position.set((hash(n + 4) - 0.5) * 1.2, 0.64, (hash(n + 5) - 0.5) * 0.6); platoEnch.add(c); cilantros.push(c); }
+
+plato.add(platoEnch);
+const ESENCH = R.platillo === "enchiladas";
 // ---------- ingredientes 3D ----------
 function platano() {
   const g = new THREE.Group();
@@ -241,7 +295,52 @@ function avena() {
   const et = mesh(new THREE.CylinderGeometry(0.425, 0.38, 0.2, 28, 1, true), "#fff4dc", { contorno: 0 }); et.position.y = -0.03; g.add(et);
   return g;
 }
-const FABRICA = { platano, huevo, avena };
+function tortilla() {
+  const g = new THREE.Group();
+  for (let i = 0; i < 4; i++) { const d = mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.035, 32), "#f1dca0", { contorno: 1.02 }); d.position.y = i * 0.045; d.rotation.y = i; g.add(d); }
+  for (let i = 0; i < 9; i++) { const m = new THREE.Mesh(new THREE.CircleGeometry(0.03 + hash(i) * 0.03, 8), M("#c9964e")); m.rotation.x = -Math.PI / 2; m.position.set(Math.cos(i * 2.3) * 0.32 * hash(i + 2), 0.16, Math.sin(i * 2.3) * 0.32 * hash(i + 5)); g.add(m); }
+  return g;
+}
+function pollo() {
+  const g = new THREE.Group();
+  const plat = mesh(new THREE.CylinderGeometry(0.48, 0.36, 0.14, 28), "#fbfaf6", { contorno: 1.03 }); g.add(plat);
+  for (let i = 0; i < 26; i++) { const h = new THREE.Mesh(new THREE.CapsuleGeometry(0.03, 0.18, 3, 6), M(i % 3 ? "#e9cfa3" : "#d8b47d")); const a = hash(i) * 6.28, r = hash(i + 7) * 0.3; h.position.set(Math.cos(a) * r, 0.12 + hash(i + 3) * 0.12, Math.sin(a) * r); h.rotation.set(hash(i + 1) * 3, hash(i + 2) * 3, hash(i + 4) * 3); g.add(h); }
+  return g;
+}
+function tomate() {
+  const g = new THREE.Group();
+  const b = mesh(new THREE.SphereGeometry(0.26, 20, 14), "#7cb342"); b.scale.y = 0.85; g.add(b);
+  for (let i = 0; i < 5; i++) { const h = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.22, 4), M("#c9c58a", { side: THREE.DoubleSide })); h.position.set(Math.cos(i * 1.26) * 0.08, 0.22, Math.sin(i * 1.26) * 0.08); h.rotation.set(Math.sin(i * 1.26) * 0.8, 0, -Math.cos(i * 1.26) * 0.8); g.add(h); }
+  return g;
+}
+function chile() {
+  const g = new THREE.Group();
+  const c = mesh(new THREE.CapsuleGeometry(0.09, 0.45, 6, 12), "#3f8f2f"); c.rotation.z = Math.PI / 2 - 0.2; g.add(c);
+  const t = mesh(new THREE.CylinderGeometry(0.025, 0.03, 0.14, 6), "#6b8e23", { contorno: 0 }); t.position.set(0.34, 0.1, 0); t.rotation.z = -0.9; g.add(t);
+  return g;
+}
+function leche() {
+  const g = new THREE.Group();
+  const caja = mesh(new THREE.BoxGeometry(0.42, 0.7, 0.42), "#ffffff"); caja.position.y = 0.1; g.add(caja);
+  const franjaL = mesh(new THREE.BoxGeometry(0.43, 0.22, 0.43), "#4d8de0", { contorno: 0 }); franjaL.position.y = 0.05; g.add(franjaL);
+  const techo = mesh(new THREE.CylinderGeometry(0.0, 0.3, 0.2, 4), "#ffffff"); techo.rotation.y = Math.PI / 4; techo.position.y = 0.55; g.add(techo);
+  return g;
+}
+function queso() {
+  const g = new THREE.Group();
+  const q = mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.32, 24, 1, false, 0, Math.PI * 0.45), "#ffd75e"); g.add(q);
+  for (let i = 0; i < 4; i++) { const h = new THREE.Mesh(new THREE.SphereGeometry(0.035 + hash(i) * 0.02, 8, 6), M("#e8b93c")); h.position.set(Math.sin(0.3 + i * 0.25) * (0.15 + hash(i + 1) * 0.2), (hash(i + 3) - 0.5) * 0.2, Math.cos(0.3 + i * 0.25) * (0.15 + hash(i + 1) * 0.2)); g.add(h); }
+  return g;
+}
+function mantequillaBloque() { const m = mesh(new THREE.BoxGeometry(0.42, 0.2, 0.28), "#ffe27a"); return m; }
+function harina() {
+  const g = new THREE.Group();
+  const b = mesh(new THREE.CylinderGeometry(0.28, 0.32, 0.6, 20), "#f6f0e2"); g.add(b);
+  const banda = mesh(new THREE.CylinderGeometry(0.29, 0.31, 0.16, 20), "#e65a7a", { contorno: 0 }); g.add(banda);
+  const polvo = new THREE.Mesh(new THREE.SphereGeometry(0.26, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M("#ffffff")); polvo.scale.y = 0.4; polvo.position.y = 0.3; g.add(polvo);
+  return g;
+}
+const FABRICA = { platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina };
 const fabrica = n => (FABRICA[n] || huevo)();
 
 // cascarón partido: dos mitades + yema + clara
@@ -278,7 +377,7 @@ pasos.forEach((s, j) => {
   (s.ingredientes || [s.ingrediente]).forEach((ing, n) => {
     const obj = ing === "huevo" ? huevoRoto() : fabrica(ing);
     obj.visible = false; scene.add(obj);
-    caidas.push({ j, n, ing, obj, lado: n % 2 ? 1 : -1 });
+    caidas.push({ j, n, ing, obj, lado: n % 2 ? 1 : -1, sarten: s.destino === "sarten" });
   });
 });
 
@@ -362,13 +461,18 @@ function armarRafagas() {
     if (a === "presenta") rafaga(ti + 0.7, { origen: V3(s.slot, SHELF_Y + 0.3, SHELF_Z + 0.2), n: 22, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.4, g: -0.5, vida: 1.0, tam: 0.05 });
     if (a === "serve") rafaga(ti + 0.8, { origen: V3(PLATE.x, 1.4, PLATE.z), n: 70, colores: CONFETI, tipo: "cuadro", vel: 3, g: -4, vida: 2.2, tam: 0.06, arriba: 3 });
     if (a === "outro") { rafaga(ti + 0.1, { origen: V3(-2, 2, 0.5), n: 70, colores: CONFETI, tipo: "cuadro", vel: 3.6, g: -4, vida: 2.6, tam: 0.07, arriba: 4 }); rafaga(ti + 0.25, { origen: V3(2, 2, 0.5), n: 70, colores: CONFETI, tipo: "cuadro", vel: 3.6, g: -4, vida: 2.6, tam: 0.07, arriba: 4 }); }
+    if (a === "arma") for (let n = 0; n < 4; n++) rafaga(ti + 0.75 + n * 0.4, { origen: V3(BOWL.x - 0.78 + n * 0.52, 0.8, BOWL.z), n: 10, colores: ["#e9cfa3", "#f1dca0"], tipo: "esfera", vel: 1.2, g: -6, vida: 0.6, tam: 0.04, arriba: 1.5 });
+    if (a === "baña") rafaga(ti + 0.4, { origen: V3(BOWL.x, 0.9, BOWL.z), n: 30, colores: [s.capa === "bechamel" ? COLOR_BECH : COLOR_SALSA], tipo: "esfera", vel: 1.8, g: -7, vida: 0.8, tam: 0.05, arriba: 2 });
+    if (a === "queso") rafaga(ti + 0.2, { origen: V3(BOWL.x, 3.2, BOWL.z), n: 60, colores: ["#ffd75e", "#ffe48a"], tipo: "cuadro", vel: 0.8, g: -5, vida: 1.2, tam: 0.04 });
+    if (a === "hornea") rafaga(ti + s.dur * 0.6, { origen: V3(BOWL.x, 1.0, BOWL.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.2, vida: 1.4, tam: 0.07 });
     if (a === "flip") rafaga(ti + s.dur * 0.5, { origen: V3(PAN.x, 0.4, PAN.z), n: 26, colores: ["#fff3d6", "#efc77a"], tipo: "esfera", vel: 1.8, g: -6, vida: 0.9, tam: 0.04, arriba: 2 });
   });
   // salpicaduras al caer cada ingrediente
   caidas.forEach(c => {
     const s = pasos[c.j], tl = s.inicio + 0.25 + c.n * 0.5 + 0.55;
     const col = c.ing === "avena" ? ["#f4ead2", "#ffffff"] : [s.color || P.batter, "#fff3c4"];
-    rafaga(tl, { origen: V3(BOWL.x, 0.7, BOWL.z), n: c.ing === "avena" ? 40 : 26, colores: col, tipo: "esfera", vel: c.ing === "avena" ? 1.2 : 2.2, g: c.ing === "avena" ? -0.6 : -7, vida: c.ing === "avena" ? 1.4 : 0.8, tam: c.ing === "avena" ? 0.07 : 0.045, arriba: 2.4 });
+    const DO = c.sarten ? PAN : BOWL;
+    rafaga(tl, { origen: V3(DO.x, c.sarten ? 0.35 : 0.7, DO.z), n: c.ing === "avena" ? 40 : 26, colores: col, tipo: "esfera", vel: c.ing === "avena" ? 1.2 : 2.2, g: c.ing === "avena" ? -0.6 : -7, vida: c.ing === "avena" ? 1.4 : 0.8, tam: c.ing === "avena" ? 0.07 : 0.045, arriba: 2.4 });
     if (c.ing === "huevo") rafaga(tl - 0.12, { origen: V3(BOWL.x + c.lado * 0.1, 1.15, BOWL.z), n: 10, colores: ["#fff4e2"], tipo: "cuadro", vel: 1.5, g: -6, vida: 0.7, tam: 0.05, arriba: 1.5 });
   });
 }
@@ -507,12 +611,13 @@ function renderAt(t) {
   // cola
   CH.cola.forEach((s, n) => { const a = n / 8; s.position.set(Math.sin(t * 3 + n * 0.5) * 0.08 * a, 0.5 + a * 0.75 + Math.sin(a * 2) * 0.1, -0.4 - Math.sin(a * 2.2) * 0.45); });
   // cabeza / cara
-  const objetivo = p.accion === "presenta" ? -0.5 : ["drop", "stir"].includes(p.accion) ? -0.45 : ["pour", "flip"].includes(p.accion) ? 0.45 : 0;
+  const zp = zonaPaso(p);
+  const objetivo = p.accion === "presenta" ? -0.5 : zp === "pan" ? 0.45 : ["bowl", "dish", "horno"].includes(zp) ? -0.45 : 0;
   CH.cabeza.rotation.y = lerp(CH.cabeza.rotation.y, objetivo, 1) + Math.sin(t * 2.2) * 0.08;
   CH.cabeza.rotation.z = Math.sin(t * 2.6) * 0.08;
   CH.cabeza.rotation.x = p.accion === "presenta" ? -0.25 * clamp(u) : ["drop", "stir", "flip"].includes(p.accion) ? 0.2 : 0;
   CH.orejas.forEach((o, n) => { o.rotation.x = Math.max(0, Math.sin(t * 7 + n)) * 0.25; });
-  const feliz = enHook || ["intro", "serve", "outro"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
+  const feliz = enHook || ["intro", "serve", "outro", "hornea", "queso"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
   const parpadeo = (t % 2.7) < 0.1;
   CH.ojos.forEach(o => { o.visible = !feliz; o.scale.y = parpadeo ? 0.15 : 1.25; });
   CH.felices.forEach(f => f.visible = feliz);
@@ -522,14 +627,20 @@ function renderAt(t) {
   CH.gorro.rotation.z = Math.sin(t * 3) * 0.06;
 
   // brazos
-  const conCuchara = ["drop", "stir"].includes(p.accion), conEspatula = ["pour", "flip"].includes(p.accion);
+  const enSarten = p.destino === "sarten" && ["drop", "stir"].includes(p.accion);
+  const conCuchara = (["drop", "stir"].includes(p.accion) && !enSarten) || ["arma", "baña"].includes(p.accion), conEspatula = ["pour", "flip"].includes(p.accion) || enSarten;
   let aL = 0.25, aR = -0.25, fL = 0, fR = 0;
   if (["intro", "outro", "hook"].includes(p.accion)) { aR = -2.5 + Math.sin(t * 10) * 0.35; }
   if (p.accion === "presenta") { aL = 0.4; aR = -2.2 + Math.sin(t * 6) * 0.2; fR = -0.4; }
   if (conCuchara) { aL = 1.15; fL = 0.5; }
-  if (p.accion === "stir") { aL = 1.15 + Math.sin(u * 11) * 0.12; fL = 0.5 + Math.cos(u * 11) * 0.35; }
+  if (p.accion === "stir" && !enSarten) { aL = 1.15 + Math.sin(u * 11) * 0.12; fL = 0.5 + Math.cos(u * 11) * 0.35; }
   if (p.accion === "drop") aL += Math.sin(u * 14) * 0.08 * (u > 0.8 ? 1 : 0);
   if (conEspatula) { aR = -1.1; fR = 0.6; }
+  if (p.accion === "stir" && enSarten) { aR = -1.1 - Math.sin(u * 11) * 0.12; fR = 0.6 + Math.cos(u * 11) * 0.35; }
+  if (p.accion === "arma") { aL = 1.1 + Math.abs(Math.sin(u * 6)) * 0.3; fL = 0.5; }
+  if (p.accion === "baña") { aL = 1.3 + Math.sin(u * 8) * 0.1; fL = 0.7; }
+  if (p.accion === "queso") { aL = 1.7 + Math.sin(t * 22) * 0.12; aR = -1.7 - Math.sin(t * 22 + 1) * 0.12; fL = fR = 0.5; }
+  if (p.accion === "hornea") { aR = -2.3 + Math.sin(t * 8) * 0.2; }
   if (p.accion === "flip" && k > 0.42 && k < 0.6) aR = -1.1 - Math.sin((k - 0.42) / 0.18 * Math.PI) * 0.6;
   if (p.accion === "serve") { aL = 2.4 + Math.sin(t * 9) * 0.25; aR = -2.4 - Math.sin(t * 9) * 0.25; }
   CH.brazos[-1].hombro.rotation.set(fL, 0, -aL); CH.brazos[1].hombro.rotation.set(fR, 0, -aR);
@@ -551,12 +662,13 @@ function renderAt(t) {
   });
 
   // --- tazón ---
-  tazon.visible = !enHook && !(idxDe("serve") >= 0 && i >= idxDe("serve"));
+  const armaI = idxDe("arma");
+  tazon.visible = !enHook && !(idxDe("serve") >= 0 && i >= idxDe("serve")) && !(armaI >= 0 && i >= armaI);
   let nivel = 0, color = new THREE.Color(P.batter), hay = false;
   pasos.forEach((s, j) => {
     if (j > i) return;
     const lu = j === i ? u : s.dur;
-    if (s.accion === "drop") {
+    if (s.accion === "drop" && s.destino !== "sarten") {
       const items = s.ingredientes || [s.ingrediente];
       items.forEach((_, n) => {
         const lleno = clamp((lu - 0.25 - n * 0.5 - 0.55) / 0.5);
@@ -564,18 +676,18 @@ function renderAt(t) {
         if (lleno > 0) { color.set(s.color || P.batter); hay = true; }
       });
     }
-    if (s.accion === "stir") color.lerp(new THREE.Color(P.batter), clamp(lu / (s.dur * 0.8)));
+    if (s.accion === "stir" && s.destino !== "sarten") color.lerp(new THREE.Color(s.color || P.batter), clamp(lu / (s.dur * 0.8)));
     if (s.accion === "pour") nivel -= 0.35 * clamp((lu - 0.3) / 1.2);
   });
   nivel = clamp(nivel, 0, 0.85);
   const h = 0.08 + nivel * 0.8;
   relleno.visible = hay; relleno.position.y = h; relleno.scale.setScalar(radioTazon(h) - 0.02);
   relleno.material = M("#" + color.getHexString());
-  remolino.visible = p.accion === "stir"; remolino.position.y = h + 0.01; remolino.rotation.z = u * 9;
-  tazon.rotation.z = p.accion === "stir" ? Math.sin(u * 11) * 0.04 : 0;
+  remolino.visible = p.accion === "stir" && p.destino !== "sarten"; remolino.position.y = h + 0.01; remolino.rotation.z = u * 9;
+  tazon.rotation.z = p.accion === "stir" && p.destino !== "sarten" ? Math.sin(u * 11) * 0.04 : 0;
   // tazón "salta" al recibir ingredientes
   let golpe = 0;
-  caidas.forEach(c => { if (c.j === i) golpe = Math.max(golpe, bounce(clamp((u - 0.25 - c.n * 0.5 - 0.55) / 0.5)) * 0.12); });
+  caidas.forEach(c => { if (c.j === i && !c.sarten) golpe = Math.max(golpe, bounce(clamp((u - 0.25 - c.n * 0.5 - 0.55) / 0.5)) * 0.12); });
   tazon.scale.set(1 + golpe, 1 - golpe, 1 + golpe);
 
   // --- caídas al tazón ---
@@ -585,10 +697,10 @@ function renderAt(t) {
     const q = (u - 0.25 - c.n * 0.5) / 0.55;
     if (q < 0 || q > 2.2) { o.visible = false; return; }
     o.visible = true;
-    const topY = 1.05, x = BOWL.x + c.lado * 0.15;
+    const D = c.sarten ? PAN : BOWL, topY = c.sarten ? 0.55 : 1.05, x = D.x + c.lado * 0.15;
     if (c.ing !== "huevo") {
       const qq = clamp(q);
-      o.position.set(x + c.lado * 0.3 * (1 - qq), lerp(6.5, topY - 0.15, easeIn(qq)), BOWL.z);
+      o.position.set(x + c.lado * 0.3 * (1 - qq), lerp(6.5, topY - 0.15, easeIn(qq)), D.z);
       o.rotation.set(0, 0, (1 - qq) * 3 * c.lado);
       const hund = clamp((q - 1) / 0.5);
       o.scale.set(1 + hund * 0.4, Math.max(0.001, 1 - hund), 1 + hund * 0.4);
@@ -600,14 +712,14 @@ function renderAt(t) {
     const { arriba, abajo, clara, yema } = o.userData;
     const qq = clamp(q);
     if (q <= 1) {
-      o.position.set(x, lerp(6.5, topY + 0.35, easeIn(qq)), BOWL.z);
+      o.position.set(x, lerp(6.5, topY + 0.35, easeIn(qq)), D.z);
       o.rotation.set(0, 0, (1 - qq) * 4 * c.lado);
       arriba.position.set(0, 0, 0); abajo.position.set(0, 0, 0); arriba.rotation.set(0, 0, 0); abajo.rotation.set(0, 0, 0);
       arriba.visible = abajo.visible = true; clara.visible = yema.visible = false;
       return;
     }
     const r = q - 1; // 0..1.2
-    o.position.set(x, topY + 0.35, BOWL.z); o.rotation.set(0, 0, 0);
+    o.position.set(x, topY + 0.35, D.z); o.rotation.set(0, 0, 0);
     const abre = easeOut(r / 0.35);
     arriba.position.set(-abre * 0.35, abre * 0.25 - easeIn(clamp((r - 0.35) / 0.6)) * 1.6, 0); arriba.rotation.set(0, 0, abre * 1.3);
     abajo.position.set(abre * 0.35, abre * 0.05 - easeIn(clamp((r - 0.35) / 0.6)) * 1.6, 0); abajo.rotation.set(0, 0, -abre * 1.6);
@@ -636,7 +748,22 @@ function renderAt(t) {
   hotcake.scale.set(Math.max(r, 0.001), 1, Math.max(r, 0.001));
   hcCuerpo.material = M(colHC);
   burbujas.forEach((b, n) => { const on = burb > 0 && Math.sin(t * 7 + n * 1.9) > -0.2; b.visible = on; b.scale.setScalar(on ? 0.6 + Math.abs(Math.sin(t * 9 + n)) * 0.8 : 1); });
-  const fuego = pourI >= 0 && i >= pourI && !enPlato;
+  let nivS = 0, hayS = false; const colS = new THREE.Color(COLOR_BECH);
+  pasos.forEach((s2, j) => {
+    if (j > i) return;
+    const lu = j === i ? u : s2.dur;
+    if (s2.accion === "drop" && s2.destino === "sarten") {
+      const items = s2.ingredientes || [s2.ingrediente];
+      items.forEach((_, n) => { const ll = clamp((lu - 0.25 - n * 0.5 - 0.55) / 0.5); nivS += ll * 0.5 / items.length; if (ll > 0) { colS.set(s2.color || COLOR_BECH); hayS = true; } });
+    }
+    if (s2.accion === "stir" && s2.destino === "sarten") colS.lerp(new THREE.Color(s2.color || COLOR_BECH), clamp(lu / (s2.dur * 0.8)));
+    if (s2.accion === "baña" && s2.capa === "bechamel") nivS -= clamp(lu / s2.dur);
+  });
+  nivS = clamp(nivS, 0, 1);
+  sartenRelleno.visible = hayS && nivS > 0.02 && !enPlato; sartenRelleno.scale.set(0.6 + nivS * 0.4, 0.5 + nivS * 1.5, 0.6 + nivS * 0.4);
+  sartenRelleno.material = M("#" + colS.getHexString());
+  sartenRemolino.visible = sartenRelleno.visible && p.accion === "stir" && p.destino === "sarten"; sartenRemolino.rotation.z = u * 9;
+  const fuego = ((pourI >= 0 && i >= pourI) || (hayS && nivS > 0.02)) && !enPlato;
   llama.visible = fuego; llama.material.opacity = 0.6 + 0.3 * Math.sin(t * 25); llama.scale.setScalar(1 + Math.sin(t * 18) * 0.04);
   sarten.rotation.z = p.accion === "flip" && k > 0.45 && k < 0.55 ? -Math.sin((k - 0.45) / 0.1 * Math.PI) * 0.12 : 0;
   vapor.forEach((v, n) => {
@@ -668,6 +795,42 @@ function renderAt(t) {
   canelaPolvo.visible = top.includes("canela") && su > 2.0; canelaPolvo.position.y = cima + 0.1;
   if (enHook) plato.rotation.y = t * 0.6; else plato.rotation.y = 0;
 
+  // --- refractario (enchiladas) ---
+  refractario.visible = armaI >= 0 && i >= armaI && !enHook && !(serveI >= 0 && i >= serveI);
+  if (refractario.visible) {
+    const lu = j0 => { const jj = idxDe(j0); return jj < 0 ? -1 : i > jj ? 99 : i === jj ? u : -1; };
+    const ua = lu("arma");
+    rollosRef.forEach((r, n) => {
+      const q = clamp((ua - 0.3 - n * 0.4) / 0.45);
+      r.visible = q > 0;
+      r.position.y = 0.6 + (1 - easeIn(q)) * 3; r.rotation.z = (1 - q) * 4;
+      const sq = bounce(clamp((ua - 0.75 - n * 0.4) / 0.4)) * 0.3; r.scale.set(1 + sq, 1 - sq, 1);
+    });
+    let cs = 0, cb = 0;
+    pasos.forEach((s2, j) => { if (s2.accion !== "baña" || j > i) return; const v = j < i ? 1 : easeOut(clamp((u - 0.2) / (s2.dur * 0.7))); if (s2.capa === "bechamel") cb = v; else cs = v; });
+    capaSalsa.visible = cs > 0.01; capaSalsa.scale.set(0.3 + cs * 0.7, cs, 0.3 + cs * 0.7);
+    capaBech.visible = cb > 0.01; capaBech.scale.set(0.3 + cb * 0.7, cb, 0.3 + cb * 0.7);
+    const uq = lu("queso");
+    quesoPiezas.forEach((q, n) => { const v = clamp((uq - 0.2 - (n / quesoPiezas.length) * 1.2) / 0.3); q.visible = v > 0; q.position.y = 0.9 + (1 - easeIn(v)) * 2.5; });
+    const uh = lu("hornea"), hk = uh >= 99 ? 1 : uh < 0 ? 0 : clamp(uh / (pasos[idxDe("hornea")].dur * 0.85));
+    gratinado.visible = hk > 0.05; gratinado.scale.set(1, hk, 1);
+    quesoPiezas.forEach(q => { q.material = M(hk > 0.5 ? "#f2b94a" : "#ffd75e"); });
+    burbujasRef.forEach((b, n) => { const on = hk > 0 && hk < 1 && Math.sin(t * 6 + n * 2.1) > 0; b.visible = on; b.scale.setScalar(on ? 0.5 + Math.abs(Math.sin(t * 9 + n)) : 1); });
+    brilloHorno.intensity = p.accion === "hornea" ? 4 + Math.sin(t * 12) * 1 : 0;
+  }
+
+  // --- plato: panqueques o enchiladas ---
+  platoEnch.visible = ESENCH;
+  if (ESENCH) {
+    pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
+    rollosPlato.forEach((r, n) => { const q = clamp((su - 0.3 - n * 0.2) / 0.3); r.visible = q > 0; r.position.y = 0.32 + (1 - easeIn(q)) * 3; });
+    const qs = clamp((su - 1.0) / 0.4); salsaPlato.visible = qs > 0; salsaPlato.scale.set(1.15 * qs, 0.35, 0.95 * qs);
+    const qb = clamp((su - 1.3) / 0.4); bechPlato.visible = qb > 0; bechPlato.scale.set(qb, 1, qb);
+    cremaPlato.visible = su > 1.7; cremaPlato.rotation.z = su * 2;
+    cebollas.forEach((c, n) => { c.visible = su > 1.9 + n * 0.06; });
+    cilantros.forEach((c, n) => { c.visible = su > 2.1 + n * 0.04; });
+  }
+
   particulas(t);
 
   // --- 2D ---
@@ -690,7 +853,7 @@ function renderAt(t) {
 window.DURACION = DURACION;
 window.renderAt = renderAt;
 window.getSubs = () => subs.map(s => ({ ini: s.ini, fin: s.fin, texto: s.palabras.map(x => x.w).join(" ") }));
-window.getGuion = () => pasos.map(p => ({ ini: p.inicio, fin: p.inicio + p.dur, texto: p.texto || "", accion: p.accion }));
+window.getGuion = () => pasos.map(p => ({ ini: p.inicio, fin: p.inicio + p.dur, texto: p.texto || "", accion: p.accion, items: (p.ingredientes || (p.ingrediente ? [p.ingrediente] : [])).length }));
 
 await Promise.all([document.fonts.load("64px Lilita"), document.fonts.load("140px Luckiest"), document.fonts.load("96px Baloo")]);
 await document.fonts.ready;

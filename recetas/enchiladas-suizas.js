@@ -1,0 +1,32 @@
+// Receta: Enchiladas suizas con bechamel
+// acciones extra para platillos: drop/stir con destino "sarten", arma, baña (capa), queso, hornea
+window.RECETA = {
+  platillo: "enchiladas",
+  titulo: ["ENCHILADAS", "SUIZAS"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["ENCHILADAS", "suizas con bechamel"],
+  usuario: "@chefmichi",
+  pasos: [
+    { accion: "hook", dur: 2.6, texto: "¡Mira nomás qué enchiladas tan cremositas!" },
+    { accion: "rewind", dur: 0.9, texto: "" },
+    { accion: "intro", dur: 2.6, texto: "¡Hoy hacemos enchiladas suizas con bechamel!" },
+    { accion: "presenta", dur: 1.6, ingrediente: "tortilla", etiqueta: "10 tortillas", texto: "Necesitas tortillas," },
+    { accion: "presenta", dur: 1.6, ingrediente: "pollo", etiqueta: "2 tazas de pollo", texto: "pollo deshebrado," },
+    { accion: "presenta", dur: 1.6, ingrediente: "tomate", cuantos: 2, etiqueta: "½ kg de tomate verde", texto: "tomate verde," },
+    { accion: "presenta", dur: 1.6, ingrediente: "chile", cuantos: 2, etiqueta: "2 chiles serranos", texto: "chile serrano," },
+    { accion: "presenta", dur: 1.6, ingrediente: "leche", etiqueta: "2 tazas de leche", texto: "leche" },
+    { accion: "presenta", dur: 1.6, ingrediente: "queso", etiqueta: "250 g de queso", texto: "y mucho queso." },
+    { accion: "drop", dur: 2.4, ingredientes: ["tomate", "tomate", "chile"], color: "#7fb84a", cantidad: 0.75, texto: "Primero licuamos el tomate con el chile." },
+    { accion: "stir", dur: 2.2, color: "#5f9e3a", texto: "¡Y queda una salsa verde riquísima!" },
+    { accion: "drop", destino: "sarten", dur: 2.2, ingredientes: ["mantequilla", "harina"], color: "#f1e2b8", texto: "Luego, en el sartén, mantequilla y harina." },
+    { accion: "drop", destino: "sarten", dur: 1.8, ingrediente: "leche", color: "#fbf6ea", texto: "Después, la leche," },
+    { accion: "stir", destino: "sarten", dur: 2.4, color: "#fbf6ea", texto: "y movemos hasta que espese. ¡Esa es la bechamel!" },
+    { accion: "arma", dur: 2.6, usa: ["tortilla", "pollo"], texto: "Ahora rellenamos las tortillas con pollo y las enrollamos." },
+    { accion: "baña", capa: "salsa", dur: 2.0, texto: "Las bañamos con salsa verde," },
+    { accion: "baña", capa: "bechamel", dur: 2.0, texto: "luego con la bechamel," },
+    { accion: "queso", dur: 2.0, usa: ["queso"], texto: "y encima, ¡mucho queso!" },
+    { accion: "hornea", dur: 2.4, texto: "Al horno hasta que gratine." },
+    { accion: "serve", dur: 3.0, texto: "Y al final, crema y cebolla. ¡Qué rico!" },
+    { accion: "outro", dur: 3.2, texto: "¡Comenta qué receta quieres que haga Michi!" },
+  ],
+};
