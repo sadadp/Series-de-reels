@@ -20,7 +20,31 @@
 const p = new URLSearchParams(location.search).get("p") || "perfil";
 const R = document.getElementById("raiz");
 const img = n => `img/${n}-recorte.png`;
+const Q = new URLSearchParams(location.search);
+const T1 = Q.get("t1") || "", T2 = Q.get("t2") || "", PILL = Q.get("pill") || "", FONDO = Q.get("fondo");
+const titulo = (t, tam, color) => `<div class="titulo" style="font-size:${tam}px;${color ? "color:" + color : ""}"><span>${t}</span></div>`;
 const plantillas = {
+  portada: () => `
+    <div class="lienzo ${FONDO ? "" : "azulejo"}" style="width:1080px;height:1920px">
+      ${FONDO ? `<img src="img/${FONDO}" style="position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover">` : `<img src="${img("michi-cuerpo")}" style="position:absolute;left:50%;bottom:260px;height:1050px;transform:translateX(-50%)">`}
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,10,5,.55) 0, rgba(20,10,5,0) 34%, rgba(20,10,5,0) 72%, rgba(20,10,5,.5) 100%)"></div>
+      <div style="position:absolute;left:0;right:0;top:300px;text-align:center;transform:rotate(-3deg)">
+        ${titulo(T1, T1.length > 9 ? 170 : 210)}
+        ${T2 ? titulo(T2, T2.length > 10 ? 130 : 160, "#fff") : ""}
+      </div>
+      ${PILL ? `<div style="position:absolute;left:0;right:0;top:1470px;text-align:center"><div class="pastilla" style="font-size:66px">${PILL}</div></div>` : ""}
+      <div style="position:absolute;left:0;right:0;top:1590px;text-align:center"><div class="sub" style="font-size:52px">CHEF MICHI 🐱</div></div>
+    </div>`,
+  mini: () => `
+    <div class="lienzo azulejo" style="width:1280px;height:720px">
+      ${FONDO ? `<div style="position:absolute;right:40px;top:40px;width:560px;height:640px;border-radius:40px;overflow:hidden;border:14px solid var(--cafe);box-sizing:border-box"><img src="img/${FONDO}" style="width:100%;height:100%;object-fit:cover;object-position:30% 60%"></div>`
+               : `<img src="${img("michi-cuerpo")}" style="position:absolute;right:120px;bottom:0;height:680px">`}
+      <div style="position:absolute;left:50px;top:110px;width:680px">
+        ${titulo(T1, T1.length > 9 ? 112 : 140)}
+        ${T2 ? titulo(T2, T2.length > 10 ? 88 : 110, "#fff") : ""}
+        ${PILL ? `<div class="pastilla" style="font-size:46px;margin-top:22px">${PILL}</div>` : ""}
+      </div>
+    </div>`,
   perfil: () => `
     <div class="lienzo" style="width:1080px;height:1080px;background:radial-gradient(circle at 50% 42%, #ffd95a 0, #f4c430 45%, #e2a21a 100%)">
       <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 46%, rgba(255,255,255,.18) 0 8deg, transparent 8deg 22deg)"></div>

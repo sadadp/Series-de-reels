@@ -30,7 +30,7 @@ const POSES = {
   await page.waitForFunction(() => window.LISTO === true, null, { timeout: 120000 });
   await page.addStyleTag({ content: "html,body,#stage{background:transparent!important} #ov{display:none!important}" });
   const etapa = process.argv[2] || "todo";
-  if (etapa !== "plantillas") for (const [nombre, p] of Object.entries(POSES)) {
+  if (etapa === "todo" || etapa === "recortes") for (const [nombre, p] of Object.entries(POSES)) {
     await page.evaluate(p => {
       const E = window.ESC;
       window.renderAt(p.t);
@@ -47,12 +47,30 @@ const POSES = {
     console.log("ok", nombre);
   }
   // plantillas 2D (perfil, logo, portadas)
-  if (etapa !== "recortes") for (const [nombre, w, h] of [["perfil", 1080, 1080], ["logo", 1500, 1500], ["youtube-banner", 2560, 1440], ["facebook-portada", 1640, 624], ["youtube-miniatura", 1280, 720]]) {
+  if (etapa === "todo" || etapa === "plantillas") for (const [nombre, w, h] of [["perfil", 1080, 1080], ["logo", 1500, 1500], ["youtube-banner", 2560, 1440], ["facebook-portada", 1640, 624], ["youtube-miniatura", 1280, 720]]) {
     const pg = await browser.newPage({ viewport: { width: w, height: h } });
     await pg.goto(`${base}/marca/plantilla.html?p=${nombre}`);
     await pg.waitForFunction(() => window.LISTO === true);
     await pg.screenshot({ path: path.join(OUT, nombre + ".png") });
     await pg.close(); console.log("ok", nombre);
+  }
+  // portadas por video (vertical + miniatura de YouTube)
+  const PORTADAS = [
+    ["presentacion", "¡HOLA, SOY", "CHEF MICHI!", "Recetas fáciles en 1 minuto", null],
+    ["panqueques-platano", "PANQUEQUES", "DE PLÁTANO", "¡Solo 3 ingredientes!", "fondo-panqueques-platano.png"],
+    ["enchiladas-suizas", "ENCHILADAS", "SUIZAS", "Con bechamel cremosita", "fondo-enchiladas-suizas.png"],
+    ["mole-poblano", "MOLE", "POBLANO", "Receta casera y fácil", "fondo-mole-poblano.png"],
+  ];
+  if (etapa === "portadas" || etapa === "todo") {
+    const dir = path.join(__dirname, "..", "portadas"); fs.mkdirSync(dir, { recursive: true });
+    for (const [n, t1, t2, pill, fondo] of PORTADAS) for (const [tipo, w, h] of [["portada", 1080, 1920], ["mini", 1280, 720]]) {
+      const pg = await browser.newPage({ viewport: { width: w, height: h } });
+      const q = new URLSearchParams({ p: tipo, t1, t2, pill, ...(fondo ? { fondo } : {}) });
+      await pg.goto(`${base}/marca/plantilla.html?${q}`);
+      await pg.waitForFunction(() => window.LISTO === true);
+      await pg.screenshot({ path: path.join(dir, `${n}-${tipo === "portada" ? "portada" : "youtube"}.png`) });
+      await pg.close(); console.log("ok", n, tipo);
+    }
   }
   await browser.close(); srv.close();
 })();
