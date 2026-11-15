@@ -13,10 +13,9 @@ else
   rm -f "salida/$R-duraciones.json"
   node render.js "$R" --frame 0 >/dev/null          # guion con textos
   # voz de Michi: por defecto la clonada de voces/michi-ref.wav (cambia con REF=, TONO=, VEL=, EXAG=)
-  python3 voz.py "$R" --motor chatterbox --ref "${REF:-voces/michi-ref.wav}" --vel "${VEL:-1.0}" --tono-factor "${TONO:-1.0}" --exag "${EXAG:-0.9}" --ajustar ${RESPETAR:+--respetar}
+  python3 voz.py "$R" --motor chatterbox --ref "${REF:-voces/michi-ref.wav}" --vel "${VEL:-1.0}" --tono-factor "${TONO:-0.88}" --exag "${EXAG:-0.6}" --ajustar ${RESPETAR:+--respetar}
 fi
 node render.js "$R"
 python3 musica.py "$R"
-ffmpeg -loglevel error -y -i "salida/$R.mp4" -i "salida/$R-mezcla.wav" -c:v copy \
-  -af "volume=3.6dB,alimiter=limit=0.89" -c:a aac -b:a 192k -ar 44100 -shortest "salida/$R-final.mp4"
+bash herramientas/masterizar.sh "salida/$R.mp4" "salida/$R-mezcla.wav" "salida/$R-final.mp4"
 echo "Listo: salida/$R-final.mp4"

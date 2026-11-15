@@ -12,5 +12,7 @@ for item in cfg["frases"]:
     w = m.generate(item["texto"], language_id="es", audio_prompt_path=cfg["ref"],
                    exaggeration=cfg.get("exageracion", 1.2), cfg_weight=cfg.get("cfg", 0.5),
                    temperature=cfg.get("temperatura", 0.7))
-    sf.write(item["salida"], w.squeeze(0).numpy(), m.sr)
+    y = w.squeeze(0).numpy()
+    y = y / max(1e-9, abs(y).max()) * 0.85   # sin recortes: la IA a veces se pasa del máximo
+    sf.write(item["salida"], y, m.sr, subtype="FLOAT")
     print("ok", item["texto"], flush=True)

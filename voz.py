@@ -81,10 +81,12 @@ def motor_chatterbox_lote(textos, ref, exag, tono, vel, intentos=3):
         out = []
         for f in frases:
             pf = f["salida"] + ".pf.wav"
-            subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f["salida"], "-af",
-                            f"rubberband=tempo={vel}:pitch={tono}:formant=preserved:transients=smooth,highshelf=f=3500:g=1.5,"
-                            "acompressor=threshold=-20dB:ratio=2:attack=10:release=120,silenceremove=start_periods=1:start_threshold=-45dB,"
-                            "areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", pf], check=True)
+            # voz limpia: solo recortar silencios; tiempo/tono únicamente si se piden (evita distorsión)
+            filtros = []
+            if abs(vel - 1) > 1e-3 or abs(tono - 1) > 1e-3:
+                filtros.append(f"rubberband=tempo={vel}:pitch={tono}:formant=preserved:transients=smooth:window=long")
+            filtros.append("silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse")
+            subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f["salida"], "-af", ",".join(filtros), pf], check=True)
             out.append(a_wav(pf))
         return out
 
