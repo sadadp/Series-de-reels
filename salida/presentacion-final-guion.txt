@@ -1,7 +1,7 @@
 [0.0s] ¡Hola! Soy el chef Michi.
-[2.4s] ¡Un gatito al que le encanta cocinar!
-[5.5s] En esta cuenta cocinamos recetas fáciles y caseras,
-[9.3s] panqueques esponjositos,
-[11.9s] enchiladas suizas,
-[20.3s] ¡y hasta mole poblano!
-[22.2s] Sígueme, guarda las recetas y comenta qué quieres que cocine.
+[2.8s] ¡Un gatito al que le encanta cocinar!
+[5.1s] En esta cuenta cocinamos recetas fáciles y caseras,
+[8.4s] panqueques esponjositos,
+[10.4s] enchiladas suizas,
+[12.1s] ¡y hasta mole poblano!
+[14.3s] Sígueme, guarda las recetas y comenta qué quieres que cocine.
