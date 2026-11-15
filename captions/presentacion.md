@@ -1,51 +1,33 @@
-# Captions — Video de presentación (19 s)
+# Captions — Presentación
 
-## Instagram (Reel)
+## Instagram
 ```
-¡Hola! Soy Chef Michi 🐱👨‍🍳
+¡Hola! Soy Chef Michi 🐱👨‍🍳 y cocino recetas fáciles en menos de un minuto.
 
-Un gatito que ama cocinar y te enseña recetas fáciles, caseras y riquísimas en menos de un minuto.
+🌎 Desayunos, comidas y postres de todo el mundo.
 
-🥞 Panqueques esponjositos
-🌮 Enchiladas suizas
-🍫 Mole poblano
-🌎 …y recetas de todo el mundo que tú me pidas 👇
-
-💬 Comenta qué receta quieres que cocine primero
-💾 Guarda este video y sígueme para no perderte ninguna
-
-#recetasfaciles #recetasdelmundo #recetascaseras #cocinafacil #chefmichi
+💬 ¿Qué cocino primero? Te leo 👇
+#recetasfaciles #recetascaseras #chefmichi
 ```
 
 ## TikTok
 ```
-¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles en menos de un minuto. ¿Qué cocino primero? 👇 #recetasfaciles #recetasdelmundo #cocinafacil #chefmichi
+¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles en 1 minuto. ¿Qué cocino primero? 👇 #recetasfaciles #chefmichi
 ```
 
 ## YouTube Shorts
-**Título:**
+**Título:** `¡Hola, soy Chef Michi! 🐱 Recetas fáciles en 1 minuto #shorts`
 ```
-¡Hola, soy Chef Michi! 🐱👨‍🍳 Recetas fáciles en menos de un minuto #shorts
-```
-**Descripción:**
-```
-Soy Chef Michi, un gatito que ama cocinar 🐱👨‍🍳
-En este canal aprendes recetas fáciles, caseras y riquísimas en menos de un minuto: panqueques, enchiladas suizas, mole poblano y mucho más.
-
-👉 Suscríbete y comenta qué receta quieres que haga.
-
-#shorts #recetasfaciles #recetasdelmundo #recetascaseras #chefmichi
+Recetas fáciles y caseras de todo el mundo, en menos de un minuto. Suscríbete y comenta qué quieres que cocine 👇
+#shorts #recetasfaciles #chefmichi
 ```
 
-## Facebook (Reel)
+## Facebook
 ```
 ¡Hola, familia! 👋 Soy Chef Michi 🐱👨‍🍳
 
-Aquí vas a encontrar recetas caseras, fáciles y ricas, explicadas paso a paso en menos de un minuto. Panqueques, enchiladas suizas, mole poblano, recetas de todo el mundo… ¡y lo que ustedes me pidan!
+Aquí vas a encontrar recetas fáciles y caseras de todo el mundo, explicadas en menos de un minuto.
 
-👉 Sigue la página para ver una receta nueva cada semana.
-💬 Cuéntame en los comentarios: ¿qué receta quieres que cocine?
+💬 ¿Qué receta quieres que cocine? Te leo en los comentarios 👇
 🔁 Compártelo con quien siempre te pide recetas 😄
-
-#recetasfaciles #recetasdelmundo #chefmichi
 ```
