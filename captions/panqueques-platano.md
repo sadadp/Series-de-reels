@@ -2,16 +2,10 @@
 
 ## Instagram
 ```
-¿Panqueques SIN harina? 🍌 Solo 3 ingredientes 👇
+¿Panqueques SIN harina? 🍌 Solo 3 ingredientes.
 
-• 1 plátano maduro
-• 2 huevos
-• ½ taza de avena
-
-Machaca, mezcla y cocina a fuego bajo. Voltea cuando salgan burbujitas. ¡Con miel y canela!
-
-💾 Guárdala · 💬 ¿Qué cocino mañana?
-#recetasfaciles #panqueques #chefmichi
+💬 ¿Con miel o con chocolate?
+#panqueques #recetasfaciles #chefmichi
 ```
 
 ## TikTok

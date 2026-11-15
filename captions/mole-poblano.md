@@ -2,16 +2,9 @@
 
 ## Instagram
 ```
-Mole poblano casero en 30 segundos 🍫🌶️
+Mole poblano casero 🍫🌶️ ¡bien brillosito!
 
-• Chiles mulato, ancho y pasilla
-• Chocolate de mesa
-• Ajonjolí y almendras
-• Pollo cocido
-
-Tuesta los chiles, licúalos con ajonjolí y almendras, y cocínalos con el chocolate hasta que espese. ¡Sobre pollo y con ajonjolí!
-
-💾 Guárdala · 💬 ¿Dulce o picoso?
+💬 ¿Dulce o picoso?
 #molepoblano #comidamexicana #chefmichi
 ```
 

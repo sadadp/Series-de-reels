@@ -2,14 +2,9 @@
 
 ## Instagram
 ```
-¿Pizza italiana en casa? 🍕 Más fácil de lo que crees 👇
+¿Pizza italiana en casa? 🍕 ¡Mira cómo se estira ese queso!
 
-• 500 g de harina · 1 sobre de levadura · 300 ml de agua tibia · sal
-• Salsa de tomate · mozzarella · albahaca
-
-Mezcla, amasa y deja reposar 1 hora. Estira bien delgadita, pon salsa, mozzarella y albahaca. Horno a 250 °C por 10 minutos. ¡Mira cómo se estira el queso!
-
-💾 Guárdala · 💬 ¿Con piña o sin piña?
+💬 ¿Con piña o sin piña?
 #pizzacasera #recetasfaciles #chefmichi
 ```
 

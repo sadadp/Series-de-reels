@@ -4,14 +4,7 @@
 ```
 Las enchiladas que te van a pedir cada domingo 💚🧀
 
-• 10 tortillas · 2 tazas de pollo deshebrado
-• ½ kg tomate verde + 2 chiles serranos
-• Bechamel: 2 cdas mantequilla, 2 cdas harina, 2 tazas leche
-• 250 g de queso
-
-Licúa la salsa, haz la bechamel, rellena y enrolla. Baña con salsa y bechamel, mucho queso y al horno. ¡Con crema y cebolla!
-
-💾 Guárdala · 💬 ¿Verdes o rojas?
+💬 ¿Verdes o rojas?
 #enchiladassuizas #comidamexicana #chefmichi
 ```
 

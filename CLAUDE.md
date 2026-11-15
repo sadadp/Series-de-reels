@@ -5,9 +5,8 @@
 - Cada vez que entregues un video terminado, entrega también su portada (`portadas/<video>-portada.png`
   1080×1920 y `portadas/<video>-youtube.png` 1280×720, con `node marca/generar.js portadas`) y sus captions para cada red
   (Instagram, TikTok, YouTube Shorts con título + descripción, Facebook) y guárdalas en
-  `captions/<video>.md`. Formato corto: primera línea = gancho (lo que se ve antes de "más"),
-  receta completa pero compacta, 3 hashtags, pregunta que divida opiniones. TikTok/Shorts en 1-2 líneas.
-  Facebook con pasos numerados.
+  `captions/<video>.md`. Instagram, TikTok y Shorts: SENCILLOS, sin receta (ya está en el video): gancho de 1 línea +
+  pregunta que divida opiniones + 3 hashtags. Solo Facebook lleva la receta (ingredientes + pasos numerados).
 - Voz de Michi: si el usuario sube su audio, úsalo tal cual (`voces/<receta>.wav`) y ajusta
   el video a sus tiempos. Si no, voz clonada con Chatterbox (`voces/michi-ref.wav`).
 - Todo en un paso: `bash hacer-reel.sh <receta>`. Kit de marca y textos de perfil: `marca/`.
