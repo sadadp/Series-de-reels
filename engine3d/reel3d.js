@@ -68,7 +68,7 @@ const chefDe = p => p.accion === "presenta" ? p.slot + 1.3 : CHEF_X[zonaPaso(p)]
 
 // ---------- renderer ----------
 const canvas = document.getElementById("gl");
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, alpha: true });
 renderer.setPixelRatio(1);
 renderer.setSize(W, H, false);
 renderer.shadowMap.enabled = true;
@@ -165,7 +165,7 @@ function cocina() {
   const hornilla = mesh(new THREE.CylinderGeometry(1.05, 1.1, 0.08, 40), "#2b2b2b", { contorno: 0 }); hornilla.position.set(PAN.x, 0.04, PAN.z); g.add(hornilla);
   return g;
 }
-scene.add(cocina());
+const COCINA = cocina(); scene.add(COCINA);
 
 // ---------- objetos ----------
 // tazón (perfil de revolución)
@@ -900,6 +900,8 @@ function renderAt(t) {
 
 // ---------- montar ----------
 window.DURACION = DURACION;
+// acceso para generar imágenes de marca (marca/generar.js)
+window.ESC = { THREE, scene, camera, renderer, COCINA, CH, plato, tazon, sarten, refractario, POOL, rerender: () => renderer.render(scene, camera) };
 window.renderAt = renderAt;
 window.getSubs = () => subs.map(s => ({ ini: s.ini, fin: s.fin, texto: s.palabras.map(x => x.w).join(" ") }));
 window.getGuion = () => pasos.map(p => ({ ini: p.inicio, fin: p.inicio + p.dur, texto: p.texto || "", accion: p.accion, items: (p.ingredientes || (p.ingrediente ? [p.ingrediente] : [])).length }));

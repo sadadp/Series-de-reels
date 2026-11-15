@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+// Genera el kit de marca de Chef Michi: recortes 3D + logo, perfil y portadas.
+// Uso: node marca/generar.js
+const { chromium } = require("playwright");
+const http = require("http"), fs = require("fs"), path = require("path");
+const RAIZ = path.join(__dirname, "..");
+const OUT = path.join(__dirname, "img");
+fs.mkdirSync(OUT, { recursive: true });
+const TIPOS = { ".html": "text/html", ".js": "text/javascript", ".ttf": "font/ttf", ".json": "application/json", ".png": "image/png" };
+const srv = http.createServer((req, res) => {
+  const f = path.join(RAIZ, decodeURIComponent(req.url.split("?")[0]));
+  if (!f.startsWith(RAIZ) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
+  res.writeHead(200, { "Content-Type": TIPOS[path.extname(f)] || "application/octet-stream" }); fs.createReadStream(f).pipe(res);
+});
+
+// poses de Michi: tiempo de la receta + ajustes de escena + cámara
+const POSES = {
+  "michi-cara":  { t: 5.0, cam: [0.35, 1.9, 4.3], mira: [0, 1.62, 0], plato: false },
+  "michi-cuerpo": { t: 5.0, cam: [0.9, 1.5, 7.2], mira: [0, 1.25, 0], plato: false },
+  "michi-plato": { t: 1.0, cam: [-0.75, 2.0, 6.6], mira: [-0.75, 1.0, 0], plato: true },
+};
+
+(async () => {
+  await new Promise(r => srv.listen(0, "127.0.0.1", r));
+  const base = `http://127.0.0.1:${srv.address().port}`;
+  const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
+  const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+  page.on("pageerror", e => console.error("Error:", e.message));
+  await page.goto(`${base}/engine3d/reel3d.html?r=panqueques-platano&render=1`);
+  await page.waitForFunction(() => window.LISTO === true, null, { timeout: 120000 });
+  await page.addStyleTag({ content: "html,body,#stage{background:transparent!important} #ov{display:none!important}" });
+  const etapa = process.argv[2] || "todo";
+  if (etapa !== "plantillas") for (const [nombre, p] of Object.entries(POSES)) {
+    await page.evaluate(p => {
+      const E = window.ESC;
+      window.renderAt(p.t);
+      E.COCINA.visible = false; E.tazon.visible = false; E.sarten.visible = false; E.refractario.visible = false;
+      E.plato.visible = p.plato;
+      E.scene.background = null;
+      E.POOL.forEach(m => m.visible = false);
+      E.CH.raiz.position.set(p.plato ? -0.25 : 0, 0, 0); E.CH.raiz.rotation.y = p.plato ? -0.25 : 0.12;
+      E.CH.cabeza.rotation.set(0, 0.1, 0.05);
+      E.camera.position.set(...p.cam); E.camera.lookAt(...p.mira); E.camera.rotation.z = 0;
+      E.rerender();
+    }, p);
+    await page.screenshot({ path: path.join(OUT, nombre + ".png"), omitBackground: true });
+    console.log("ok", nombre);
+  }
+  // plantillas 2D (perfil, logo, portadas)
+  if (etapa !== "recortes") for (const [nombre, w, h] of [["perfil", 1080, 1080], ["logo", 1500, 1500], ["youtube-banner", 2560, 1440], ["facebook-portada", 1640, 624], ["youtube-miniatura", 1280, 720]]) {
+    const pg = await browser.newPage({ viewport: { width: w, height: h } });
+    await pg.goto(`${base}/marca/plantilla.html?p=${nombre}`);
+    await pg.waitForFunction(() => window.LISTO === true);
+    await pg.screenshot({ path: path.join(OUT, nombre + ".png") });
+    await pg.close(); console.log("ok", nombre);
+  }
+  await browser.close(); srv.close();
+})();

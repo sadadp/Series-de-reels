@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Marca Chef Michi</title>
+<style>
+  @font-face { font-family: "Luckiest"; src: url("../engine/fonts/LuckiestGuy.ttf"); }
+  @font-face { font-family: "Lilita"; src: url("../engine/fonts/LilitaOne.ttf"); }
+  @font-face { font-family: "Baloo"; src: url("../engine/fonts/Baloo2-ExtraBold.ttf"); }
+  :root { --azul: #2f5b9a; --azulO: #1f3f70; --amarillo: #f4c430; --crema: #f6f1e4; --cafe: #3a1f0d; --naranja: #f08a2c; }
+  html, body { margin: 0; overflow: hidden; }
+  .lienzo { position: relative; overflow: hidden; }
+  .azulejo { background-color: var(--crema); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%23f6f1e4' stroke='%23dcd4c2' stroke-width='3'/%3E%3Cg transform='translate(75 75)' fill='%232f5b9a'%3E%3Cellipse rx='9' ry='22' cy='-24'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(45)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(90)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(135)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(180)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(225)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(270)'/%3E%3Cellipse rx='9' ry='22' cy='-24' transform='rotate(315)'/%3E%3Ccircle r='11' fill='%23f4c430'/%3E%3C/g%3E%3Cg fill='none' stroke='%232f5b9a' stroke-width='9'%3E%3Ccircle r='26'/%3E%3Ccircle cx='150' r='26'/%3E%3Ccircle cy='150' r='26'/%3E%3Ccircle cx='150' cy='150' r='26'/%3E%3C/g%3E%3C/svg%3E"); }
+  .titulo { font-family: Luckiest; color: var(--amarillo); -webkit-text-stroke: 0; paint-order: stroke fill; text-shadow: 0 .08em 0 var(--cafe); letter-spacing: .02em; line-height: .9; }
+  .titulo span { -webkit-text-stroke: .09em var(--cafe); paint-order: stroke fill; }
+  .sub { font-family: Baloo; font-weight: 800; color: #fff; -webkit-text-stroke: .12em #000; paint-order: stroke fill; }
+  .pastilla { font-family: Lilita; background: var(--cafe); color: var(--amarillo); border: .12em solid var(--amarillo); border-radius: 1em; padding: .15em .7em; display: inline-block; }
+  img { display: block; }
+</style></head>
+<body>
+<div id="raiz"></div>
+<script>
+const p = new URLSearchParams(location.search).get("p") || "perfil";
+const R = document.getElementById("raiz");
+const img = n => `img/${n}-recorte.png`;
+const plantillas = {
+  perfil: () => `
+    <div class="lienzo" style="width:1080px;height:1080px;background:radial-gradient(circle at 50% 42%, #ffd95a 0, #f4c430 45%, #e2a21a 100%)">
+      <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 46%, rgba(255,255,255,.18) 0 8deg, transparent 8deg 22deg)"></div>
+      <img src="${img("michi-cara")}" style="position:absolute;left:50%;top:90px;height:1480px;transform:translateX(-50%)">
+    </div>`,
+  logo: () => `
+    <div class="lienzo" style="width:1500px;height:1500px;background:transparent">
+      <div class="azulejo" style="position:absolute;left:150px;top:120px;width:1200px;height:1200px;border-radius:50%;border:40px solid var(--azul);box-sizing:border-box;box-shadow:0 0 0 18px var(--cafe)"></div>
+      <div style="position:absolute;left:230px;top:200px;width:1040px;height:1040px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 40%, #ffd95a, #f4c430 60%, #e2a21a)">
+        <img src="${img("michi-cara")}" style="position:absolute;left:50%;top:40px;height:1600px;transform:translateX(-50%)">
+      </div>
+      <div style="position:absolute;left:50%;top:1000px;transform:translateX(-50%) rotate(-3deg);text-align:center;white-space:nowrap">
+        <div style="background:var(--azul);border:22px solid var(--cafe);border-radius:60px;padding:10px 70px 30px">
+          <div class="titulo" style="font-size:230px"><span>CHEF MICHI</span></div>
+        </div>
+        <div class="pastilla" style="font-size:64px;margin-top:-10px">recetas fáciles</div>
+      </div>
+    </div>`,
+  "youtube-banner": () => `
+    <div class="lienzo azulejo" style="width:2560px;height:1440px">
+      <div style="position:absolute;left:0;right:0;bottom:0;height:420px;background:var(--azul);border-top:20px solid var(--cafe)"></div>
+      <img src="${img("michi-plato")}" style="position:absolute;left:560px;top:500px;height:440px">
+      <div style="position:absolute;left:1060px;top:540px;white-space:nowrap">
+        <div class="titulo" style="font-size:170px"><span>CHEF MICHI</span></div>
+        <div class="sub" style="font-size:62px;margin-top:14px">Recetas fáciles en 30 segundos</div>
+        <div class="pastilla" style="font-size:46px;margin-top:16px">Nuevo video cada semana</div>
+      </div>
+    </div>`,
+  "facebook-portada": () => `
+    <div class="lienzo azulejo" style="width:1640px;height:624px">
+      <div style="position:absolute;left:0;right:0;bottom:0;height:110px;background:var(--azul);border-top:12px solid var(--cafe)"></div>
+      <div style="position:absolute;left:330px;top:120px;white-space:nowrap">
+        <div class="titulo" style="font-size:140px"><span>CHEF MICHI</span></div>
+        <div class="sub" style="font-size:50px;margin-top:12px">Recetas caseras, fáciles y ricas</div>
+        <div class="pastilla" style="font-size:38px;margin-top:14px">¡Guárdalas y compártelas!</div>
+      </div>
+      <img src="${img("michi-plato")}" style="position:absolute;right:250px;bottom:20px;height:520px">
+    </div>`,
+  "youtube-miniatura": () => `
+    <div class="lienzo azulejo" style="width:1280px;height:720px">
+      <img src="${img("michi-plato")}" style="position:absolute;right:30px;bottom:-10px;height:640px">
+      <div style="position:absolute;left:60px;top:90px;width:700px">
+        <div class="titulo" style="font-size:150px"><span>PANQUEQUES</span></div>
+        <div class="titulo" style="font-size:110px;color:#fff"><span>DE PLÁTANO</span></div>
+        <div class="pastilla" style="font-size:56px;margin-top:24px">¡Solo 3 ingredientes!</div>
+      </div>
+    </div>`,
+};
+R.innerHTML = plantillas[p]();
+Promise.all([document.fonts.ready, ...[...document.images].map(i => i.complete ? 1 : new Promise(r => i.onload = i.onerror = r))]).then(() => window.LISTO = true);
+</script>
+</body></html>
