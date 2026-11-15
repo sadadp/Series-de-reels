@@ -29,12 +29,29 @@ def sh(*a):
 
 
 def main():
-    textos = INICIO + [m[0] for m in MONTAJE] + [CIERRE]
-    clips = V.motor_chatterbox_lote(textos, os.path.join(RAIZ, "voces", "michi-ref.wav"), 0.9, 1.0, 1.08)
-    largo = [len(c) / SR for c in clips]
-    a1, a2 = max(1.8, largo[0] + 0.3), max(1.8, largo[1] + 0.3)
-    mont = [max(1.6, l + 0.25) for l in largo[2:6]]
-    cierre = max(3.2, largo[6] + 0.5)
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--voz", help="tu audio grabado (en vez de la voz IA)")
+    ap.add_argument("--cortes", help="segundos donde empieza cada frase, ej. 0,2.8,5.1,8.4,10.4,12.1,14.3")
+    o = ap.parse_args()
+    propia = os.path.join(RAIZ, "voces", "presentacion-final.wav")
+    if o.voz:
+        # voz grabada: los tiempos de cada parte salen de donde empieza cada frase
+        import shutil; shutil.copy(o.voz, propia)
+        c = [float(x) for x in o.cortes.split(",")]
+        total_audio = sf.info(o.voz).duration
+        a1, a2 = c[1] - c[0], c[2] - c[1]
+        mont = [c[i + 1] - c[i] for i in range(2, 6)]
+        cierre = max(3.2, total_audio - c[6] + 0.3)
+        clips = None
+    else:
+        if os.path.exists(propia): os.remove(propia)
+        textos = INICIO + [m[0] for m in MONTAJE] + [CIERRE]
+        clips = V.motor_chatterbox_lote(textos, os.path.join(RAIZ, "voces", "michi-ref.wav"), 0.9, 1.0, 1.08)
+        largo = [len(c) / SR for c in clips]
+        a1, a2 = max(1.8, largo[0] + 0.3), max(1.8, largo[1] + 0.3)
+        mont = [max(1.6, l + 0.25) for l in largo[2:6]]
+        cierre = max(3.2, largo[6] + 0.5)
     print("tiempos:", round(a1, 2), round(a2, 2), [round(m, 2) for m in mont], round(cierre, 2))
 
     # 1) Michi en 3D (inicio + cierre) con duraciones a la medida de la voz
@@ -66,10 +83,11 @@ def main():
     # 4) voz en su lugar
     tiempos = [0, a1] + list(np.cumsum([0] + mont[:-1]) + a) + [a + sum(mont)]
     total = a + sum(mont) + cierre
-    pista = np.zeros(int((total + 0.5) * SR), dtype=np.float32)
-    for c, t in zip(clips, tiempos):
-        i = int((t + 0.08) * SR); pista[i:i + len(c)] += c[: len(pista) - i]
-    sf.write(S("presentacion-final-voz.wav"), pista, SR)
+    if clips is not None:
+        pista = np.zeros(int((total + 0.5) * SR), dtype=np.float32)
+        for c, t in zip(clips, tiempos):
+            i = int((t + 0.08) * SR); pista[i:i + len(c)] += c[: len(pista) - i]
+        sf.write(S("presentacion-final-voz.wav"), pista, SR)
 
     # 5) guion para música y efectos
     guion = [{"ini": 0, "fin": a1, "texto": INICIO[0], "accion": "intro"}, {"ini": a1, "fin": a, "texto": INICIO[1], "accion": "intro"}]
