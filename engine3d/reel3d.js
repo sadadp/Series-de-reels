@@ -272,6 +272,19 @@ const cilantros = [];
 for (let n = 0; n < 10; n++) { const c = new THREE.Mesh(new THREE.CircleGeometry(0.06, 5), M("#3f9b3f", { side: THREE.DoubleSide })); c.rotation.x = -Math.PI / 2 + hash(n) * 0.6; c.position.set((hash(n + 4) - 0.5) * 1.2, 0.64, (hash(n + 5) - 0.5) * 0.6); platoEnch.add(c); cilantros.push(c); }
 
 plato.add(platoEnch);
+// plato de mole: piezas bañadas, ajonjolí y arroz
+const platoMole = new THREE.Group();
+const piezasMole = [];
+for (let n = 0; n < 2; n++) { const pz = pieza(); pz.position.set(-0.25 + n * 0.45, 0.32, n ? 0.18 : -0.15); pz.rotation.y = n ? -0.5 : 0.4; platoMole.add(pz); piezasMole.push(pz); }
+const salsaMole = new THREE.Mesh(new THREE.SphereGeometry(0.8, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2), M("#4b2215")); salsaMole.scale.set(1.0, 0.45, 0.85); salsaMole.position.set(0.05, 0.12, 0); platoMole.add(salsaMole);
+const brilloMole = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 6), new THREE.MeshBasicMaterial({ color: 0x8a5a3a, transparent: true, opacity: 0.5 })); brilloMole.scale.set(1.4, 0.15, 0.6); brilloMole.position.set(-0.2, 0.47, 0.2); platoMole.add(brilloMole);
+const semillas = [];
+for (let n = 0; n < 45; n++) { const sm = new THREE.Mesh(new THREE.SphereGeometry(0.022, 6, 4), M("#f3e3bf")); sm.scale.set(1, 0.5, 1.6); const a = hash(n + 11) * 6.28, r = hash(n + 13) * 0.6; sm.position.set(0.05 + Math.cos(a) * r, 0.5 - r * 0.35, Math.sin(a) * r * 0.8); sm.rotation.y = hash(n) * 6; platoMole.add(sm); semillas.push(sm); }
+const arroz = new THREE.Group();
+for (let n = 0; n < 40; n++) { const a = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 6), M(n % 7 ? "#fff8ec" : "#f08a2c")); const r = hash(n + 20) * 0.32, ang = hash(n + 21) * 6.28; a.position.set(Math.cos(ang) * r, 0.15 + (0.32 - r) * 0.7, Math.sin(ang) * r); arroz.add(a); }
+arroz.position.set(-0.75, 0.05, -0.25); platoMole.add(arroz);
+plato.add(platoMole);
+const ESMOLE = R.platillo === "mole";
 const ESENCH = R.platillo === "enchiladas";
 // ---------- ingredientes 3D ----------
 function platano() {
@@ -340,7 +353,34 @@ function harina() {
   const polvo = new THREE.Mesh(new THREE.SphereGeometry(0.26, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M("#ffffff")); polvo.scale.y = 0.4; polvo.position.y = 0.3; g.add(polvo);
   return g;
 }
-const FABRICA = { platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina };
+function chileSeco() {
+  const g = new THREE.Group();
+  const c = mesh(new THREE.CapsuleGeometry(0.13, 0.42, 6, 12), "#5a1f17"); c.scale.set(1, 1, 0.55); c.rotation.z = Math.PI / 2 - 0.3; g.add(c);
+  for (let i = 0; i < 4; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 4, 12, Math.PI), M("#3e140f")); r.position.set(-0.2 + i * 0.13, 0.06 - i * 0.04, 0.05); r.rotation.z = -0.3; g.add(r); }
+  const t = mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.12, 8), "#7a6a3a", { contorno: 0 }); t.position.set(0.34, 0.12, 0); t.rotation.z = -1.2; g.add(t);
+  return g;
+}
+function chocolate() {
+  const g = new THREE.Group();
+  const d = mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.16, 32), "#5a2e1a"); g.add(d);
+  for (let i = 0; i < 4; i++) { const l = new THREE.Mesh(new THREE.BoxGeometry(0.84, 0.02, 0.025), M("#3e1f10")); l.position.y = 0.085; l.rotation.y = i * Math.PI / 4; g.add(l); }
+  return g;
+}
+function ajonjoli() {
+  const g = new THREE.Group();
+  g.add(mesh(new THREE.CylinderGeometry(0.42, 0.3, 0.22, 24), "#d9a066"));
+  for (let i = 0; i < 40; i++) { const s = new THREE.Mesh(new THREE.SphereGeometry(0.025, 6, 4), M("#f3e3bf")); const a = hash(i) * 6.28, r = hash(i + 9) * 0.34; s.scale.set(1, 0.5, 1.6); s.position.set(Math.cos(a) * r, 0.12 + hash(i + 2) * 0.04, Math.sin(a) * r); s.rotation.y = hash(i + 3) * 6; g.add(s); }
+  for (let i = 0; i < 5; i++) { const a = new THREE.Mesh(new THREE.SphereGeometry(0.07, 10, 8), M("#b07040")); a.scale.set(1.4, 0.6, 0.9); a.position.set(Math.cos(i * 1.3) * 0.2, 0.17, Math.sin(i * 1.3) * 0.2); a.rotation.y = i; g.add(a); }
+  return g;
+}
+function pieza() {
+  const g = new THREE.Group();
+  const carne = mesh(new THREE.SphereGeometry(0.28, 20, 14), "#d7a46a"); carne.scale.set(1.25, 0.85, 0.9); g.add(carne);
+  const hueso = mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.35, 10), "#f6efe0"); hueso.rotation.z = Math.PI / 2; hueso.position.x = 0.45; g.add(hueso);
+  const nudo = mesh(new THREE.SphereGeometry(0.08, 10, 8), "#f6efe0"); nudo.position.x = 0.64; g.add(nudo);
+  return g;
+}
+const FABRICA = { platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina, chileSeco, chocolate, ajonjoli, pieza };
 const fabrica = n => (FABRICA[n] || huevo)();
 
 // cascarón partido: dos mitades + yema + clara
@@ -465,6 +505,7 @@ function armarRafagas() {
     if (a === "baña") rafaga(ti + 0.4, { origen: V3(BOWL.x, 0.9, BOWL.z), n: 30, colores: [s.capa === "bechamel" ? COLOR_BECH : COLOR_SALSA], tipo: "esfera", vel: 1.8, g: -7, vida: 0.8, tam: 0.05, arriba: 2 });
     if (a === "queso") rafaga(ti + 0.2, { origen: V3(BOWL.x, 3.2, BOWL.z), n: 60, colores: ["#ffd75e", "#ffe48a"], tipo: "cuadro", vel: 0.8, g: -5, vida: 1.2, tam: 0.04 });
     if (a === "hornea") rafaga(ti + s.dur * 0.6, { origen: V3(BOWL.x, 1.0, BOWL.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.2, vida: 1.4, tam: 0.07 });
+    if (a === "serve" && R.platillo === "mole") rafaga(ti + 1.5, { origen: V3(PLATE.x, 2.6, PLATE.z), n: 50, colores: ["#f3e3bf"], tipo: "esfera", vel: 0.5, g: -5, vida: 1.0, tam: 0.025 });
     if (a === "flip") rafaga(ti + s.dur * 0.5, { origen: V3(PAN.x, 0.4, PAN.z), n: 26, colores: ["#fff3d6", "#efc77a"], tipo: "esfera", vel: 1.8, g: -6, vida: 0.9, tam: 0.04, arriba: 2 });
   });
   // salpicaduras al caer cada ingrediente
@@ -565,7 +606,7 @@ function renderSubs(t, accion) {
   }
   if (idx < 0) return;
   const s = subs[idx], pop = easeOutBack((t - s.ini) / 0.16);
-  const y = accion === "outro" || accion === "intro" ? 1560 : 330;
+  const y = ["outro", "intro", "presenta"].includes(accion) ? 1560 : 330;
   g.setAttribute("transform", `translate(540,${y}) rotate(${Math.sin(t * 5) * 1.2}) scale(${lerp(0.6, 1, pop)})`);
   g.querySelectorAll(".frente tspan").forEach(ts => { const w = s.palabras[+ts.dataset.k]; ts.setAttribute("fill", t >= w.t && t < w.t + w.d ? P.amarillo : "#fff"); });
 }
@@ -821,6 +862,14 @@ function renderAt(t) {
 
   // --- plato: panqueques o enchiladas ---
   platoEnch.visible = ESENCH;
+  platoMole.visible = ESMOLE;
+  if (ESMOLE) {
+    pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
+    piezasMole.forEach((pz, n) => { const q = clamp((su - 0.3 - n * 0.25) / 0.3); pz.visible = q > 0; pz.position.y = 0.32 + (1 - easeIn(q)) * 3; });
+    const qs = clamp((su - 0.9) / 0.5); salsaMole.visible = qs > 0; salsaMole.scale.set(1.0 * qs, 0.45, 0.85 * qs); brilloMole.visible = qs > 0.9;
+    semillas.forEach((sm, n) => { sm.visible = su > 1.5 + n * 0.012; });
+    const qa = clamp((su - 1.9) / 0.35); arroz.visible = qa > 0; arroz.scale.setScalar(Math.max(0.001, easeOutBack(qa)));
+  }
   if (ESENCH) {
     pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
     rollosPlato.forEach((r, n) => { const q = clamp((su - 0.3 - n * 0.2) / 0.3); r.visible = q > 0; r.position.y = 0.32 + (1 - easeIn(q)) * 3; });
