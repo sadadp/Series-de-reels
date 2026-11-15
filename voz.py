@@ -111,6 +111,7 @@ def main():
     a.add_argument("--ref", default=os.path.join(RAIZ, "herramientas", "voces", "michi-euforico.wav"), help="chatterbox: voz de referencia")
     a.add_argument("--exag", type=float, default=1.2, help="chatterbox: emoción")
     a.add_argument("--tono-factor", type=float, default=1.055, help="chatterbox: tono (1.0 = igual)")
+    a.add_argument("--respetar", action="store_true", help="con --ajustar: nunca acortar los tiempos del guion (ritmo tranquilo)")
     a.add_argument("--ajustar", action="store_true", help="ajusta la duración de cada paso a su frase (sin huecos)")
     o = a.parse_args()
     voz = o.voz or VOZ_DEF[o.motor]
@@ -133,6 +134,8 @@ def main():
             if c is None:
                 durs.append(round(base, 2)); continue
             minimo = MIN_DUR.get(g["accion"], 1.5) + (0.5 * max(0, g.get("items", 1) - 1) + (0.5 if "huev" in g["texto"].lower() else 0) if g["accion"] == "drop" else 0)
+            if o.respetar:
+                minimo = max(minimo, base)
             durs.append(round(max(minimo, len(c) / SR + 0.3), 2))
         json.dump(durs, open(os.path.join(RAIZ, "salida", f"{o.receta}-duraciones.json"), "w"))
         t = 0

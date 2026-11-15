@@ -13,7 +13,7 @@ else
   rm -f "salida/$R-duraciones.json"
   node render.js "$R" --frame 0 >/dev/null          # guion con textos
   # voz de Michi: por defecto la clonada de voces/michi-ref.wav (cambia con REF=, TONO=, VEL=, EXAG=)
-  python3 voz.py "$R" --motor chatterbox --ref "${REF:-voces/michi-ref.wav}" --vel "${VEL:-1.0}" --tono-factor "${TONO:-1.0}" --exag "${EXAG:-0.9}" --ajustar
+  python3 voz.py "$R" --motor chatterbox --ref "${REF:-voces/michi-ref.wav}" --vel "${VEL:-1.0}" --tono-factor "${TONO:-1.0}" --exag "${EXAG:-0.9}" --ajustar ${RESPETAR:+--respetar}
 fi
 node render.js "$R"
 python3 musica.py "$R"
