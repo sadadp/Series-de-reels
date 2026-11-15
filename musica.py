@@ -192,6 +192,7 @@ def main():
     a = argparse.ArgumentParser()
     a.add_argument("receta"); a.add_argument("--bpm", type=float, default=128)
     a.add_argument("--vol", type=float, default=0.22); a.add_argument("--semilla", type=int, default=3)
+    a.add_argument("--voz", help="audio de voz a usar (por defecto voces/<receta>.wav si existe, si no salida/<receta>-voz.wav)")
     o = a.parse_args()
     guion = json.load(open(os.path.join(RAIZ, "salida", f"{o.receta}-guion.json")))
     dur = guion[-1]["fin"]
@@ -201,14 +202,18 @@ def main():
     fx = efectos(guion, dur) * 0.5
 
     voz = np.zeros(len(musica))
-    vpath = os.path.join(RAIZ, "salida", f"{o.receta}-voz.wav")
+    propia = o.voz or os.path.join(RAIZ, "voces", f"{o.receta}.wav")
+    es_propia = os.path.exists(propia)  # voz grabada/subida por ti: se usa tal cual
+    vpath = propia if es_propia else os.path.join(RAIZ, "salida", f"{o.receta}-voz.wav")
+    if es_propia: print("Voz:", vpath)
     if os.path.exists(vpath):
         v, vsr = sf.read(vpath, dtype="float64")
         if v.ndim > 1: v = v.mean(axis=1)
         v = np.interp(np.arange(int(len(v) * SR / vsr)) / SR, np.arange(len(v)) / vsr, v)
         voz[: min(len(v), len(voz))] = v[: len(voz)]
-        voz = voz + 0.15 * pasa_altos(voz, 0.92)  # más brillo = suena más alegre
-        voz = np.tanh(voz / (np.abs(voz).max() + 1e-9) * 1.1)  # compresión suave, más presencia
+        if not es_propia:
+            voz = voz + 0.15 * pasa_altos(voz, 0.92)  # más brillo = suena más alegre
+            voz = np.tanh(voz / (np.abs(voz).max() + 1e-9) * 1.1)  # compresión suave, más presencia
         voz /= np.abs(voz).max() + 1e-9
 
     # "ducking": baja la música cuando habla la voz

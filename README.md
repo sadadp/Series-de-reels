@@ -16,6 +16,12 @@ bash hacer-reel.sh panqueques-platano          # 3D + voz Alonso + música → s
   sin derechos de autor — con efectos (pop, ding, whoosh, chisporroteo) y la música baja cuando habla la voz.
 - Vista previa en navegador: `node render.js panqueques-platano --serve` y abre la URL.
 
+## Voz propia
+
+Pon tu audio en `voces/<receta>.wav` (alineado a los tiempos de `salida/<receta>-guion.txt`)
+y sus duraciones en `voces/<receta>-duraciones.json`. `hacer-reel.sh` y `musica.py` lo usan tal cual,
+sin generar voz con IA ni procesarla.
+
 ## Uso
 
 ```bash
