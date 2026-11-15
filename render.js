@@ -50,6 +50,7 @@ const srtTime = s => {
   const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on("pageerror", e => console.error("Error en página:", e.message));
+  page.on("console", m => { if (m.type() === "error") console.error("Consola:", m.text()); });
   await page.goto(`${base}/${pagina}?r=${nombre}&render=1`);
   await page.waitForFunction(() => window.LISTO === true, null, { timeout: 120000 });
   const dur = await page.evaluate(() => window.DURACION);
