@@ -12,7 +12,8 @@ if [ -f "voces/$R.wav" ]; then
 else
   rm -f "salida/$R-duraciones.json"
   node render.js "$R" --frame 0 >/dev/null          # guion con textos
-  python3 voz.py "$R" --motor chatterbox --vel 1.07 --tono-factor 1.055 --exag 1.2 --ajustar   # voz michi + duraciones sin huecos
+  # voz de Michi: por defecto la clonada de voces/michi-ref.wav (cambia con REF=, TONO=, VEL=, EXAG=)
+  python3 voz.py "$R" --motor chatterbox --ref "${REF:-voces/michi-ref.wav}" --vel "${VEL:-1.0}" --tono-factor "${TONO:-1.0}" --exag "${EXAG:-0.9}" --ajustar
 fi
 node render.js "$R"
 python3 musica.py "$R"
