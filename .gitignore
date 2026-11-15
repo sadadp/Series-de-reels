@@ -18,3 +18,7 @@ salida/presentacion-final-video.mp4
 salida/*-voz.wav
 salida/*-video.mp4
 salida/story-*-guion.json
+salida/*.mp4
+!salida/*-final.mp4
+!salida/story-*.mp4
+salida/*-video.mp4
