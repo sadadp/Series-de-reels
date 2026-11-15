@@ -26,12 +26,12 @@ Imágenes en `marca/img/` (se regeneran con `node marca/generar.js`).
 
 ```
 🐱👨‍🍳 Recetas fáciles en 30 segundos
-🇲🇽 Comida mexicana, desayunos y postres
+🌎 Desayunos, comidas y postres de todo el mundo
 💾 Guárdalas y cocina conmigo
 👇 ¿Qué cocino mañana? Comenta
 ```
 
-- **Historias destacadas:** Desayunos · Comida mexicana · Postres · Tips
+- **Historias destacadas:** Desayunos · Comidas · Postres · Del mundo · Tips
 
 ## TikTok
 
@@ -52,13 +52,13 @@ Recetas fáciles en 30 seg 🐱👨‍🍳 ¿Qué cocino mañana? 👇
 ¡Hola! Soy Chef Michi 🐱👨‍🍳 y cocino recetas fáciles, caseras y ricas en menos de un minuto.
 
 🍳 Desayunos rápidos
-🌮 Comida mexicana de siempre: enchiladas, mole y más
+🌎 Comidas de México y del mundo: enchiladas, pastas, mole y más
 🍰 Postres fáciles
 
 Nuevo video cada semana. Suscríbete y dime en los comentarios qué receta quieres que haga.
 ```
 
-- **Palabras clave del canal:** recetas fáciles, recetas mexicanas, comida casera, recetas rápidas, cocina fácil, panqueques, enchiladas, mole, chef michi
+- **Palabras clave del canal:** recetas fáciles, recetas caseras, recetas del mundo, comida casera, recetas rápidas, cocina fácil, panqueques, enchiladas, mole, chef michi
 
 ## Facebook (página)
 
@@ -73,7 +73,7 @@ Recetas caseras, fáciles y ricas explicadas por Chef Michi 🐱👨‍🍳 Nuev
 - **Por qué Facebook sí sirve aquí:** el público de recetas comparte mucho en Facebook y guarda las publicaciones. Ahí:
   - Sube el reel como **Reel de Facebook**, no solo compartido desde Instagram.
   - En la descripción pon **la receta completa en texto** (ingredientes + pasos). La gente la guarda y la comparte.
-  - Comparte en grupos de recetas y comida mexicana, sin hacer spam: solo cuando la receta encaja con el grupo.
+  - Comparte en grupos de recetas y cocina casera, sin hacer spam: solo cuando la receta encaja con el grupo.
 
 ## Texto para cada publicación (plantilla)
 
@@ -91,7 +91,7 @@ Recetas caseras, fáciles y ricas explicadas por Chef Michi 🐱👨‍🍳 Nuev
 💾 Guárdala para después
 💬 ¿Qué receta quieres que haga Michi?
 
-#recetasfaciles #recetasmexicanas #comidacasera #cocinafacil #chefmichi
+#recetasfaciles #recetascaseras #comidacasera #cocinafacil #chefmichi
 ```
 
 ## Plan para empezar

@@ -1,5 +1,6 @@
 # Reglas del proyecto (Chef Michi)
 
+- La cuenta NO es solo de comida mexicana: recetas fáciles de todo el mundo (México incluido).
 - Habla en español. Nada de palabras en inglés en los videos (ej. "panqueques", no "hot cakes").
 - Cada vez que entregues un video terminado, entrega también su portada (`portadas/<video>-portada.png`
   1080×1920 y `portadas/<video>-youtube.png` 1280×720, con `node marca/generar.js portadas`) y sus captions para cada red

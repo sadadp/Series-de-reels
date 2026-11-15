@@ -9,17 +9,17 @@ Un gatito que ama cocinar y te enseña recetas fáciles, caseras y riquísimas e
 🥞 Panqueques esponjositos
 🌮 Enchiladas suizas
 🍫 Mole poblano
-…y lo que tú me pidas 👇
+🌎 …y recetas de todo el mundo que tú me pidas 👇
 
 💬 Comenta qué receta quieres que cocine primero
 💾 Guarda este video y sígueme para no perderte ninguna
 
-#recetasfaciles #comidamexicana #recetascaseras #cocinafacil #chefmichi
+#recetasfaciles #recetasdelmundo #recetascaseras #cocinafacil #chefmichi
 ```
 
 ## TikTok
 ```
-¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles en menos de un minuto. ¿Qué cocino primero? 👇 #recetasfaciles #comidamexicana #cocinafacil #chefmichi
+¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles en menos de un minuto. ¿Qué cocino primero? 👇 #recetasfaciles #recetasdelmundo #cocinafacil #chefmichi
 ```
 
 ## YouTube Shorts
@@ -34,18 +34,18 @@ En este canal aprendes recetas fáciles, caseras y riquísimas en menos de un mi
 
 👉 Suscríbete y comenta qué receta quieres que haga.
 
-#shorts #recetasfaciles #comidamexicana #recetascaseras #chefmichi
+#shorts #recetasfaciles #recetasdelmundo #recetascaseras #chefmichi
 ```
 
 ## Facebook (Reel)
 ```
 ¡Hola, familia! 👋 Soy Chef Michi 🐱👨‍🍳
 
-Aquí vas a encontrar recetas caseras, fáciles y ricas, explicadas paso a paso en menos de un minuto. Panqueques, enchiladas suizas, mole poblano… ¡y lo que ustedes me pidan!
+Aquí vas a encontrar recetas caseras, fáciles y ricas, explicadas paso a paso en menos de un minuto. Panqueques, enchiladas suizas, mole poblano, recetas de todo el mundo… ¡y lo que ustedes me pidan!
 
 👉 Sigue la página para ver una receta nueva cada semana.
 💬 Cuéntame en los comentarios: ¿qué receta quieres que cocine?
 🔁 Compártelo con quien siempre te pide recetas 😄
 
-#recetasfaciles #comidamexicana #chefmichi
+#recetasfaciles #recetasdelmundo #chefmichi
 ```
