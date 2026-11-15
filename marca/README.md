@@ -55,7 +55,7 @@ Recetas fáciles en 30 seg 🐱👨‍🍳 ¿Qué cocino mañana? 👇
 🌎 Comidas de México y del mundo: enchiladas, pastas, mole y más
 🍰 Postres fáciles
 
-Nuevo video cada semana. Suscríbete y dime en los comentarios qué receta quieres que haga.
+Recetas nuevas todos los días. Suscríbete y dime en los comentarios qué receta quieres que haga.
 ```
 
 - **Palabras clave del canal:** recetas fáciles, recetas caseras, recetas del mundo, comida casera, recetas rápidas, cocina fácil, panqueques, enchiladas, mole, chef michi
@@ -67,7 +67,7 @@ Nuevo video cada semana. Suscríbete y dime en los comentarios qué receta quier
 - **Presentación (máx. 101):**
 
 ```
-Recetas caseras, fáciles y ricas explicadas por Chef Michi 🐱👨‍🍳 Nuevo video cada semana.
+Recetas caseras, fáciles y ricas explicadas por Chef Michi 🐱👨‍🍳 ¡Recetas nuevas todos los días!
 ```
 
 - **Por qué Facebook sí sirve aquí:** el público de recetas comparte mucho en Facebook y guarda las publicaciones. Ahí:
@@ -97,6 +97,6 @@ Recetas caseras, fáciles y ricas explicadas por Chef Michi 🐱👨‍🍳 Nuev
 ## Plan para empezar
 
 - **Primeras 3 publicaciones:** panqueques de plátano, enchiladas suizas y mole poblano. Fíjalas arriba del perfil.
-- **Ritmo:** 3 a 5 reels por semana, a la misma hora (por ejemplo 7–8 pm).
+- **Ritmo:** 3 a 4 recetas al día, repartidas (por ejemplo 8 am, 2 pm, 7 pm y 9 pm).
 - **El mismo video en las 4 redes**, cada uno con su texto.
 - **Responde comentarios** en la primera hora y pide la siguiente receta. Con lo que pidan se arma el siguiente video.
