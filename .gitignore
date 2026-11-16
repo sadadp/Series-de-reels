@@ -22,3 +22,7 @@ salida/*.mp4
 !salida/*-final.mp4
 !salida/story-*.mp4
 salida/*-video.mp4
+
+# los videos viven en Google Drive (carpeta Chef Michi), no en el repo
+salida/**/*.mp4
+salida/*.mp4

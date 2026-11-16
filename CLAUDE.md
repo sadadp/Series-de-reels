@@ -16,4 +16,8 @@
   pregunta que divida opiniones + 3 hashtags. Solo Facebook lleva la receta (ingredientes + pasos numerados).
 - Voz de Michi: si el usuario sube su audio, úsalo tal cual (`voces/<receta>.wav`) y ajusta
   el video a sus tiempos. Si no, voz clonada con Chatterbox (`voces/michi-ref.wav`).
+- Entregas en Google Drive, carpeta "Chef Michi" (IDs en `marca/drive.md`): una subcarpeta por receta
+  con portada, miniatura de YouTube y captions (como Documento de Google). Crea la subcarpeta si no existe.
+  El conector solo acepta ~3 MB por archivo: los videos se mandan al usuario aquí para que él los suba
+  a su carpeta. Los videos NO se guardan en el repo.
 - Todo en un paso: `bash hacer-reel.sh <receta>`. Kit de marca y textos de perfil: `marca/`.
