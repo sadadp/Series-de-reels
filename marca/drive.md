@@ -10,6 +10,7 @@ https://drive.google.com/drive/folders/1XxQg5edEApI8PEcpXCak4AMwHBJR1tqz
 | Mole poblano | 1GH6dlkr7KsJOZjt8fiph3Wd1forlKnnN |
 | Pizza italiana | 1eIe14Vma5xUcOQKm4crd93oWVDBMcYxi |
 | Stories | 140YTaka3xuFkCmzJVc3et5-C_URKzzY3 |
+| Sushi en casa | 1t0xZKKQaTW-9EElZHF21JDp72WwEoQXL |
 
 Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí caben;
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.
