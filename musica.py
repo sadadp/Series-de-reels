@@ -198,6 +198,13 @@ def efectos(guion, dur):
             for n in range(12): poner(buf, pasa_altos(ruido(0.04, 60, 40 + n)) * 0.12, t0 + 0.2 + n * 0.1)
         elif a == "hornea": poner(buf, sfx_chisporroteo(d), t0); poner(buf, sfx_ding(), t0 + d - 0.5)
         elif a == "extiende": poner(buf, sfx_whoosh(0.5), t0 + 0.5); poner(buf, sfx_pop(), t0 + 1.6)
+        elif a == "remoja": poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
+        elif a == "marina":
+            for n in range(3): poner(buf, sfx_pop() * 0.6, t0 + 0.6 + n * 0.35)
+            poner(buf, sfx_mezcla(d * 0.5) * 0.5, t0 + 1.6)
+        elif a in ("dora", "pina"): poner(buf, sfx_chisporroteo(d) * 0.8, t0)
+        elif a == "tortillas":
+            for n in range(3): poner(buf, sfx_pop() * 0.5, t0 + 1.2 + n * 0.4)
         elif a == "lava": poner(buf, sfx_mezcla(d * 0.8) * 0.8, t0 + 0.2); poner(buf, sfx_chisporroteo(d * 0.6) * 0.3, t0 + 0.4)
         elif a == "cocina": poner(buf, sfx_chisporroteo(d) * 0.6, t0); poner(buf, sfx_ding(), t0 + d - 0.6)
         elif a == "alina": poner(buf, sfx_whoosh(0.4), t0 + 0.4); poner(buf, sfx_mezcla(d * 0.5) * 0.6, t0 + 1.3)
