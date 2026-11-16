@@ -38,11 +38,11 @@ one arm raised, shouting in panic, tourists behind him confused, [ESTILO]
 ### TOMA 4 · 13–19 s · ¿Dónde está Leo?
 **Imagen (ref: Leo):**
 ```
-First-person POV, wide view of the exposed seabed, far in the distance a small boy in a
+First-person POV, wide view of the exposed seabed, far in the distance a small girl in a
 yellow t-shirt with a star crouching and collecting seashells into a blue bucket, alone,
 unaware, the sky starting to turn grey-green, [ESTILO]
 ```
-**Video:** `Slow push-in toward the small boy far away on the empty seabed, he keeps picking up shells happily, clouds darken, 6 seconds`
+**Video:** `Slow push-in toward the small girl far away on the empty seabed, she keeps picking up shells happily, clouds darken, 6 seconds`
 **Texto:** "Él no escuchó." · **Audio:** entra latido.
 
 ### TOMA 5 · 19–25 s · La línea blanca
@@ -68,7 +68,7 @@ terrified face, people running behind, [ESTILO]
 ### TOMA 7 · 31–37 s · Leo te saluda (SILENCIO)
 **Imagen (ref: Leo):**
 ```
-First-person POV, medium shot of little Leo on the exposed seabed, turning toward the
+First-person POV, medium shot of little girl Leo on the exposed seabed, turning toward the
 camera, smiling innocently and waving with one hand, holding his blue bucket, completely
 unaware, behind him on the horizon a massive dark wall of water, [ESTILO]
 ```

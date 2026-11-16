@@ -11,10 +11,10 @@ multiple angles: open palm, reaching forward, gripping, white background,
 [BLOQUE DE ESTILO]
 ```
 
-## LEO — tu hermano, 8 años
-- Pelo rizado café, pecas, camiseta amarilla con estrella, short azul, cubeta azul de playa.
+## LEO — tu hermana, 8 años
+- Niña. Pelo rizado café en dos coletas, pecas, camiseta amarilla con estrella, short azul, cubeta azul de playa.
 ```
-Character reference sheet of an 8-year-old boy named Leo, curly brown hair, freckles,
+Character reference sheet of an 8-year-old girl named Leo, curly brown hair in two puffy pigtails, freckles,
 big curious brown eyes, wide gap-toothed smile, yellow t-shirt with a white star,
 blue swim shorts, holding a small blue sand bucket, barefoot,
 front view, side view, back view, three expressions: happy, confused, scared,
