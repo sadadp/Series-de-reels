@@ -1,0 +1,28 @@
+// Tacos al pastor en casa, sin trompo
+window.RECETA = {
+  platillo: "tacos",
+  titulo: ["TACOS", "AL PASTOR"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["TACOS AL PASTOR", "sin trompo"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "hook", "dur": 3.2, "texto": "¡Mira nomás estos tacos al pastor!"},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "intro", "dur": 6.5, "texto": "Hoy te enseño a hacerlos en casa, sin trompo. El secreto está en el adobo con piña."},
+    {"accion": "presenta", "dur": 4.9, "ingrediente": "carne", "etiqueta": "1 kg de bistec de cerdo", "texto": "Necesitas un kilo de bistec de cerdo, cortado delgadito,"},
+    {"accion": "presenta", "dur": 5.0, "ingrediente": "chileSeco", "cuantos": 3, "etiqueta": "4 guajillo + 2 anchos", "texto": "cuatro chiles guajillo y dos chiles anchos, sin semillas,"},
+    {"accion": "presenta", "dur": 5.3, "ingrediente": "achiote", "etiqueta": "achiote + ½ taza jugo de piña", "texto": "dos cucharadas de pasta de achiote y media taza de jugo de piña,"},
+    {"accion": "presenta", "dur": 7.7, "ingrediente": "especias", "etiqueta": "ajo, cebolla y especias", "texto": "tres dientes de ajo, un cuarto de cebolla, dos clavos, comino, orégano, sal y un chorrito de vinagre."},
+    {"accion": "presenta", "dur": 5.2, "ingrediente": "tortilla", "etiqueta": "tortillas, piña, cebolla, cilantro", "texto": "Para servir: tortillas de maíz, piña, cebolla, cilantro y limón."},
+    {"accion": "remoja", "dur": 7.2, "texto": "Primero, pon a remojar los chiles en agua caliente por diez minutos, para que se suavicen."},
+    {"accion": "drop", "dur": 9.0, "ingredientes": ["chileSeco", "achiote", "pina"], "color": "#b5321f", "cantidad": 0.7, "texto": "Licúalos con el achiote, el jugo de piña, el ajo, la cebolla, las especias, el vinagre y sal, hasta tener un adobo espeso."},
+    {"accion": "marina", "dur": 10.0, "texto": "Baña la carne con el adobo, que quede bien cubierta, y déjala reposar mínimo dos horas. Si puedes, toda la noche: así agarra más sabor."},
+    {"accion": "drop", "dur": 7.5, "destino": "sarten", "ingrediente": "carne", "color": "#a3341f", "texto": "Calienta muy bien un sartén con un poquito de aceite, y pon la carne en tandas, sin amontonarla."},
+    {"accion": "dora", "dur": 8.2, "texto": "Déjala dorar sin moverla, unos tres minutos por lado. Esas orillitas doradas son las que saben a trompo."},
+    {"accion": "corta", "dur": 3.0, "texto": "Ya cocida, pícala en trocitos."},
+    {"accion": "pina", "dur": 5.5, "texto": "En el mismo sartén, dora unas rebanadas de piña y pícalas también."},
+    {"accion": "tortillas", "dur": 5.6, "texto": "Calienta las tortillas en el comal, hasta que se inflen un poquito."},
+    {"accion": "serve", "dur": 6.6, "texto": "Sirve la carne en las tortillas, con cebolla, cilantro, piña y un chorrito de limón."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Con salsa verde o con salsa roja? ¡Comenta!"},
+  ],
+};
