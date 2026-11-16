@@ -10,7 +10,7 @@
 | 12–18 s | Buscas a tu hermana. Lo ves: **lejos, en el fondo seco**, juntando conchas. | "Ella no escuchó." | Latido. |
 | 18–24 s | En el horizonte, una línea blanca. Crece. | ⏱️ 4:00 | Rugido grave, lejano. |
 | 24–30 s | Tu pareja te jala del brazo hacia la colina. | "¡No llegas! ¡Vámonos!" | Gritos alrededor. |
-| 30–36 s | **Silencio total 2 s.** Miras a tu hermana. Él te ve. Te saluda, sonriendo. No entiende. | | Nada. |
+| 30–36 s | **Silencio total 2 s.** Miras a tu hermana. Ella te ve. Te saluda, sonriendo. No entiende. | | Nada. |
 | 36–42 s | La ola ya se ve. Es más alta que los hoteles. | ⏱️ 2:30 | Rugido sube. |
 | 42–52 s | Congelado. | **A 🏃 Bajas por tu hermana** / **B ⛰️ Subes con tu pareja** | Tic tac. |
 | 52–58 s | Negro. | "A o B." | Corte. |

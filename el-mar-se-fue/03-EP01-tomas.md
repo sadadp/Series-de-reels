@@ -43,7 +43,7 @@ yellow t-shirt with a star crouching and collecting seashells into a blue bucket
 unaware, the sky starting to turn grey-green, [ESTILO]
 ```
 **Video:** `Slow push-in toward the small girl far away on the empty seabed, she keeps picking up shells happily, clouds darken, 6 seconds`
-**Texto:** "Él no escuchó." · **Audio:** entra latido.
+**Texto:** "Ella no escuchó." · **Audio:** entra latido.
 
 ### TOMA 5 · 19–25 s · La línea blanca
 **Imagen:**
