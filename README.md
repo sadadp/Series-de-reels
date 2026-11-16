@@ -6,7 +6,8 @@ Serie POV (primera persona). Drama apocalíptico. **La gente decide** en comenta
 | Carpeta | Qué es |
 |---|---|
 | `no-mires-al-cielo/` | **Serie principal.** Arco completo T1 + guiones EP1 y EP2 (ramas A/B). |
-| `pilotos/` | 4 escenarios más, cada uno con su EP1 listo. Prueba cuál pega más. |
+| `el-mar-se-fue/` | **En producción (3D animado).** Guía de estilo, personajes y tomas con prompts. |
+| `pilotos/` | 3 escenarios más, cada uno con su EP1 listo. |
 | `suspenso.md` | Las técnicas de suspenso que usan todos los guiones. Léelo antes de grabar. |
 | `plantilla-episodio.md` | Molde para escribir episodios nuevos. |
 
