@@ -62,6 +62,7 @@ const POSES = {
     ["mole-poblano", "MOLE", "POBLANO", "Receta casera y fácil", "fondo-mole-poblano.png"],
     ["pizza-italiana", "PIZZA", "ITALIANA", "¿Con piña o sin piña?", "fondo-pizza-italiana.png"],
     ["enchiladas-suizas-v2", "ENCHILADAS", "SUIZAS", "El secreto: bechamel casera", "fondo-enchiladas-suizas.png"],
+    ["sushi", "SUSHI", "EN CASA", "Paso a paso, fácil", "fondo-sushi.png"],
   ];
   if (etapa === "portadas" || etapa === "todo") {
     const dir = path.join(__dirname, "..", "portadas"); fs.mkdirSync(dir, { recursive: true });

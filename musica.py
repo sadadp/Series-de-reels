@@ -156,6 +156,12 @@ def sfx_chisporroteo(dur):
     env = np.minimum(1, np.arange(len(r)) / (0.3 * SR)) * np.minimum(1, (len(r) - np.arange(len(r))) / (0.3 * SR))
     return (r * 0.05 + pasa_altos(crep, 0.5) * 0.35) * env
 
+def sfx_corte(seed):
+    """Golpe de cuchillo sobre la tabla."""
+    n = int(0.09 * SR); t = np.arange(n) / SR
+    golpe = np.sin(2 * np.pi * 180 * t) * np.exp(-t * 60) * 0.5
+    return golpe + pasa_altos(ruido(0.09, 80, 200 + seed), 0.6) * 0.25
+
 def sfx_brillo():
     s = np.zeros(int(0.9 * SR))
     for i, m in enumerate([84, 88, 91, 96]):
@@ -192,6 +198,14 @@ def efectos(guion, dur):
             for n in range(12): poner(buf, pasa_altos(ruido(0.04, 60, 40 + n)) * 0.12, t0 + 0.2 + n * 0.1)
         elif a == "hornea": poner(buf, sfx_chisporroteo(d), t0); poner(buf, sfx_ding(), t0 + d - 0.5)
         elif a == "extiende": poner(buf, sfx_whoosh(0.5), t0 + 0.5); poner(buf, sfx_pop(), t0 + 1.6)
+        elif a == "lava": poner(buf, sfx_mezcla(d * 0.8) * 0.8, t0 + 0.2); poner(buf, sfx_chisporroteo(d * 0.6) * 0.3, t0 + 0.4)
+        elif a == "cocina": poner(buf, sfx_chisporroteo(d) * 0.6, t0); poner(buf, sfx_ding(), t0 + d - 0.6)
+        elif a == "alina": poner(buf, sfx_whoosh(0.4), t0 + 0.4); poner(buf, sfx_mezcla(d * 0.5) * 0.6, t0 + 1.3)
+        elif a in ("corta", "rebana"):
+            for n in range(8 if a == "rebana" else 6): poner(buf, sfx_corte(n), t0 + 0.4 + n * (0.25 if a == "rebana" else 0.35))
+        elif a in ("esterilla", "enrolla"): poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.3)
+        elif a == "relleno":
+            for n in range(4): poner(buf, sfx_pop() * 0.5, t0 + 0.3 + n * 0.35)
         elif a == "salsa": poner(buf, sfx_mezcla(d * 0.7) * 0.6, t0 + 0.2)
     return buf
 

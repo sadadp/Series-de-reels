@@ -60,7 +60,7 @@ const CAMS = {
   dish:  [V3(-1.0, 3.1, 6.6), V3(-1.45, 0.7, 0.2)],
   horno: [V3(-1.0, 2.0, 4.6), V3(-1.5, 0.5, 0.2)],
 };
-const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish" }[a] || "wide");
+const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish", lava: "bowl", alina: "bowl", cocina: "pan", corta: "pan", esterilla: "dish", relleno: "dish", enrolla: "dish", rebana: "dish" }[a] || "wide");
 const zonaPaso = p => (p.destino === "sarten" && ["drop", "stir"].includes(p.accion)) ? "pan" : zonaDe(p.accion);
 const camDe = p => p.accion === "presenta" ? [V3(p.slot + 0.6, 3.2, 7.6), V3(p.slot + 0.6, 2.5, 0)] : CAMS[zonaPaso(p)];
 const CHEF_X = { wide: 0, hook: 0.15, intro: 0, bowl: 0.1, pan: 0.15, plate: 0.15, outro: 0, dish: 0.25, horno: 0.35 };
@@ -288,6 +288,69 @@ const ESMOLE = R.platillo === "mole";
 
 // ---------- pizza ----------
 const ESPIZZA = R.platillo === "pizza";
+
+// ---------- sushi ----------
+const ESSUSHI = R.platillo === "sushi";
+const COL_NORI = "#1f3a26", COL_ARROZ = "#fbf8f0";
+// olla para cocer el arroz (en la estufa)
+const olla = new THREE.Group();
+olla.add(mesh(new THREE.CylinderGeometry(0.8, 0.72, 0.85, 36), "#9aa3ad", { contorno: 1.02 }));
+const tapa = new THREE.Group(); tapa.position.y = 0.45; olla.add(tapa);
+tapa.add(mesh(new THREE.CylinderGeometry(0.84, 0.84, 0.06, 36), "#b8c0c8", { contorno: 1.02 }));
+const perilla = mesh(new THREE.SphereGeometry(0.1, 12, 8), "#2b2b2b"); perilla.position.y = 0.08; tapa.add(perilla);
+for (const s2 of [-1, 1]) { const a = mesh(new THREE.TorusGeometry(0.14, 0.04, 6, 14, Math.PI), "#2b2b2b", { contorno: 0 }); a.position.set(s2 * 0.82, 0.2, 0); a.rotation.z = s2 > 0 ? -Math.PI / 2 : Math.PI / 2; olla.add(a); }
+olla.position.copy(PAN); olla.position.y = 0.48; olla.visible = false; scene.add(olla);
+// tabla de cortar con cuchillo y tiras
+const tabla2 = new THREE.Group();
+tabla2.add(mesh(new THREE.BoxGeometry(2.1, 0.12, 1.3), "#d8a46a", { contorno: 1.02 }));
+const cuchillo = new THREE.Group();
+const hoja = mesh(new THREE.BoxGeometry(0.9, 0.24, 0.025), "#d6dde3"); hoja.position.x = 0.1; cuchillo.add(hoja);
+const mangoC = mesh(new THREE.BoxGeometry(0.42, 0.1, 0.08), "#2b2b2b"); mangoC.position.x = 0.75; cuchillo.add(mangoC);
+tabla2.add(cuchillo);
+const TIRAS = [["#5aa83c", 0.07], ["#b7d36b", 0.08], ["#f2814f", 0.08]];
+const tiras = TIRAS.map(([c, r], n) => { const t = mesh(new THREE.CapsuleGeometry(r, 1.0, 4, 10), c); t.rotation.z = Math.PI / 2; t.position.set(-0.1, 0.15, -0.35 + n * 0.32); tabla2.add(t); return t; });
+tabla2.position.copy(PAN); tabla2.position.y = 0.08; tabla2.visible = false; scene.add(tabla2);
+// esterilla, alga, arroz, relleno y rollo (en el lugar del tazón)
+const mesa = new THREE.Group();
+const esterilla = new THREE.Group(); mesa.add(esterilla);
+for (let i = 0; i < 14; i++) { const v = mesh(new THREE.CylinderGeometry(0.06, 0.06, 2.0, 8), "#d9b77a", { contorno: 0 }); v.rotation.z = Math.PI / 2; v.position.set(0, 0.06, -0.85 + i * 0.13); esterilla.add(v); }
+const hojaNori = mesh(new THREE.BoxGeometry(1.8, 0.03, 1.5), COL_NORI, { contorno: 1.01 }); hojaNori.position.y = 0.14; mesa.add(hojaNori);
+const capaArroz = new THREE.Group(); capaArroz.position.y = 0.19; mesa.add(capaArroz);
+capaArroz.add(mesh(new THREE.BoxGeometry(1.72, 0.08, 1.15), COL_ARROZ, { contorno: 0 }));
+for (let n = 0; n < 60; n++) { const gr = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 4), M("#ffffff")); gr.scale.set(1.5, 0.7, 1); gr.position.set((hash(n + 70) - 0.5) * 1.65, 0.05, (hash(n + 71) - 0.5) * 1.1); capaArroz.add(gr); }
+const lineaRelleno = TIRAS.map(([c, r], n) => { const t = mesh(new THREE.CapsuleGeometry(r, 1.4, 4, 10), c); t.rotation.z = Math.PI / 2; t.position.set(0, 0.3, 0.2 + n * 0.12 - 0.12); mesa.add(t); return t; });
+const queso2 = mesh(new THREE.CapsuleGeometry(0.06, 1.4, 4, 10), "#fffaf0"); queso2.rotation.z = Math.PI / 2; queso2.position.set(0, 0.3, 0.32); mesa.add(queso2); lineaRelleno.push(queso2);
+const rollo2 = new THREE.Group(); mesa.add(rollo2);
+const rolloCuerpo = mesh(new THREE.CylinderGeometry(0.36, 0.36, 1.8, 28), COL_NORI, { contorno: 1.03 }); rolloCuerpo.rotation.z = Math.PI / 2; rollo2.add(rolloCuerpo);
+// piezas (corte del rollo)
+function piezaSushi() {
+  const g = new THREE.Group();
+  g.add(mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.2, 24), COL_NORI, { contorno: 1.04 }));
+  const ar = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.31, 0.205, 24), M(COL_ARROZ)); g.add(ar);
+  [["#f2814f", 0, 0.06, 0.09], ["#5aa83c", -0.1, -0.05, 0.05], ["#b7d36b", 0.1, -0.06, 0.05], ["#fffaf0", 0.0, -0.13, 0.04]].forEach(([c, x, z, r]) => { const d = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.21, 12), M(c)); d.position.set(x, 0, z); g.add(d); });
+  return g;
+}
+const piezasRollo = [];
+for (let n = 0; n < 8; n++) { const pz = piezaSushi(); pz.rotation.z = Math.PI / 2; pz.position.set(-0.79 + n * 0.225, 0, 0); rollo2.add(pz); piezasRollo.push(pz); }
+const gotasAgua = [];
+for (let n = 0; n < 5; n++) { const g = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 6), M("#9fd7ff", { transparent: true, opacity: 0.8 })); g.position.set(-0.7 + n * 0.35, 0.18, -0.6); mesa.add(g); gotasAgua.push(g); }
+mesa.position.copy(BOWL); mesa.visible = false; scene.add(mesa);
+// botella de vinagre que se vierte
+const botella = vinagre(); botella.visible = false; scene.add(botella);
+const chorro = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1, 8), M("#efe6c4", { transparent: true, opacity: 0.8 })); chorro.visible = false; scene.add(chorro);
+// plato de sushi
+const platoSushi = new THREE.Group();
+const piezasPlato = [];
+for (let n = 0; n < 8; n++) { const pz = piezaSushi(); pz.position.set(-0.55 + (n % 4) * 0.36, 0.2, n < 4 ? -0.18 : 0.22); piezasPlato.push(pz); platoSushi.add(pz); }
+const soya = new THREE.Group(); soya.position.set(0.85, 0.12, 0.35);
+soya.add(mesh(new THREE.CylinderGeometry(0.25, 0.18, 0.14, 20), "#ffffff", { contorno: 1.04 }));
+const soyaL = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.02, 20), M("#3a1f10")); soyaL.position.y = 0.06; soya.add(soyaL);
+platoSushi.add(soya);
+const jengibre = new THREE.Group(); jengibre.position.set(0.8, 0.12, -0.3);
+for (let n = 0; n < 5; n++) { const pe = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 6), M("#f6b8b0")); pe.scale.set(1, 0.18, 0.7); pe.position.set((hash(n) - 0.5) * 0.15, n * 0.025, (hash(n + 1) - 0.5) * 0.15); pe.rotation.y = n; jengibre.add(pe); }
+platoSushi.add(jengibre);
+const wasabi = mesh(new THREE.SphereGeometry(0.1, 12, 8), "#8bc34a"); wasabi.scale.set(1, 0.7, 1); wasabi.position.set(0.55, 0.15, -0.5); platoSushi.add(wasabi);
+plato.add(platoSushi);
 const COL_MASA = "#f3e4c4", COL_SALSA_P = "#c8361f";
 const pizza = new THREE.Group();
 const tabla = mesh(new THREE.CylinderGeometry(1.3, 1.3, 0.07, 48), "#c58a4a", { contorno: 1.02 }); tabla.position.y = 0.035; pizza.add(tabla);
@@ -427,7 +490,33 @@ function jitomate() {
   for (let i = 0; i < 5; i++) { const h = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.16, 4), M("#3f8f2f")); h.position.set(Math.cos(i * 1.26) * 0.07, 0.22, Math.sin(i * 1.26) * 0.07); h.rotation.set(Math.sin(i * 1.26) * 1.2, 0, -Math.cos(i * 1.26) * 1.2); g.add(h); }
   return g;
 }
-const FABRICA = { agua, jitomate, platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina, chileSeco, chocolate, ajonjoli, pieza };
+function arrozBolsa() {
+  const g = new THREE.Group();
+  const b = mesh(new THREE.BoxGeometry(0.55, 0.75, 0.3), "#f7f3ea"); g.add(b);
+  const e = mesh(new THREE.BoxGeometry(0.56, 0.24, 0.31), "#d93b3b", { contorno: 0 }); e.position.y = 0.05; g.add(e);
+  const c = new THREE.Mesh(new THREE.CircleGeometry(0.08, 16), M("#ffffff")); c.position.set(0, 0.05, 0.16); g.add(c);
+  return g;
+}
+function vinagre() {
+  const g = new THREE.Group();
+  const b = mesh(new THREE.CylinderGeometry(0.16, 0.18, 0.62, 18), "#e9dfb8", { extra: { transparent: true, opacity: 0.85 } }); g.add(b);
+  const cu = mesh(new THREE.CylinderGeometry(0.07, 0.12, 0.2, 14), "#e9dfb8"); cu.position.y = 0.4; g.add(cu);
+  const t = mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.1, 14), "#d93b3b", { contorno: 0 }); t.position.y = 0.53; g.add(t);
+  const et = mesh(new THREE.CylinderGeometry(0.185, 0.185, 0.22, 18, 1, true), "#ffffff", { contorno: 0 }); et.position.y = -0.05; g.add(et);
+  return g;
+}
+function nori() {
+  const g = new THREE.Group();
+  for (let i = 0; i < 4; i++) { const h = mesh(new THREE.BoxGeometry(0.7, 0.025, 0.6), "#1f3a26", { contorno: 1.02 }); h.position.y = i * 0.03; h.rotation.y = i * 0.08; g.add(h); }
+  return g;
+}
+function salmon() {
+  const g = new THREE.Group();
+  const b = mesh(new THREE.BoxGeometry(0.75, 0.2, 0.4), "#f2814f"); g.add(b);
+  for (let i = 0; i < 5; i++) { const r = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.205, 0.405), M("#ffd2bd")); r.position.x = -0.3 + i * 0.15; r.rotation.y = 0.4; g.add(r); }
+  return g;
+}
+const FABRICA = { arroz: arrozBolsa, vinagre, nori, salmon, agua, jitomate, platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina, chileSeco, chocolate, ajonjoli, pieza };
 const fabrica = n => (FABRICA[n] || huevo)();
 
 // cascarón partido: dos mitades + yema + clara
@@ -551,6 +640,10 @@ function armarRafagas() {
     if (a === "outro") { rafaga(ti + 0.1, { origen: V3(-2, 2, 0.5), n: 70, colores: CONFETI, tipo: "cuadro", vel: 3.6, g: -4, vida: 2.6, tam: 0.07, arriba: 4 }); rafaga(ti + 0.25, { origen: V3(2, 2, 0.5), n: 70, colores: CONFETI, tipo: "cuadro", vel: 3.6, g: -4, vida: 2.6, tam: 0.07, arriba: 4 }); }
     if (a === "arma") for (let n = 0; n < 4; n++) rafaga(ti + 0.75 + n * 0.4, { origen: V3(BOWL.x - 0.78 + n * 0.52, 0.8, BOWL.z), n: 10, colores: ["#e9cfa3", "#f1dca0"], tipo: "esfera", vel: 1.2, g: -6, vida: 0.6, tam: 0.04, arriba: 1.5 });
     if (a === "baña") rafaga(ti + 0.4, { origen: V3(BOWL.x, 0.9, BOWL.z), n: 30, colores: [s.capa === "bechamel" ? COLOR_BECH : COLOR_SALSA], tipo: "esfera", vel: 1.8, g: -7, vida: 0.8, tam: 0.05, arriba: 2 });
+    if (a === "lava") rafaga(ti + 0.5, { origen: V3(BOWL.x, 0.9, BOWL.z), n: 30, colores: ["#bfe3f5", "#ffffff"], tipo: "esfera", vel: 1.4, g: -6, vida: 0.8, tam: 0.04, arriba: 2 });
+    if (a === "cocina") rafaga(ti + s.dur * 0.4, { origen: V3(PAN.x, 1.2, PAN.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.4, vida: 1.6, tam: 0.08 });
+    if (a === "corta") for (let n = 0; n < 3; n++) rafaga(ti + 0.6 + n * 0.6, { origen: V3(PAN.x, 0.4, PAN.z), n: 8, colores: [["#5aa83c", "#b7d36b", "#f2814f"][n]], tipo: "cuadro", vel: 1, g: -6, vida: 0.6, tam: 0.03 });
+    if (a === "serve" && R.platillo === "sushi") rafaga(ti + 2.0, { origen: V3(PLATE.x, 1.4, PLATE.z), n: 30, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.4, g: -0.5, vida: 1.2, tam: 0.05 });
     if (a === "extiende" && R.platillo === "pizza") rafaga(ti + 1.6, { origen: V3(BOWL.x, 0.4, BOWL.z), n: 40, colores: ["#ffffff", "#f3e4c4"], tipo: "esfera", vel: 1.4, g: -0.8, vida: 1.2, tam: 0.06 });
     if (a === "salsa") rafaga(ti + 0.3, { origen: V3(BOWL.x, 0.4, BOWL.z), n: 24, colores: [COL_SALSA_P_R], tipo: "esfera", vel: 1.5, g: -7, vida: 0.7, tam: 0.04, arriba: 1.6 });
     if (a === "queso" && R.platillo === "pizza") rafaga(ti + 0.1, { origen: V3(BOWL.x, 3.0, BOWL.z), n: 40, colores: ["#fff7e6", "#2e8b3a"], tipo: "cuadro", vel: 0.7, g: -5, vida: 1.2, tam: 0.04 });
@@ -709,7 +802,7 @@ function renderAt(t) {
   CH.cabeza.rotation.z = Math.sin(t * 2.6) * 0.08;
   CH.cabeza.rotation.x = p.accion === "presenta" ? -0.25 * clamp(u) : ["drop", "stir", "flip"].includes(p.accion) ? 0.2 : 0;
   CH.orejas.forEach((o, n) => { o.rotation.x = Math.max(0, Math.sin(t * 7 + n)) * 0.25; });
-  const feliz = enHook || ["intro", "serve", "outro", "hornea", "queso", "extiende"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
+  const feliz = enHook || ["intro", "serve", "outro", "hornea", "queso", "extiende", "rebana"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
   const parpadeo = (t % 2.7) < 0.1;
   CH.ojos.forEach(o => { o.visible = !feliz; o.scale.y = parpadeo ? 0.15 : 1.25; });
   CH.felices.forEach(f => f.visible = feliz);
@@ -720,7 +813,7 @@ function renderAt(t) {
 
   // brazos
   const enSarten = p.destino === "sarten" && ["drop", "stir"].includes(p.accion);
-  const conCuchara = (["drop", "stir"].includes(p.accion) && !enSarten) || ["arma", "baña", "salsa"].includes(p.accion), conEspatula = ["pour", "flip"].includes(p.accion) || enSarten;
+  const conCuchara = (["drop", "stir"].includes(p.accion) && !enSarten) || ["arma", "baña", "salsa", "lava", "alina"].includes(p.accion), conEspatula = ["pour", "flip"].includes(p.accion) || enSarten;
   let aL = 0.25, aR = -0.25, fL = 0, fR = 0;
   if (["intro", "outro", "hook"].includes(p.accion)) { aR = -2.5 + Math.sin(t * 10) * 0.35; }
   if (p.accion === "presenta") { aL = 0.4; aR = -2.2 + Math.sin(t * 6) * 0.2; fR = -0.4; }
@@ -734,6 +827,11 @@ function renderAt(t) {
   if (p.accion === "queso") { aL = 1.7 + Math.sin(t * 22) * 0.12; aR = -1.7 - Math.sin(t * 22 + 1) * 0.12; fL = fR = 0.5; }
   if (p.accion === "hornea") { aR = -2.3 + Math.sin(t * 8) * 0.2; }
   if (p.accion === "extiende") { const v = clamp((u - 0.5) / 1.1); aL = 1.2 + Math.sin(Math.PI * v) * 1.3; aR = -1.2 - Math.sin(Math.PI * v) * 1.3; fL = fR = 0.4; }
+  if (["lava", "alina"].includes(p.accion)) { aL = 1.15 + Math.sin(u * 11) * 0.12; fL = 0.5 + Math.cos(u * 11) * 0.35; }
+  if (p.accion === "cocina") { aR = -1.4 + Math.sin(t * 6) * 0.15; fR = 0.4; }
+  if (["corta", "rebana"].includes(p.accion)) { aR = -1.2 - Math.abs(Math.sin(u * 14)) * 0.4; fR = 0.5; }
+  if (["esterilla", "extiende", "relleno"].includes(p.accion)) { aL = 1.1 + Math.sin(u * 6) * 0.15; aR = -1.1 - Math.sin(u * 6) * 0.15; fL = fR = 0.5; }
+  if (p.accion === "enrolla") { aL = 1.3 + Math.sin(u * 4) * 0.2; aR = -1.3 - Math.sin(u * 4) * 0.2; fL = fR = 0.7; }
   if (p.accion === "salsa") { aL = 1.25 + Math.sin(u * 9) * 0.12; fL = 0.6 + Math.cos(u * 9) * 0.3; }
   if (p.accion === "flip" && k > 0.42 && k < 0.6) aR = -1.1 - Math.sin((k - 0.42) / 0.18 * Math.PI) * 0.6;
   if (p.accion === "serve") { aL = 2.4 + Math.sin(t * 9) * 0.25; aR = -2.4 - Math.sin(t * 9) * 0.25; }
@@ -756,7 +854,7 @@ function renderAt(t) {
   });
 
   // --- tazón ---
-  const armaI = [idxDe("arma"), idxDe("extiende")].filter(x => x >= 0)[0] ?? -1;
+  const armaI = [idxDe("arma"), ESSUSHI ? idxDe("esterilla") : idxDe("extiende")].filter(x => x >= 0)[0] ?? -1;
   tazon.visible = !enHook && !(idxDe("serve") >= 0 && i >= idxDe("serve")) && !(armaI >= 0 && i >= armaI);
   let nivel = 0, color = new THREE.Color(P.batter), hay = false;
   pasos.forEach((s, j) => {
@@ -775,9 +873,17 @@ function renderAt(t) {
   });
   nivel = clamp(nivel, 0, 0.85);
   const h = 0.08 + nivel * 0.8;
-  relleno.visible = hay; relleno.position.y = h; relleno.scale.setScalar(radioTazon(h) - 0.02);
+  if (ESSUSHI) {
+    const li = idxDe("lava"), ai = idxDe("alina");
+    hay = li >= 0 && i >= li;
+    nivel = 0.75;
+    if (i === li) color.set("#e9e4d6").lerp(new THREE.Color("#bfe3f5"), clamp(u / (p.dur * 0.85)));
+    else if (ai >= 0 && i >= ai) color.set(COL_ARROZ); else color.set("#bfe3f5");
+    if (i > li && ai >= 0 && i < ai) hay = false; // el arroz está en la olla
+  }
+  relleno.visible = hay; relleno.position.y = 0.08 + nivel * 0.8; relleno.scale.setScalar(radioTazon(0.08 + nivel * 0.8) - 0.02);
   relleno.material = M("#" + color.getHexString());
-  remolino.visible = p.accion === "stir" && p.destino !== "sarten"; remolino.position.y = h + 0.01; remolino.rotation.z = u * 9;
+  remolino.visible = (p.accion === "stir" && p.destino !== "sarten") || p.accion === "lava" || (p.accion === "alina" && u > 1.2); remolino.position.y = h + 0.01; remolino.rotation.z = u * 9;
   tazon.rotation.z = p.accion === "stir" && p.destino !== "sarten" ? Math.sin(u * 11) * 0.04 : 0;
   // tazón "salta" al recibir ingredientes
   let golpe = 0;
@@ -872,6 +978,7 @@ function renderAt(t) {
   let pl = 0;
   if (serveI >= 0 && i >= serveI) pl = i > serveI ? 1 : easeOutBack(clamp((u - 0.2) / 0.5));
   if (enHook) pl = 1;
+  sarten.visible = !ESSUSHI;
   plato.visible = pl > 0.001 && !ESPIZZA; plato.scale.setScalar(Math.max(pl, 0.001));
   const su = i > serveI || enHook ? 99 : u;
   pila.forEach((hc, n) => {
@@ -916,6 +1023,12 @@ function renderAt(t) {
   // --- plato: panqueques o enchiladas ---
   platoEnch.visible = ESENCH;
   platoMole.visible = ESMOLE;
+  platoSushi.visible = ESSUSHI;
+  if (ESSUSHI) {
+    pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
+    piezasPlato.forEach((pz, n) => { const q = clamp((su - 0.3 - n * 0.12) / 0.3); pz.visible = q > 0; pz.position.y = 0.2 + (1 - easeIn(q)) * 2.5; });
+    soya.visible = su > 1.4; jengibre.visible = su > 1.7; wasabi.visible = su > 1.9;
+  }
   if (ESMOLE) {
     pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
     piezasMole.forEach((pz, n) => { const q = clamp((su - 0.3 - n * 0.25) / 0.3); pz.visible = q > 0; pz.position.y = 0.32 + (1 - easeIn(q)) * 3; });
@@ -931,6 +1044,50 @@ function renderAt(t) {
     cremaPlato.visible = su > 1.7; cremaPlato.rotation.z = su * 2;
     cebollas.forEach((c, n) => { c.visible = su > 1.9 + n * 0.06; });
     cilantros.forEach((c, n) => { c.visible = su > 2.1 + n * 0.04; });
+  }
+
+  // --- sushi ---
+  if (ESSUSHI) {
+    const lu = j0 => { const jj = idxDe(j0); return jj < 0 ? -1 : (i > jj || enHook) ? 99 : i === jj ? u : -1; };
+    const ui = j0 => idxDe(j0);
+    // olla
+    olla.visible = p.accion === "cocina";
+    if (olla.visible) { tapa.position.y = 0.45 + Math.abs(Math.sin(t * 9)) * 0.05; tapa.rotation.z = Math.sin(t * 13) * 0.03; }
+    // botella de vinagre
+    const ua = p.accion === "alina" ? u : -1;
+    botella.visible = ua >= 0 && ua < 1.4;
+    if (botella.visible) { const q = clamp(ua / 0.5); botella.position.set(BOWL.x + 0.6, 1.9 - (1 - q) * 2, BOWL.z); botella.rotation.z = q * 2.0; }
+    chorro.visible = ua > 0.5 && ua < 1.3;
+    if (chorro.visible) { chorro.position.set(BOWL.x + 0.22, 1.25, BOWL.z); chorro.scale.set(1, 0.9, 1); }
+    // tabla y cuchillo
+    const uc = lu("corta");
+    tabla2.visible = uc >= 0 && i < (ui("serve") >= 0 ? ui("serve") : 999) && !enHook && p.accion !== "cocina";
+    cuchillo.position.set(-0.2 + ((uc * 1.4) % 1) * 0.9, 0.35 + Math.abs(Math.sin(uc * 14)) * 0.3 * (p.accion === "corta" ? 1 : 0), 0.0);
+    cuchillo.rotation.y = 0.4;
+    tiras.forEach((tr, n) => { tr.visible = uc > 0.6 + n * 0.6 && (ui("relleno") < 0 || i < ui("relleno")); });
+    // mesa de armado
+    mesa.visible = armaI >= 0 && i >= armaI && !enHook && !(ui("serve") >= 0 && i >= ui("serve"));
+    if (mesa.visible) {
+      const ue = lu("esterilla"), ux = lu("extiende"), ur = lu("relleno"), un = lu("enrolla"), ub = lu("rebana");
+      const qn = clamp((ue - 0.3) / 0.6);
+      hojaNori.visible = ue > 0.3; hojaNori.position.y = 0.14 + (1 - easeIn(qn)) * 2.5;
+      const enr = clamp(un / 2.4);
+      const qa = clamp((ux - 0.2) / 2.6);
+      capaArroz.visible = ux > 0.2 && enr < 1; capaArroz.scale.set(1, 1, Math.max(0.001, qa * (1 - enr))); capaArroz.position.z = (1 - qa) * -0.55 * 0 - 0.1 + enr * 0.6;
+      hojaNori.scale.set(1, 1, Math.max(0.001, 1 - enr)); hojaNori.position.z = enr * 0.75;
+      lineaRelleno.forEach((tr, n) => { const q = clamp((ur - 0.1 - n * 0.35) / 0.4); tr.visible = q > 0 && enr < 0.6; tr.position.y = 0.3 + (1 - easeIn(q)) * 1.6; });
+      rollo2.visible = enr > 0.05;
+      rollo2.position.set(0, 0.36 + 0.05, 0.75 - (1 - enr) * 0.6);
+      rolloCuerpo.visible = ub < 0.3;
+      rollo2.rotation.x = -enr * Math.PI * 2;
+      if (un >= 99) rollo2.rotation.x = 0;
+      esterilla.rotation.x = p.accion === "enrolla" ? -Math.sin(Math.PI * clamp(u / 2.4)) * 0.6 : 0;
+      gotasAgua.forEach((g, n) => { g.visible = p.accion === "enrolla" && u > 2.2 + n * 0.1; });
+      // rebanar: el rollo se separa en 8 piezas
+      piezasRollo.forEach((pz, n) => { const corte = clamp((ub - 0.3 - n * 0.25) / 0.2); pz.visible = ub > 0.3; pz.position.x = -0.79 + n * 0.225 + (n - 3.5) * 0.12 * corte; });
+      if (p.accion === "rebana") { cuchillo.parent !== mesa && mesa.add(cuchillo); cuchillo.position.set(-0.8 + clamp((u - 0.3) / 2.0) * 1.6, 0.9 - Math.abs(Math.sin(u * 8)) * 0.35, 0); cuchillo.rotation.set(0, Math.PI / 2, 0); }
+      else if (cuchillo.parent !== tabla2) tabla2.add(cuchillo);
+    }
   }
 
   // --- pizza ---
