@@ -12,7 +12,7 @@
 
 ## TikTok
 ```
-¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles en 1 minuto. ¿Qué cocino primero? 👇 #recetasfaciles #chefmichi
+¡Hola! Soy Chef Michi 🐱👨‍🍳 Recetas fáciles paso a paso. ¿Qué cocino primero? 👇 #recetasfaciles #chefmichi
 ```
 
 ## YouTube Shorts

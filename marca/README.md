@@ -39,7 +39,7 @@ Imágenes en `marca/img/` (se regeneran con `node marca/generar.js`).
 - **Biografía (máx. 80):**
 
 ```
-Recetas fáciles en 30 seg 🐱👨‍🍳 ¿Qué cocino mañana? 👇
+Recetas fáciles paso a paso 🐱👨‍🍳 ¿Qué cocino mañana? 👇
 ```
 
 ## YouTube

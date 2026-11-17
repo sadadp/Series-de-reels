@@ -15,3 +15,4 @@ https://drive.google.com/drive/folders/1XxQg5edEApI8PEcpXCak4AMwHBJR1tqz
 
 Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí caben;
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.
+| Doc TikTok | 1B1OQsNTay6_LSx7XBaEeCxOvNkcNBD3h0wGWlqAbGCM |
