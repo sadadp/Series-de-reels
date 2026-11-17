@@ -26,7 +26,7 @@ Recetas fáciles y caseras de todo el mundo, en menos de un minuto. Suscríbete 
 ```
 ¡Hola, familia! 👋 Soy Chef Michi 🐱👨‍🍳
 
-Aquí vas a encontrar recetas fáciles y caseras de todo el mundo, explicadas en menos de un minuto.
+Aquí vas a encontrar recetas fáciles y caseras de todo el mundo, explicadas paso a paso.
 
 💬 ¿Qué receta quieres que cocine? Te leo en los comentarios 👇
 🔁 Compártelo con quien siempre te pide recetas 😄
