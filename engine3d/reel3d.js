@@ -60,7 +60,7 @@ const CAMS = {
   dish:  [V3(-1.0, 3.1, 6.6), V3(-1.45, 0.7, 0.2)],
   horno: [V3(-1.0, 2.0, 4.6), V3(-1.5, 0.5, 0.2)],
 };
-const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish", lava: "bowl", alina: "bowl", cocina: "pan", corta: "pan", remoja: "bowl", marina: "bowl", dora: "pan", pina: "pan", tortillas: "pan", ralla: "bowl", hierve: "pan", cuece: "pan", pasa: "pan", emulsiona: "pan", tip: "pan", esterilla: "dish", relleno: "dish", enrolla: "dish", rebana: "dish" }[a] || "wide");
+const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish", lava: "bowl", alina: "bowl", cocina: "pan", corta: "pan", remoja: "bowl", marina: "bowl", dora: "pan", pina: "pan", tortillas: "pan", ralla: "bowl", hierve: "pan", cuece: "pan", pasa: "pan", emulsiona: "pan", tip: "pan", esterilla: "dish", relleno: "dish", enrolla: "dish", rebana: "dish", activa: "bowl", amasa: "dish", reposa: "dish", estira: "dish", unta: "dish", hilo: "dish", acomoda: "dish", glasea: "dish" }[a] || "wide");
 const zonaPaso = p => (p.destino === "sarten" && ["drop", "stir"].includes(p.accion)) ? "pan" : zonaDe(p.accion);
 const camDe = p => p.accion === "presenta" ? [V3(p.slot + 0.6, 3.2, 7.6), V3(p.slot + 0.6, 2.5, 0)] : CAMS[zonaPaso(p)];
 const CHEF_X = { wide: 0, hook: 0.15, intro: 0, bowl: 0.1, pan: 0.15, plate: 0.15, outro: 0, dish: 0.25, horno: 0.35 };
@@ -438,6 +438,88 @@ const quesoPlato = [], pimienta = [];
 for (let n = 0; n < 30; n++) { const q = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.015, 0.02), M("#fff3cf")); q.position.set((hash(n + 400) - 0.5) * 0.9, 0.3, (hash(n + 401) - 0.5) * 0.8); q.rotation.y = hash(n) * 3; platoAlfredo.add(q); quesoPlato.push(q); }
 for (let n = 0; n < 25; n++) { const pm = new THREE.Mesh(new THREE.SphereGeometry(0.018, 5, 4), M("#2b2b2b")); pm.position.set((hash(n + 500) - 0.5) * 0.9, 0.31, (hash(n + 501) - 0.5) * 0.8); platoAlfredo.add(pm); pimienta.push(pm); }
 plato.add(platoAlfredo);
+
+// ---------- roles de canela ----------
+const ESROLES = R.platillo === "roles";
+const COL_MASA_R = "#f3dfb5", COL_DORADO_R = "#d08a3c", COL_GLASE = "#fffaf0";
+const texEspiral = texCanvas(256, 256, (g, w) => {
+  g.fillStyle = "#ffffff"; g.fillRect(0, 0, w, w);
+  g.strokeStyle = "#8a4b1f"; g.lineWidth = 15; g.lineCap = "round"; g.beginPath();
+  for (let a = 0; a < Math.PI * 7; a += 0.05) { const r = 6 + a * 5.4; const x = w / 2 + Math.cos(a) * r, y = w / 2 + Math.sin(a) * r; a ? g.lineTo(x, y) : g.moveTo(x, y); }
+  g.stroke();
+});
+const matRolLado = new THREE.MeshToonMaterial({ color: COL_MASA_R, gradientMap: grad });
+const matRolTapa = new THREE.MeshToonMaterial({ color: COL_MASA_R, gradientMap: grad, map: texEspiral });
+function rolCanela(r = 0.3, h = 0.26) {
+  const geo = new THREE.CylinderGeometry(r, r, h, 28);
+  const m = new THREE.Mesh(geo, [matRolLado, matRolTapa, matRolTapa]); m.castShadow = m.receiveShadow = true;
+  const o = new THREE.Mesh(geo, LINEA); o.scale.setScalar(1.05); m.add(o);
+  return m;
+}
+function canelaRaja() {
+  const g = new THREE.Group();
+  for (let i = 0; i < 3; i++) { const c = mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.8, 10), i % 2 ? "#8a4b1f" : "#9b5a2a"); c.rotation.z = Math.PI / 2; c.position.set(0, i * 0.11, (i - 1) * 0.07); g.add(c); }
+  const cinta = mesh(new THREE.TorusGeometry(0.15, 0.025, 6, 16), "#e65a7a", { contorno: 0 }); cinta.rotation.y = Math.PI / 2; cinta.position.y = 0.1; g.add(cinta);
+  return g;
+}
+function quesoCremaTina() {
+  const g = new THREE.Group();
+  g.add(mesh(new THREE.CylinderGeometry(0.34, 0.3, 0.32, 24), "#ffffff"));
+  const tapaQ = mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.08, 24), "#4d8de0"); tapaQ.position.y = 0.2; g.add(tapaQ);
+  const fr = mesh(new THREE.CylinderGeometry(0.345, 0.31, 0.1, 24), "#f4c430", { contorno: 0 }); fr.position.y = -0.02; g.add(fr);
+  return g;
+}
+const rolesG = new THREE.Group(); rolesG.position.copy(BOWL); rolesG.visible = false; scene.add(rolesG);
+// jarra con leche y levadura (espuma)
+const jarra = new THREE.Group();
+jarra.add(mesh(new THREE.CylinderGeometry(0.38, 0.32, 0.8, 24, 1, true), "#cfe8ff", { contorno: 1.03, extra: { side: THREE.DoubleSide, transparent: true, opacity: 0.55 } }));
+const lecheJ = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.32, 0.5, 24), M("#fbf6ea")); lecheJ.position.y = -0.14; jarra.add(lecheJ);
+const espuma = new THREE.Group(); jarra.add(espuma);
+for (let n = 0; n < 9; n++) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.13 + hash(n + 60) * 0.06, 12, 8), M(n % 3 ? "#f4e6c4" : "#efd9a8")); const a = n / 9 * 6.28; b.position.set(Math.cos(a) * 0.2 * (n % 2 ? 1 : 0.4), 0, Math.sin(a) * 0.2 * (n % 2 ? 1 : 0.4)); b.scale.y = 0.6; espuma.add(b); }
+jarra.position.set(BOWL.x + 1.25, 0.4, BOWL.z + 0.35); jarra.visible = false; scene.add(jarra);
+// tabla de madera
+const tablaR = mesh(new THREE.BoxGeometry(2.9, 0.1, 1.9), "#c58a4a", { contorno: 1.02 }); tablaR.position.y = 0.05; rolesG.add(tablaR);
+const bolaR = mesh(new THREE.SphereGeometry(0.55, 28, 18), COL_MASA_R); bolaR.position.y = 0.45; rolesG.add(bolaR);
+const trapo = mesh(new THREE.SphereGeometry(0.95, 28, 14, 0, Math.PI * 2, 0, Math.PI * 0.55), "#4d8de0", { contorno: 1.02, extra: { side: THREE.DoubleSide } });
+const trapoRaya = mesh(new THREE.TorusGeometry(0.86, 0.05, 6, 40), "#ffffff", { contorno: 0 }); trapoRaya.rotation.x = Math.PI / 2; trapoRaya.position.y = 0.32; trapo.add(trapoRaya);
+trapo.position.y = 0.1; rolesG.add(trapo);
+const lamina = mesh(new THREE.BoxGeometry(2.4, 0.07, 1.5), COL_MASA_R, { contorno: 1.02 }); lamina.position.y = 0.14; rolesG.add(lamina);
+const capaMant = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.02, 1.3), M("#ffe9a6")); capaMant.position.set(0, 0.185, 0.05); rolesG.add(capaMant);
+const granos = [];
+for (let n = 0; n < 90; n++) { const gr = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.02, 0.05), M(n % 3 ? "#8a4b1f" : "#b0703a")); gr.position.set((hash(n + 700) - 0.5) * 2.2, 0.2, (hash(n + 701) - 0.5) * 1.15 + 0.05); gr.rotation.y = hash(n) * 3; rolesG.add(gr); granos.push(gr); }
+const rodillo = new THREE.Group();
+const rodCuerpo = mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.7, 20), "#d9a066"); rodCuerpo.rotation.z = Math.PI / 2; rodillo.add(rodCuerpo);
+for (const sx of [-1, 1]) { const mg = mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.4, 10), "#a86f35"); mg.rotation.z = Math.PI / 2; mg.position.x = sx * 1.05; rodillo.add(mg); }
+rodillo.position.y = 0.34; rolesG.add(rodillo);
+// tronco enrollado = 12 rodajas
+const rodajas = [];
+for (let n = 0; n < 12; n++) { const r = rolCanela(0.3, 0.18); r.rotation.z = Math.PI / 2; r.position.set(-1.1 + n * 0.2, 0.42, 0); rolesG.add(r); rodajas.push(r); }
+const hiloD = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.4, 6), M("#ffffff")); hiloD.rotation.x = Math.PI / 2; rolesG.add(hiloD);
+const hiloD2 = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 6), M("#ffffff")); rolesG.add(hiloD2);
+// molde con 12 roles
+const molde = new THREE.Group();
+const moldeBase = mesh(new THREE.BoxGeometry(2.5, 0.12, 1.9), "#5a5f68", { contorno: 1.02 }); moldeBase.position.y = 0.06; molde.add(moldeBase);
+for (const [w, d, x, z] of [[2.5, 0.08, 0, 0.91], [2.5, 0.08, 0, -0.91], [0.08, 1.9, 1.21, 0], [0.08, 1.9, -1.21, 0]]) { const pa = mesh(new THREE.BoxGeometry(w, 0.42, d), "#6b717b", { contorno: 1.02 }); pa.position.set(x, 0.24, z); molde.add(pa); }
+const rolesMolde = [], glaseMolde = [];
+for (let n = 0; n < 12; n++) {
+  const r = rolCanela(0.27, 0.3); r.position.set(-0.87 + (n % 4) * 0.58, 0.28, -0.56 + Math.floor(n / 4) * 0.56); molde.add(r); rolesMolde.push(r);
+  const gl = new THREE.Mesh(new THREE.SphereGeometry(0.25, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M(COL_GLASE)); gl.scale.y = 0.35; gl.position.copy(r.position); gl.position.y = 0.43; molde.add(gl); glaseMolde.push(gl);
+}
+const moldeLuz = new THREE.PointLight(0xff8a1f, 0, 6); moldeLuz.position.set(0, 2, 1.2); molde.add(moldeLuz);
+molde.visible = false; rolesG.add(molde);
+const tazonGlase = new THREE.Group();
+tazonGlase.add(mesh(new THREE.CylinderGeometry(0.42, 0.3, 0.34, 24, 1, true), "#fbfaf6", { contorno: 1.03, extra: { side: THREE.DoubleSide } }));
+const glaseT = new THREE.Mesh(new THREE.CircleGeometry(0.39, 24), M(COL_GLASE)); glaseT.rotation.x = -Math.PI / 2; glaseT.position.y = 0.1; tazonGlase.add(glaseT);
+tazonGlase.position.set(BOWL.x + 1.75, 0.2, BOWL.z + 0.6); tazonGlase.visible = false; scene.add(tazonGlase);
+// plato servido
+const platoRoles = new THREE.Group(), rolesPlato = [];
+for (let n = 0; n < 4; n++) {
+  const g = new THREE.Group(); const r = rolCanela(0.36, 0.34); g.add(r);
+  const gl = new THREE.Mesh(new THREE.SphereGeometry(0.33, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M(COL_GLASE)); gl.scale.y = 0.4; gl.position.y = 0.16; g.add(gl);
+  for (let d = 0; d < 4; d++) { const gt = new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.12, 3, 6), M(COL_GLASE)); const a = d * 1.6 + n; gt.position.set(Math.cos(a) * 0.35, 0.08, Math.sin(a) * 0.35); g.add(gt); }
+  g.position.set([-0.38, 0.38, 0, 0][n], 0.25 + (n === 3 ? 0.34 : 0), [-0.25, -0.25, 0.32, 0][n]); platoRoles.add(g); rolesPlato.push(g);
+}
+plato.add(platoRoles);
 const COL_MASA = "#f3e4c4", COL_SALSA_P = "#c8361f";
 const pizza = new THREE.Group();
 const tabla = mesh(new THREE.CylinderGeometry(1.3, 1.3, 0.07, 48), "#c58a4a", { contorno: 1.02 }); tabla.position.y = 0.035; pizza.add(tabla);
@@ -639,7 +721,7 @@ function sal() {
   const t = mesh(new THREE.SphereGeometry(0.16, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), "#b8c0c8"); t.position.y = 0.25; g.add(t);
   return g;
 }
-const FABRICA = { pasta: pastaSeca, sal, carne, achiote, especias, pina: pinaFruta, arroz: arrozBolsa, vinagre, nori, salmon, agua, jitomate, platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina, chileSeco, chocolate, ajonjoli, pieza };
+const FABRICA = { pasta: pastaSeca, sal, carne, achiote, especias, pina: pinaFruta, arroz: arrozBolsa, vinagre, nori, salmon, agua, jitomate, platano, huevo, avena, tortilla, pollo, tomate, chile, leche, queso, mantequilla: mantequillaBloque, harina, chileSeco, chocolate, ajonjoli, pieza, canela: canelaRaja, quesoCrema: quesoCremaTina };
 const fabrica = n => (FABRICA[n] || huevo)();
 
 // cascarón partido: dos mitades + yema + clara
@@ -778,6 +860,14 @@ function armarRafagas() {
     else if (a === "queso") rafaga(ti + 0.2, { origen: V3(BOWL.x, 3.2, BOWL.z), n: 60, colores: ["#ffd75e", "#ffe48a"], tipo: "cuadro", vel: 0.8, g: -5, vida: 1.2, tam: 0.04 });
     if (a === "hornea") rafaga(ti + s.dur * 0.6, { origen: V3(BOWL.x, 1.0, BOWL.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.2, vida: 1.4, tam: 0.07 });
     if (a === "serve" && R.platillo === "mole") rafaga(ti + 1.5, { origen: V3(PLATE.x, 2.6, PLATE.z), n: 50, colores: ["#f3e3bf"], tipo: "esfera", vel: 0.5, g: -5, vida: 1.0, tam: 0.025 });
+    if (R.platillo === "roles") {
+      if (a === "activa") rafaga(ti + s.dur * 0.6, { origen: V3(BOWL.x + 1.25, 0.9, BOWL.z + 0.35), n: 24, colores: ["#fff7e0", "#f4e6c4"], tipo: "esfera", vel: 0.4, g: 0.8, vida: 1.6, tam: 0.05 });
+      if (a === "amasa") for (let n = 0; n < 3; n++) rafaga(ti + 0.8 + n * 1.6, { origen: V3(BOWL.x, 0.7, BOWL.z), n: 18, colores: ["#ffffff", "#f6f0e2"], tipo: "esfera", vel: 1.0, g: -1, vida: 1.0, tam: 0.05, arriba: 1 });
+      if (a === "reposa") rafaga(ti + s.dur * 0.5, { origen: V3(BOWL.x, 1.2, BOWL.z), n: 24, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.2, g: -0.4, vida: 1.2, tam: 0.05 });
+      if (a === "unta") rafaga(ti + 2.6, { origen: V3(BOWL.x, 1.6, BOWL.z), n: 40, colores: ["#8a4b1f", "#b0703a"], tipo: "cuadro", vel: 0.6, g: -5, vida: 1.0, tam: 0.03 });
+      if (a === "hilo") rafaga(ti + s.dur - 0.5, { origen: V3(BOWL.x, 0.8, BOWL.z), n: 30, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.4, g: -0.5, vida: 1.2, tam: 0.05 });
+      if (a === "glasea") rafaga(ti + 2.6, { origen: V3(BOWL.x, 1.0, BOWL.z), n: 30, colores: ["#fffaf0", "#ffffff"], tipo: "esfera", vel: 1.2, g: -5, vida: 0.8, tam: 0.04, arriba: 1.5 });
+    }
     if (a === "flip") rafaga(ti + s.dur * 0.5, { origen: V3(PAN.x, 0.4, PAN.z), n: 26, colores: ["#fff3d6", "#efc77a"], tipo: "esfera", vel: 1.8, g: -6, vida: 0.9, tam: 0.04, arriba: 2 });
   });
   // salpicaduras al caer cada ingrediente
@@ -930,7 +1020,7 @@ function renderAt(t) {
   CH.cabeza.rotation.z = Math.sin(t * 2.6) * 0.08;
   CH.cabeza.rotation.x = p.accion === "presenta" ? -0.25 * clamp(u) : ["drop", "stir", "flip"].includes(p.accion) ? 0.2 : 0;
   CH.orejas.forEach((o, n) => { o.rotation.x = Math.max(0, Math.sin(t * 7 + n)) * 0.25; });
-  const feliz = enHook || ["intro", "serve", "outro", "hornea", "queso", "extiende", "rebana"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
+  const feliz = enHook || ["intro", "serve", "outro", "hornea", "queso", "extiende", "rebana", "glasea"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
   const parpadeo = (t % 2.7) < 0.1;
   CH.ojos.forEach(o => { o.visible = !feliz; o.scale.y = parpadeo ? 0.15 : 1.25; });
   CH.felices.forEach(f => f.visible = feliz);
@@ -964,6 +1054,15 @@ function renderAt(t) {
   if (["corta", "rebana"].includes(p.accion)) { aR = -1.2 - Math.abs(Math.sin(u * 14)) * 0.4; fR = 0.5; }
   if (["esterilla", "extiende", "relleno"].includes(p.accion)) { aL = 1.1 + Math.sin(u * 6) * 0.15; aR = -1.1 - Math.sin(u * 6) * 0.15; fL = fR = 0.5; }
   if (p.accion === "enrolla") { aL = 1.3 + Math.sin(u * 4) * 0.2; aR = -1.3 - Math.sin(u * 4) * 0.2; fL = fR = 0.7; }
+  if (ESROLES) {
+    if (p.accion === "activa") { aL = 1.2 + Math.sin(u * 3) * 0.1; fL = 0.3; aR = -0.6; }
+    if (p.accion === "amasa") { const v = Math.abs(Math.sin(u * 5)); aL = 1.1 + v * 0.4; aR = -1.1 - v * 0.4; fL = fR = 0.6 + v * 0.3; }
+    if (p.accion === "reposa") { aR = -2.3 + Math.sin(t * 5) * 0.15; }
+    if (p.accion === "estira") { const v = Math.sin(u * 3.2); aL = 1.2 + v * 0.15; aR = -1.2 - v * 0.15; fL = fR = 0.7 + v * 0.35; }
+    if (["unta", "glasea"].includes(p.accion)) { aL = 1.2 + Math.sin(u * 9) * 0.12; fL = 0.5 + Math.cos(u * 9) * 0.3; }
+    if (p.accion === "hilo") { const v = Math.abs(Math.sin(u * 4)); aL = 1.3 + v * 0.3; aR = -1.3 - v * 0.3; fL = fR = 0.6; }
+    if (p.accion === "acomoda") { aL = 1.1 + Math.abs(Math.sin(u * 6)) * 0.3; fL = 0.5; }
+  }
   if (p.accion === "salsa") { aL = 1.25 + Math.sin(u * 9) * 0.12; fL = 0.6 + Math.cos(u * 9) * 0.3; }
   if (p.accion === "flip" && k > 0.42 && k < 0.6) aR = -1.1 - Math.sin((k - 0.42) / 0.18 * Math.PI) * 0.6;
   if (p.accion === "serve") { aL = 2.4 + Math.sin(t * 9) * 0.25; aR = -2.4 - Math.sin(t * 9) * 0.25; }
@@ -986,7 +1085,7 @@ function renderAt(t) {
   });
 
   // --- tazón ---
-  const armaI = [idxDe("arma"), ESSUSHI ? idxDe("esterilla") : idxDe("extiende")].filter(x => x >= 0)[0] ?? -1;
+  const armaI = [idxDe("arma"), ESSUSHI ? idxDe("esterilla") : ESROLES ? idxDe("amasa") : idxDe("extiende")].filter(x => x >= 0)[0] ?? -1;
   tazon.visible = !enHook && !(idxDe("serve") >= 0 && i >= idxDe("serve")) && !(armaI >= 0 && i >= armaI);
   let nivel = 0, color = new THREE.Color(P.batter), hay = false;
   pasos.forEach((s, j) => {
@@ -1111,7 +1210,7 @@ function renderAt(t) {
   let pl = 0;
   if (serveI >= 0 && i >= serveI) pl = i > serveI ? 1 : easeOutBack(clamp((u - 0.2) / 0.5));
   if (enHook) pl = 1;
-  sarten.visible = !ESSUSHI && !(ESTACOS && ["corta", "tortillas"].includes(p.accion)) && !(ESALFREDO && ["hierve", "cuece"].includes(p.accion));
+  sarten.visible = !ESSUSHI && !ESROLES && !(ESTACOS && ["corta", "tortillas"].includes(p.accion)) && !(ESALFREDO && ["hierve", "cuece"].includes(p.accion));
   plato.visible = pl > 0.001 && !ESPIZZA; plato.scale.setScalar(Math.max(pl, 0.001));
   const su = i > serveI || enHook ? 99 : u;
   pila.forEach((hc, n) => {
@@ -1165,6 +1264,11 @@ function renderAt(t) {
     nidoPlato.userData.tubos.forEach(tb => tb.material = M(COL_CREMA));
     quesoPlato.forEach((q, n) => { const v = clamp((su - 1.1 - n * 0.02) / 0.3); q.visible = v > 0; q.position.y = 0.3 + (1 - easeIn(v)) * 1.5; });
     pimienta.forEach((pm, n) => pm.visible = su > 1.8 + n * 0.02);
+  }
+  platoRoles.visible = ESROLES;
+  if (ESROLES) {
+    pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
+    rolesPlato.forEach((r, n) => { const q = clamp((su - 0.3 - n * 0.25) / 0.35); r.visible = q > 0; r.position.y = 0.25 + (n === 3 ? 0.34 : 0) + (1 - easeIn(q)) * 2.5; });
   }
   if (ESTACOS) {
     pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
@@ -1295,6 +1399,89 @@ function renderAt(t) {
       if (p.accion === "rebana") { cuchillo.parent !== mesa && mesa.add(cuchillo); cuchillo.position.set(-0.8 + clamp((u - 0.3) / 2.0) * 1.6, 0.9 - Math.abs(Math.sin(u * 8)) * 0.35, 0); cuchillo.rotation.set(0, Math.PI / 2, 0); }
       else if (cuchillo.parent !== tabla2) tabla2.add(cuchillo);
     }
+  }
+
+  // --- roles de canela ---
+  jarra.visible = ESROLES && ["activa", "drop"].includes(p.accion) && !(p.accion === "drop" && u > 1.0);
+  if (jarra.visible) {
+    const q = p.accion === "activa" ? clamp((u - 1.5) / (p.dur - 3)) : 1;
+    espuma.position.y = 0.12 + q * 0.2; espuma.scale.set(0.2 + q * 0.8, 0.2 + q * 0.9, 0.2 + q * 0.8);
+    espuma.children.forEach((b, n) => { b.position.y = Math.sin(t * 3 + n) * 0.02 * q; });
+    jarra.rotation.z = p.accion === "drop" ? Math.sin(Math.PI * clamp(u / 1.0)) * 0.9 : 0;
+  }
+  rolesG.visible = ESROLES && !enHook && armaI >= 0 && i >= armaI && !(serveI >= 0 && i >= serveI);
+  tazonGlase.visible = ESROLES && p.accion === "glasea";
+  if (rolesG.visible) {
+    const lu = j0 => { const jj = idxDe(j0); return jj < 0 ? -1 : i > jj ? 99 : i === jj ? u : -1; };
+    const ua = lu("amasa"), ur = lu("reposa"), ue = lu("estira"), ut = lu("unta"), un = lu("enrolla"), uh = lu("hilo"), um = lu("acomoda"), uo = lu("hornea"), ug = lu("glasea");
+    const d = j0 => pasos[idxDe(j0)].dur;
+    const enMolde = um >= 0;
+    tablaR.visible = !enMolde;
+    // bola: amasar y crecer
+    const crece = ur >= 0 ? easeOut(clamp((ur - 0.8) / (d("reposa") - 1.6))) : 0;
+    bolaR.visible = ue < 0.6 && !enMolde;
+    const amas = p.accion === "amasa" ? Math.abs(Math.sin(u * 5)) * 0.25 : 0;
+    const eb = (1 + crece * 0.5) * (ue >= 0 ? 1 - clamp(ue / 0.6) * 0.5 : 1);
+    bolaR.scale.set(eb * (1 + amas), eb * (0.8 - amas), eb * (1 + amas)); bolaR.position.y = 0.1 + 0.55 * eb * (0.8 - amas);
+    // trapo: cae, se queda, se quita
+    const tIn = clamp((ur - 0.1) / 0.6), tOut = clamp((ur - (d("reposa") - 0.7)) / 0.6);
+    trapo.visible = ur >= 0 && ur < 99 && tOut < 1;
+    trapo.position.y = 0.1 + (1 - easeIn(tIn)) * 2.5 + easeIn(tOut) * 2.5; trapo.scale.setScalar(0.85 + crece * 0.35);
+    // lámina estirada
+    const le = ue >= 0 ? easeOut(clamp((ue - 0.4) / (d("estira") - 1.2))) : 0;
+    const enr = un >= 0 ? clamp((un - 0.3) / (d("enrolla") - 1.0)) : 0;
+    lamina.visible = le > 0 && enr < 0.97 && !enMolde;
+    lamina.scale.set(0.3 + le * 0.7, 1, Math.max(0.02, (0.3 + le * 0.7) * (1 - enr)));
+    lamina.position.z = (0.3 + le * 0.7) * 1.5 * enr / 2 * -1 + 0;
+    lamina.position.z = -0.75 * enr;
+    rodillo.visible = p.accion === "estira";
+    if (rodillo.visible) { rodillo.position.z = Math.sin(u * 3.2) * 0.55; rodCuerpo.rotation.x = u * 6; }
+    // mantequilla + azúcar con canela
+    const mt = ut >= 0 ? clamp((ut - 0.3) / 2.2) : 0;
+    capaMant.visible = mt > 0 && enr < 0.95 && !enMolde; capaMant.scale.set(Math.max(mt, 0.01), 1, Math.max(0.02, 1 - enr)); capaMant.position.z = 0.05 - 0.75 * enr;
+    granos.forEach((gr, n) => { const v = ut >= 0 ? clamp((ut - 2.6 - n * 0.025) / 0.35) : 0; gr.visible = v > 0 && enr < 0.9 && !enMolde; gr.position.y = 0.2 + (1 - easeIn(v)) * 1.8; gr.position.z = ((hash(n + 701) - 0.5) * 1.15 + 0.05) * (1 - enr) - 0.6 * enr; });
+    // tronco: crece mientras se enrolla y luego se corta con hilo
+    const tronco = un >= 0 && !enMolde;
+    const nCortes = uh >= 0 ? Math.floor(clamp((uh - 2.2) / (d("hilo") - 3.0)) * 11.99) : 0;
+    rodajas.forEach((r, n) => {
+      r.visible = tronco && (un >= 99 || enr > 0.05);
+      const rr = un >= 99 ? 1 : 0.25 + enr * 0.75; r.scale.set(rr, 1, rr);
+      const sep = uh >= 0 && n <= nCortes ? 1 : 0;
+      r.position.set((-1.1 + n * 0.2) * (1 + sep * 0.0) + (n - 5.5) * 0.07 * (uh >= 99 ? 1 : sep), 0.12 + 0.3 * rr, 0.75 - 0.75 * Math.max(enr, un >= 99 ? 1 : 0) + 0.0);
+      r.position.z = 0.6 * (1 - (un >= 99 ? 1 : enr));
+      r.rotation.x = un >= 0 && un < 99 ? -enr * 12 : 0;
+      if (uh >= 0 && n <= nCortes) r.rotation.y = -0.9 * (uh >= 99 ? 1 : clamp((uh - 2.2 - n * (d("hilo") - 3.0) / 12) / 0.4));
+      else r.rotation.y = 0;
+    });
+    // hilo dental cortando
+    const cortando = p.accion === "hilo" && u > 2.2 && u < d("hilo") - 0.6;
+    hiloD.visible = hiloD2.visible = cortando;
+    if (cortando) {
+      const f = ((u - 2.2) / (d("hilo") - 3.0)) * 12, n = Math.min(10, Math.floor(f)), ph = f - Math.floor(f);
+      const x = -1.0 + n * 0.2 + (n + 0.5 - 5.5) * 0.07;
+      const y = 0.75 - Math.sin(Math.PI * ph) * 0.45;
+      hiloD.position.set(x, y, 0); hiloD2.position.set(x, y + 0.5, 0.65);
+    }
+    // molde: caen los roles, crecen, se doran y se glasean
+    molde.visible = enMolde;
+    const hk = uo >= 99 ? 1 : uo < 0 ? 0 : clamp(uo / (d("hornea") * 0.85));
+    const subeM = um >= 0 ? clamp((um - 3.5) / 2.5) : 0;
+    rolesMolde.forEach((r, n) => {
+      const q = um >= 99 ? 1 : clamp((um - 0.4 - n * 0.22) / 0.35);
+      r.visible = q > 0; r.position.y = 0.28 + (1 - easeIn(q)) * 2.5;
+      const sq = um < 99 ? bounce(clamp((um - 0.75 - n * 0.22) / 0.35)) * 0.2 : 0;
+      const gr = 1 + subeM * 0.18 + hk * 0.06;
+      r.scale.set(gr * (1 + sq), gr * (1 - sq), gr * (1 + sq));
+    });
+    const gq = ug >= 0 ? ug : -1;
+    glaseMolde.forEach((gl, n) => { const v = gq >= 99 ? 1 : clamp((gq - 2.5 - n * 0.4) / 0.5); gl.visible = v > 0; gl.scale.set(0.3 + v * 0.75, 0.35 * v, 0.3 + v * 0.75); gl.position.y = 0.45 + subeM * 0.05; });
+    moldeLuz.intensity = p.accion === "hornea" ? 4 + Math.sin(t * 12) : 0;
+  }
+  if (ESROLES) {
+    const sv = serveI >= 0 && i >= serveI;
+    const hk = enHook || sv ? 1 : (() => { const jj = idxDe("hornea"); return jj < 0 || i < jj ? 0 : i > jj ? 1 : clamp(u / (pasos[jj].dur * 0.85)); })();
+    const c = new THREE.Color(COL_MASA_R).lerp(new THREE.Color(COL_DORADO_R), hk);
+    matRolLado.color.copy(c); matRolTapa.color.copy(new THREE.Color("#fbeccb").lerp(new THREE.Color("#f0b46a"), hk));
   }
 
   // --- pizza ---

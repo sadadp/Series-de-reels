@@ -220,6 +220,19 @@ def efectos(guion, dur):
         elif a == "relleno":
             for n in range(4): poner(buf, sfx_pop() * 0.5, t0 + 0.3 + n * 0.35)
         elif a == "salsa": poner(buf, sfx_mezcla(d * 0.7) * 0.6, t0 + 0.2)
+        elif a == "activa": poner(buf, sfx_mezcla(1.5) * 0.5, t0 + 0.4); poner(buf, sfx_brillo(), t0 + d * 0.6)
+        elif a == "amasa":
+            for n in range(int((d - 0.6) / 0.63)): poner(buf, sfx_pop() * 0.35, t0 + 0.3 + n * 0.63)
+        elif a == "reposa": poner(buf, sfx_whoosh(0.5) * 0.6, t0 + 0.1); poner(buf, sfx_brillo(), t0 + d * 0.5)
+        elif a == "estira":
+            for n in range(3): poner(buf, sfx_whoosh(0.45) * 0.45, t0 + 0.5 + n * 1.0)
+        elif a == "unta": poner(buf, sfx_mezcla(2.2) * 0.5, t0 + 0.3); poner(buf, sfx_whoosh(0.5) * 0.5, t0 + 2.6)
+        elif a == "hilo":
+            for n in range(12): poner(buf, sfx_corte(n) * 0.8, t0 + 2.2 + (n + 0.5) * (d - 3.0) / 12)
+            poner(buf, sfx_ding(), t0 + d - 0.5)
+        elif a == "acomoda":
+            for n in range(12): poner(buf, sfx_pop() * 0.6, t0 + 0.75 + n * 0.22)
+        elif a == "glasea": poner(buf, sfx_mezcla(2.0) * 0.5, t0 + 0.3)
     return buf
 
 
