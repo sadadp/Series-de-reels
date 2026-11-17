@@ -233,6 +233,16 @@ def efectos(guion, dur):
         elif a == "acomoda":
             for n in range(12): poner(buf, sfx_pop() * 0.6, t0 + 0.75 + n * 0.22)
         elif a == "glasea": poner(buf, sfx_mezcla(2.0) * 0.5, t0 + 0.3)
+        elif a == "precalienta": poner(buf, sfx_corte(0) * 0.6, t0 + 0.8); poner(buf, sfx_ding(), t0 + 2.8)
+        elif a == "base": poner(buf, sfx_mezcla(2.0) * 0.6, t0 + 0.3)
+        elif a == "rodajas":
+            for n in range(24): poner(buf, sfx_corte(n) * 0.7, t0 + 0.5 + n * (d - 1.0) / 24)
+        elif a == "espiral":
+            for n in range(16): poner(buf, sfx_pop() * 0.35, t0 + 0.5 + n * (d - 1.4) / 16)
+            poner(buf, sfx_brillo(), t0 + d - 0.6)
+        elif a == "aliña": poner(buf, sfx_mezcla(1.5) * 0.5, t0 + 0.3); poner(buf, sfx_whoosh(0.4) * 0.5, t0 + 2.5)
+        elif a == "tapa": poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.3); poner(buf, sfx_pop() * 0.6, t0 + 0.9)
+        elif a == "destapa": poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.3); poner(buf, sfx_ding(), t0 + d - 0.5)
     return buf
 
 
