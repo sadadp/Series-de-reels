@@ -1,0 +1,27 @@
+// Ratatouille en rodajas (estilo tian)
+window.RECETA = {
+  platillo: "ratatouille",
+  titulo: ["RATATOUILLE", "CASERA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["RATATOUILLE", "clásico francés"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "hook", "dur": 4.2, "texto": "¡Mira nomás qué bonita queda esta ratatouille!"},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "intro", "dur": 9.4, "texto": "Hoy hacemos este clásico francés de verduras. El secreto: todas las rodajas del mismo grosor, para que se cocinen parejo."},
+    {"accion": "presenta", "dur": 9.0, "ingrediente": "berenjena", "etiqueta": "berenjena, 2 calabacitas, 3 jitomates", "texto": "Para las rodajas necesitas una berenjena, una calabacita verde, una calabacita amarilla y tres jitomates guaje."},
+    {"accion": "presenta", "dur": 7.3, "ingrediente": "pimiento", "etiqueta": "cebolla, ajo, pimiento, puré de tomate", "texto": "Para la salsa: media cebolla, dos dientes de ajo, un pimiento rojo y una taza de puré de tomate."},
+    {"accion": "presenta", "dur": 6.4, "ingrediente": "especias", "etiqueta": "aceite de oliva, tomillo, albahaca", "texto": "Y para sazonar: aceite de oliva, tomillo, sal, pimienta y unas hojas de albahaca."},
+    {"accion": "precalienta", "dur": 5.8, "texto": "Primero, prende el horno a ciento noventa grados, para que esté listo."},
+    {"accion": "drop", "dur": 9.9, "destino": "sarten", "ingredientes": ["cebolla", "ajo"], "color": "#f2e6c4", "texto": "Para la salsa, sofríe la cebolla y el ajo picados en un chorrito de aceite, tres o cuatro minutos, hasta que se vean transparentes."},
+    {"accion": "drop", "dur": 7.9, "destino": "sarten", "ingredientes": ["pimiento", "jitomate"], "color": "#c8361f", "texto": "Agrega el pimiento picado y el puré de tomate, con sal y pimienta, y deja que se cocine cinco minutos."},
+    {"accion": "base", "dur": 5.0, "texto": "Extiende esa salsa en el fondo de un refractario redondo."},
+    {"accion": "rodajas", "dur": 13.0, "texto": "Ahora corta todas las verduras en rodajas delgaditas, de unos tres milímetros. Si escoges verduras del mismo ancho, las rodajas quedan del mismo tamaño y se ve más bonito."},
+    {"accion": "espiral", "dur": 12.6, "texto": "Acomódalas sobre la salsa, alternando colores: berenjena, calabacita verde, jitomate, calabacita amarilla. Ve formando una espiral desde la orilla hasta el centro."},
+    {"accion": "aliña", "dur": 8.9, "texto": "Mezcla tres cucharadas de aceite de oliva con un ajo picado, tomillo, sal y pimienta, y barniza todas las verduras."},
+    {"accion": "tapa", "dur": 10.7, "texto": "Tapa el refractario con papel aluminio y hornea cuarenta minutos. Tapado, las verduras se cuecen con su propio vapor y quedan suavecitas."},
+    {"accion": "destapa", "dur": 6.5, "texto": "Luego quita el papel y hornea quince minutos más, para que las orillas se doren."},
+    {"accion": "serve", "dur": 5.9, "texto": "Sirve con hojas de albahaca fresca. Queda riquísima con pan o con arroz."},
+    {"accion": "outro", "dur": 3.4, "texto": "¿Con pan o con arroz? ¡Comenta!"},
+  ],
+};
