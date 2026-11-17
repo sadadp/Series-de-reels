@@ -198,6 +198,12 @@ def efectos(guion, dur):
             for n in range(12): poner(buf, pasa_altos(ruido(0.04, 60, 40 + n)) * 0.12, t0 + 0.2 + n * 0.1)
         elif a == "hornea": poner(buf, sfx_chisporroteo(d), t0); poner(buf, sfx_ding(), t0 + d - 0.5)
         elif a == "extiende": poner(buf, sfx_whoosh(0.5), t0 + 0.5); poner(buf, sfx_pop(), t0 + 1.6)
+        elif a == "ralla":
+            for n in range(10): poner(buf, pasa_altos(ruido(0.08, 30, 600 + n), 0.9) * 0.15, t0 + 0.3 + n * 0.22)
+        elif a in ("hierve", "cuece"): poner(buf, sfx_chisporroteo(d) * 0.5, t0); poner(buf, sfx_whoosh(0.4) * 0.5, t0 + 0.4)
+        elif a == "pasa": poner(buf, sfx_whoosh(0.4), t0 + 0.3); poner(buf, sfx_chisporroteo(d * 0.8) * 0.5, t0 + 0.6)
+        elif a == "emulsiona": poner(buf, sfx_mezcla(d * 0.8) * 0.6, t0 + 0.3)
+        elif a == "tip": poner(buf, sfx_mezcla(d * 0.5) * 0.4, t0 + 0.5)
         elif a == "remoja": poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
         elif a == "marina":
             for n in range(3): poner(buf, sfx_pop() * 0.6, t0 + 0.6 + n * 0.35)
