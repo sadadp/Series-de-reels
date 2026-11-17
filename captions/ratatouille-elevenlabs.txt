@@ -1,0 +1,31 @@
+¡Mira nomás qué bonita queda esta ratatouille!
+<break time="1.5s" />
+Hoy hacemos este clásico francés de verduras. El secreto: todas las rodajas del mismo grosor, para que se cocinen parejo.
+<break time="0.8s" />
+Para las rodajas necesitas una berenjena, una calabacita verde, una calabacita amarilla y tres jitomates guaje.
+<break time="0.8s" />
+Para la salsa: media cebolla, dos dientes de ajo, un pimiento rojo y una taza de puré de tomate.
+<break time="0.8s" />
+Y para sazonar: aceite de oliva, tomillo, sal, pimienta y unas hojas de albahaca.
+<break time="0.8s" />
+Primero, prende el horno a ciento noventa grados, para que esté listo.
+<break time="0.8s" />
+Para la salsa, sofríe la cebolla y el ajo picados en un chorrito de aceite, tres o cuatro minutos, hasta que se vean transparentes.
+<break time="0.8s" />
+Agrega el pimiento picado y el puré de tomate, con sal y pimienta, y deja que se cocine cinco minutos.
+<break time="0.8s" />
+Extiende esa salsa en el fondo de un refractario redondo.
+<break time="0.8s" />
+Ahora corta todas las verduras en rodajas delgaditas, de unos tres milímetros. Si escoges verduras del mismo ancho, las rodajas quedan del mismo tamaño y se ve más bonito.
+<break time="0.8s" />
+Acomódalas sobre la salsa, alternando colores: berenjena, calabacita verde, jitomate, calabacita amarilla. Ve formando una espiral desde la orilla hasta el centro.
+<break time="0.8s" />
+Mezcla tres cucharadas de aceite de oliva con un ajo picado, tomillo, sal y pimienta, y barniza todas las verduras.
+<break time="0.8s" />
+Tapa el refractario con papel aluminio y hornea cuarenta minutos. Tapado, las verduras se cuecen con su propio vapor y quedan suavecitas.
+<break time="0.8s" />
+Luego quita el papel y hornea quince minutos más, para que las orillas se doren.
+<break time="0.8s" />
+Sirve con hojas de albahaca fresca. Queda riquísima con pan o con arroz.
+<break time="0.8s" />
+¿Con pan o con arroz? ¡Comenta!
