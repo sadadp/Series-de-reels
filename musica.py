@@ -182,7 +182,18 @@ def efectos(guion, dur):
             if "truenan" in g["texto"]:
                 for n in range(6): poner(buf, pasa_altos(ruido(0.07, 45, 900 + n), 0.9) * 0.3, t0 + 0.9 + n * 0.28)
         elif a == "rewind": poner(buf, sfx_rebobinar(d), t0)
-        elif a == "intro": poner(buf, sfx_whoosh(), t0)
+        elif a == "intro":
+            poner(buf, sfx_whoosh(), t0)
+            if "Cobija" in g["texto"]:
+                for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "secreto": poner(buf, sfx_brillo(), t0 + 0.4)
+        elif a == "pico":
+            for n in range(int((d - 2.2) / 0.3)): poner(buf, sfx_corte(n) * 0.7, t0 + 0.4 + n * 0.3)
+        elif a == "guacamole": poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.6)
+        elif a == "capa":
+            for n in range(6): poner(buf, pasa_altos(ruido(0.05, 50, 950 + n), 0.9) * 0.2, t0 + 0.8 + n * 0.22)
+            for n in range(3): poner(buf, sfx_pop() * 0.4, t0 + d * 0.45 + n * 0.3)
+            poner(buf, sfx_whoosh(0.4) * 0.5, t0 + d * 0.68)
         elif a == "presenta": poner(buf, sfx_whoosh(0.35) * 0.6, t0); poner(buf, sfx_ding(), t0 + 0.55)
         elif a == "drop":
             for n in range(2 if "huevos" in g["texto"].lower() else 1):
