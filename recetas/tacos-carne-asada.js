@@ -1,0 +1,25 @@
+// Tacos de carne asada
+window.RECETA = {
+  platillo: "carneasada",
+  titulo: ["TACOS DE", "CARNE ASADA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["CARNE ASADA", "jugosa y dorada"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "hook", "dur": 3.7, "texto": "¡Mira qué jugosa queda esta carne asada!"},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "intro", "dur": 8.9, "texto": "Hoy hacemos tacos de carne asada. El secreto: dejar reposar la carne antes de cortarla, y cortarla contra la fibra."},
+    {"accion": "presenta", "dur": 5.7, "ingrediente": "carne", "etiqueta": "1 kilo de arrachera o diezmillo", "texto": "Necesitas un kilo de arrachera o de diezmillo, en filetes delgados."},
+    {"accion": "presenta", "dur": 9.3, "ingrediente": "naranja", "etiqueta": "naranja, 2 limones, ajo y comino", "texto": "Para la marinada: el jugo de una naranja, el de dos limones, tres dientes de ajo picados, una pizca de comino, sal y pimienta."},
+    {"accion": "presenta", "dur": 9.0, "ingrediente": "tortilla", "etiqueta": "tortillas, cebolla, cilantro y salsa", "texto": "Y para los tacos: tortillas de maíz, cebolla y cilantro picados, cebollitas de cambray, limones y tu salsa favorita."},
+    {"accion": "marina", "dur": 10.6, "texto": "Pon la carne en un tazón, báñala con la marinada y frótala bien por los dos lados. Déjala reposar en el refrigerador por lo menos media hora."},
+    {"accion": "calienta", "dur": 9.9, "texto": "Calienta la parrilla o un sartén grueso a fuego alto, hasta que esté bien caliente. Si echas una gota de agua, debe chisporrotear."},
+    {"accion": "asa", "dur": 9.5, "texto": "Asa la carne de tres a cuatro minutos por lado. No la muevas ni la aplastes, así se dora por fuera y se queda jugosa por dentro."},
+    {"accion": "cebollitas", "dur": 9.4, "texto": "Al mismo tiempo, asa las cebollitas de cambray con una pizca de sal, dándoles vuelta hasta que se vean doraditas y suaves."},
+    {"accion": "reposa", "dur": 9.7, "texto": "Ahora el secreto: pasa la carne a una tabla y déjala reposar cinco minutos. Así los jugos se acomodan y no se salen al cortarla."},
+    {"accion": "pica", "dur": 9.6, "texto": "Córtala en tiras contra la fibra, o sea, atravesando las rayitas de la carne. Luego pícala en cuadritos. Así queda suavecita."},
+    {"accion": "tortillas", "dur": 8.4, "texto": "Calienta las tortillas en la misma parrilla, unos segundos por lado, para que agarren el sabor de la carne."},
+    {"accion": "arma", "dur": 9.6, "texto": "Arma tus tacos: dos tortillas, la carne, cebolla, cilantro, un chorrito de limón y salsa al gusto. Acompaña con las cebollitas."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Con salsa verde o con salsa roja? ¡Comenta!"},
+  ],
+};
