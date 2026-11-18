@@ -219,6 +219,14 @@ def efectos(guion, dur):
         elif a == "alina": poner(buf, sfx_whoosh(0.4), t0 + 0.4); poner(buf, sfx_mezcla(d * 0.5) * 0.6, t0 + 1.3)
         elif a == "corta" and "triángulos" in g["texto"]:
             for n, fr in enumerate((0.24, 0.51, 0.78)): poner(buf, sfx_corte(n), t0 + d * fr); poner(buf, sfx_corte(n + 5) * 0.7, t0 + d * fr + 0.18)
+        elif a == "calienta": poner(buf, sfx_chisporroteo(1.6) * 0.9, t0 + d * 0.6); poner(buf, sfx_pop() * 0.5, t0 + d * 0.6)
+        elif a == "asa": poner(buf, sfx_chisporroteo(d) * 0.9, t0 + 0.6); poner(buf, sfx_whoosh(0.3) * 0.5, t0 + d * 0.5 + 0.2)
+        elif a == "cebollitas":
+            poner(buf, sfx_chisporroteo(d) * 0.6, t0 + 0.4)
+            for n in range(4): poner(buf, sfx_pop() * 0.4, t0 + 0.75 + n * 0.3)
+        elif a == "pica":
+            for n in range(8): poner(buf, sfx_corte(n), t0 + 1.4 + n * 0.44)
+            for n in range(10): poner(buf, sfx_corte(n + 3) * 0.6, t0 + 6.2 + n * 0.3)
         elif a == "frie":
             poner(buf, sfx_chisporroteo(d) * 0.9, t0 + 0.3)
             for n in range(12): poner(buf, sfx_pop() * 0.3, t0 + 0.4 + n * 0.18 + 0.4)
