@@ -1,0 +1,25 @@
+// Chilaquiles rojos con totopos caseros
+window.RECETA = {
+  platillo: "chilaquiles",
+  titulo: ["CHILAQUILES", "ROJOS"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["CHILAQUILES", "rojos y crujientes"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "hook", "dur": 4.3, "texto": "¡Escucha nomás cómo truenan estos chilaquiles!"},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "intro", "dur": 8.6, "texto": "Hoy hacemos chilaquiles rojos. El secreto: bañarlos en la salsa justo antes de servir, para que no se aguaden."},
+    {"accion": "presenta", "dur": 7.9, "ingrediente": "tortilla", "etiqueta": "12 tortillas del día anterior", "texto": "Necesitas doce tortillas de maíz, mejor si son del día anterior, porque así absorben menos aceite."},
+    {"accion": "presenta", "dur": 7.6, "ingrediente": "chile", "etiqueta": "4 chiles guajillo, 3 jitomates, cebolla y ajo", "texto": "Para la salsa: cuatro chiles guajillo, tres jitomates, un cuarto de cebolla y dos dientes de ajo."},
+    {"accion": "presenta", "dur": 5.9, "ingrediente": "queso", "etiqueta": "crema, queso fresco, cebolla y cilantro", "texto": "Y para servir: crema, queso fresco, cebolla morada en rodajas y cilantro."},
+    {"accion": "corta", "dur": 9.5, "texto": "Corta las tortillas en ocho triángulos, como si cortaras una pizza: primero a la mitad, luego en cuartos y luego en octavos."},
+    {"accion": "frie", "dur": 9.2, "texto": "Fríelos en aceite bien caliente, poquitos a la vez, moviéndolos para que se doren parejo, hasta que suenen crujientes."},
+    {"accion": "escurre", "dur": 7.4, "texto": "Sácalos a un plato con papel absorbente y ponles una pizca de sal mientras están calientes."},
+    {"accion": "drop", "dur": 9.8, "destino": "olla", "ingredientes": ["jitomate", "chile"], "color": "#b5321c", "texto": "Para la salsa, quítale las semillas a los chiles y hiérvelos con los jitomates diez minutos, hasta que el jitomate esté suave."},
+    {"accion": "licua", "dur": 8.5, "texto": "Licúalos con la cebolla, el ajo, sal y una taza del agua donde se cocieron, hasta que no quede ningún pedacito."},
+    {"accion": "drop", "dur": 9.4, "destino": "sarten", "ingredientes": ["salsa"], "color": "#a32a17", "texto": "Fríe la salsa en una cucharada de aceite, a fuego medio, unos cinco minutos. Así pierde el sabor a crudo y se pone más oscura."},
+    {"accion": "baña", "dur": 10.2, "texto": "Ahora sí, el truco: apaga el fuego, echa los totopos a la salsa y revuelve solo unos segundos, para que se cubran pero sigan crujientes."},
+    {"accion": "serve", "dur": 9.9, "texto": "Sírvelos de inmediato con crema, queso fresco desmoronado, cebolla y cilantro. Si quieres, ponles un huevo estrellado encima."},
+    {"accion": "outro", "dur": 3.4, "texto": "¿Con huevo o con pollo? ¡Comenta!"},
+  ],
+};
