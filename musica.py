@@ -177,7 +177,10 @@ def efectos(guion, dur):
     buf = np.zeros(int(dur * SR))
     for g in guion:
         a, t0, d = g["accion"], g["ini"], g["fin"] - g["ini"]
-        if a == "hook": poner(buf, sfx_brillo(), t0 + 0.1)
+        if a == "hook":
+            poner(buf, sfx_brillo(), t0 + 0.1)
+            if "truenan" in g["texto"]:
+                for n in range(6): poner(buf, pasa_altos(ruido(0.07, 45, 900 + n), 0.9) * 0.3, t0 + 0.9 + n * 0.28)
         elif a == "rewind": poner(buf, sfx_rebobinar(d), t0)
         elif a == "intro": poner(buf, sfx_whoosh(), t0)
         elif a == "presenta": poner(buf, sfx_whoosh(0.35) * 0.6, t0); poner(buf, sfx_ding(), t0 + 0.55)
@@ -193,7 +196,7 @@ def efectos(guion, dur):
         elif a == "outro": poner(buf, sfx_brillo(), t0 + 0.1)
         elif a == "arma":
             for n in range(4): poner(buf, sfx_pop() * 0.7, t0 + 0.75 + n * 0.4)
-        elif a == "baña": poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.1); poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
+        elif a == "baña" and "totopos" not in g["texto"]: poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.1); poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
         elif a == "queso":
             for n in range(12): poner(buf, pasa_altos(ruido(0.04, 60, 40 + n)) * 0.12, t0 + 0.2 + n * 0.1)
         elif a == "hornea": poner(buf, sfx_chisporroteo(d), t0); poner(buf, sfx_ding(), t0 + d - 0.5)
@@ -214,6 +217,19 @@ def efectos(guion, dur):
         elif a == "lava": poner(buf, sfx_mezcla(d * 0.8) * 0.8, t0 + 0.2); poner(buf, sfx_chisporroteo(d * 0.6) * 0.3, t0 + 0.4)
         elif a == "cocina": poner(buf, sfx_chisporroteo(d) * 0.6, t0); poner(buf, sfx_ding(), t0 + d - 0.6)
         elif a == "alina": poner(buf, sfx_whoosh(0.4), t0 + 0.4); poner(buf, sfx_mezcla(d * 0.5) * 0.6, t0 + 1.3)
+        elif a == "corta" and "triángulos" in g["texto"]:
+            for n, fr in enumerate((0.24, 0.51, 0.78)): poner(buf, sfx_corte(n), t0 + d * fr); poner(buf, sfx_corte(n + 5) * 0.7, t0 + d * fr + 0.18)
+        elif a == "frie":
+            poner(buf, sfx_chisporroteo(d) * 0.9, t0 + 0.3)
+            for n in range(12): poner(buf, sfx_pop() * 0.3, t0 + 0.4 + n * 0.18 + 0.4)
+        elif a == "escurre":
+            for n in range(18): poner(buf, pasa_altos(ruido(0.05, 50, 700 + n), 0.9) * 0.2, t0 + 0.75 + n * 0.12)
+            for n in range(8): poner(buf, pasa_altos(ruido(0.03, 80, 760 + n)) * 0.1, t0 + 3.4 + n * 0.12)
+        elif a == "licua": poner(buf, sfx_pop() * 0.5, t0 + 0.5); poner(buf, suave(ruido(d - 2.5, 0.3, 800), 0.6) * 0.25, t0 + 1.5); poner(buf, sfx_ding(), t0 + d - 0.6)
+        elif a == "sofrie": poner(buf, sfx_chisporroteo(d) * 0.8, t0 + 0.3); poner(buf, sfx_mezcla(d * 0.6) * 0.4, t0 + 1.5)
+        elif a == "baña" and "totopos" in g["texto"]:
+            for n in range(12): poner(buf, pasa_altos(ruido(0.05, 50, 820 + n), 0.9) * 0.2, t0 + 1.9 + n * 0.12)
+            poner(buf, sfx_mezcla(3.0) * 0.5, t0 + 3.6); poner(buf, sfx_brillo(), t0 + d - 1.2)
         elif a in ("corta", "rebana"):
             for n in range(8 if a == "rebana" else 6): poner(buf, sfx_corte(n), t0 + 0.4 + n * (0.25 if a == "rebana" else 0.35))
         elif a in ("esterilla", "enrolla"): poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.3)
