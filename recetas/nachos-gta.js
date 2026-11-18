@@ -1,0 +1,25 @@
+// Nachos para la noche de estreno de GTA VI
+window.RECETA = {
+  platillo: "nachos",
+  titulo: ["NACHOS", "PARA LA DESVELADA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["NACHOS", "noche de estreno"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "hook", "dur": 3.6, "texto": "¡Esta noche no duermo! Hoy sale GTA seis."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "intro", "dur": 7.6, "texto": "Cobija, lista. Control cargado, listo. Café de olla, listo. Pero falta lo más importante: la botana."},
+    {"accion": "secreto", "dur": 7.8, "texto": "Hoy hacemos nachos, y el secreto es armarlos en dos capas, para que todos los totopos lleven queso."},
+    {"accion": "presenta", "dur": 9.2, "ingrediente": "totopos", "etiqueta": "totopos, frijoles y 200 g de queso", "texto": "Necesitas una bolsa grande de totopos, una taza de frijoles refritos y doscientos gramos de queso manchego rallado."},
+    {"accion": "presenta", "dur": 6.1, "ingrediente": "jitomate", "etiqueta": "jitomate, cebolla, cilantro y limón", "texto": "Para el pico de gallo: un jitomate, un cuarto de cebolla, cilantro y un limón."},
+    {"accion": "presenta", "dur": 5.4, "ingrediente": "aguacate", "etiqueta": "aguacate, crema y jalapeños", "texto": "Y para coronar: un aguacate, crema y chiles jalapeños en rodajas."},
+    {"accion": "precalienta", "dur": 7.2, "texto": "Prende el horno a doscientos grados, para que esté bien caliente cuando metas los nachos."},
+    {"accion": "pico", "dur": 8.0, "texto": "Mientras, pica el jitomate, la cebolla y el cilantro en cuadritos, y ponles sal y el jugo de medio limón."},
+    {"accion": "guacamole", "dur": 8.4, "texto": "Machaca el aguacate con un tenedor, con sal y el jugo del otro medio limón. El limón evita que se ponga negro."},
+    {"accion": "capa", "dur": 9.3, "texto": "Ahora el secreto: en una charola, pon la mitad de los totopos, unas cucharadas de frijoles calientes y la mitad del queso."},
+    {"accion": "capa", "dur": 8.5, "texto": "Encima, otra capa de totopos, el resto de los frijoles y el resto del queso. Así ningún totopo se queda solito."},
+    {"accion": "hornea", "dur": 7.1, "texto": "Hornéalos de cinco a siete minutos, hasta que el queso se derrita y empiece a burbujear."},
+    {"accion": "serve", "dur": 11.4, "texto": "Sácalos y ponles encima el pico de gallo, el guacamole, chorritos de crema y los jalapeños. Sírvelos en ese momento, para que el totopo siga crujiente."},
+    {"accion": "outro", "dur": 6.1, "texto": "Ahora sí, a jugar hasta que salga el sol. ¿Tú también te desvelas hoy? ¡Comenta!"},
+  ],
+};
