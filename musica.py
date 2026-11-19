@@ -186,6 +186,16 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "sobras":
+            for n in range(3):
+                for k in range(3): poner(buf, pasa_altos(ruido(0.06, 45, 1100 + n * 3 + k), 0.9) * 0.25, t0 + 1.0 + n * 1.8 + k * 0.15)
+        elif a == "carne": poner(buf, sfx_pop() * 0.6, t0 + 0.7); poner(buf, sfx_chisporroteo(d) * 0.9, t0 + 0.8)
+        elif a == "bechamel":
+            poner(buf, sfx_chisporroteo(1.8) * 0.5, t0 + 0.6); poner(buf, sfx_whoosh(0.4) * 0.5, t0 + 1.9)
+            for t1 in (4.8, 6.6, 8.4): poner(buf, sfx_mezcla(0.9) * 0.6, t0 + t1)
+            poner(buf, sfx_mezcla(d - 2) * 0.35, t0 + 1.8); poner(buf, sfx_brillo(), t0 + 10.8)
+        elif a == "arma" and "láminas" in g["texto"]:
+            for n in range(13): poner(buf, sfx_pop() * 0.45, t0 + (0.4 if n == 0 else 1.4 + ((n - 1) // 4) * 3.3 + ((n - 1) % 4) * 0.8) + 0.3)
         elif a == "prepara":
             for n in range(22): poner(buf, pasa_altos(ruido(0.04, 60, 1000 + n), 0.9) * 0.18, t0 + 0.7 + n * 0.14)
             poner(buf, sfx_mezcla(2.0) * 0.6, t0 + 5.0)
@@ -211,7 +221,7 @@ def efectos(guion, dur):
             for n in range(4): poner(buf, sfx_pop() * 0.6, t0 + 0.4 + n * 0.18 + 0.2)
             poner(buf, sfx_brillo(), t0 + 1.4)
         elif a == "outro": poner(buf, sfx_brillo(), t0 + 0.1)
-        elif a == "arma":
+        elif a == "arma" and "láminas" not in g["texto"]:
             for n in range(4): poner(buf, sfx_pop() * 0.7, t0 + 0.75 + n * 0.4)
         elif a == "baña" and "totopos" not in g["texto"]: poner(buf, sfx_whoosh(0.5) * 0.7, t0 + 0.1); poner(buf, sfx_mezcla(d * 0.6) * 0.6, t0 + 0.3)
         elif a == "queso":
