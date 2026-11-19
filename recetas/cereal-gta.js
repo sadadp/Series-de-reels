@@ -1,17 +1,16 @@
-// Michi jugando GTA VI con su cereal (sin receta, tierno)
+// Día uno de GTA VI: el desayuno más fácil del Chef Michi
 window.RECETA = {
   platillo: "cerealgta",
-  titulo: ["HOY NO HAY", "RECETA"],
+  titulo: ["DÍA UNO", "DE GTA VI"],
   letrero: "RECETA DEL CHEF MICHI",
-  pizarron: ["HOY NO HAY RECETA", "estoy jugando"],
+  pizarron: ["EL DESAYUNO", "más fácil"],
   usuario: "@chefmichi",
   pasos: [
-    {"accion": "hook", "dur": 3.3, "texto": "Shh… ¿ya están grabando? Hola, amigos."},
-    {"accion": "juega", "dur": 7.9, "texto": "Hoy no hay receta, perdón. Es que salió GTA seis, y Michi lleva toda la noche jugando. ¡Está bien bonito!"},
-    {"accion": "come", "dur": 9.1, "texto": "Pero no se preocupen, sí estoy comiendo: un platito de cereal con leche. Se come con una mano y no hay que dejar de jugar."},
-    {"accion": "juega", "dur": 6.4, "texto": "¿Dormir? Ahorita, nada más termino esta misión. Bueno, esta y la otra. Y luego otra."},
-    {"accion": "come", "dur": 7.8, "texto": "La cocina está un poquito desordenada, pero mañana la dejo rechinando de limpia. Palabra de chef."},
-    {"accion": "huye", "dur": 7.2, "texto": "Ay, ya me encontraron en el juego. ¡Me voy! Prometo que la próxima semana regreso con receta."},
-    {"accion": "outro", "dur": 5.6, "texto": "Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenten!"},
+    {"accion": "hook", "dur": 2.6, "texto": "Día uno de GTA seis."},
+    {"accion": "juega", "dur": 7.3, "texto": "Son las siete de la mañana y Michi no ha dormido nada. Pero un chef nunca se salta el desayuno."},
+    {"accion": "come", "dur": 8.3, "texto": "Así que hoy les traigo la receta más fácil del mundo: un plato hondo, cereal hasta arriba y leche bien fría."},
+    {"accion": "juega", "dur": 5.7, "texto": "Listo. Se prepara en diez segundos y no tienes que soltar el control."},
+    {"accion": "come", "dur": 8.9, "texto": "Truco de chef: sírvele poquita leche y ve agregando, para que el cereal siga crujiente hasta la siguiente misión."},
+    {"accion": "outro", "dur": 4.5, "texto": "¿Tú qué echas primero, la leche o el cereal? ¡Comenten!"},
   ],
 };
