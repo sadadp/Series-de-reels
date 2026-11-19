@@ -6,7 +6,7 @@ window.RECETA = {
   pizarron: ["LASAÑA", "con bechamel"],
   usuario: "@chefmichi",
   pasos: [
-    {"accion": "sobras", "dur": 3.6, "texto": "Mmm… nachos fríos de ayer. No me juzguen."},
+    {"accion": "sobras", "dur": 5.7, "texto": "Después de dos días jugando GTA seis, ya toca cocinar algo de verdad."},
     {"accion": "rewind", "dur": 1.0, "texto": ""},
     {"accion": "intro", "dur": 7.5, "texto": "Hoy hacemos lasaña con bechamel, la misma bechamel que aprendimos en las enchiladas suizas."},
     {"accion": "secreto", "dur": 6.9, "texto": "Y el secreto: dejarla reposar antes de cortarla, para que salga en cuadros perfectos."},
