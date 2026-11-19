@@ -1,14 +1,14 @@
-# Guion — cereal-gta (≈38 s)
+# Guion — cereal-gta (≈47 s)
 
-¿Qué? ¿Receta hoy? No, no, no. Hoy no hay receta. Estoy jugando GTA seis… ¡y a la madre, qué bonito se ve! Ah, sí, estoy comiendo cereal. Es lo único que se puede comer con una mano. Llevo toda la noche. ¿Dormir? ¿Qué es eso? ¿La cocina? Mañana la limpio. Bueno, pasado mañana. Y no me pregunten si va primero la leche o el cereal, que estoy ocupado. Ya, ya, ya me voy, que me andan persiguiendo. ¡Nos vemos cuando termine el juego! O sea… en marzo. ¿Tú qué echas primero, la leche o el cereal? ¡Comenta!
+Shh… ¿ya están grabando? Hola, amigos. Hoy no hay receta, perdón. Es que salió GTA seis, y Michi lleva toda la noche jugando. ¡Está bien bonito! Pero no se preocupen, sí estoy comiendo: un platito de cereal con leche. Se come con una mano y no hay que dejar de jugar. ¿Dormir? Ahorita, nada más termino esta misión. Bueno, esta y la otra. Y luego otra. La cocina está un poquito desordenada, pero mañana la dejo rechinando de limpia. Palabra de chef. Ay, ya me encontraron en el juego. ¡Me voy! Prometo que la próxima semana regreso con receta. Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenta!
 
 | Seg. | Frase |
 |---|---|
-| 0.0 | ¿Qué? ¿Receta hoy? No, no, no. |
-| 2.6 | Hoy no hay receta. Estoy jugando GTA seis… ¡y a la madre, qué bonito se ve! |
-| 8.3 | Ah, sí, estoy comiendo cereal. Es lo único que se puede comer con una mano. |
-| 14.2 | Llevo toda la noche. ¿Dormir? ¿Qué es eso? ¿La cocina? Mañana la limpio. Bueno, pasado mañana. |
-| 21.1 | Y no me pregunten si va primero la leche o el cereal, que estoy ocupado. |
-| 26.9 | Ya, ya, ya me voy, que me andan persiguiendo. ¡Nos vemos cuando termine el juego! O sea… en marzo. |
-| 34.1 | ¿Tú qué echas primero, la leche o el cereal? ¡Comenta! |
-| 38.5 | *(fin)* |
+| 0.0 | Shh… ¿ya están grabando? Hola, amigos. |
+| 3.3 | Hoy no hay receta, perdón. Es que salió GTA seis, y Michi lleva toda la noche jugando. ¡Está bien bonito! |
+| 11.2 | Pero no se preocupen, sí estoy comiendo: un platito de cereal con leche. Se come con una mano y no hay que dejar de jugar. |
+| 20.3 | ¿Dormir? Ahorita, nada más termino esta misión. Bueno, esta y la otra. Y luego otra. |
+| 26.7 | La cocina está un poquito desordenada, pero mañana la dejo rechinando de limpia. Palabra de chef. |
+| 34.5 | Ay, ya me encontraron en el juego. ¡Me voy! Prometo que la próxima semana regreso con receta. |
+| 41.7 | Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenta! |
+| 47.2 | *(fin)* |

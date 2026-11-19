@@ -1,4 +1,4 @@
-// Michi jugando GTA VI con su cereal (sin receta, de humor)
+// Michi jugando GTA VI con su cereal (sin receta, tierno)
 window.RECETA = {
   platillo: "cerealgta",
   titulo: ["HOY NO HAY", "RECETA"],
@@ -6,12 +6,12 @@ window.RECETA = {
   pizarron: ["HOY NO HAY RECETA", "estoy jugando"],
   usuario: "@chefmichi",
   pasos: [
-    {"accion": "hook", "dur": 2.6, "texto": "¿Qué? ¿Receta hoy? No, no, no."},
-    {"accion": "juega", "dur": 5.7, "texto": "Hoy no hay receta. Estoy jugando GTA seis… ¡y a la madre, qué bonito se ve!"},
-    {"accion": "come", "dur": 5.9, "texto": "Ah, sí, estoy comiendo cereal. Es lo único que se puede comer con una mano."},
-    {"accion": "juega", "dur": 6.9, "texto": "Llevo toda la noche. ¿Dormir? ¿Qué es eso? ¿La cocina? Mañana la limpio. Bueno, pasado mañana."},
-    {"accion": "come", "dur": 5.8, "texto": "Y no me pregunten si va primero la leche o el cereal, que estoy ocupado."},
-    {"accion": "huye", "dur": 7.2, "texto": "Ya, ya, ya me voy, que me andan persiguiendo. ¡Nos vemos cuando termine el juego! O sea… en marzo."},
-    {"accion": "outro", "dur": 4.4, "texto": "¿Tú qué echas primero, la leche o el cereal? ¡Comenta!"},
+    {"accion": "hook", "dur": 3.3, "texto": "Shh… ¿ya están grabando? Hola, amigos."},
+    {"accion": "juega", "dur": 7.9, "texto": "Hoy no hay receta, perdón. Es que salió GTA seis, y Michi lleva toda la noche jugando. ¡Está bien bonito!"},
+    {"accion": "come", "dur": 9.1, "texto": "Pero no se preocupen, sí estoy comiendo: un platito de cereal con leche. Se come con una mano y no hay que dejar de jugar."},
+    {"accion": "juega", "dur": 6.4, "texto": "¿Dormir? Ahorita, nada más termino esta misión. Bueno, esta y la otra. Y luego otra."},
+    {"accion": "come", "dur": 7.8, "texto": "La cocina está un poquito desordenada, pero mañana la dejo rechinando de limpia. Palabra de chef."},
+    {"accion": "huye", "dur": 7.2, "texto": "Ay, ya me encontraron en el juego. ¡Me voy! Prometo que la próxima semana regreso con receta."},
+    {"accion": "outro", "dur": 5.5, "texto": "Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenta!"},
   ],
 };
