@@ -1,4 +1,4 @@
-// Lasaña con bechamel (después de GTA VI). Visual, sin voz: al inicio Michi come las sobras de ayer (nachos)
+// Lasaña con bechamel (después de GTA VI). Visual, sin voz: al inicio Michi se termina el cereal del video anterior
 window.RECETA = {
   platillo: "lasana",
   titulo: ["LASAÑA", "CON BECHAMEL"],
@@ -6,7 +6,7 @@ window.RECETA = {
   pizarron: ["LASAÑA", "con bechamel"],
   usuario: "@chefmichi",
   pasos: [
-    {"accion": "sobras", "dur": 5.7, "texto": "Después de dos días jugando GTA seis, ya toca cocinar algo de verdad."},
+    {"accion": "sobras", "dur": 5.9, "texto": "Después de jugar GTA seis toda la noche, ya toca cocinar algo de verdad."},
     {"accion": "rewind", "dur": 1.0, "texto": ""},
     {"accion": "intro", "dur": 7.5, "texto": "Hoy hacemos lasaña con bechamel, la misma bechamel que aprendimos en las enchiladas suizas."},
     {"accion": "secreto", "dur": 6.9, "texto": "Y el secreto: dejarla reposar antes de cortarla, para que salga en cuadros perfectos."},
