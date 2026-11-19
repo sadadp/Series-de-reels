@@ -186,6 +186,12 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "prepara":
+            for n in range(22): poner(buf, pasa_altos(ruido(0.04, 60, 1000 + n), 0.9) * 0.18, t0 + 0.7 + n * 0.14)
+            poner(buf, sfx_mezcla(2.0) * 0.6, t0 + 5.0)
+        elif a == "control":
+            for n in range(5): poner(buf, pasa_altos(ruido(0.07, 45, 1040 + n), 0.9) * 0.3, t0 + 0.9 + n * 0.5)
+        elif a == "leche": poner(buf, sfx_mezcla(0.8) * 0.6, t0 + 1.0); poner(buf, sfx_mezcla(0.8) * 0.6, t0 + 4.3); poner(buf, sfx_ding(), t0 + 5.4)
         elif a == "secreto": poner(buf, sfx_brillo(), t0 + 0.4)
         elif a == "pico":
             for n in range(int((d - 2.2) / 0.3)): poner(buf, sfx_corte(n) * 0.7, t0 + 0.4 + n * 0.3)
