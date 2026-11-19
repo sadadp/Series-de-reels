@@ -1,11 +1,11 @@
-# Reparto de voces (ElevenLabs v3, español)
+# Reparto de voces (ElevenLabs v4, voces nativas en español latino, plan Creator)
 
 | Personaje | Voz | voice_id |
 |---|---|---|
-| Tú (versión hombre) | Chris | iP95p4xoKVk53GoZ742B |
-| Tú (versión mujer) | Jessica | cgSgspJ2msm6clMCkdW9 |
-| Don Chuy | Daniel | onwK4e9ZLuTAKqWW03F9 |
-| Dani | Laura | FGY2WhTYpPnrIDTdsKH5 |
-| Leo (niña, 8 años) | River | SAz9YHcvj6GT2YYXdXww |
+| Tú (versión hombre) | Erick Pro (mexicano) | u4L1errSjs4GPNGP5O5U |
+| Tú (versión mujer) | Natalia – Doblaje versátil | zJtOCbdQjTZt7YZtkRDP |
+| Don Chuy | Santiago – grave y rasposo | VXZKNah1ssrzM8c81OiY |
+| Dani | Emma – intensa | tbfu7H6JPPlpF9clW89V |
+| Leo (niña) | Lulu – infantil | CPv3Zr3CQCqE4ZzuCgBP |
 
-Modelo: `eleven_v3`, `language_code: es`. Las emociones van entre corchetes en inglés: `[whispers]`, `[shouting]`, `[crying]`.
+Modelo: `eleven_v4`, `language_code: es`. Emociones entre corchetes: `[whispers]`, `[shouting]`, `[crying]`.
