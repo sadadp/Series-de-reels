@@ -12,6 +12,6 @@ window.RECETA = {
     {"accion": "juega", "dur": 6.4, "texto": "¿Dormir? Ahorita, nada más termino esta misión. Bueno, esta y la otra. Y luego otra."},
     {"accion": "come", "dur": 7.8, "texto": "La cocina está un poquito desordenada, pero mañana la dejo rechinando de limpia. Palabra de chef."},
     {"accion": "huye", "dur": 7.2, "texto": "Ay, ya me encontraron en el juego. ¡Me voy! Prometo que la próxima semana regreso con receta."},
-    {"accion": "outro", "dur": 5.5, "texto": "Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenta!"},
+    {"accion": "outro", "dur": 5.6, "texto": "Y díganme: ¿ustedes qué echan primero, la leche o el cereal? ¡Comenten!"},
   ],
 };
