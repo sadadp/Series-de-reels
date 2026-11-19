@@ -1,4 +1,4 @@
-// Lasaña con bechamel (después de GTA VI; Michi comiendo lo de ayer)
+// Lasaña con bechamel (después de GTA VI). Visual, sin voz: al inicio Michi come las sobras de ayer (nachos)
 window.RECETA = {
   platillo: "lasana",
   titulo: ["LASAÑA", "CON BECHAMEL"],
@@ -8,7 +8,7 @@ window.RECETA = {
   pasos: [
     {"accion": "sobras", "dur": 3.6, "texto": "Mmm… nachos fríos de ayer. No me juzguen."},
     {"accion": "rewind", "dur": 1.0, "texto": ""},
-    {"accion": "intro", "dur": 12.3, "texto": "Después de dos días jugando GTA seis, ya toca cocinar algo de verdad. Hoy hacemos lasaña con bechamel, la misma bechamel que aprendimos en las enchiladas suizas."},
+    {"accion": "intro", "dur": 7.5, "texto": "Hoy hacemos lasaña con bechamel, la misma bechamel que aprendimos en las enchiladas suizas."},
     {"accion": "secreto", "dur": 6.9, "texto": "Y el secreto: dejarla reposar antes de cortarla, para que salga en cuadros perfectos."},
     {"accion": "presenta", "dur": 9.0, "ingrediente": "carne", "etiqueta": "½ kg de carne molida, cebolla, zanahoria, ajo y tomate", "texto": "Para la salsa: medio kilo de carne molida, una cebolla, una zanahoria, dos dientes de ajo y dos tazas de puré de tomate."},
     {"accion": "presenta", "dur": 8.5, "ingrediente": "leche", "etiqueta": "mantequilla, harina, leche y nuez moscada", "texto": "Para la bechamel: cuatro cucharadas de mantequilla, cuatro de harina, cuatro tazas de leche y nuez moscada."},
@@ -23,6 +23,6 @@ window.RECETA = {
     {"accion": "hornea", "dur": 9.1, "texto": "Tápala con papel aluminio y hornea treinta minutos. Luego destápala y hornea quince más, hasta que el queso se dore."},
     {"accion": "reposa", "dur": 8.5, "texto": "Y el secreto: déjala reposar quince minutos antes de cortarla. Así las capas se asientan y no se desparrama."},
     {"accion": "serve", "dur": 5.2, "texto": "Córtala en cuadros y sírvela con un poco de parmesano encima."},
-    {"accion": "outro", "dur": 6.4, "texto": "Y lo que sobre… es el desayuno de mañana. ¿Lasaña de carne o de verduras? ¡Comenten!"},
+    {"accion": "outro", "dur": 3.7, "texto": "¿Lasaña de carne o de verduras? ¡Comenten!"},
   ],
 };
