@@ -18,3 +18,13 @@ echo "Listo: $(ls "$REPO/.claude/skills" | wc -l) skills enlazadas."
 FL="$HOME_DIR/freellmapi"
 [ -d "$FL" ] || git clone --depth 1 https://github.com/tashfeenahmed/freellmapi "$FL"
 (cd "$FL" && npm install --no-audit --no-fund && { [ -f .env ] || printf "ENCRYPTION_KEY=%s\nPORT=3001\n" "$(node -e 'console.log(require("crypto").randomBytes(32).toString("hex"))')" > .env; chmod 600 .env; })
+# 4) Lemo-Opuscar (99 estilos de película en código; los videos hechos son tuyos, uso comercial OK)
+LO="${LEMO_OPUSCAR_HOME:-$HOME/lemo-opuscar}"
+[ -d "$LO" ] || git clone --depth 1 https://github.com/lemomo-ai/lemo-opuscar /tmp/lemo-bootstrap
+sh "${LO}/plugin/skills/lemo-opuscar/scripts/setup.sh" deps 2>/dev/null || sh /tmp/lemo-bootstrap/plugin/skills/lemo-opuscar/scripts/setup.sh deps
+[ -e "$REPO/.claude/skills/lemo-opuscar" ] || ln -s "$LO/plugin/skills/lemo-opuscar" "$REPO/.claude/skills/lemo-opuscar"
+# Lemo pide ffmpeg 7+: si el del sistema es más viejo, usa el de imageio-ffmpeg
+if [ "$(ffmpeg -version | sed -n '1s/^ffmpeg version n\{0,1\}\([0-9]*\)\..*/\1/p')" -lt 7 ] 2>/dev/null; then
+  python3 -m venv "$HOME_DIR/.ff7" && "$HOME_DIR/.ff7/bin/pip" install -q imageio-ffmpeg
+  ln -sf "$("$HOME_DIR/.ff7/bin/python" -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg
+fi
