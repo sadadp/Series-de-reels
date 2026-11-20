@@ -1,0 +1,11 @@
+const { chromium } = require('playwright'); const fs = require('fs'); const http = require('http'); const path = require('path');
+const srv = http.createServer((q, r) => { const f = path.join(__dirname, decodeURIComponent(q.url.split('?')[0])); fs.readFile(f, (e, d) => { if (e) { r.writeHead(404); r.end(); return; } r.writeHead(200, { 'Content-Type': f.endsWith('.js') ? 'text/javascript' : 'text/html' }); r.end(d); }); }).listen(8768);
+(async () => { const br = await chromium.launch({ args: ['--use-angle=swiftshader','--enable-unsafe-swiftshader'] }); const pg = await br.newPage({ viewport: { width: 720, height: 1280 } });
+pg.on('pageerror', e => console.log('ERR', e.message));
+await pg.goto('http://localhost:8768/chars.html'); await pg.waitForFunction('window.READY', null, { timeout: 60000 }); await pg.evaluate(() => document.fonts.load('900 40px Inter'));
+fs.mkdirSync('chars_out', { recursive: true });
+const save = (n, u) => fs.writeFileSync('chars_out/' + n, Buffer.from(u.split(',')[1], 'base64'));
+save('reparto.jpg', await pg.evaluate(() => window.renderCast()));
+save('leo.jpg', await pg.evaluate(() => window.renderCloseup('leo', '¡Mira! ¡Encontré una concha gigante!', 'LEO')));
+save('chuy.jpg', await pg.evaluate(() => window.renderCloseup('chuy', '¡TSUNAMI! ¡Corran a la capilla!', 'DON CHUY')));
+await br.close(); srv.close(); })();
