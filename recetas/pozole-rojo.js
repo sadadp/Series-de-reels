@@ -6,7 +6,7 @@ window.RECETA = {
   pizarron: ["POZOLE ROJO", "para compartir"],
   usuario: "@chefmichi",
   pasos: [
-    {"accion": "hook", "dur": 3.7, "texto": "¡Mira cómo se abre el maíz de este pozole!"},
+    {"accion": "hook", "dur": 6.4, "texto": "Si tu pozole siempre queda con el maíz duro, quédate, porque hoy lo arreglamos."},
     {"accion": "rewind", "dur": 1.0, "texto": ""},
     {"accion": "intro", "dur": 9.2, "texto": "Hoy hacemos pozole rojo. El secreto: cocer el maíz hasta que floree, o sea, hasta que los granos se abran como florecitas."},
     {"accion": "presenta", "dur": 7.9, "ingrediente": "maiz", "etiqueta": "1 kilo de maíz pozolero", "texto": "Necesitas un kilo de maíz pozolero precocido. Lávalo con agua fría hasta que el agua salga clarita."},
@@ -22,6 +22,6 @@ window.RECETA = {
     {"accion": "junta", "dur": 9.7, "texto": "Cuando el maíz ya floreó y la carne está suave, junta todo en la olla del maíz: la carne con su caldo y la salsa. Ahora sí, ponle sal."},
     {"accion": "hierve", "dur": 9.9, "texto": "Agrega una cucharada de orégano, desmoronándolo con las manos, y deja que hierva media hora más para que se mezclen los sabores."},
     {"accion": "serve", "dur": 10.7, "texto": "Sírvelo bien caliente y que cada quien le ponga lechuga, rábano, cebolla, orégano, chile piquín y su chorrito de limón, con tostadas a un lado."},
-    {"accion": "outro", "dur": 3.4, "texto": "¿Con tostada o sin tostada? ¡Comenta!"},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
   ],
 };

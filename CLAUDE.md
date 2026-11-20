@@ -8,6 +8,11 @@
   - Ritmo tranquilo: los tiempos se calculan con `python3 herramientas/guion.py <receta>`
     (~11 letras por segundo + pausa). Duración libre (60-120 s está bien si se entiende).
   - Cada receta tiene algo que la distinga (su secreto o truco) y se dice desde el inicio.
+  - HOOK distinto en cada video (nunca repetir "Mira nomás…", "Ya toca el postre…", etc.). Que enganche en
+    los primeros 3 segundos: un problema común ("si tu pozole sale con el maíz duro…"), una promesa, una
+    sorpresa o una pregunta. Revisa los hooks de los videos anteriores (`recetas/*.js`) para no repetir.
+  - CIERRE hablado SIEMPRE: "¿Qué quieres que cocine después? ¡Comenta!" (o una variante igual de clara).
+    La pregunta que divide opiniones (ej. "¿verdes o rojos?") ya NO va en la voz: va en las descripciones/captions.
 - Habla en español. Nada de palabras en inglés en los videos (ej. "panqueques", no "hot cakes").
 - Cada vez que entregues un video terminado, entrega también su portada (`portadas/<video>-portada.png`
   1080×1920 y `portadas/<video>-youtube.png` 1280×720, con `node marca/generar.js portadas`) y sus captions para cada red
