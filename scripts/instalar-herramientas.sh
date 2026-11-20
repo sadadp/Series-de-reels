@@ -14,3 +14,7 @@ for p in tiktok-video-skills webgl-animation-skills explainer-video-skills kinet
   for d in "$MS/$p"/skills/*/; do n=$(basename "$d"); [ -e "$REPO/.claude/skills/$n" ] || ln -s "$(realpath --relative-to="$REPO/.claude/skills" "$d")" "$REPO/.claude/skills/$n"; done
 done
 echo "Listo: $(ls "$REPO/.claude/skills" | wc -l) skills enlazadas."
+# 3) FreeLLMAPI (MIT) — router de modelos gratis. Arranca con: cd ../freellmapi && npm run dev  (puerto 3001)
+FL="$HOME_DIR/freellmapi"
+[ -d "$FL" ] || git clone --depth 1 https://github.com/tashfeenahmed/freellmapi "$FL"
+(cd "$FL" && npm install --no-audit --no-fund && { [ -f .env ] || printf "ENCRYPTION_KEY=%s\nPORT=3001\n" "$(node -e 'console.log(require("crypto").randomBytes(32).toString("hex"))')" > .env; chmod 600 .env; })
