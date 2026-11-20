@@ -186,6 +186,16 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "cuecemaiz": poner(buf, sfx_mezcla(1.6) * 0.6, t0 + 0.5); poner(buf, sfx_chisporroteo(d - 2.5) * 0.4, t0 + 2.2); poner(buf, sfx_brillo(), t0 + d - 2.5)
+        elif a == "cuececarne":
+            for n in range(7): poner(buf, sfx_pop() * 0.4, t0 + 0.3 + n * 0.2 + 0.3)
+            poner(buf, sfx_chisporroteo(d - 2) * 0.35, t0 + 2)
+        elif a == "cuela": poner(buf, sfx_mezcla(4.5) * 0.5, t0 + 1.0)
+        elif a == "friesalsa": poner(buf, sfx_chisporroteo(d) * 0.8, t0 + 0.3); poner(buf, sfx_mezcla(d * 0.6) * 0.4, t0 + 1.5)
+        elif a == "junta":
+            for n in range(8): poner(buf, sfx_pop() * 0.4, t0 + 0.6 + n * 0.25 + 0.3)
+            poner(buf, sfx_mezcla(2.2) * 0.6, t0 + 4.3)
+            for n in range(6): poner(buf, pasa_altos(ruido(0.03, 80, 1900 + n)) * 0.1, t0 + d - 1.6 + n * 0.12)
         elif a == "claras":
             poner(buf, sfx_mezcla(d - 2.2) * 0.6, t0 + 0.3)
             for n in range(5): poner(buf, pasa_altos(ruido(0.04, 60, 1400 + n)) * 0.12, t0 + 3.4 + n * 0.3)
