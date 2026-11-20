@@ -20,6 +20,7 @@ https://drive.google.com/drive/folders/1XxQg5edEApI8PEcpXCak4AMwHBJR1tqz
 | Nachos GTA VI | 1mPQp3OJqbgv87-USat-xNhGPtOZKaLap |
 | Día uno de GTA VI (cereal) | 1R1PKX-KcONg_xZGWkJ__Gmhf_XccY26H |
 | Lasaña con bechamel | 179bXYNp380O7nF2Plgo_B3WC8_5guQ-k |
+| Tiramisú | 1hAXcw1vE4L8BX9rDa_Leg-lbke_d8VFl |
 
 Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí caben;
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.
