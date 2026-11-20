@@ -29,15 +29,15 @@ function faceTex(o) {
   // eyebrows
   g.strokeStyle = o.brow; g.lineWidth = 14; g.lineCap = 'round';
   for (const s of [-1, 1]) { g.beginPath(); g.moveTo(cx + s * 30, 196 - (o.worried ? s * 0 : 0)); g.quadraticCurveTo(cx + s * 62, o.worried ? 176 : 186, cx + s * 96, o.worried ? 200 : 192); g.stroke(); }
-  // sunken eye sockets with tiny white pupils
+  // ojos normales de caricatura: blanco, pupila, brillo
   for (const s of [-1, 1]) {
-    const ex = cx + s * 64, ey = 250;
-    const grd = g.createRadialGradient(ex, ey, 6, ex, ey, 62); grd.addColorStop(0, 'rgba(18,14,10,1)'); grd.addColorStop(0.62, 'rgba(25,20,14,0.95)'); grd.addColorStop(1, 'rgba(40,28,18,0)');
-    g.fillStyle = grd; g.beginPath(); g.ellipse(ex, ey, 52, 58, 0, 0, Math.PI * 2); g.fill();
-    g.fillStyle = '#f4efe2'; g.beginPath(); g.ellipse(ex + s * 4, ey - 4, 9, 11, 0, 0, Math.PI * 2); g.fill();
-    if (o.drips) { g.strokeStyle = 'rgba(20,14,10,0.95)'; g.lineWidth = 9; for (const k of [-24, -6, 14, 30]) { g.beginPath(); g.moveTo(ex + k, ey + 40); g.lineTo(ex + k + (rnd() - 0.5) * 6, ey + 78 + rnd() * 50); g.stroke(); } }
-    // wrinkle ticks
-    g.strokeStyle = 'rgba(40,25,15,0.55)'; g.lineWidth = 4; for (let k = 0; k < (o.old ? 3 : 1); k++) { g.beginPath(); g.moveTo(ex + s * 62, ey - 10 + k * 14); g.lineTo(ex + s * 82, ey - 16 + k * 16); g.stroke(); }
+    const ex = cx + s * 62, ey = 250;
+    g.fillStyle = '#fbf8f1'; g.beginPath(); g.ellipse(ex, ey, 40, 48, 0, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = '#1e140c'; g.lineWidth = 6; g.stroke();
+    g.fillStyle = o.iris || '#3b2414'; g.beginPath(); g.ellipse(ex + s * 2, ey + 6, 20, 24, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#120c08'; g.beginPath(); g.ellipse(ex + s * 2, ey + 8, 11, 13, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#ffffff'; g.beginPath(); g.ellipse(ex + s * 2 - 7, ey - 2, 6, 7, 0, 0, Math.PI * 2); g.fill();
+    if (o.old) { g.strokeStyle = 'rgba(70,40,20,0.5)'; g.lineWidth = 4; g.beginPath(); g.moveTo(ex + s * 46, ey - 6); g.lineTo(ex + s * 64, ey - 12); g.moveTo(ex + s * 46, ey + 8); g.lineTo(ex + s * 64, ey + 10); g.stroke(); }
   }
   // mouth
   g.strokeStyle = '#2a1810'; g.lineWidth = 8; g.beginPath();
@@ -106,17 +106,17 @@ function caption(text, who) {
   ctx.font = '900 34px Inter'; ctx.textAlign = 'left'; ctx.fillStyle = '#fff'; ctx.fillText('◉ ' + who, 40, 103);
 }
 function grain(warm) {
-  const vg = ctx.createRadialGradient(W / 2, H * 0.45, H * 0.2, W / 2, H / 2, H * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, `rgba(20,10,0,${warm ? 0.7 : 0.5})`); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  const vg = ctx.createRadialGradient(W / 2, H * 0.45, H * 0.2, W / 2, H / 2, H * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, `rgba(0,0,0,${warm ? 0.45 : 0.25})`); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
 }
 
 window.renderCast = function () {
   R = 7;
-  const sc = scene0(0x6b4a2c, { sky: 0xffe2b8, ground: 0x4a3020, hemi: 1.2, key: 0xffd29a, keyI: 2.2, pos: [3, 5, 6] });
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), M(0x8a6440)); floor.rotation.x = -Math.PI / 2; sc.add(floor);
-  const order = ['chuy', 'dani', 'tu', 'leo', 'leoMal']; const xs = [-2.3, -1.15, 0, 1.0, 1.95];
+  const sc = scene0(0x8ec9dc, { sky: 0xffffff, ground: 0xe9cf9e, hemi: 1.3, key: 0xfff0d6, keyI: 2.2, pos: [3, 5, 6] });
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), M(0xf0d9a8)); floor.rotation.x = -Math.PI / 2; sc.add(floor);
+  const order = ['chuy', 'dani', 'tu', 'leo']; const xs = [-1.9, -0.65, 0.6, 1.7];
   const people = order.map((k, i) => { const p = person(CAST[k]); p.position.x = xs[i]; p.rotation.y = -xs[i] * 0.08; sc.add(p); return [k, p]; });
   const cam = new THREE.PerspectiveCamera(30, W / H, 0.1, 100); cam.position.set(0, 1.4, 19); cam.lookAt(0, 1.3, 0);
-  effect.render(sc, cam); ctx.drawImage(renderer.domElement, 0, 0); grain(true);
+  effect.render(sc, cam); ctx.drawImage(renderer.domElement, 0, 0); grain(false);
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   people.forEach(([k, p]) => { const v = new THREE.Vector3(p.position.x, p.top + 0.25, 0).project(cam); const x = (v.x * 0.5 + 0.5) * W, y = (-v.y * 0.5 + 0.5) * H;
     const t = k === 'leoMal' ? 'LEO (después)' : CAST[k].name; ctx.font = '800 20px Inter'; const w = ctx.measureText(t).width + 18; ctx.fillStyle = 'rgba(0,0,0,0.75)'; ctx.beginPath(); ctx.roundRect(x - w / 2, y - 16, w, 32, 16); ctx.fill(); ctx.fillStyle = '#fff'; ctx.fillText(t, x, y + 1); });
@@ -126,7 +126,7 @@ window.renderCast = function () {
 
 window.renderCloseup = function (key, line, who) {
   R = 11;
-  const sc = scene0(0x2c4a52, { sky: 0x9cc8d0, ground: 0x6a5a3a, hemi: 1.0, key: 0xffc58a, keyI: 1.8, pos: [-4, 3, 5] });
+  const sc = scene0(0x9bbfd0, { sky: 0xe6f2f6, ground: 0xd8c08e, hemi: 1.3, key: 0xffe2b8, keyI: 2.0, pos: [-4, 3, 5] });
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), M(0x8f8a62)); ground.rotation.x = -Math.PI / 2; sc.add(ground);
   for (let i = 0; i < 40; i++) { const r = new THREE.Mesh(new THREE.DodecahedronGeometry(0.15 + rnd() * 0.3, 0), M(rnd() < 0.3 ? 0xe8dcc0 : 0x5e5a48)); r.position.set((rnd() - 0.5) * 16, 0.05, -rnd() * 30); r.scale.y = 0.5; sc.add(r); }
   // wall of water behind
