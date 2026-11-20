@@ -28,3 +28,15 @@ if [ "$(ffmpeg -version | sed -n '1s/^ffmpeg version n\{0,1\}\([0-9]*\)\..*/\1/p
   python3 -m venv "$HOME_DIR/.ff7" && "$HOME_DIR/.ff7/bin/pip" install -q imageio-ffmpeg
   ln -sf "$("$HOME_DIR/.ff7/bin/python" -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg
 fi
+# 5) SkillSpector (NVIDIA, Apache-2.0): escanea skills antes de instalarlas. Uso: ../SkillSpector/.venv/bin/skillspector scan <carpeta> --no-llm
+SS="$HOME_DIR/SkillSpector"
+[ -d "$SS" ] || git clone --depth 1 https://github.com/NVIDIA/SkillSpector "$SS"
+[ -x "$SS/.venv/bin/skillspector" ] || { python3 -m venv "$SS/.venv" && "$SS/.venv/bin/pip" install -q -e "$SS"; }
+# 6) Ponytail (MIT): skills de código corto (/ponytail-review, /ponytail-audit). Los hooks solo con /plugin install.
+PT="$HOME_DIR/ponytail"
+[ -d "$PT" ] || git clone --depth 1 https://github.com/DietrichGebert/ponytail "$PT"
+for d in "$PT"/skills/*/; do n=$(basename "$d"); [ -f "$d/SKILL.md" ] && { [ -e "$REPO/.claude/skills/$n" ] || ln -s "$(realpath --relative-to="$REPO/.claude/skills" "$d")" "$REPO/.claude/skills/$n"; }; done
+# 7) Agent-Reach (MIT): leer YouTube/Reddit/X/GitHub. Nunca desde PyPI.
+command -v uv >/dev/null || pip install -q uv
+command -v agent-reach >/dev/null || { uv tool install https://github.com/Panniantong/Agent-Reach/releases/latest/download/agent-reach.zip && agent-reach setup >/dev/null; }
+echo "Listo: $(ls "$REPO/.claude/skills" | wc -l) skills enlazadas."
