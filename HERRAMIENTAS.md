@@ -20,17 +20,15 @@ Estado al 20-nov-2026. "Global" = nivel usuario (`~/.claude/skills`, plugins de 
 | Agent-Reach | Leer YouTube, Reddit, X, GitHub | CLI + skill | MIT | Esta red bloquea YouTube/Reddit |
 | FreeLLMAPI | Router de modelos gratis | `/home/user/freellmapi` | MIT | Red bloqueada; pide cuentas por proveedor |
 
-## Pendientes (necesitan tu permiso)
+## También instaladas (con tu permiso)
 
-Estas cambian la configuración global de Claude (hooks que corren en cada sesión). La seguridad de la sesión bloqueó la primera; las demás son del mismo tipo.
-
-| Herramienta | Qué hace | Qué falta |
+| Herramienta | Qué hace | Cómo quedó |
 |---|---|---|
-| GSD (get-shit-done) | Flujo de trabajo por fases para proyectos | **El repo que mandaste está archivado.** Ahora es `open-gsd/gsd-core`. Instalar: `npx @opengsd/gsd-core@latest --claude --global` |
-| gstack | "Equipo virtual" (CEO, diseño, QA, release) de Garry Tan | `git clone … ~/.claude/skills/gstack && ./setup` (usa bun, ya está) |
-| claude-mem | Memoria entre sesiones | Plugin con hooks + servicio en segundo plano. **Telemetría encendida por defecto** (`npx claude-mem telemetry disable`). En la nube la memoria se borra con el contenedor |
-| BMAD-METHOD | Método ágil con agentes (PM, arquitecto, dev) | v6 se instala **por proyecto** (`npx bmad-method install`); v7 está en alfa |
-| i-have-adhd | Respuestas cortas y fáciles de leer | Cambia el estilo de **todas** las respuestas; choca con caveman. Mejor instalarlo apagado |
+| GSD Core | Flujo por fases para proyectos | **El repo que mandaste (get-shit-done) está archivado**; instalé el nuevo, `open-gsd/gsd-core`, como plugin. Su instalador `npx` lo bloqueó la seguridad de la sesión |
+| gstack | "Equipo virtual" (CEO, diseño, QA, release) | ~60 skills con prefijo `gstack-` (ej. `/gstack-review`). Sin navegador ni hooks; para las skills de navegador: `cd ~/.claude/skills/gstack && ./setup` |
+| claude-mem | Memoria entre sesiones | Plugin, **telemetría apagada**. En la nube la memoria se borra con el contenedor |
+| BMAD-METHOD | Agentes ágiles (analista, PM, arquitecto, dev, UX) | Skills globales v7 (alfa): `bmad-*`. Para el instalador estable v6: `npx bmad-method install` dentro de cada proyecto |
+| i-have-adhd | Respuestas cortas y fáciles de leer | Plugin **apagado** (cambia todas las respuestas). Encender: `claude plugin enable i-have-adhd@i-have-adhd` |
 
 ## No recomendado
 
@@ -40,4 +38,4 @@ Estas cambian la configuración global de Claude (hooks que corren en cada sesi�
 
 ## Que dure entre sesiones
 
-Esta nube borra el contenedor al terminar la sesión. Para tenerlo todo en cualquier sesión nueva, el camino es el **script de inicio del entorno** (Settings → entorno → setup script), que lo reinstala solo al arrancar. `scripts/instalar-herramientas.sh` hace lo mismo a mano.
+Esta nube borra el contenedor al terminar la sesión. El entorno **Series-de-reels** ya tiene un **script de inicio** (copia en `scripts/setup-entorno.sh`) que reinstala todo al arrancar cada sesión nueva. Para usarlo con otro repo, elige el entorno Series-de-reels al abrir la sesión, o pega el mismo script en el entorno Default (Settings → entorno → Edit → Setup script).
