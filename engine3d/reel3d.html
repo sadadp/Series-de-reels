@@ -25,7 +25,7 @@
   <input id="scrub" type="range" min="0" max="1000" value="0">
   <span id="time">0.0s</span>
 </div>
-<script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js" } }</script>
+<script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js", "three/addons/": "../node_modules/three/examples/jsm/" } }</script>
 <script>
   const params = new URLSearchParams(location.search);
   if (!params.has("render")) document.body.classList.add("preview");

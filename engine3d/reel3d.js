@@ -3,6 +3,7 @@
  * Capa 3D (canvas) + capa 2D (SVG) para subtítulos, título y efectos.
  */
 import * as THREE from "three";
+import { makePost } from "./post.js";
 
 // fuentes listas antes de dibujar letreros y etiquetas
 await Promise.all([document.fonts.load("64px Lilita"), document.fonts.load("140px Luckiest"), document.fonts.load("96px Baloo")]);
@@ -79,6 +80,23 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(P.pared);
 const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 100);
+// posproceso (de Lemo-Opuscar): oclusión ambiental, profundidad de campo, brillo y color. Se apaga con ?post=0
+const MODO_POST = new URLSearchParams(location.search).get("post") || "lite"; // lite | dof | full | 0
+const USAR_POST = MODO_POST === "dof" || MODO_POST === "full";
+// "lite": color cálido y viñeta con CSS (sin costo de render)
+if (MODO_POST !== "0") {
+  canvas.style.filter = "saturate(1.08) contrast(1.05) sepia(0.05)";
+  const vin = document.createElement("div");
+  vin.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;background:radial-gradient(ellipse 75% 62% at 50% 46%, rgba(0,0,0,0) 55%, rgba(30,14,4,0.32) 100%)";
+  canvas.insertAdjacentElement("afterend", vin);
+}
+let POST = null;
+function armarPost() {
+  POST = makePost(renderer, scene, camera, W, H, { ssaa: 1, ao: MODO_POST === "full", aoAmt: 0.55, aoRadius: 0.35 });
+  POST.dof.maxCoc = MODO_POST === "lite" ? 0 : 7;
+  POST.bloom.strength = 0.18; POST.bloom.threshold = 0.92; POST.bloom.radius = 0.4;
+  const v = POST.vig.uniforms; v.amt.value = 0.22; v.warm.value = 0.35; v.contrast.value = 0.08; v.sat.value = 1.06;
+}
 
 scene.add(new THREE.HemisphereLight(0xfff6e6, 0x6a5a4a, 0.85));
 const sol = new THREE.DirectionalLight(0xfff2dd, 1.7);
@@ -1449,61 +1467,8 @@ function renderSubs(t, accion) {
 
 // ---------- estado en el tiempo t ----------
 const tmpA = V3(0, 0, 0), tmpB = V3(0, 0, 0);
-function renderAt(t) {
-  t = clamp(t, 0, DURACION - 1e-3);
-  const { i, p, u, k } = pasoEn(t);
-  const prevP = i > 0 ? pasos[i - 1] : p;
-  const enHook = p.accion === "hook" || p.accion === "rewind";
-
-  // --- cámara ---
-  const dur = p.accion === "rewind" ? p.dur : 0.7;
-  const ct = ease(u / dur);
-  const [pa, la] = camDe(prevP), [pb, lb] = camDe(p);
-  tmpA.lerpVectors(pa, pb, ct); tmpB.lerpVectors(la, lb, ct);
-  // movimiento vivo: respiración + empuje lento
-  const empuje = 1 - 0.06 * k;
-  camera.position.copy(tmpB).add(tmpA.clone().sub(tmpB).multiplyScalar(empuje));
-  camera.position.x += Math.sin(t * 0.9) * 0.08; camera.position.y += Math.sin(t * 1.3) * 0.05;
-  if (p.accion === "hook") { const a = Math.sin(u * 0.8) * 0.35; const d = camera.position.clone().sub(tmpB); d.applyAxisAngle(V3(0, 1, 0), a); camera.position.copy(tmpB).add(d); }
-  if (p.accion === "rewind") { camera.position.x += Math.sin(t * 80) * 0.12; camera.position.y += Math.cos(t * 65) * 0.08; }
-  if (p.accion === "flip" && k > 0.45 && k < 0.85) tmpB.y += Math.sin((k - 0.45) / 0.4 * Math.PI) * 0.6;
-  camera.lookAt(tmpB);
-  camera.rotation.z += Math.sin(t * 0.7) * 0.012;
-
-  // --- chef ---
-  const xA = chefDe(prevP), xB = chefDe(p);
-  const caminando = Math.abs(xA - xB) > 0.01 && u < 0.7;
-  let cx = lerp(xA, xB, ease(u / 0.7)), cy = 0, salto = 0;
-  if (caminando) cy = Math.abs(Math.sin(u * 16)) * 0.12;
-  if (p.accion === "serve" && u > 1.2) salto = bounce((u - 1.2) / 1.4) * 0.6;
-  if (p.accion === "outro") salto = bounce(u / 1.6) * 0.7;
-  if (p.accion === "hook") salto = bounce(u / 1.2) * 0.3;
-  const zA = prevP.accion === "presenta" ? -1.3 : -0.35, zB = p.accion === "presenta" ? -1.3 : -0.35;
-  CH.raiz.position.set(cx, cy + salto, lerp(zA, zB, ease(u / 0.7)));
-  const respira = 1 + Math.sin(t * 3) * 0.02;
-  const aplasta = salto > 0 ? 1 + salto * 0.15 : respira;
-  CH.cuerpo.scale.set(1 / Math.sqrt(aplasta), aplasta, 1 / Math.sqrt(aplasta));
-  CH.raiz.rotation.y = caminando ? Math.sign(xB - xA) * 0.5 : Math.sin(t * 0.8) * 0.12;
-  CH.piernas.forEach((pi, n) => { pi.rotation.x = caminando ? Math.sin(u * 16 + n * Math.PI) * 0.6 : 0; });
-  // cola
-  CH.cola.forEach((s, n) => { const a = n / 8; s.position.set(Math.sin(t * 3 + n * 0.5) * 0.08 * a, 0.5 + a * 0.75 + Math.sin(a * 2) * 0.1, -0.4 - Math.sin(a * 2.2) * 0.45); });
-  // cabeza / cara
-  const zp = zonaPaso(p);
-  const objetivo = p.accion === "presenta" ? -0.5 : zp === "pan" ? 0.45 : ["bowl", "dish", "horno"].includes(zp) ? -0.45 : 0;
-  CH.cabeza.rotation.y = lerp(CH.cabeza.rotation.y, objetivo, 1) + Math.sin(t * 2.2) * 0.08;
-  CH.cabeza.rotation.z = Math.sin(t * 2.6) * 0.08;
-  CH.cabeza.rotation.x = p.accion === "presenta" ? -0.25 * clamp(u) : ["drop", "stir", "flip"].includes(p.accion) ? 0.2 : 0;
-  CH.orejas.forEach((o, n) => { o.rotation.x = Math.max(0, Math.sin(t * 7 + n)) * 0.25; });
-  const feliz = enHook || (ESNACHOS && ["secreto", "hornea"].includes(p.accion)) || (ESCARNE && p.accion === "arma" && u > 9) || (ESCHILA && p.accion === "escurre" && u > 3) || ["intro", "serve", "outro", "hornea", "queso", "extiende", "rebana", "glasea", "destapa"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
-  const parpadeo = (t % 2.7) < 0.1;
-  CH.ojos.forEach(o => { o.visible = !feliz; o.scale.y = parpadeo ? 0.15 : (ESCEREAL && ['hook', 'juega', 'control'].includes(p.accion) ? 0.55 : 1.25); });
-  CH.felices.forEach(f => f.visible = feliz);
-  const hablando = subs.some(s => t >= s.ini && t < s.fin);
-  const mov = hablando ? Math.abs(Math.sin(t * 17)) : feliz ? 0.6 : 0.1;
-  CH.boca.scale.set(1 + mov * 0.4, 0.25 + mov * 0.9, 0.5);
-  CH.gorro.rotation.z = Math.sin(t * 3) * 0.06;
-
-  // brazos
+// pose de los brazos para un paso (se mezcla con la del paso anterior para que no brinque)
+function poseBrazos(p, u, k, t) {
   const enSarten = p.destino === "sarten" && ["drop", "stir"].includes(p.accion);
   const conCuchara = (["drop", "stir"].includes(p.accion) && !enSarten) || ["arma", "baña", "salsa", "lava", "alina", "remoja", "marina"].includes(p.accion), conEspatula = ["pour", "flip", "dora", "pina", "tortillas", "pasa", "emulsiona"].includes(p.accion) || enSarten;
   let aL = 0.25, aR = -0.25, fL = 0, fR = 0;
@@ -1589,6 +1554,70 @@ function renderAt(t) {
   if (p.accion === "salsa" && !ESLASANA) { aL = 1.25 + Math.sin(u * 9) * 0.12; fL = 0.6 + Math.cos(u * 9) * 0.3; }
   if (p.accion === "flip" && k > 0.42 && k < 0.6) aR = -1.1 - Math.sin((k - 0.42) / 0.18 * Math.PI) * 0.6;
   if (p.accion === "serve") { aL = 2.4 + Math.sin(t * 9) * 0.25; aR = -2.4 - Math.sin(t * 9) * 0.25; }
+  return { aL, aR, fL, fR, conCuchara, conEspatula };
+}
+
+function renderAt(t) {
+  t = clamp(t, 0, DURACION - 1e-3);
+  const { i, p, u, k } = pasoEn(t);
+  const prevP = i > 0 ? pasos[i - 1] : p;
+  const enHook = p.accion === "hook" || p.accion === "rewind";
+
+  // --- cámara ---
+  const dur = p.accion === "rewind" ? p.dur : 0.7;
+  const ct = ease(u / dur);
+  const [pa, la] = camDe(prevP), [pb, lb] = camDe(p);
+  tmpA.lerpVectors(pa, pb, ct); tmpB.lerpVectors(la, lb, ct);
+  // movimiento vivo: respiración + empuje lento
+  const empuje = 1 - 0.06 * k;
+  camera.position.copy(tmpB).add(tmpA.clone().sub(tmpB).multiplyScalar(empuje));
+  camera.position.x += Math.sin(t * 0.9) * 0.08; camera.position.y += Math.sin(t * 1.3) * 0.05;
+  if (p.accion === "hook") { const a = Math.sin(u * 0.8) * 0.35; const d = camera.position.clone().sub(tmpB); d.applyAxisAngle(V3(0, 1, 0), a); camera.position.copy(tmpB).add(d); }
+  if (p.accion === "rewind") { camera.position.x += Math.sin(t * 80) * 0.12; camera.position.y += Math.cos(t * 65) * 0.08; }
+  if (p.accion === "flip" && k > 0.45 && k < 0.85) tmpB.y += Math.sin((k - 0.45) / 0.4 * Math.PI) * 0.6;
+  camera.lookAt(tmpB);
+  camera.rotation.z += Math.sin(t * 0.7) * 0.012;
+
+  // --- chef ---
+  const xA = chefDe(prevP), xB = chefDe(p);
+  const caminando = Math.abs(xA - xB) > 0.01 && u < 0.7;
+  let cx = lerp(xA, xB, ease(u / 0.7)), cy = 0, salto = 0;
+  if (caminando) cy = Math.abs(Math.sin(u * 16)) * 0.12;
+  if (p.accion === "serve" && u > 1.2) salto = bounce((u - 1.2) / 1.4) * 0.6;
+  if (p.accion === "outro") salto = bounce(u / 1.6) * 0.7;
+  if (p.accion === "hook") salto = bounce(u / 1.2) * 0.3;
+  const zA = prevP.accion === "presenta" ? -1.3 : -0.35, zB = p.accion === "presenta" ? -1.3 : -0.35;
+  CH.raiz.position.set(cx, cy + salto, lerp(zA, zB, ease(u / 0.7)));
+  const respira = 1 + Math.sin(t * 3) * 0.02;
+  const aplasta = salto > 0 ? 1 + salto * 0.15 : respira;
+  CH.cuerpo.scale.set(1 / Math.sqrt(aplasta), aplasta, 1 / Math.sqrt(aplasta));
+  CH.raiz.rotation.y = caminando ? Math.sign(xB - xA) * 0.5 : Math.sin(t * 0.8) * 0.12;
+  CH.piernas.forEach((pi, n) => { pi.rotation.x = caminando ? Math.sin(u * 16 + n * Math.PI) * 0.6 : 0; });
+  // cola
+  CH.cola.forEach((s, n) => { const a = n / 8; s.position.set(Math.sin(t * 3 + n * 0.5) * 0.08 * a, 0.5 + a * 0.75 + Math.sin(a * 2) * 0.1, -0.4 - Math.sin(a * 2.2) * 0.45); });
+  // cabeza / cara
+  const zp = zonaPaso(p);
+  const objetivo = p.accion === "presenta" ? -0.5 : zp === "pan" ? 0.45 : ["bowl", "dish", "horno"].includes(zp) ? -0.45 : 0;
+  CH.cabeza.rotation.y = lerp(CH.cabeza.rotation.y, objetivo, 1) + Math.sin(t * 2.2) * 0.08;
+  CH.cabeza.rotation.z = Math.sin(t * 2.6) * 0.08;
+  CH.cabeza.rotation.x = p.accion === "presenta" ? -0.25 * clamp(u) : ["drop", "stir", "flip"].includes(p.accion) ? 0.2 : 0;
+  CH.orejas.forEach((o, n) => { o.rotation.x = Math.max(0, Math.sin(t * 7 + n)) * 0.25; });
+  const feliz = enHook || (ESNACHOS && ["secreto", "hornea"].includes(p.accion)) || (ESCARNE && p.accion === "arma" && u > 9) || (ESCHILA && p.accion === "escurre" && u > 3) || ["intro", "serve", "outro", "hornea", "queso", "extiende", "rebana", "glasea", "destapa"].includes(p.accion) || (p.accion === "presenta" && u > 0.8);
+  const parpadeo = (t % 2.7) < 0.1;
+  CH.ojos.forEach(o => { o.visible = !feliz; o.scale.y = parpadeo ? 0.15 : (ESCEREAL && ['hook', 'juega', 'control'].includes(p.accion) ? 0.55 : 1.25); });
+  CH.felices.forEach(f => f.visible = feliz);
+  const hablando = subs.some(s => t >= s.ini && t < s.fin);
+  const mov = hablando ? Math.abs(Math.sin(t * 17)) : feliz ? 0.6 : 0.1;
+  CH.boca.scale.set(1 + mov * 0.4, 0.25 + mov * 0.9, 0.5);
+  CH.gorro.rotation.z = Math.sin(t * 3) * 0.06;
+
+  // brazos
+  let { aL, aR, fL, fR, conCuchara, conEspatula } = poseBrazos(p, u, k, t);
+  // transición suave entre poses, con un poquito de rebote al final (anticipación y seguimiento)
+  if (i > 0 && u < 0.5) {
+    const pp = pasos[i - 1], A = poseBrazos(pp, pp.dur, 1, t), w = easeOutBack(u / 0.5);
+    aL = A.aL + (aL - A.aL) * w; aR = A.aR + (aR - A.aR) * w; fL = A.fL + (fL - A.fL) * w; fR = A.fR + (fR - A.fR) * w;
+  }
   CH.brazos[-1].hombro.rotation.set(fL, 0, -aL); CH.brazos[1].hombro.rotation.set(fR, 0, -aR);
   cuchara.visible = conCuchara; espatula.visible = conEspatula;
   if (ESCEREAL) { espatula.visible = false; cuchara.visible = p.accion === "control"; }
@@ -2474,7 +2503,11 @@ function renderAt(t) {
   set("titulo", { opacity: tit > 0 ? 1 : 0, transform: `translate(540,330) rotate(${Math.sin(t * 4) * 2}) scale(${Math.max(tit, 0.001)})` });
   renderSubs(t, p.accion);
 
-  renderer.render(scene, camera);
+  if (USAR_POST) {
+    if (!POST) armarPost();
+    POST.dof.focus = camera.position.distanceTo(tmpB); POST.dof.aper = 90;
+    POST.composer.render();
+  } else renderer.render(scene, camera);
 }
 
 // ---------- montar ----------

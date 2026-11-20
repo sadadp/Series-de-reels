@@ -51,7 +51,7 @@ const srtTime = s => {
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on("pageerror", e => console.error("Error en página:", e.message));
   page.on("console", m => { if (m.type() === "error") console.error("Consola:", m.text()); });
-  await page.goto(`${base}/${pagina}?r=${nombre}&render=1`);
+  await page.goto(`${base}/${pagina}?r=${nombre}&render=1${flag("sin-post") ? "&post=0" : opt("post") ? "&post=" + opt("post") : ""}`);
   await page.waitForFunction(() => window.LISTO === true, null, { timeout: 120000 });
   const dur = await page.evaluate(() => window.DURACION);
   if (sinSubs) await page.addStyleTag({ content: "#subs{display:none!important}" });
