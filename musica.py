@@ -186,6 +186,17 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "claras":
+            poner(buf, sfx_mezcla(d - 2.2) * 0.6, t0 + 0.3)
+            for n in range(5): poner(buf, pasa_altos(ruido(0.04, 60, 1400 + n)) * 0.12, t0 + 3.4 + n * 0.3)
+            poner(buf, sfx_whoosh(0.5) * 0.6, t0 + d - 1.8); poner(buf, sfx_brillo(), t0 + d - 1.0)
+        elif a == "molde": poner(buf, sfx_whoosh(0.5) * 0.5, t0 + 0.3); poner(buf, sfx_mezcla(2.0) * 0.4, t0 + 1.2)
+        elif a == "enfria":
+            for n in range(int(d / 0.5)): poner(buf, pasa_altos(ruido(0.015, 200, 1500 + n)) * 0.12, t0 + 0.3 + n * 0.5)
+        elif a == "relleno" and "condensada" in g["texto"]: poner(buf, sfx_mezcla(2.0) * 0.5, t0 + 0.8); poner(buf, sfx_mezcla(3.2) * 0.6, t0 + 3.2); poner(buf, sfx_mezcla(3.0) * 0.4, t0 + 6.6)
+        elif a == "fresas":
+            for n in range(12): poner(buf, sfx_pop() * 0.3, t0 + 0.4 + n * (d - 1.2) / 12)
+            poner(buf, sfx_brillo(), t0 + d - 0.6)
         elif a == "cafe": poner(buf, sfx_mezcla(2.4) * 0.6, t0 + 0.9)
         elif a == "bate": poner(buf, sfx_mezcla(d - 1.6) * 0.6, t0 + 0.3); poner(buf, sfx_brillo(), t0 + d - 1.2)
         elif a == "mascarpone":
