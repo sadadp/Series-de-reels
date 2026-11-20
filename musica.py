@@ -186,6 +186,22 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "cafe": poner(buf, sfx_mezcla(2.4) * 0.6, t0 + 0.9)
+        elif a == "bate": poner(buf, sfx_mezcla(d - 1.6) * 0.6, t0 + 0.3); poner(buf, sfx_brillo(), t0 + d - 1.2)
+        elif a == "mascarpone":
+            for n in range(4): poner(buf, sfx_pop() * 0.25, t0 + 0.5 + n * 0.2)
+            poner(buf, sfx_mezcla(d - 2) * 0.35, t0 + 1.5)
+        elif a == "envuelve":
+            for n in range(3): poner(buf, sfx_pop() * 0.5, t0 + 0.8 + n * 2.2); poner(buf, sfx_whoosh(0.5) * 0.35, t0 + 1.3 + n * 2.2)
+        elif a == "moja":
+            for n in range(3):
+                poner(buf, sfx_pop() * 0.4, t0 + n * 2.8 + 0.5); poner(buf, sfx_pop() * 0.35, t0 + n * 2.8 + 1.8)
+        elif a == "capa" and "soletas" in g["texto"]:
+            for n in range(16): poner(buf, sfx_pop() * 0.3, t0 + 0.3 + n * 0.16 + 0.2)
+            poner(buf, sfx_mezcla(1.8) * 0.4, t0 + 3.0)
+        elif a == "refri": poner(buf, sfx_whoosh(0.5) * 0.6, t0 + 1.1); poner(buf, sfx_pop() * 0.9, t0 + 3.3); poner(buf, sfx_brillo(), t0 + 3.5)
+        elif a == "cacao":
+            for n in range(int((d - 1) / 0.12)): poner(buf, pasa_altos(ruido(0.03, 80, 1300 + n)) * 0.08, t0 + 0.5 + n * 0.12)
         elif a == "sobras":
             for n in range(3):
                 for k in range(3): poner(buf, pasa_altos(ruido(0.06, 45, 1100 + n * 3 + k), 0.9) * 0.25, t0 + 1.0 + n * 1.8 + k * 0.15)
