@@ -8,7 +8,7 @@ window.RECETA = {
   pasos: [
     {"accion": "hook", "dur": 6.4, "texto": "Si tu pozole siempre queda con el maíz duro, quédate, porque hoy lo arreglamos."},
     {"accion": "rewind", "dur": 1.0, "texto": ""},
-    {"accion": "intro", "dur": 9.2, "texto": "Hoy hacemos pozole rojo. El secreto: cocer el maíz hasta que floree, o sea, hasta que los granos se abran como florecitas."},
+    {"accion": "intro", "dur": 9.2, "texto": "Vamos con un pozole rojo. El secreto: cocer el maíz hasta que floree, o sea, hasta que los granos se abran como florecitas."},
     {"accion": "presenta", "dur": 7.9, "ingrediente": "maiz", "etiqueta": "1 kilo de maíz pozolero", "texto": "Necesitas un kilo de maíz pozolero precocido. Lávalo con agua fría hasta que el agua salga clarita."},
     {"accion": "presenta", "dur": 8.9, "ingrediente": "carne", "etiqueta": "1 kilo de cerdo: pierna y espinazo", "texto": "Un kilo de carne de cerdo, mitad pierna y mitad espinazo, en trozos. El hueso del espinazo le da mucho sabor al caldo."},
     {"accion": "presenta", "dur": 7.9, "ingrediente": "chile", "etiqueta": "5 chiles guajillo, 2 chiles anchos, ajo y cebolla", "texto": "Para la salsa: cinco chiles guajillo, dos chiles anchos, cuatro dientes de ajo, una cebolla y orégano."},
