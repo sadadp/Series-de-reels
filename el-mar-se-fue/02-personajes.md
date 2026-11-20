@@ -21,10 +21,10 @@ front view, side view, back view, three expressions: happy, confused, scared,
 white background, [BLOQUE DE ESTILO]
 ```
 
-## DANI — tu pareja
-- 25 años, pelo negro corto, camisa de lino blanca abierta, collar de concha.
+## DANI — tu pareja (mujer)
+- Mujer de 25 años, pelo negro largo, camisa de lino blanca, collar de concha, aretes dorados.
 ```
-Character reference sheet of a 25-year-old adult named Dani, short black hair,
+Character reference sheet of a 25-year-old woman named Dani, long straight black hair, gold hoop earrings,
 warm brown skin, white open linen shirt over a dark tank top, shell necklace,
 front view, side view, back view, three expressions: relaxed smile, worried, screaming in panic,
 white background, [BLOQUE DE ESTILO]

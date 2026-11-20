@@ -45,6 +45,7 @@ function faceTex(o) {
   if (o.mouth === 'open') { g.fillStyle = '#2a1008'; g.ellipse(cx, 378, 26, 22, 0, 0, Math.PI * 2); g.fill(); }
   else if (o.mouth === 'smile') { g.moveTo(cx - 34, 370); g.quadraticCurveTo(cx, 392, cx + 34, 370); g.stroke(); }
   else { g.moveTo(cx - 30, 378); g.lineTo(cx + 30, 376); g.stroke(); }
+  if (o.lips && o.mouth === 'open') { g.strokeStyle = o.lips; g.lineWidth = 7; g.beginPath(); g.ellipse(cx, 378, 28, 24, 0, 0, Math.PI * 2); g.stroke(); }
   if (o.mustache) { g.fillStyle = o.mustache; g.beginPath(); g.ellipse(cx - 30, 352, 36, 14, 0.2, 0, Math.PI * 2); g.ellipse(cx + 30, 352, 36, 14, -0.2, 0, Math.PI * 2); g.fill(); }
   if (o.freckles) { g.fillStyle = 'rgba(110,60,30,0.7)'; for (let i = 0; i < 14; i++) g.fillRect(cx + (rnd() - 0.5) * 170, 300 + rnd() * 30, 5, 5); }
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
@@ -81,6 +82,14 @@ function person(o) {
     const crown = new THREE.Mesh(new THREE.CylinderGeometry(hr * 0.75, hr * 0.95, hr * 0.6, 20), M(0xc49a52)); crown.position.y = brim.position.y + hr * 0.3; g.add(crown);
     const band = new THREE.Mesh(new THREE.CylinderGeometry(hr * 0.96, hr * 0.96, hr * 0.12, 20), M(0x3a2a1a)); band.position.y = brim.position.y + hr * 0.08; g.add(band);
   }
+  if (o.longHair) {
+    const hm = M(o.hairC);
+    const back = new THREE.Mesh(new THREE.SphereGeometry(hr * 1.02, 24, 16), hm); back.scale.set(1.15, 1.25, 0.7); back.position.set(0, head.position.y - hr * 0.35, -hr * 0.25); g.add(back);
+    for (const sx of [-1, 1]) { const lock = new THREE.Mesh(new THREE.BoxGeometry(hr * 0.35, hr * 1.5, hr * 0.5), hm); lock.position.set(sx * hr * 1.05, head.position.y - hr * 0.55, hr * 0.05); g.add(lock); }
+  }
+  if (o.earrings) for (const sx of [-1, 1]) { const e = new THREE.Mesh(new THREE.TorusGeometry(hr * 0.09, hr * 0.025, 6, 12), M(0xe8c060)); e.position.set(sx * hr * 1.12, head.position.y - hr * 0.3, hr * 0.1); g.add(e); }
+  if (o.necklace) { const n = new THREE.Mesh(new THREE.TorusGeometry(0.17 * s, 0.015 * s, 6, 20, Math.PI), M(0x7a5a3a)); n.rotation.set(Math.PI / 2 + 0.35, 0, Math.PI); n.position.set(0, legH + torH - 0.03 * s, 0.05 * s); g.add(n);
+    const sh = new THREE.Mesh(new THREE.ConeGeometry(0.04 * s, 0.07 * s, 6), M(0xf3e6cf)); sh.rotation.x = Math.PI; sh.position.set(0, legH + torH - 0.17 * s, 0.2 * s); g.add(sh); }
   if (o.pigtails) for (const sx of [-1, 1]) { const p = new THREE.Mesh(new THREE.SphereGeometry(hr * 0.28, 10, 8), M(o.hairC)); p.position.set(sx * hr * 1.05, head.position.y + hr * 0.3, -hr * 0.2); g.add(p); }
   g.arms = arms; g.top = head.position.y + hr * (o.hat ? 1.2 : 1);
   return g;
@@ -88,7 +97,7 @@ function person(o) {
 
 const CAST = {
   chuy: { name: 'DON CHUY', skin: '#b07a4e', hair: '#b9b4aa', brow: '#e8e2d6', shirt: 0x5a3b28, pants: 0x3a2e24, mustache: '#efe7da', old: true, hat: true, hairLine: 150, buttons: true },
-  dani: { name: 'DANI', skin: '#9a6442', hair: '#1c1612', brow: '#1c1612', shirt: 0xe9e2d2, pants: 0x2b2d3a, hairLine: 175, mouth: 'open', worried: true },
+  dani: { name: 'DANI', skin: '#9a6442', hair: '#1c1612', hairC: 0x1c1612, longHair: true, lashes: true, earrings: true, necklace: true, lips: '#8a3a32', brow: '#1c1612', shirt: 0xe9e2d2, pants: 0x2b2d3a, hairLine: 200, mouth: 'open', worried: true },
   leo: { name: 'LEO', kid: true, s: 0.8, skin: '#c88d5f', hair: '#4a2c17', hairC: 0x4a2c17, pigtails: true, lashes: true, brow: '#3a2010', shirt: 0xf2c230, pants: 0x2e5fb8, hairLine: 190, freckles: true, mouth: 'smile' },
   leoMal: { name: 'LEO', kid: true, s: 0.8, skin: '#a9805e', hair: '#3a2414', brow: '#2a1810', shirt: 0xb8962a, pants: 0x24467e, hairLine: 170, drips: true },
   tu: { name: 'TÚ', skin: '#c68a5e', hair: '#5a3720', brow: '#3a2414', shirt: 0xc85a4a, pants: 0x3b3b55, hairLine: 175 },

@@ -7,5 +7,5 @@ fs.mkdirSync('chars_out', { recursive: true });
 const save = (n, u) => fs.writeFileSync('chars_out/' + n, Buffer.from(u.split(',')[1], 'base64'));
 save('reparto.jpg', await pg.evaluate(() => window.renderCast()));
 save('leo.jpg', await pg.evaluate(() => window.renderCloseup('leo', '¡Mira! ¡Encontré una concha gigante!', 'LEO')));
-save('chuy.jpg', await pg.evaluate(() => window.renderCloseup('chuy', '¡TSUNAMI! ¡Corran a la capilla!', 'DON CHUY')));
+save('chuy.jpg', await pg.evaluate(() => window.renderCloseup('chuy', '¡TSUNAMI! ¡Corran a la capilla!', 'DON CHUY'))); save('dani.jpg', await pg.evaluate(() => window.renderCloseup('dani', '¡No vas a llegar! ¡Vámonos!', 'DANI')));
 await br.close(); srv.close(); })();
