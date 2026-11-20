@@ -29,7 +29,7 @@ const plantillas = {
       ${FONDO ? `<img src="img/${FONDO}" style="position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover">` : `<img src="${img("michi-cuerpo")}" style="position:absolute;left:50%;bottom:260px;height:1050px;transform:translateX(-50%)">`}
       <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,10,5,.55) 0, rgba(20,10,5,0) 34%, rgba(20,10,5,0) 72%, rgba(20,10,5,.5) 100%)"></div>
       <div style="position:absolute;left:0;right:0;top:300px;text-align:center;transform:rotate(-3deg)">
-        ${titulo(T1, T1.length > 9 ? 170 : 210)}
+        ${titulo(T1, T1.length > 8 ? 170 : 210)}
         ${T2 ? titulo(T2, T2.length > 10 ? 130 : 160, "#fff") : ""}
       </div>
       ${PILL ? `<div style="position:absolute;left:0;right:0;top:1470px;text-align:center"><div class="pastilla" style="font-size:66px">${PILL}</div></div>` : ""}
