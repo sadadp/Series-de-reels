@@ -73,6 +73,7 @@ const POSES = {
     ["cereal-gta", "DÍA UNO", "DE GTA VI", "El desayuno más fácil", "fondo-cereal-gta.png"],
     ["lasana-bechamel", "LASAÑA", "CON BECHAMEL", "El secreto: el reposo", "fondo-lasana-bechamel.png"],
     ["tiramisu", "TIRAMISÚ", "SIN HORNO", "El secreto: un segundo", "fondo-tiramisu.png"],
+    ["mostachon", "MOSTACHÓN", "DE FRESA", "El secreto: la base", "fondo-mostachon.png"],
   ];
   if (etapa === "portadas" || etapa === "todo") {
     const dir = path.join(__dirname, "..", "portadas"); fs.mkdirSync(dir, { recursive: true });
