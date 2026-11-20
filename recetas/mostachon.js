@@ -1,0 +1,27 @@
+// Mostachón de fresa. Visual, sin voz: al inicio Michi se termina un cuadro de la lasaña del video anterior
+window.RECETA = {
+  platillo: "mostachon",
+  titulo: ["MOSTACHÓN", "DE FRESA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["MOSTACHÓN", "de fresa"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 5.3, "texto": "Ya toca el postre, y hoy es uno bien mexicano: mostachón de fresa."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 9.5, "texto": "El secreto está en la base: las claras se envuelven con cuidado, para que quede crujiente por fuera y suavecita por dentro."},
+    {"accion": "presenta", "dur": 11.2, "ingrediente": "huevo", "etiqueta": "4 claras, azúcar, galletas y nuez", "texto": "Para la base: cuatro claras, una taza de azúcar, dos tazas de galletas María molidas, una taza de nuez picada y una cucharadita de polvo para hornear."},
+    {"accion": "presenta", "dur": 8.1, "ingrediente": "quesoCrema", "etiqueta": "queso crema, leche condensada y crema", "texto": "Para el relleno: una barra de queso crema, media lata de leche condensada y una taza de crema para batir."},
+    {"accion": "presenta", "dur": 3.4, "ingrediente": "fresas", "etiqueta": "medio kilo de fresas", "texto": "Y medio kilo de fresas para decorar."},
+    {"accion": "precalienta", "dur": 5.7, "texto": "Prende el horno a ciento ochenta grados y engrasa un molde redondo."},
+    {"accion": "claras", "dur": 11.3, "texto": "Bate las claras hasta que estén blancas y espumosas. Luego agrega el azúcar poco a poco, sin dejar de batir, hasta que al voltear el tazón no se caigan."},
+    {"accion": "envuelve", "dur": 12.1, "texto": "Ahora el secreto: agrega las galletas, la nuez y el polvo para hornear, y mezcla con una espátula de abajo hacia arriba, despacito, para que no se bajen las claras."},
+    {"accion": "molde", "dur": 4.6, "texto": "Vacía la mezcla en el molde y empareja la superficie."},
+    {"accion": "hornea", "dur": 7.3, "texto": "Hornea de veinticinco a treinta minutos, hasta que se vea doradito y al tocarlo esté firme."},
+    {"accion": "enfria", "dur": 6.6, "texto": "Déjalo enfriar por completo antes de rellenar. Si está tibio, la crema se derrite."},
+    {"accion": "relleno", "dur": 12.2, "texto": "Para el relleno, bate el queso crema con la leche condensada hasta que no tenga grumos. Aparte, bate la crema hasta que espese, y júntalas con movimientos suaves."},
+    {"accion": "unta", "dur": 5.2, "texto": "Unta el relleno sobre la base, bien parejito, hasta la orilla."},
+    {"accion": "fresas", "dur": 6.9, "texto": "Corta las fresas en rebanadas y acomódalas en círculos, de la orilla hacia el centro."},
+    {"accion": "serve", "dur": 5.0, "texto": "Refrigéralo una hora, córtalo en rebanadas, y a disfrutar."},
+    {"accion": "outro", "dur": 3.9, "texto": "¿Mostachón de fresa o de durazno? ¡Comenten!"},
+  ],
+};
