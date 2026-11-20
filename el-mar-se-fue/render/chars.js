@@ -37,6 +37,7 @@ function faceTex(o) {
     g.fillStyle = o.iris || '#3b2414'; g.beginPath(); g.ellipse(ex + s * 2, ey + 6, 20, 24, 0, 0, Math.PI * 2); g.fill();
     g.fillStyle = '#120c08'; g.beginPath(); g.ellipse(ex + s * 2, ey + 8, 11, 13, 0, 0, Math.PI * 2); g.fill();
     g.fillStyle = '#ffffff'; g.beginPath(); g.ellipse(ex + s * 2 - 7, ey - 2, 6, 7, 0, 0, Math.PI * 2); g.fill();
+    if (o.lashes) { g.strokeStyle = '#1e140c'; g.lineWidth = 5; for (const k of [-0.6, 0, 0.6]) { g.beginPath(); g.moveTo(ex + s * (20 + k * 18), ey - 44); g.lineTo(ex + s * (28 + k * 22), ey - 60); g.stroke(); } }
     if (o.old) { g.strokeStyle = 'rgba(70,40,20,0.5)'; g.lineWidth = 4; g.beginPath(); g.moveTo(ex + s * 46, ey - 6); g.lineTo(ex + s * 64, ey - 12); g.moveTo(ex + s * 46, ey + 8); g.lineTo(ex + s * 64, ey + 10); g.stroke(); }
   }
   // mouth
@@ -88,7 +89,7 @@ function person(o) {
 const CAST = {
   chuy: { name: 'DON CHUY', skin: '#b07a4e', hair: '#b9b4aa', brow: '#e8e2d6', shirt: 0x5a3b28, pants: 0x3a2e24, mustache: '#efe7da', old: true, hat: true, hairLine: 150, buttons: true },
   dani: { name: 'DANI', skin: '#9a6442', hair: '#1c1612', brow: '#1c1612', shirt: 0xe9e2d2, pants: 0x2b2d3a, hairLine: 175, mouth: 'open', worried: true },
-  leo: { name: 'LEO', kid: true, s: 0.8, skin: '#c88d5f', hair: '#4a2c17', brow: '#3a2010', shirt: 0xf2c230, pants: 0x2e5fb8, hairLine: 170, freckles: true, mouth: 'smile' },
+  leo: { name: 'LEO', kid: true, s: 0.8, skin: '#c88d5f', hair: '#4a2c17', hairC: 0x4a2c17, pigtails: true, lashes: true, brow: '#3a2010', shirt: 0xf2c230, pants: 0x2e5fb8, hairLine: 190, freckles: true, mouth: 'smile' },
   leoMal: { name: 'LEO', kid: true, s: 0.8, skin: '#a9805e', hair: '#3a2414', brow: '#2a1810', shirt: 0xb8962a, pants: 0x24467e, hairLine: 170, drips: true },
   tu: { name: 'TÚ', skin: '#c68a5e', hair: '#5a3720', brow: '#3a2414', shirt: 0xc85a4a, pants: 0x3b3b55, hairLine: 175 },
 };
