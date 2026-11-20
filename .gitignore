@@ -1,1 +1,3 @@
 node_modules/
+# skills enlazadas del video-editor-agent (instalado fuera del repo)
+.claude/skills/
