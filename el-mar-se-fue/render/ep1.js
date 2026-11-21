@@ -231,13 +231,12 @@ function txt(text, x, y, size, color = '#fff', weight = 800, alpha = 1, maxW = 6
 function pill(text, x, y, size, bg, fg, align = 'center') { ctx.save(); ctx.font = `900 ${size}px Inter`; const w = ctx.measureText(text).width + size * 1.2, h = size * 1.75; const x0 = align === 'left' ? x : x - w / 2;
   ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(x0, y - h / 2, w, h, h / 2); ctx.fill(); ctx.fillStyle = fg; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(text, x0 + size * 0.6, y + 1); ctx.restore(); }
 function overlays(t) {
-  if (t < 3.6) { pill('FICCIÓN · EP 1', W / 2, 200, 24, 'rgba(0,0,0,0.55)', '#fff'); txt('EL MAR SE FUE', W / 2, 270, 66, '#fff', 900, clamp(t * 3, 0, 1) * clamp((3.6 - t) * 3, 0, 1)); }
   for (const [a, b, who, s] of SUBS) if (t >= a && t < b) { const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al; pill('◉ ' + who, 24, 110, 30, 'rgba(0,0,0,0.72)', '#fff', 'left'); ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
   if (t >= 20 && t < 44) { const sec = Math.round(lerp(240, 150, seg(t, 20, 44))), s = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; pill(s, W - 150, 110, 36, sec < 180 ? 'rgba(200,0,0,0.85)' : 'rgba(0,0,0,0.6)', '#fff', 'left'); }
 }
 function vignette(t) { const g = ctx.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.78); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,0,${0.22 + dark(t) * 0.35})`); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
 
-window.renderFrame = function (t) {
+const storyFrame = function (t, noOverlay) {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = 'none'; ctx.globalAlpha = 1;
   if (t >= 56.5) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); const a = clamp((t - 56.6) * 3, 0, 1);
     txt('Comenta A o B.', W / 2, 560, 64, '#fff', 900, a); txt('Lo que gane, pasa.', W / 2, 650, 48, '#ffd23f', 800, a); txt('EP 2 mañana', W / 2, 760, 34, '#bbb', 700, a); return out.toDataURL('image/jpeg', 0.92); }
@@ -246,7 +245,7 @@ window.renderFrame = function (t) {
     stage(t, shot); camera.aspect = W / H; camera.updateProjectionMatrix(); renderer.setViewport(0, 0, W, H); renderer.setScissorTest(false);
     effect.render(scene, camera); ctx.drawImage(renderer.domElement, 0, 0); vignette(t);
     if (t >= 32 && t < 34.6) { ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fillRect(0, 0, W, H); }
-    overlays(t);
+    if (!noOverlay) overlays(t);
   } else {
     const k = t - 44, half = H / 2; renderer.setScissorTest(true);
     stage(37.5, 'leoWave'); pose(leo, { waveR: 2.6 + Math.sin(k * 3) * 0.2 }); camera.fov = 7.5 - k * 0.1; camera.aspect = W / half; camera.updateProjectionMatrix();
@@ -263,4 +262,50 @@ window.renderFrame = function (t) {
   }
   return out.toDataURL('image/jpeg', 0.92);
 };
+
+// ---------- gancho + contexto (antes de la historia) ----------
+const HOOK_END = 3.9, CARD_END = 5.1, OFF = 15.6;
+const towel = box(2.4, 0.04, 1.6, 0x4cc9f0, -1.3, hgt(-1.3, 4) + 0.03, 4); towel.visible = false;
+const towel2 = box(0.6, 0.045, 1.6, 0xffffff, -1.3, hgt(-1.3, 4) + 0.035, 4); towel2.visible = false;
+const umb = new THREE.Group(); box(0.08, 2.4, 0.08, 0xeeeeee, 0, 1.2, 0, umb); { const c = new THREE.Mesh(new THREE.ConeGeometry(1.6, 0.6, 8), M(0xff6b6b)); c.position.y = 2.5; umb.add(c); }
+umb.position.set(-2.6, hgt(-2.6, 4.6), 4.6); umb.visible = false; scene.add(umb);
+function sit(p) { p.root.position.y = -p.legH * 0.72; p.legs[0].rotation.x = p.legs[1].rotation.x = -1.45; p.arms[0].rotation.set(0.5, 0, 0.25); p.arms[1].rotation.set(0.5, 0, -0.25); }
+function ctxStage(t, shot) {
+  atmos(0); updateWater(0); setWave(-1500, 0, 0, t);
+  birds.forEach(b => b.visible = false); fish.forEach(f => f.visible = false); crowd.forEach(c => c.p.visible = false);
+  chuy.visible = false; [tu, dani, leo, towel, towel2, umb].forEach(o => o.visible = true);
+  place(tu, -0.7, 4.1); tu.rotation.y = Math.PI; pose(tu, {}); sit(tu);
+  place(dani, -1.9, 4.0); dani.rotation.y = Math.PI - 0.2; pose(dani, {}); sit(dani);
+  let eye, look, fov = 46;
+  if (shot === 'c1') { const k = seg(t, CARD_END, 8.6); const x = lerp(0.2, 2.6, k), z = lerp(3.2, -1.4, k); place(leo, x, z); leo.rotation.y = Math.atan2(2.4, -4.6); pose(leo, { run: 1, phase: t * 13 });
+    eye = V3(2.6, 2.3, 10.5); look = V3(-0.3, 0.7, 2.0); fov = 46; }
+  else if (shot === 'c2') { place(leo, 2.6, -1.8); leo.position.y += Math.abs(Math.sin(t * 6)) * 0.12; leo.rotation.y = -0.5; pose(leo, { waveR: 2.6 + Math.sin(t * 8) * 0.3 });
+    eye = V3(1.2, 1.0, 1.4); look = V3(2.6, 0.75, -1.8); fov = 42; }
+  else { place(leo, 2.6, -1.8); leo.rotation.y = Math.PI; pose(leo, {}); dani.rotation.y = Math.PI + 0.5; dani.arms[0].rotation.set(0, 0, -2.3 + Math.sin(t * 7) * 0.25);
+    eye = V3(-1.0, 1.15, 0.4); look = V3(-1.3, 0.75, 4.0); fov = 44; }
+  camera.position.copy(eye); camera.fov = fov; camera.aspect = W / H; camera.updateProjectionMatrix();
+  camera.lookAt(look.clone().add(shake(t, 0.004 * eye.distanceTo(look)))); sky.position.copy(eye);
+}
+const CTX_SUBS = [[5.3, 8.6, 'TÚ', 'Por fin… vacaciones.'], [8.8, 11.6, 'LEO', '¡Vengan! ¡El agua está calientita!'], [11.8, 15.4, 'DANI', '¡Leo, no te alejes mucho, eh!']];
+function subAt(t, a, b, who, s) { if (t < a || t >= b) return; const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al; pill('◉ ' + who, 24, 110, 30, 'rgba(0,0,0,0.72)', '#fff', 'left'); ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
+window.renderFrame = function (t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = 'none'; ctx.globalAlpha = 1;
+  [towel, towel2, umb].forEach(o => o.visible = false);
+  if (t < HOOK_END) {
+    const st = t < 1.7 ? 40 + t * 1.2 : 11 + (t - 1.7) * 1.3; storyFrame(st, true);
+    subAt(t, 0.15, HOOK_END, 'DON CHUY', '¡TSUNAMI! ¡Corran a la capilla!');
+    if (t > HOOK_END - 0.25) { ctx.fillStyle = `rgba(255,255,255,${(t - (HOOK_END - 0.25)) / 0.25})`; ctx.fillRect(0, 0, W, H); }
+    return out.toDataURL('image/jpeg', 0.92);
+  }
+  if (t < CARD_END) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); txt('3 HORAS ANTES', W / 2, H / 2, 64, '#fff', 900, clamp((t - HOOK_END) * 5, 0, 1) * clamp((CARD_END - t) * 5, 0, 1)); return out.toDataURL('image/jpeg', 0.92); }
+  if (t < OFF) {
+    ctxStage(t, t < 8.6 ? 'c1' : t < 11.6 ? 'c2' : 'c3');
+    effect.render(scene, camera); ctx.drawImage(renderer.domElement, 0, 0); vignette(0);
+    if (t < 8.0) txt('EL MAR SE FUE', W / 2, 300, 70, '#fff', 900, clamp((t - CARD_END) * 3, 0, 1) * clamp((8.0 - t) * 3, 0, 1));
+    for (const [a, b, w, s2] of CTX_SUBS) subAt(t, a, b, w, s2);
+    return out.toDataURL('image/jpeg', 0.92);
+  }
+  return storyFrame(t - OFF);
+};
+window.TOTAL = OFF + 59;
 window.READY = true;
