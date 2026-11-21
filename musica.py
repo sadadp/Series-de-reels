@@ -186,6 +186,12 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "suda":
+            poner(buf, sfx_whoosh(0.5) * 0.6, t0 + 0.4)
+            for n in range(int((d - 5) / 0.3)): poner(buf, sfx_corte(n) * 0.6, t0 + 5 + n * 0.3)
+        elif a == "rajas": poner(buf, sfx_chisporroteo(d) * 0.8, t0 + 0.3); poner(buf, sfx_mezcla(d * 0.6) * 0.4, t0 + 1.5)
+        elif a == "tortillas" and "aceite" in g["texto"]:
+            for n in range(int(d / 1.4)): poner(buf, sfx_chisporroteo(0.8) * 0.7, t0 + n * 1.4 + 0.2); poner(buf, sfx_pop() * 0.3, t0 + n * 1.4 + 1.0)
         elif a == "cuecemaiz": poner(buf, sfx_mezcla(1.6) * 0.6, t0 + 0.5); poner(buf, sfx_chisporroteo(d - 2.5) * 0.4, t0 + 2.2); poner(buf, sfx_brillo(), t0 + d - 2.5)
         elif a == "cuececarne":
             for n in range(7): poner(buf, sfx_pop() * 0.4, t0 + 0.3 + n * 0.2 + 0.3)
