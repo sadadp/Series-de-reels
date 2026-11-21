@@ -1,0 +1,28 @@
+// Pastel azteca. Visual, sin voz: al inicio Michi se termina un plato de pozole (video anterior)
+window.RECETA = {
+  platillo: "azteca",
+  titulo: ["PASTEL", "AZTECA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["PASTEL AZTECA", "de tortilla"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 6.6, "texto": "Este pastel no lleva ni un gramo de azúcar: lleva tortillas, pollo y chile poblano."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 9.8, "texto": "Es el pastel azteca, y el secreto es pasar las tortillas unos segundos por aceite caliente, para que no se deshagan en el horno."},
+    {"accion": "presenta", "dur": 6.8, "ingrediente": "tortilla", "etiqueta": "15 tortillas y 2 pechugas deshebradas", "texto": "Necesitas quince tortillas de maíz y dos pechugas de pollo cocidas y deshebradas."},
+    {"accion": "presenta", "dur": 5.5, "ingrediente": "pimiento", "etiqueta": "3 chiles poblanos, elote y cebolla", "texto": "Tres chiles poblanos, una taza de granos de elote y media cebolla."},
+    {"accion": "presenta", "dur": 7.2, "ingrediente": "jitomate", "etiqueta": "4 jitomates, ajo y chipotle", "texto": "Para la salsa: cuatro jitomates, un cuarto de cebolla, un diente de ajo y un chile chipotle."},
+    {"accion": "presenta", "dur": 6.1, "ingrediente": "queso", "etiqueta": "crema y 250 g de queso", "texto": "Y una taza de crema y doscientos cincuenta gramos de queso para gratinar."},
+    {"accion": "precalienta", "dur": 3.8, "texto": "Prende el horno a ciento ochenta grados."},
+    {"accion": "asa", "dur": 7.9, "texto": "Asa los poblanos directo en la flama, volteándolos, hasta que la piel se ponga negra por todos lados."},
+    {"accion": "suda", "dur": 10.7, "texto": "Mételos en una bolsa cerrada diez minutos para que suden. Así la piel se despega solita. Pélalos, quítales las semillas y córtalos en rajas."},
+    {"accion": "rajas", "dur": 8.7, "texto": "Sofríe la cebolla en rajitas con un chorrito de aceite, y agrega las rajas y el elote, con sal, unos cinco minutos."},
+    {"accion": "salsa", "dur": 9.9, "texto": "Para la salsa, licúa los jitomates con la cebolla, el ajo y el chipotle, y cocínala cinco minutos con sal, hasta que cambie de color."},
+    {"accion": "tortillas", "dur": 9.3, "texto": "Ahora el secreto: pasa cada tortilla unos cinco segundos por aceite caliente, solo para sellarla, y escúrrela en papel."},
+    {"accion": "arma", "dur": 10.3, "texto": "Arma en un refractario: un poco de salsa en el fondo, una capa de tortillas, pollo, rajas con elote, crema, queso y salsa. Repite tres veces."},
+    {"accion": "queso", "dur": 4.9, "texto": "Termina con tortillas, salsa, crema y mucho queso encima."},
+    {"accion": "hornea", "dur": 5.7, "texto": "Hornea veinticinco minutos, hasta que el queso se derrita y se dore."},
+    {"accion": "serve", "dur": 7.2, "texto": "Déjalo reposar cinco minutos para que se corte bonito, y sírvelo con un poco más de crema."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
