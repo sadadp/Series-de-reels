@@ -219,7 +219,7 @@ const shotAt = t => t < 4.5 ? 'feet' : t < 10 ? 'seabed' : t < 14 ? 'chuy' : t <
 const SUBS = [
   [0.6, 3.4, 'TÚ', 'El mar… se está yendo.'], [5.0, 7.6, 'TÚ', 'Nadie corre. Nadie.'],
   [10.2, 13.9, 'DON CHUY', '¡TSUNAMI! ¡Corran a la capilla!'], [14.2, 17.5, 'LEO', '¡Mira! ¡Encontré una concha gigante!'],
-  [17.6, 21.6, 'TÚ', '¿Leo? ¡LEO!… No me escuchó.'], [23.0, 24.8, 'TÚ', 'Cuatro minutos.'],
+  [17.6, 21.6, 'TÚ', '¿Lía? ¡LÍA!… No me escuchó.'], [23.0, 24.8, 'TÚ', 'Cuatro minutos.'],
   [26.4, 31.5, 'DANI', '¡No vas a llegar! ¡Vámonos, por favor!'], [34.8, 36.8, 'TÚ', 'Me está saludando…'],
 ];
 function wrap(text, maxW) { const ws = text.split(' '), ls = []; let c = ''; for (const w of ws) { const tt = c ? c + ' ' + w : w; if (ctx.measureText(tt).width > maxW && c) { ls.push(c); c = w; } else c = tt; } if (c) ls.push(c); return ls; }
@@ -231,7 +231,7 @@ function txt(text, x, y, size, color = '#fff', weight = 800, alpha = 1, maxW = 6
 function pill(text, x, y, size, bg, fg, align = 'center') { ctx.save(); ctx.font = `900 ${size}px Inter`; const w = ctx.measureText(text).width + size * 1.2, h = size * 1.75; const x0 = align === 'left' ? x : x - w / 2;
   ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(x0, y - h / 2, w, h, h / 2); ctx.fill(); ctx.fillStyle = fg; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(text, x0 + size * 0.6, y + 1); ctx.restore(); }
 function overlays(t) {
-  for (const [a, b, who, s] of SUBS) if (t >= a && t < b) { const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al; pill('◉ ' + who, 24, 110, 30, 'rgba(0,0,0,0.72)', '#fff', 'left'); ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
+  for (const [a, b, who, s] of SUBS) if (t >= a && t < b) { const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al;  ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
   if (t >= 20 && t < 44) { const sec = Math.round(lerp(240, 150, seg(t, 20, 44))), s = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; pill(s, W - 150, 110, 36, sec < 180 ? 'rgba(200,0,0,0.85)' : 'rgba(0,0,0,0.6)', '#fff', 'left'); }
 }
 function vignette(t) { const g = ctx.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.78); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,0,${0.22 + dark(t) * 0.35})`); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
@@ -256,7 +256,7 @@ const storyFrame = function (t, noOverlay) {
     const p = clamp(1 - k / 12.5, 0, 1); ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(0, half - 5, W, 10); ctx.fillStyle = '#ff3b3b'; ctx.fillRect(0, half - 5, W * p, 10);
     pill('¿QUÉ HACES?', W / 2, half, 36, 'rgba(0,0,0,0.85)', '#fff');
     ctx.globalAlpha = clamp(k * 3, 0, 1);
-    pill('A', 40, 190, 46, '#ffcf2e', '#000', 'left'); txt('Bajas por Leo', W / 2 + 40, 190, 50, '#ffcf2e', 900);
+    pill('A', 40, 190, 46, '#ffcf2e', '#000', 'left'); txt('Bajas por Lía', W / 2 + 40, 190, 50, '#ffcf2e', 900);
     pill('B', 40, half + 110, 46, '#7bdff2', '#000', 'left'); txt('Subes con Dani', W / 2 + 40, half + 110, 50, '#7bdff2', 900);
     ctx.globalAlpha = 1;
   }
@@ -286,8 +286,8 @@ function ctxStage(t, shot) {
   camera.position.copy(eye); camera.fov = fov; camera.aspect = W / H; camera.updateProjectionMatrix();
   camera.lookAt(look.clone().add(shake(t, 0.004 * eye.distanceTo(look)))); sky.position.copy(eye);
 }
-const CTX_SUBS = [[5.3, 8.6, 'TÚ', 'Por fin… vacaciones.'], [8.8, 11.6, 'LEO', '¡Vengan! ¡El agua está calientita!'], [11.8, 15.4, 'DANI', '¡Leo, no te alejes mucho, eh!']];
-function subAt(t, a, b, who, s) { if (t < a || t >= b) return; const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al; pill('◉ ' + who, 24, 110, 30, 'rgba(0,0,0,0.72)', '#fff', 'left'); ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
+const CTX_SUBS = [[5.3, 8.6, 'TÚ', 'Por fin… vacaciones.'], [8.8, 11.6, 'LEO', '¡Vengan! ¡El agua está calientita!'], [11.8, 15.4, 'DANI', '¡Lía, no te alejes mucho, eh!']];
+function subAt(t, a, b, who, s) { if (t < a || t >= b) return; const al = clamp((t - a) * 6, 0, 1) * clamp((b - t) * 6, 0, 1); ctx.globalAlpha = al;  ctx.globalAlpha = 1; txt(s, W / 2, 790, 44, '#fff', 900, al); }
 window.renderFrame = function (t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = 'none'; ctx.globalAlpha = 1;
   [towel, towel2, umb].forEach(o => o.visible = false);
