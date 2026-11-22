@@ -218,4 +218,26 @@ window.renderOpt = function (n) {
   }
   return out.toDataURL('image/png');
 };
+
+// ---------- banners v2: Don Chuy al frente ----------
+function chuyCut(size) { faceShot(size, 'chuy', { mouth: 'smile' }, 4.2, 1.55); const c = document.createElement('canvas'); c.width = c.height = size; c.getContext('2d').drawImage(renderer.domElement, 0, 0); return c; }
+function bg(w, h) { const g = ctx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#0f3c4c'); g.addColorStop(0.6, '#1d6f8b'); g.addColorStop(1, '#3fb6c8'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = 'rgba(234,247,246,0.9)'; ctx.beginPath(); ctx.moveTo(0, h * 0.82); for (let x = 0; x <= w; x += 20) ctx.lineTo(x, h * 0.82 - Math.sin(x / w * Math.PI * 3) * h * 0.03); ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.fill();
+  ctx.fillStyle = '#f0d9a8'; ctx.fillRect(0, h * 0.9, w, h * 0.1); }
+window.renderYouTube2 = function () {
+  const w = 2560, h = 1440, sy = (h - 423) / 2, ch = chuyCut(700); resize(w, h); bg(w, h);
+  ctx.drawImage(ch, 470, sy - 150, 700, 700);
+  ctx.textAlign = 'left'; const tx = 1130;
+  ctx.font = '900 96px Inter'; ctx.lineJoin = 'round'; for (const [s, y, c, sz] of [['LO QUE CUENTA', sy + 150, '#ffcf2e', 96], ['DON CHUY', sy + 270, '#fff', 130]]) { ctx.font = `900 ${sz}px Inter`; ctx.lineWidth = sz * 0.16; ctx.strokeStyle = '#140c06'; ctx.strokeText(s, tx, y); ctx.fillStyle = c; ctx.fillText(s, tx, y); }
+  ctx.font = '800 50px Inter'; ctx.lineWidth = 8; ctx.strokeStyle = '#140c06'; ctx.strokeText('Historias donde TÚ decides qué pasa', tx, sy + 370); ctx.fillStyle = '#fff'; ctx.fillText('Historias donde TÚ decides qué pasa', tx, sy + 370);
+  return out.toDataURL('image/png');
+};
+window.renderFacebook2 = function () {
+  const w = 1640, h = 624, ch = chuyCut(620); resize(w, h); bg(w, h);
+  ctx.drawImage(ch, 230, 10, 620, 620);
+  ctx.textAlign = 'left'; const tx = 800; ctx.lineJoin = 'round';
+  for (const [s, y, c, sz] of [['LO QUE CUENTA', 230, '#ffcf2e', 72], ['DON CHUY', 330, '#fff', 100]]) { ctx.font = `900 ${sz}px Inter`; ctx.lineWidth = sz * 0.16; ctx.strokeStyle = '#140c06'; ctx.strokeText(s, tx, y); ctx.fillStyle = c; ctx.fillText(s, tx, y); }
+  ctx.font = '800 38px Inter'; ctx.lineWidth = 7; ctx.strokeStyle = '#140c06'; ctx.strokeText('Tú decides qué pasa · Comenta A o B', tx, 410); ctx.fillStyle = '#fff'; ctx.fillText('Tú decides qué pasa · Comenta A o B', tx, 410);
+  return out.toDataURL('image/png');
+};
 window.READY = true;
