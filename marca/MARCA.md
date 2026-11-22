@@ -25,12 +25,12 @@
 **Facebook:** `Un día de playa… hasta que el mar se fue 🌊 A) Bajas por Lía B) Subes con Dani. Comenta y lo que gane, pasa. (Ficción animada)`
 **Fijado:** `🅰️ = bajas por Lía · 🅱️ = subes con Dani. Gana el comentario con más likes.`
 
-## EP2 · Lo que nadie vio (Parte 2)
-**TikTok:** `Mientras tú estabas en la playa… Don Chuy ya sabía lo que venía 👀 ¿Regresa por Lía o toca la campana? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
-**Instagram:** `La misma tarde, dos lugares 🌊 En el mar, Don Chuy vio las señales. En la orilla, Lía seguía al agua. ¿Qué hace Don Chuy? 🅰️ Regresa por Lía 🅱️ Toca la campana para salvar a todos. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
-**YouTube Shorts:** título `Don Chuy ya lo había vivido… ¿regresa por la niña o salva a todos? 🌊 #shorts` · descripción `Parte 2 de "El Mar se Fue": lo que nadie vio. Comenta A o B. Ficción animada. #elmarsefue #donchuy`
-**Facebook:** `Lo que nadie vio: Don Chuy sabía lo que venía. A) Regresa por Lía B) Toca la campana. Comenta y lo que gane, pasa. (Ficción animada)`
-**Fijado:** `🅰️ = regresa por Lía · 🅱️ = toca la campana. Gana el comentario con más likes.`
+## EP2 · El Hotel (Parte 2)
+**TikTok:** `Mientras tú corrías a la colina… en el hotel alguien no podía bajar 🏨🌊 ¿Rosa baja con Doña Carmen o suben a la azotea? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Mientras tanto, en el hotel… 🏨 Se fue la luz, el elevador no sirve y Doña Carmen no puede bajar. ¿Qué hace Rosa? 🅰️ Bajan y corren a la capilla 🅱️ Suben a la azotea. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `El elevador no sirve y viene un tsunami… ¿bajan o suben? 🏨🌊 #shorts` · descripción `Parte 2 de "El Mar se Fue": el hotel. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Mientras tanto, en el hotel… A) Rosa baja con Doña Carmen y corren a la capilla B) Suben a la azotea. Comenta y lo que gane, pasa. (Ficción animada)`
+**Fijado:** `🅰️ = bajan y corren a la capilla · 🅱️ = suben a la azotea. Gana el comentario con más likes.`
 
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
