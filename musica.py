@@ -186,6 +186,19 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "hojas":
+            for n in range(6): poner(buf, sfx_pop() * 0.35, t0 + 0.4 + n * 1.1 + 0.4)
+        elif a == "manteca": poner(buf, sfx_mezcla(d - 1.5) * 0.6, t0 + 0.8); poner(buf, sfx_brillo(), t0 + d - 1.2)
+        elif a == "masa":
+            for n in range(8): poner(buf, sfx_pop() * 0.3, t0 + 0.4 + n * 0.9 + 0.4)
+            poner(buf, sfx_mezcla(d - 1) * 0.5, t0 + 0.5)
+        elif a == "flota": poner(buf, sfx_pop() * 0.9, t0 + 2.4); poner(buf, sfx_brillo(), t0 + 3.8)
+        elif a == "vaporera":
+            poner(buf, pluck(nota(96), 0.4) * 0.5, t0 + 1.3)
+            for n in range(17): poner(buf, sfx_pop() * 0.3, t0 + 2.6 + n * 0.36 + 0.3)
+        elif a == "cuece":
+            poner(buf, sfx_pop() * 0.6, t0 + 1.1); poner(buf, sfx_chisporroteo(d - 1.5) * 0.35, t0 + 1.4)
+            for n in range(int((d - 1.6) / 0.18)): poner(buf, pluck(nota(96 + (n % 3)), 0.12) * 0.12, t0 + 1.5 + n * 0.18)
         elif a == "suda":
             poner(buf, sfx_whoosh(0.5) * 0.6, t0 + 0.4)
             for n in range(int((d - 5) / 0.3)): poner(buf, sfx_corte(n) * 0.6, t0 + 5 + n * 0.3)

@@ -63,8 +63,8 @@ const CAMS = {
   hornoR: [V3(-1.0, 0.4, 5.6), V3(-1.5, -1.2, 1.4)],
   sala: [V3(0.6, 2.7, 9.0), V3(0.6, 1.35, 0)],
 };
-const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish", lava: "bowl", alina: "bowl", cocina: "pan", corta: "pan", remoja: "bowl", marina: "bowl", dora: "pan", pina: "pan", tortillas: "pan", ralla: "bowl", hierve: "pan", cuece: "pan", pasa: "pan", emulsiona: "pan", tip: "pan", esterilla: "dish", relleno: "dish", enrolla: "dish", rebana: "dish", activa: "bowl", amasa: "dish", reposa: "dish", estira: "dish", unta: "dish", hilo: "dish", acomoda: "dish", glasea: "dish", precalienta: "hornoR", base: "dish", rodajas: "dish", espiral: "dish", "aliña": "dish", tapa: "horno", destapa: "horno", bate: "bowl", suda: "dish", rajas: "pan", cuecemaiz: "pan", cuececarne: "pan", cuela: "bowl", friesalsa: "pan", junta: "pan", claras: "bowl", molde: "dish", enfria: "dish", unta: "dish", fresas: "dish", mascarpone: "bowl", envuelve: "bowl", moja: "pan", refri: "bowl", cacao: "dish", frie: "pan", escurre: "dish", licua: "bowl", sofrie: "pan", calienta: "pan", asa: "pan", cebollitas: "pan", pica: "dish", secreto: "intro", pico: "dish", guacamole: "dish", capa: "dish" }[a] || "wide");
-const zonaPaso = p => (R.platillo === "azteca" && p.accion === "sobras") ? "sala" : (R.platillo === "azteca" && p.accion === "salsa") ? "bowl" : (R.platillo === "azteca" && p.accion === "hornea") ? "dish" : (R.platillo === "mostachon" && p.accion === "sobras") ? "sala" : (R.platillo === "mostachon" && ["hornea", "relleno"].includes(p.accion)) ? (p.accion === "hornea" ? "dish" : "bowl") : (R.platillo === "tiramisu" && p.accion === "hook") ? "sala" : (R.platillo === "tiramisu" && p.accion === "cafe") ? "pan" : (R.platillo === "lasana" && p.accion === "hornea") ? "dish" : (R.platillo === "lasana" && p.accion === "sobras") ? "sala" : (R.platillo === "lasana" && ["salsa", "bechamel"].includes(p.accion)) ? "pan" : (R.platillo === "lasana" && ["sofrie", "carne"].includes(p.accion)) ? "pan" : (R.platillo === "cerealgta" && ["hook", "juega", "control"].includes(p.accion)) ? "sala" : (R.platillo === "cerealgta" && ["prepara", "leche"].includes(p.accion)) ? "bowl" : (R.platillo === "chilaquiles" && p.accion === "baña") ? "pan" : (p.destino === "sarten" && ["drop", "stir"].includes(p.accion)) ? "pan" : zonaDe(p.accion);
+const zonaDe = a => ({ hook: "hook", rewind: "intro", intro: "intro", drop: "bowl", stir: "bowl", pour: "pan", flip: "pan", serve: "plate", outro: "outro", arma: "dish", "baña": "dish", queso: "dish", hornea: "horno", extiende: "dish", salsa: "dish", lava: "bowl", alina: "bowl", cocina: "pan", corta: "pan", remoja: "bowl", marina: "bowl", dora: "pan", pina: "pan", tortillas: "pan", ralla: "bowl", hierve: "pan", cuece: "pan", pasa: "pan", emulsiona: "pan", tip: "pan", esterilla: "dish", relleno: "dish", enrolla: "dish", rebana: "dish", activa: "bowl", amasa: "dish", reposa: "dish", estira: "dish", unta: "dish", hilo: "dish", acomoda: "dish", glasea: "dish", precalienta: "hornoR", base: "dish", rodajas: "dish", espiral: "dish", "aliña": "dish", tapa: "horno", destapa: "horno", bate: "bowl", hojas: "bowl", manteca: "bowl", masa: "bowl", flota: "bowl", vaporera: "pan", suda: "dish", rajas: "pan", cuecemaiz: "pan", cuececarne: "pan", cuela: "bowl", friesalsa: "pan", junta: "pan", claras: "bowl", molde: "dish", enfria: "dish", unta: "dish", fresas: "dish", mascarpone: "bowl", envuelve: "bowl", moja: "pan", refri: "bowl", cacao: "dish", frie: "pan", escurre: "dish", licua: "bowl", sofrie: "pan", calienta: "pan", asa: "pan", cebollitas: "pan", pica: "dish", secreto: "intro", pico: "dish", guacamole: "dish", capa: "dish" }[a] || "wide");
+const zonaPaso = p => (R.platillo === "tamales" && p.accion === "sobras") ? "sala" : (R.platillo === "tamales" && p.accion === "salsa") ? "bowl" : (R.platillo === "tamales" && p.accion === "cuece") ? "pan" : (R.platillo === "azteca" && p.accion === "sobras") ? "sala" : (R.platillo === "azteca" && p.accion === "salsa") ? "bowl" : (R.platillo === "azteca" && p.accion === "hornea") ? "dish" : (R.platillo === "mostachon" && p.accion === "sobras") ? "sala" : (R.platillo === "mostachon" && ["hornea", "relleno"].includes(p.accion)) ? (p.accion === "hornea" ? "dish" : "bowl") : (R.platillo === "tiramisu" && p.accion === "hook") ? "sala" : (R.platillo === "tiramisu" && p.accion === "cafe") ? "pan" : (R.platillo === "lasana" && p.accion === "hornea") ? "dish" : (R.platillo === "lasana" && p.accion === "sobras") ? "sala" : (R.platillo === "lasana" && ["salsa", "bechamel"].includes(p.accion)) ? "pan" : (R.platillo === "lasana" && ["sofrie", "carne"].includes(p.accion)) ? "pan" : (R.platillo === "cerealgta" && ["hook", "juega", "control"].includes(p.accion)) ? "sala" : (R.platillo === "cerealgta" && ["prepara", "leche"].includes(p.accion)) ? "bowl" : (R.platillo === "chilaquiles" && p.accion === "baña") ? "pan" : (p.destino === "sarten" && ["drop", "stir"].includes(p.accion)) ? "pan" : zonaDe(p.accion);
 const camDe = p => p.accion === "presenta" ? [V3(p.slot + 0.6, 3.2, 7.6), V3(p.slot + 0.6, 2.5, 0)] : CAMS[zonaPaso(p)];
 const CHEF_X = { wide: 0, hook: 0.15, intro: 0, bowl: 0.1, pan: 0.15, plate: 0.15, outro: 0, dish: 0.25, horno: 0.35, hornoR: 1.4, sala: -0.2 };
 const chefDe = p => p.accion === "presenta" ? p.slot + 1.3 : CHEF_X[zonaPaso(p)];
@@ -1250,6 +1250,76 @@ const cuadroA = new THREE.Group(); platoA.add(cuadroA); cuadroA.rotation.y = 0.5
 const cremaA = mesh(new THREE.TorusGeometry(0.18, 0.025, 6, 24, Math.PI * 1.2), "#fffaf0", { contorno: 0 }); cremaA.rotation.x = -Math.PI / 2 + 0.2; cremaA.position.y = cuadroA.userData.top + 0.03; cuadroA.add(cremaA);
 const rajaTop = mesh(new THREE.BoxGeometry(0.4, 0.04, 0.06), COL_RAJA, { contorno: 1.05 }); rajaTop.position.set(0.05, cuadroA.userData.top + 0.04, 0.1); rajaTop.rotation.y = 0.6; cuadroA.add(rajaTop);
 plato.add(platoA);
+// ---------- tamales verdes ----------
+const ESTAM = R.platillo === "tamales";
+const COL_HOJA = "#e6d290", COL_MASA_T = "#f3dca0", COL_VERDE_S = "#5f9e3a";
+const formaHoja = (() => { const s = new THREE.Shape(); s.moveTo(0, -0.55); s.bezierCurveTo(0.32, -0.45, 0.34, 0.2, 0.06, 0.62); s.lineTo(-0.06, 0.62); s.bezierCurveTo(-0.34, 0.2, -0.32, -0.45, 0, -0.55); return s; })();
+const geoHoja = new THREE.ShapeGeometry(formaHoja, 16);
+function hojaMaiz(col) { const m = new THREE.Mesh(geoHoja, M(col || COL_HOJA, { side: THREE.DoubleSide })); m.castShadow = true; const o = new THREE.Mesh(geoHoja, new THREE.MeshBasicMaterial({ color: P.tinta, side: THREE.BackSide })); o.scale.setScalar(1.03); o.position.z = -0.003; m.add(o); return m; }
+function tamal() { // tamal envuelto
+  const g = new THREE.Group();
+  const c = mesh(new THREE.CapsuleGeometry(0.11, 0.38, 6, 12), COL_HOJA, { contorno: 1.05 }); c.scale.set(1, 1, 0.75); g.add(c);
+  for (let k = 0; k < 4; k++) { const l = new THREE.Mesh(new THREE.BoxGeometry(0.005, 0.4, 0.005), M("#c9b06a")); l.position.set(-0.06 + k * 0.04, 0, 0.083); g.add(l); }
+  return g;
+}
+// tiramisú en la mano (lo del video anterior)
+const platoTir = new THREE.Group();
+{ platoTir.add(mesh(new THREE.CylinderGeometry(0.32, 0.26, 0.04, 24), "#fbfaf6", { contorno: 1.04 }));
+  let y = 0.03; [[COL_SOLETA_M, 0.04], [COL_CREMA_T, 0.04], [COL_SOLETA_M, 0.04], [COL_CREMA_T, 0.04], [COL_CACAO, 0.01]].forEach(([c, h]) => { const m = mesh(new THREE.BoxGeometry(0.28, h, 0.22), c, { contorno: 1.01 }); m.position.y = y + h / 2; platoTir.add(m); y += h; }); }
+platoTir.position.set(0, -0.1, 0.1);
+const manoTir = enMano(platoTir);
+const bolitaMano = mesh(new THREE.SphereGeometry(0.07, 12, 10), COL_MASA_T, { contorno: 1.08 }); bolitaMano.position.set(0, -0.1, 0.12);
+const manoBolita = enMano(bolitaMano);
+// tazón: hojas en remojo, manteca y masa
+const hojasTaz = [];
+for (let n = 0; n < 6; n++) { const h = hojaMaiz(); h.rotation.set(-Math.PI / 2 + (hash(n + 2100) - 0.5) * 0.4, 0, n * 1.05); h.scale.setScalar(0.75); h.visible = false; tazon.add(h); hojasTaz.push(h); }
+const mantecaB = mesh(new THREE.BoxGeometry(0.5, 0.25, 0.35), "#fbf6ea", { contorno: 1.04 }); mantecaB.visible = false; tazon.add(mantecaB);
+const trozosMasa = [];
+for (let n = 0; n < 8; n++) { const m = mesh(new THREE.SphereGeometry(0.12, 10, 8), COL_MASA_T, { contorno: 1.06 }); m.scale.y = 0.7; m.position.set((hash(n + 2120) - 0.5) * 0.6, 0, (hash(n + 2121) - 0.5) * 0.5); m.visible = false; tazon.add(m); trozosMasa.push(m); }
+// vaso con agua para la prueba
+const vasoT = new THREE.Group(); vasoT.position.set(BOWL.x + 1.25, 0.06, BOWL.z + 0.65); vasoT.visible = false; scene.add(vasoT);
+{ const v = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.28, 0.95, 24, 1, true), M("#dff1ff", { transparent: true, opacity: 0.35, side: THREE.DoubleSide })); v.position.y = 0.475; vasoT.add(v); const o = new THREE.Mesh(v.geometry, LINEA); o.scale.setScalar(1.03); v.add(o);
+  const f = mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.04, 24), "#dff1ff", { contorno: 1.03, extra: { transparent: true, opacity: 0.5 } }); f.position.y = 0.02; vasoT.add(f);
+  const a = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.27, 0.75, 24), M("#9fd3f5", { transparent: true, opacity: 0.25 })); a.position.y = 0.42; vasoT.add(a);
+  const sup = new THREE.Mesh(new THREE.CircleGeometry(0.3, 24), M("#bfe3f8", { transparent: true, opacity: 0.6 })); sup.rotation.x = -Math.PI / 2; sup.position.y = 0.8; vasoT.add(sup); }
+const bolitaV = mesh(new THREE.SphereGeometry(0.13, 14, 10), "#f0c870", { contorno: 1.1 }); vasoT.add(bolitaV);
+const burbV = [];
+for (let n = 0; n < 6; n++) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.025, 6, 4), M("#ffffff", { transparent: true, opacity: 0.8 })); vasoT.add(b); burbV.push(b); }
+// armado: una hoja grande que se unta y se dobla
+const armaT = new THREE.Group(); armaT.position.copy(BOWL); armaT.position.y = 0.06; armaT.visible = false; scene.add(armaT);
+{ const tb = mesh(new THREE.BoxGeometry(2.3, 0.1, 1.4), "#c58a4a", { contorno: 1.02 }); tb.position.y = 0.05; armaT.add(tb); }
+const hojaGrande = new THREE.Group(); hojaGrande.position.set(-0.35, 0.11, 0.05); hojaGrande.rotation.x = -Math.PI / 2; armaT.add(hojaGrande);
+const mitades = [-1, 1].map(s2 => { const piv = new THREE.Group(); piv.position.x = s2 * 0.02; hojaGrande.add(piv); const h = hojaMaiz(); h.scale.set(1.3, 1.3, 1); piv.add(h); return { piv, h, s2 }; });
+// recortamos visualmente: cada mitad es una hoja completa escalada a la mitad
+mitades.forEach(({ h, s2 }) => { h.scale.set(0.65, 1.3, 1); h.position.x = s2 * 0.2; });
+const masaUnta = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.7), M(COL_MASA_T, { side: THREE.DoubleSide })); masaUnta.position.set(0, -0.1, 0.006); hojaGrande.add(masaUnta);
+const rellenoT = mesh(new THREE.CapsuleGeometry(0.06, 0.32, 4, 8), COL_VERDE_S, { contorno: 1.06 }); rellenoT.position.set(0, -0.1, 0.05); hojaGrande.add(rellenoT);
+const tamalHecho = tamal(); tamalHecho.rotation.z = Math.PI / 2; tamalHecho.position.set(-0.35, 0.22, 0.05); armaT.add(tamalHecho);
+const pilaTam = [];
+for (let n = 0; n < 6; n++) { const t2 = tamal(); t2.rotation.z = Math.PI / 2; t2.rotation.y = 0.1; t2.position.set(0.65, 0.2 + Math.floor(n / 3) * 0.2, -0.35 + (n % 3) * 0.3); armaT.add(t2); pilaTam.push(t2); }
+// vaporera con tamales parados, moneda y tapa
+const vapT = new THREE.Group(); vapT.position.set(PAN.x, 0.08, PAN.z); vapT.visible = false; scene.add(vapT);
+vapT.add(mesh(new THREE.LatheGeometry(perfilOlla(0.95, 0.9, 0.55), 40), "#9aa3ad", { contorno: 1.025, extra: { side: THREE.DoubleSide } }));
+for (const s2 of [-1, 1]) { const a = mesh(new THREE.TorusGeometry(0.13, 0.045, 6, 14, Math.PI), "#2b2b2b", { contorno: 0 }); a.position.set(s2 * 0.97, 0.42, 0); a.rotation.z = s2 > 0 ? -Math.PI / 2 : Math.PI / 2; vapT.add(a); }
+const aguaVap = new THREE.Mesh(new THREE.CircleGeometry(0.88, 32), M("#9fd3f5")); aguaVap.rotation.x = -Math.PI / 2; aguaVap.position.y = 0.18; vapT.add(aguaVap);
+const monedaT = mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.02, 20), "#e6b422", { contorno: 1.1 }); vapT.add(monedaT);
+const rejillaT = new THREE.Group(); rejillaT.position.y = 0.28; vapT.add(rejillaT);
+{ const r = mesh(new THREE.TorusGeometry(0.82, 0.02, 4, 32), "#c9d0d6", { contorno: 0 }); r.rotation.x = Math.PI / 2; rejillaT.add(r); for (let n = 0; n < 5; n++) { const b = mesh(new THREE.BoxGeometry(1.6, 0.015, 0.02), "#c9d0d6", { contorno: 0 }); b.position.z = -0.6 + n * 0.3; rejillaT.add(b); } }
+const tamVap = [];
+{ [[0.6, 10], [0.3, 6], [0, 1]].forEach(([r, c]) => { for (let j = 0; j < c; j++) { const a = j / c * Math.PI * 2, t2 = tamal(); t2.position.set(Math.cos(a) * r, 0.55, Math.sin(a) * r); t2.rotation.set((Math.sin(a) * 0.25) * (r > 0 ? 1 : 0), 0, -(Math.cos(a) * 0.25) * (r > 0 ? 1 : 0)); vapT.add(t2); tamVap.push(t2); } }); }
+const hojasTapa = [];
+for (let n = 0; n < 5; n++) { const h = hojaMaiz(); h.rotation.set(-Math.PI / 2, 0, n * 1.25); h.position.y = 0.85; h.scale.setScalar(1.2); vapT.add(h); hojasTapa.push(h); }
+const tapaVap = new THREE.Group(); vapT.add(tapaVap);
+{ tapaVap.add(mesh(new THREE.SphereGeometry(0.98, 32, 10, 0, Math.PI * 2, 0, Math.PI / 2), "#b8c0c8", { contorno: 1.02 })); tapaVap.children[0].scale.y = 0.35; const p2 = mesh(new THREE.SphereGeometry(0.1, 12, 8), "#2b2b2b"); p2.position.y = 0.38; tapaVap.add(p2); }
+// plato servido: un tamal abierto en su hoja y otro cerrado
+const platoTm = new THREE.Group();
+const abierto = new THREE.Group(); abierto.position.set(-0.15, 0.08, 0); abierto.rotation.y = 0.5; platoTm.add(abierto);
+{ const h = hojaMaiz(); h.rotation.x = -Math.PI / 2; h.scale.setScalar(1.4); abierto.add(h);
+  const m = mesh(new THREE.CapsuleGeometry(0.17, 0.5, 6, 14), COL_MASA_T, { contorno: 1.04 }); m.rotation.x = Math.PI / 2; m.scale.set(1, 1, 0.7); m.position.y = 0.12; abierto.add(m);
+  const v = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, 0.55), M(COL_VERDE_S)); v.position.y = 0.24; abierto.add(v); }
+const salsaTm = new THREE.Mesh(new THREE.CircleGeometry(0.35, 20), M(COL_VERDE_S)); salsaTm.rotation.x = -Math.PI / 2; salsaTm.position.set(0.55, 0.075, 0.25); platoTm.add(salsaTm);
+const cerrado = tamal(); cerrado.rotation.set(Math.PI / 2, 0, 0.4); cerrado.position.set(0.55, 0.2, -0.35); platoTm.add(cerrado);
+plato.add(platoTm);
 const texT180 = texCanvas(256, 128, (g, w, h) => { g.fillStyle = "#1b1b1b"; g.fillRect(0, 0, w, h); g.fillStyle = "#ff8a1f"; g.font = "bold 92px sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("180°", w / 2, h / 2 + 4); });
 if (ESLASANA) pantallaH.material.map = texT180;
 if (ESNACHOS) { const tx200 = texCanvas(256, 128, (g, w, h) => { g.fillStyle = "#1b1b1b"; g.fillRect(0, 0, w, h); g.fillStyle = "#ff8a1f"; g.font = "bold 92px sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("200°", w / 2, h / 2 + 4); }); pantallaH.material.map = tx200; }
@@ -1567,6 +1637,8 @@ CH.brazos[1].agarre.add(manoJarra, manoSoleta);
 CH.brazos[-1].agarre.add(manoLas, manoLata, manoFresa);
 // pastel azteca: objetos que Michi sostiene
 CH.brazos[-1].agarre.add(manoPoz, manoTort);
+// tamales: objetos que Michi sostiene
+CH.brazos[-1].agarre.add(manoTir, manoBolita);
 
 // ---------- partículas (deterministas) ----------
 const POOL = [];
@@ -1600,11 +1672,17 @@ function armarRafagas() {
     if (a === "corta" && R.platillo !== "chilaquiles") for (let n = 0; n < 3; n++) rafaga(ti + 0.6 + n * 0.6, { origen: V3(PAN.x, 0.4, PAN.z), n: 8, colores: [["#5aa83c", "#b7d36b", "#f2814f"][n]], tipo: "cuadro", vel: 1, g: -6, vida: 0.6, tam: 0.03 });
     if (a === "serve" && R.platillo === "sushi") rafaga(ti + 2.0, { origen: V3(PLATE.x, 1.4, PLATE.z), n: 30, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.4, g: -0.5, vida: 1.2, tam: 0.05 });
     if (a === "extiende" && R.platillo === "pizza") rafaga(ti + 1.6, { origen: V3(BOWL.x, 0.4, BOWL.z), n: 40, colores: ["#ffffff", "#f3e4c4"], tipo: "esfera", vel: 1.4, g: -0.8, vida: 1.2, tam: 0.06 });
-    if (a === "salsa" && !["lasana", "azteca"].includes(R.platillo)) rafaga(ti + 0.3, { origen: V3(BOWL.x, 0.4, BOWL.z), n: 24, colores: [COL_SALSA_P_R], tipo: "esfera", vel: 1.5, g: -7, vida: 0.7, tam: 0.04, arriba: 1.6 });
+    if (a === "salsa" && !["lasana", "azteca", "tamales"].includes(R.platillo)) rafaga(ti + 0.3, { origen: V3(BOWL.x, 0.4, BOWL.z), n: 24, colores: [COL_SALSA_P_R], tipo: "esfera", vel: 1.5, g: -7, vida: 0.7, tam: 0.04, arriba: 1.6 });
     if (a === "queso" && R.platillo === "pizza") rafaga(ti + 0.1, { origen: V3(BOWL.x, 3.0, BOWL.z), n: 40, colores: ["#fff7e6", "#2e8b3a"], tipo: "cuadro", vel: 0.7, g: -5, vida: 1.2, tam: 0.04 });
     else if (a === "queso") rafaga(ti + 0.2, { origen: V3(BOWL.x, 3.2, BOWL.z), n: 60, colores: ["#ffd75e", "#ffe48a"], tipo: "cuadro", vel: 0.8, g: -5, vida: 1.2, tam: 0.04 });
     if (a === "hornea") rafaga(ti + s.dur * 0.6, { origen: V3(BOWL.x, 1.0, BOWL.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.2, vida: 1.4, tam: 0.07 });
     if (a === "serve" && R.platillo === "mole") rafaga(ti + 1.5, { origen: V3(PLATE.x, 2.6, PLATE.z), n: 50, colores: ["#f3e3bf"], tipo: "esfera", vel: 0.5, g: -5, vida: 1.0, tam: 0.025 });
+    if (R.platillo === "tamales") {
+      if (a === "manteca") rafaga(ti + s.dur - 1.2, { origen: V3(BOWL.x, 1.3, BOWL.z), n: 24, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.0, g: -0.4, vida: 1.0, tam: 0.045 });
+      if (a === "flota") rafaga(ti + 3.8, { origen: V3(BOWL.x + 1.25, 1.2, BOWL.z + 0.65), n: 40, colores: ["#ffffff", "#fff3b0", "#9fd3f5"], tipo: "estrella", vel: 1.4, g: -0.5, vida: 1.3, tam: 0.05 });
+      if (a === "arma") rafaga(ti + 8.0, { origen: V3(BOWL.x - 0.35, 0.6, BOWL.z), n: 24, colores: ["#ffffff", "#fff3b0"], tipo: "estrella", vel: 1.0, g: -0.4, vida: 1.0, tam: 0.045 });
+      if (a === "cuece") rafaga(ti + 1.5, { origen: V3(PAN.x, 1.2, PAN.z), n: 30, colores: ["#ffffff"], tipo: "esfera", vel: 0.6, g: 1.3, vida: 1.6, tam: 0.08 });
+    }
     if (R.platillo === "azteca") {
       if (a === "asa") for (let n = 0; n < 3; n++) rafaga(ti + 1 + n * 1.8, { origen: V3(PAN.x, 0.7, PAN.z), n: 16, colores: ["#3a3a3a", "#6a6a6a"], tipo: "esfera", vel: 0.5, g: 1.2, vida: 1.2, tam: 0.05 });
       if (a === "tortillas") for (let n = 0; n < 5; n++) rafaga(ti + 0.3 + n * 1.4, { origen: V3(PAN.x, 0.45, PAN.z), n: 12, colores: ["#fff3c4", "#f2c14e"], tipo: "esfera", vel: 1.2, g: -6, vida: 0.5, tam: 0.025, arriba: 1.3 });
@@ -1821,6 +1899,16 @@ function poseBrazos(p, u, k, t) {
     if (p.accion === "aliña") { aL = 1.2 + Math.sin(u * 10) * 0.15; fL = 0.5 + Math.cos(u * 10) * 0.3; }
     if (["tapa", "destapa"].includes(p.accion)) { aL = 1.3; aR = -1.3; fL = fR = 0.6; }
   }
+  if (ESTAM) {
+    if (p.accion === "sobras") { const ph = (u % 1.8) / 1.8, sube = Math.sin(Math.PI * clamp((ph - 0.15) / 0.55)); aL = 0.35; fL = -1.2; aR = 0.4 + sube * 0.25; fR = -1.0 - sube * 1.1; }
+    if (p.accion === "hojas") { const c = (u % 1.2) / 1.2; aL = 1.05 + Math.sin(Math.PI * c) * 0.2; fL = -0.4 - Math.sin(Math.PI * c) * 0.4; }
+    if (p.accion === "salsa") { aR = -1.4; fR = 0.5; aL = 1.1; fL = 0.4; }
+    if (["manteca", "masa"].includes(p.accion)) { aL = 1.15 + Math.sin(u * 12) * 0.12; fL = 0.5 + Math.cos(u * 12) * 0.35; }
+    if (p.accion === "flota") { const tira = clamp((u - 1.6) / 0.5); aL = 0.6 + tira * 0.5; fL = -1.1 + tira * 0.6; aR = -0.3; }
+    if (p.accion === "arma") { aL = 1.1 + Math.sin(u * 6) * 0.15; aR = -1.1 - Math.sin(u * 6) * 0.15; fL = fR = 0.5; }
+    if (p.accion === "vaporera") { const c = (u % 0.7) / 0.7; aR = -1.1 - Math.sin(Math.PI * c) * 0.2; fR = -0.3 - Math.sin(Math.PI * c) * 0.3; }
+    if (p.accion === "cuece") { const e = Math.sin(Math.PI * clamp((u - 0.2) / 1.4)); aL = 0.35 + e * 0.8; aR = -0.35 - e * 0.8; fL = fR = -e * 0.8; }
+  }
   if (ESAZT) {
     if (p.accion === "sobras") { const ph = (u % 1.8) / 1.8, sube = Math.sin(Math.PI * clamp((ph - 0.15) / 0.55)); aL = 0.35; fL = -1.2; aR = 0.4 + sube * 0.25; fR = -1.0 - sube * 1.1; }
     if (p.accion === "precalienta") { aR = -1.6 + Math.sin(u * 3) * 0.1; fR = 0.3; }
@@ -1912,7 +2000,7 @@ function poseBrazos(p, u, k, t) {
     if (p.accion === "hilo") { const v = Math.abs(Math.sin(u * 4)); aL = 1.3 + v * 0.3; aR = -1.3 - v * 0.3; fL = fR = 0.6; }
     if (p.accion === "acomoda") { aL = 1.1 + Math.abs(Math.sin(u * 6)) * 0.3; fL = 0.5; }
   }
-  if (p.accion === "salsa" && !ESLASANA && !ESAZT) { aL = 1.25 + Math.sin(u * 9) * 0.12; fL = 0.6 + Math.cos(u * 9) * 0.3; }
+  if (p.accion === "salsa" && !ESLASANA && !ESAZT && !ESTAM) { aL = 1.25 + Math.sin(u * 9) * 0.12; fL = 0.6 + Math.cos(u * 9) * 0.3; }
   if (p.accion === "flip" && k > 0.42 && k < 0.6) aR = -1.1 - Math.sin((k - 0.42) / 0.18 * Math.PI) * 0.6;
   if (p.accion === "serve") { aL = 2.4 + Math.sin(t * 9) * 0.25; aR = -2.4 - Math.sin(t * 9) * 0.25; }
   return { aL, aR, fL, fR, conCuchara, conEspatula };
@@ -1985,6 +2073,15 @@ function renderAt(t) {
   if (ESNACHOS) { espatula.visible = false; cuchara.visible = p.accion === "capa"; }
   if (ESCARNE) { espatula.visible = ["asa", "cebollitas", "tortillas"].includes(p.accion); if (!["marina", "arma"].includes(p.accion)) cuchara.visible = false; }
   if (ESCHILA) { const esp = ["frie", "sofrie", "baña"].includes(p.accion); espatula.visible = esp; if (esp || ["escurre", "licua"].includes(p.accion)) cuchara.visible = false; }
+  if (ESTAM) {
+    manoTir.visible = false; manoBolita.visible = false; manoCuch.visible = false; batidorL.visible = false; espatula.visible = false; cuchara.visible = false;
+    if (p.accion === "sobras") { manoTir.visible = true; manoCuch.visible = true; const ph = (u % 1.8) / 1.8; CH.boca.scale.set(1.3, ph > 0.45 && ph < 0.75 ? 1.2 : 0.35 + Math.abs(Math.sin(t * 14)) * 0.3, 0.5); }
+    if (p.accion === "flota") manoBolita.visible = u > 0.3 && u < 2.0;
+    batidorL.visible = ["manteca", "masa"].includes(p.accion); batidorL.userData.pico.visible = false;
+    enderezar(manoTir, fL, aL); enderezar(manoCuch, fR, aR); enderezar(manoBolita, fL, aL);
+    const trabaja = ["hojas", "manteca", "masa", "flota", "arma", "vaporera"].includes(p.accion);
+    CH.cuerpo.rotation.x = trabaja ? 0.15 + Math.sin(t * 2) * 0.02 : 0;
+  }
   if (ESAZT) {
     manoPoz.visible = false; manoTort.visible = false; manoCuch.visible = false;
     if (p.accion === "sobras") { manoPoz.visible = true; manoCuch.visible = true; const ph = (u % 1.8) / 1.8; CH.boca.scale.set(1.3, ph > 0.45 && ph < 0.75 ? 1.2 : 0.35 + Math.abs(Math.sin(t * 14)) * 0.3, 0.5); }
@@ -2210,7 +2307,7 @@ function renderAt(t) {
   if (enHook) plato.rotation.y = t * 0.6; else plato.rotation.y = 0;
 
   // --- refractario (enchiladas) ---
-  refractario.visible = !ESCARNE && !ESLASANA && !ESAZT && idxDe("arma") >= 0 && i >= idxDe("arma") && !enHook && !(serveI >= 0 && i >= serveI);
+  refractario.visible = !ESCARNE && !ESLASANA && !ESAZT && !ESTAM && idxDe("arma") >= 0 && i >= idxDe("arma") && !enHook && !(serveI >= 0 && i >= serveI);
   if (refractario.visible) {
     const lu = j0 => { const jj = idxDe(j0); return jj < 0 ? -1 : i > jj ? 99 : i === jj ? u : -1; };
     const ua = lu("arma");
@@ -2248,7 +2345,7 @@ function renderAt(t) {
   }
   platoChila.visible = ESCHILA;
   platoCA.visible = ESCARNE;
-  platoL.visible = ESLASANA; platoT.visible = ESTIRA; platoM.visible = ESMOST; platoP.visible = ESPOZ; platoA.visible = ESAZT;
+  platoL.visible = ESLASANA; platoT.visible = ESTIRA; platoM.visible = ESMOST; platoP.visible = ESPOZ; platoA.visible = ESAZT; platoTm.visible = ESTAM;
   platoN.visible = ESNACHOS;
   if (ESNACHOS) {
     pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
@@ -3023,6 +3120,72 @@ function renderAt(t) {
     const sv = ["serve", "outro"].includes(p.accion) ? (p.accion === "outro" ? 99 : u) : -1;
     const qc = clamp((sv - 0.4) / 0.6); cuadroA.visible = qc > 0; cuadroA.position.y = (1 - easeOutBack(qc)) * 1.2;
     cremaA.visible = sv > 2.2; rajaTop.visible = sv > 3;
+  }
+  // --- tamales ---
+  vasoT.visible = ESTAM && p.accion === "flota";
+  armaT.visible = ESTAM && p.accion === "arma";
+  vapT.visible = ESTAM && ["vaporera", "cuece"].includes(p.accion);
+  hojasTaz.forEach(h => h.visible = false); mantecaB.visible = false; trozosMasa.forEach(m => m.visible = false);
+  if (ESTAM) {
+    sarten.visible = false; olla.visible = false; llama.visible = false;
+    tazon.visible = ["hojas", "manteca", "masa", "flota"].includes(p.accion); relleno.visible = false; remolino.visible = false;
+    licuadora.visible = p.accion === "salsa";
+    vapor.forEach(v => v.visible = vapT.visible || p.accion === "hojas");
+    CH.raiz.updateMatrixWorld(true);
+    if (tazon.visible) {
+      if (p.accion === "hojas") {
+        relleno.visible = true; relleno.position.y = 0.08 + 0.6 * 0.8; relleno.scale.setScalar(radioTazon(0.08 + 0.48) - 0.02); relleno.material = M("#cfe3ee");
+        hojasTaz.forEach((h, n) => { const q = clamp((u - 0.4 - n * 1.1) / 0.5); h.visible = q > 0; h.position.set((hash(n + 2140) - 0.5) * 0.3, 0.58 + (1 - easeIn(q)) * 1.6 - clamp((u - n * 1.1 - 1) / 2) * 0.06, (hash(n + 2141) - 0.5) * 0.3); });
+      }
+      if (["manteca", "masa", "flota"].includes(p.accion)) {
+        masaT.visible = true;
+        if (p.accion === "manteca") { const v = clamp((u - 1) / (p.dur - 2)); mantecaB.visible = u < 2.5; mantecaB.position.y = 0.4 + (1 - easeIn(clamp((u - 0.2) / 0.4))) * 1.6; mantecaB.scale.setScalar(Math.max(0.01, 1 - clamp((u - 1.2) / 1.3))); masaT.visible = u > 1; masaT.material = M("#" + new THREE.Color("#f3eee0").lerp(new THREE.Color("#fffdf8"), v).getHexString()); masaT.scale.set(0.9, 0.18 + v * 0.3, 0.9); masaT.position.y = 0.4 + v * 0.1; picosT.forEach((c, n) => { c.visible = v > 0.5 + n * 0.05; c.material = M("#fffdf8"); c.position.y = masaT.position.y + 0.7 * masaT.scale.y * 0.9; }); }
+        else { picosT.forEach(c => c.visible = false); }
+        if (p.accion === "masa") { const v = clamp((u - 0.5) / (p.dur - 1.5)); masaT.material = M("#" + new THREE.Color("#fffdf8").lerp(new THREE.Color(COL_MASA_T), v).getHexString()); masaT.scale.set(0.95, 0.45 + v * 0.15, 0.95); masaT.position.y = 0.5 + v * 0.05;
+          trozosMasa.forEach((m, n) => { const q = clamp((u - 0.4 - n * 0.9) / 0.4), d = clamp((u - n * 0.9 - 1.2) / 0.8); m.visible = q > 0 && d < 1; m.position.y = 0.85 + (1 - easeIn(q)) * 1.5; m.scale.set(1 - d * 0.7, 0.7 * (1 - d), 1 - d * 0.7); });
+          if ([2.2, 5.0].some(t0 => u > t0 && u < t0 + 1.0)) { chorroL.visible = true; chorroL.material = M("#e8c27a"); const yB = 0.9, A = new THREE.Vector3(BOWL.x + 0.2, 2.4, BOWL.z); chorroL.position.set(A.x, (A.y + yB) / 2, A.z); chorroL.scale.set(1, A.y - yB, 1); }
+          remolino.visible = true; remolino.position.y = 0.95; remolino.rotation.z = u * 10; remolino.material = M("#e6cc8a"); }
+        if (p.accion === "flota") { masaT.material = M(COL_MASA_T); masaT.scale.set(0.95, 0.6, 0.95); masaT.position.y = 0.55; }
+      }
+    }
+    if (vasoT.visible) {
+      // la bolita cae, se hunde un poquito y sube a flotar
+      const q = clamp((u - 2.0) / 0.4), sube = clamp((u - 2.8) / 1.2);
+      bolitaV.visible = u > 2.0; bolitaV.position.set(Math.sin(t * 2) * 0.03 * sube, u < 2.4 ? 1.5 - easeIn(q) * 1.05 : 0.45 + easeOut(sube) * 0.37 + Math.sin(t * 3) * 0.01 * sube, 0);
+      burbV.forEach((b, n) => { const ph = ((u - 2.4) * 0.8 + n / 6) % 1; b.visible = u > 2.4 && u < 5; b.position.set(Math.sin(n * 2) * 0.12, 0.2 + ph * 0.6, Math.cos(n * 1.7) * 0.1); });
+    }
+    if (licuadora.visible) {
+      const mezcla = clamp((u - 1.5) / 3);
+      liquidoL.scale.y = 0.2 + mezcla * 0.8; liquidoL.position.y = 0.6 + liquidoL.scale.y * 0.5 + 0.02;
+      liquidoL.material = M("#" + new THREE.Color("#9cc75a").lerp(new THREE.Color(COL_VERDE_S), mezcla).getHexString());
+      trozosL.forEach((o, n) => { o.visible = false; });
+      const vibra = u > 1.5 && u < p.dur - 1.5 ? 1 : 0;
+      licuadora.position.x = BOWL.x + Math.sin(t * 60) * 0.025 * vibra; licuadora.rotation.z = Math.sin(t * 47) * 0.015 * vibra;
+      remL.visible = vibra > 0; remL.material = M("#7fb84a"); remL.position.y = liquidoL.position.y + liquidoL.scale.y * 0.5 + 0.01; remL.rotation.z = t * 20;
+    } else remL.material = M("#d0503a");
+    if (armaT.visible) {
+      const unta = clamp((u - 0.4) / 2.5), rell = clamp((u - 3.4) / 0.8), lados = clamp((u - 5.2) / 1.3), punta = clamp((u - 6.8) / 1.0), listo = u > 8;
+      hojaGrande.visible = !listo; masaUnta.scale.set(Math.max(0.01, unta), Math.max(0.01, unta), 1); masaUnta.visible = unta > 0;
+      rellenoT.visible = rell > 0; rellenoT.scale.setScalar(Math.max(0.01, easeOutBack(rell)));
+      mitades.forEach(({ piv, s2 }) => { piv.rotation.y = -s2 * lados * 2.6; });
+      hojaGrande.scale.set(1, 1 - punta * 0.35, 1); hojaGrande.position.z = 0.05 + punta * 0.1;
+      tamalHecho.visible = listo; tamalHecho.scale.setScalar(listo ? easeOutBack(clamp((u - 8) / 0.4)) : 0.001);
+      pilaTam.forEach((t2, n) => { const q = clamp((u - 8.6 - n * 0.35) / 0.3); t2.visible = q > 0; t2.position.y = 0.2 + Math.floor(n / 3) * 0.2 + (1 - easeIn(q)) * 1.2; });
+    }
+    if (vapT.visible) {
+      const uv = p.accion === "vaporera" ? u : 99, uc = p.accion === "cuece" ? u : -1;
+      const qm = clamp((uv - 0.8) / 0.5); monedaT.position.set(0.2, 0.2 + (1 - easeIn(qm)) * 1.6 + (uc > 0 ? Math.abs(Math.sin(t * 25)) * 0.02 : 0), 0.1); monedaT.rotation.x = uc > 0 ? Math.sin(t * 30) * 0.15 : 0;
+      rejillaT.visible = uv > 2.2;
+      tamVap.forEach((t2, n) => { const q = clamp((uv - 2.6 - n * 0.36) / 0.3); t2.visible = q > 0; t2.position.y = 0.55 + (1 - easeIn(q)) * 1.4; });
+      hojasTapa.forEach((h, n) => { const q = clamp((uv - 9.2 - n * 0.3) / 0.35); h.visible = q > 0 && p.accion === "vaporera"; h.position.y = 0.88 + n * 0.01 + (1 - easeIn(q)) * 1; });
+      const tq = uc < 0 ? 0 : clamp((uc - 0.3) / 0.8); tapaVap.visible = uc >= 0; tapaVap.position.y = 0.55 + (1 - easeIn(tq)) * 1.5 + (uc > 1.2 ? Math.abs(Math.sin(t * 9)) * 0.03 : 0);
+      relojT.visible = uc > 1.5; if (relojT.visible) { relojT.position.set(PAN.x - 1.05, 0.45, PAN.z + 0.9); relojT.scale.setScalar(0.7 * easeOutBack(clamp((uc - 1.5) / 0.4))); agujaT.rotation.z = -clamp((uc - 1.8) / (p.dur - 2.5)) * Math.PI * 6; }
+    }
+    // plato servido
+    pila.forEach(hc => hc.visible = false); miel.visible = false; mantequilla.visible = false; canelaPolvo.visible = false;
+    const sv = ["serve", "outro"].includes(p.accion) ? (p.accion === "outro" ? 99 : u) : -1;
+    const qc = clamp((sv - 0.3) / 0.5); abierto.visible = qc > 0; abierto.position.y = 0.08 + (1 - easeOutBack(qc)) * 1.0;
+    cerrado.visible = sv > 1.0; salsaTm.visible = sv > 2.2; salsaTm.scale.setScalar(Math.max(0.01, clamp((sv - 2.2) / 0.6)));
   }
   // --- roles de canela ---
   jarra.visible = ESROLES && ["activa", "drop"].includes(p.accion) && !(p.accion === "drop" && u > 1.0);
