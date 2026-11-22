@@ -184,4 +184,38 @@ window.renderFacebook = function (name) {
   stroked(name, w / 2, 250, 120, '#fff'); stroked('Tú decides qué pasa · Comenta A o B', w / 2, 360, 46, '#ffcf2e', 800, 0.14);
   return out.toDataURL('image/png');
 };
+
+// ---------- opciones de foto de perfil ----------
+function circleClip(S, bg) { ctx.clearRect(0, 0, S, S); ctx.save(); ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); ctx.clip(); ctx.fillStyle = bg; ctx.fillRect(0, 0, S, S); }
+function ring(S, c = '#140c06') { ctx.restore(); ctx.lineWidth = 36; ctx.strokeStyle = c; ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2 - 18, 0, Math.PI * 2); ctx.stroke(); }
+function faceShot(S, key, over, camZ, lookY) {
+  R = 3; resize(S, S);
+  const sc = new THREE.Scene(); sc.add(new THREE.HemisphereLight(0xffffff, 0x886644, 1.4)); const d = new THREE.DirectionalLight(0xfff0dd, 2.2); d.position.set(2, 3, 5); sc.add(d);
+  const p = person({ ...CAST[key], ...over }); sc.add(p); const cam = new THREE.PerspectiveCamera(28, 1, 0.1, 100); cam.position.set(0, lookY, camZ); cam.lookAt(0, lookY, 0);
+  renderer.setClearColor(0x000000, 0); effect.render(sc, cam); renderer.setClearColor(0x000000, 1);
+}
+window.renderOpt = function (n) {
+  const S = 1080;
+  if (n === 1) { // cara de Lía asustada, fondo rojo
+    faceShot(S, 'leo', { mouth: 'open', worried: true }, 2.5, 1.0); const img = renderer.domElement;
+    circleClip(S, '#e0342a'); const g = ctx.createRadialGradient(S / 2, S / 2, 100, S / 2, S / 2, S * 0.7); g.addColorStop(0, '#ff6a3d'); g.addColorStop(1, '#a3140f'); ctx.fillStyle = g; ctx.fillRect(0, 0, S, S); ctx.drawImage(img, 0, 40); ring(S);
+  } else if (n === 2) { // ojo gigante con la ola reflejada
+    circleClip(S, '#0f2f3a'); const c = S / 2;
+    ctx.fillStyle = '#fbf8f1'; ctx.beginPath(); ctx.ellipse(c, c, 430, 300, 0, 0, Math.PI * 2); ctx.fill(); ctx.lineWidth = 30; ctx.strokeStyle = '#140c06'; ctx.stroke();
+    ctx.save(); ctx.beginPath(); ctx.arc(c, c, 210, 0, Math.PI * 2); ctx.clip(); ctx.fillStyle = '#3aa9c4'; ctx.fillRect(0, 0, S, S);
+    ctx.fillStyle = '#0d4f66'; ctx.beginPath(); ctx.moveTo(c - 260, c + 60); for (let x = -260; x <= 260; x += 20) ctx.lineTo(c + x, c - 40 - Math.sin((x + 260) / 520 * Math.PI) * 120); ctx.lineTo(c + 260, c + 260); ctx.lineTo(c - 260, c + 260); ctx.fill();
+    ctx.fillStyle = '#eaf7f6'; ctx.beginPath(); ctx.ellipse(c + 40, c - 150, 140, 34, -0.1, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#140c06'; ctx.beginPath(); ctx.arc(c, c + 10, 70, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    ctx.lineWidth = 22; ctx.strokeStyle = '#140c06'; ctx.beginPath(); ctx.arc(c, c, 210, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(c - 70, c - 80, 40, 0, Math.PI * 2); ctx.fill(); ring(S, '#ffcf2e');
+  } else if (n === 3) { // Don Chuy, el narrador de todas las historias
+    faceShot(S, 'chuy', {}, 3.6, 1.75); const img = renderer.domElement;
+    circleClip(S, '#1d6f8b'); const g = ctx.createRadialGradient(S / 2, S * 0.4, 80, S / 2, S / 2, S * 0.7); g.addColorStop(0, '#3fb6c8'); g.addColorStop(1, '#0f3c4c'); ctx.fillStyle = g; ctx.fillRect(0, 0, S, S); ctx.drawImage(img, 0, 30); ring(S, '#ffcf2e');
+  } else { // texto: ¿Y TÚ?
+    circleClip(S, '#140c06'); const c = S / 2;
+    ctx.fillStyle = '#e0342a'; ctx.beginPath(); ctx.moveTo(0, c + 160); for (let x = 0; x <= S; x += 30) ctx.lineTo(x, c + 160 - Math.sin(x / S * Math.PI * 2) * 50); ctx.lineTo(S, S); ctx.lineTo(0, S); ctx.fill();
+    stroked('¿Y', c, c - 210, 260, '#ffcf2e', 900, 0.08); stroked('TÚ?', c, c + 60, 330, '#fff', 900, 0.08); ring(S, '#ffcf2e');
+  }
+  return out.toDataURL('image/png');
+};
 window.READY = true;
