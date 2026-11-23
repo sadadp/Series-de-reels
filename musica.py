@@ -186,6 +186,14 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a in ("salsaroja", "salsaverde"): poner(buf, sfx_pop() * 0.5, t0 + 0.5); poner(buf, suave(ruido(d - 3, 0.3, 2300 + int(t0)), 0.6) * 0.25, t0 + 1.5); poner(buf, sfx_ding(), t0 + d - 1.2)
+        elif a == "frijoles": poner(buf, sfx_mezcla(d - 1) * 0.6, t0 + 0.5)
+        elif a == "huevo":
+            for t1 in (2.4, 6.6): poner(buf, sfx_corte(int(t1)) * 0.8, t1 + t0 - 0.3); poner(buf, sfx_chisporroteo(2.5) * 0.7, t0 + t1 + 0.2)
+        elif a == "bana": poner(buf, sfx_chisporroteo(d) * 0.8, t0); poner(buf, sfx_brillo(), t0 + d - 1.5)
+        elif a == "armadiv":
+            for n in range(2): poner(buf, sfx_pop() * 0.6, t0 + 0.8 + n * 0.6)
+            poner(buf, sfx_whoosh(0.5) * 0.5, t0 + 2.2); poner(buf, sfx_whoosh(0.5) * 0.5, t0 + 3.8); poner(buf, sfx_mezcla(1.5) * 0.4, t0 + 6); poner(buf, sfx_brillo(), t0 + 7.2)
         elif a == "hojas":
             for n in range(6): poner(buf, sfx_pop() * 0.35, t0 + 0.4 + n * 1.1 + 0.4)
         elif a == "manteca": poner(buf, sfx_mezcla(d - 1.5) * 0.6, t0 + 0.8); poner(buf, sfx_brillo(), t0 + d - 1.2)
