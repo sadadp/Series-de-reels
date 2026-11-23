@@ -25,6 +25,7 @@ https://drive.google.com/drive/folders/1XxQg5edEApI8PEcpXCak4AMwHBJR1tqz
 | Pozole rojo | 1uD5YSrRAydeC_v6xI8gNn_oooTzWklAM |
 | Pastel azteca | 1kPkMnfUAsZicJF6BQfWxVoKr5OViw9Ud |
 | Tamales verdes | 18BMVnO16OMvIkoaOIrh28EF35GA__tIL |
+| Huevos divorciados | 1SG3muklU2E5GEorlqY8vhacE_sYhhGkf |
 
 Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí caben;
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.

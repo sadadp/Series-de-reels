@@ -77,6 +77,7 @@ const POSES = {
     ["pozole-rojo", "POZOLE", "ROJO", "El secreto: que floree", "fondo-pozole-rojo.png"],
     ["pastel-azteca", "PASTEL", "AZTECA", "El secreto: sellar la tortilla", "fondo-pastel-azteca.png"],
     ["tamales-verdes", "TAMALES", "VERDES", "El secreto: la prueba del vaso", "fondo-tamales-verdes.png"],
+    ["huevos-divorciados", "HUEVOS", "DIVORCIADOS", "El secreto: la yema líquida", "fondo-huevos-divorciados.png"],
   ];
   if (etapa === "portadas" || etapa === "todo") {
     const dir = path.join(__dirname, "..", "portadas"); fs.mkdirSync(dir, { recursive: true });
