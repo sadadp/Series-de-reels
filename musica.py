@@ -186,6 +186,16 @@ def efectos(guion, dur):
             poner(buf, sfx_whoosh(), t0)
             if "Cobija" in g["texto"]:
                 for d0 in (0.3, 1.7, 3.7): poner(buf, sfx_ding(), t0 + d0 + 0.5)
+        elif a == "sofrito": poner(buf, sfx_chisporroteo(d) * 0.7, t0 + 0.3); poner(buf, sfx_mezcla(d * 0.5) * 0.4, t0 + 2)
+        elif a == "leche": poner(buf, sfx_mezcla(2.0) * 0.6, t0 + 0.8); poner(buf, sfx_chisporroteo(d - 3) * 0.6, t0 + 3)
+        elif a == "tomate": poner(buf, sfx_mezcla(1.8) * 0.6, t0 + 0.7)
+        elif a == "lento":
+            poner(buf, sfx_pop() * 0.6, t0 + 2.2)
+            for n in range(int((d - 3) / 0.5)): poner(buf, pasa_altos(ruido(0.015, 200, 2400 + n)) * 0.12, t0 + 3 + n * 0.5)
+        elif a == "cuecepasta":
+            for n in range(8): poner(buf, pasa_altos(ruido(0.03, 80, 2450 + n)) * 0.1, t0 + 0.8 + n * 0.12)
+            poner(buf, sfx_whoosh(0.5) * 0.5, t0 + 2.6); poner(buf, sfx_chisporroteo(d - 3) * 0.35, t0 + 3)
+        elif a == "juntapasta": poner(buf, sfx_whoosh(0.5) * 0.6, t0 + 0.3); poner(buf, sfx_mezcla(d - 2) * 0.6, t0 + 1.2)
         elif a in ("salsaroja", "salsaverde"): poner(buf, sfx_pop() * 0.5, t0 + 0.5); poner(buf, suave(ruido(d - 3, 0.3, 2300 + int(t0)), 0.6) * 0.25, t0 + 1.5); poner(buf, sfx_ding(), t0 + d - 1.2)
         elif a == "frijoles": poner(buf, sfx_mezcla(d - 1) * 0.6, t0 + 0.5)
         elif a == "huevo":
