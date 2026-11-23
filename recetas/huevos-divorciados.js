@@ -1,0 +1,26 @@
+// Huevos divorciados. Visual, sin voz: al inicio Michi se termina un tamal (video anterior)
+window.RECETA = {
+  platillo: "divorciados",
+  titulo: ["HUEVOS", "DIVORCIADOS"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["HUEVOS", "divorciados"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 5.0, "texto": "Este es el único divorcio que termina bien: en el desayuno."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 11.2, "texto": "Son huevos divorciados: uno con salsa roja y otro con salsa verde. El secreto es bañar la clara con aceite caliente, para que la yema quede líquida."},
+    {"accion": "presenta", "dur": 7.3, "ingrediente": "huevo", "etiqueta": "4 huevos, 4 tortillas y frijoles", "texto": "Para dos personas: cuatro huevos, cuatro tortillas de maíz y una taza de frijoles refritos."},
+    {"accion": "presenta", "dur": 6.5, "ingrediente": "jitomate", "etiqueta": "2 jitomates, serrano, cebolla y ajo", "texto": "Para la salsa roja: dos jitomates, un chile serrano, un pedazo de cebolla y un ajo."},
+    {"accion": "presenta", "dur": 6.4, "ingrediente": "tomate", "etiqueta": "4 tomates verdes, serrano y cilantro", "texto": "Para la salsa verde: cuatro tomates verdes, un chile serrano, cilantro y un ajo."},
+    {"accion": "presenta", "dur": 3.2, "ingrediente": "queso", "etiqueta": "queso fresco", "texto": "Y queso fresco para desmoronar."},
+    {"accion": "salsaroja", "dur": 12.7, "texto": "Hierve los jitomates con el chile diez minutos, y licúalos con la cebolla, el ajo y sal. Luego cocínala cinco minutos con poquito aceite, para que pierda el sabor a crudo."},
+    {"accion": "salsaverde", "dur": 8.6, "texto": "Haz lo mismo con los tomates verdes y el chile, y licúalos con el cilantro, el ajo y sal. Ya tienes las dos salsas."},
+    {"accion": "tortillas", "dur": 8.6, "texto": "Pasa las tortillas unos segundos por aceite caliente, para que no se aguaden con la salsa, y ponlas en el plato."},
+    {"accion": "frijoles", "dur": 6.8, "texto": "Calienta los frijoles con un chorrito de agua, moviendo, hasta que queden cremosos."},
+    {"accion": "huevo", "dur": 12.8, "texto": "Para los huevos, calienta un poco de aceite a fuego medio. Rompe cada huevo primero en un platito, así si cae un pedacito de cascarón lo quitas fácil, y deslízalo al sartén."},
+    {"accion": "bana", "dur": 11.5, "texto": "Ahora el secreto: inclina un poquito el sartén y, con una cuchara, baña la clara con el aceite caliente. Así se cuece por arriba y la yema se queda líquida."},
+    {"accion": "armadiv", "dur": 10.1, "texto": "Pon un huevo sobre cada tortilla. Baña uno con salsa roja y el otro con salsa verde, y en medio, una línea de frijoles: la que los separa."},
+    {"accion": "serve", "dur": 5.4, "texto": "Termina con queso fresco desmoronado, y sírvelos calientitos."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
