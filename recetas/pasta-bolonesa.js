@@ -1,0 +1,25 @@
+// Pasta a la boloñesa. Visual, sin voz: al inicio Michi se termina sus huevos divorciados (video anterior)
+window.RECETA = {
+  platillo: "bolonesa",
+  titulo: ["PASTA A LA", "BOLOÑESA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["BOLOÑESA", "a fuego lento"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 6.0, "texto": "La boloñesa de verdad no se hace en quince minutos, y te voy a decir por qué."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 8.8, "texto": "El secreto es el tiempo: una hora a fuego bajo, para que la carne se ponga suavecita y la salsa agarre todo el sabor."},
+    {"accion": "presenta", "dur": 9.6, "ingrediente": "pasta", "etiqueta": "400 g de espagueti y 400 g de carne", "texto": "Para cuatro personas: cuatrocientos gramos de espagueti y cuatrocientos gramos de carne molida, mitad res y mitad cerdo."},
+    {"accion": "presenta", "dur": 5.3, "ingrediente": "cebolla", "etiqueta": "cebolla, zanahoria, apio y ajo", "texto": "Una cebolla, una zanahoria, una rama de apio y dos dientes de ajo."},
+    {"accion": "presenta", "dur": 7.9, "ingrediente": "jitomate", "etiqueta": "tomate triturado y media taza de leche", "texto": "Tres tazas de tomate triturado, media taza de leche, aceite de oliva, sal, pimienta y queso parmesano."},
+    {"accion": "sofrito", "dur": 12.4, "texto": "Pica muy finito la cebolla, la zanahoria, el apio y el ajo, y sofríelos en dos cucharadas de aceite unos ocho minutos, hasta que estén suaves. Esta es la base del sabor."},
+    {"accion": "carne", "dur": 9.0, "texto": "Sube el fuego, agrega la carne y extiéndela. No la muevas dos minutos, para que se dore. Luego deshazla con la cuchara."},
+    {"accion": "leche", "dur": 8.1, "texto": "Ahora el truco: agrega la leche y deja que se evapore. Parece raro, pero hace que la carne quede más suave."},
+    {"accion": "tomate", "dur": 5.0, "texto": "Echa el tomate triturado, con sal y pimienta, y mezcla bien."},
+    {"accion": "lento", "dur": 10.4, "texto": "Y el secreto: baja el fuego al mínimo, tapa a medias y déjala una hora, moviendo cada quince minutos. Si se seca, agrega un chorrito de agua."},
+    {"accion": "cuecepasta", "dur": 11.5, "texto": "Para la pasta, hierve mucha agua con sal, que sepa como agua de mar. Cuece el espagueti un minuto menos de lo que dice el paquete, y guarda una taza del agua."},
+    {"accion": "juntapasta", "dur": 9.9, "texto": "Pasa la pasta directo a la salsa con un chorrito de esa agua, y mezcla un minuto. Así termina de cocerse en la salsa y se pega mejor."},
+    {"accion": "serve", "dur": 4.6, "texto": "Sírvela con mucho queso parmesano rallado encima."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
