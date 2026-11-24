@@ -40,7 +40,7 @@ const plantillas = {
       ${FONDO ? `<div style="position:absolute;right:40px;top:40px;width:560px;height:640px;border-radius:40px;overflow:hidden;border:14px solid var(--cafe);box-sizing:border-box"><img src="img/${FONDO}" style="width:100%;height:100%;object-fit:cover;object-position:30% 60%"></div>`
                : `<img src="${img("michi-cuerpo")}" style="position:absolute;right:120px;bottom:0;height:680px">`}
       <div style="position:absolute;left:50px;top:110px;width:680px">
-        ${titulo(T1, T1.length > 9 ? 112 : 140)}
+        ${titulo(T1, T1.length > 9 ? 100 : T1.length > 8 ? 118 : 140)}
         ${T2 ? titulo(T2, T2.length > 10 ? 88 : 110, "#fff") : ""}
         ${PILL ? `<div class="pastilla" style="font-size:46px;margin-top:22px">${PILL}</div>` : ""}
       </div>
