@@ -1,0 +1,25 @@
+// Arroz frito mar y tierra. Visual, sin voz: al inicio Michi se termina sus panqueques de galleta (video anterior)
+window.RECETA = {
+  platillo: "arrozfrito",
+  titulo: ["ARROZ FRITO", "MAR Y TIERRA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["ARROZ FRITO", "mar y tierra"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 6.1, "texto": "El arroz frito de restaurante tiene un secreto, y está en tu refrigerador."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 11.2, "texto": "Hoy hacemos arroz frito mar y tierra, y el secreto es usar arroz cocido del día anterior, bien frío. Así los granos quedan sueltos y no se hacen masa."},
+    {"accion": "presenta", "dur": 7.0, "ingrediente": "arroz", "etiqueta": "3 tazas de arroz frío y 2 huevos", "texto": "Para cuatro personas: tres tazas de arroz blanco cocido del día anterior y dos huevos."},
+    {"accion": "presenta", "dur": 9.1, "ingrediente": "carne", "etiqueta": "camarón, pollo y res", "texto": "Doscientos gramos de camarón pelado, una pechuga de pollo en cubitos y doscientos gramos de bistec de res en tiras."},
+    {"accion": "presenta", "dur": 7.9, "ingrediente": "cebollita", "etiqueta": "zanahoria, chícharos, cebollita y ajo", "texto": "Una zanahoria en cubitos, media taza de chícharos, tres cebollitas de cambray y dos dientes de ajo."},
+    {"accion": "presenta", "dur": 6.2, "ingrediente": "vinagre", "etiqueta": "salsa de soya y aceite de ajonjolí", "texto": "Y cuatro cucharadas de salsa de soya y una cucharada de aceite de ajonjolí."},
+    {"accion": "carnes", "dur": 13.4, "texto": "Calienta muy bien el sartén con aceite. Dora el pollo y luego la res por separado, unos cinco minutos cada uno, y apártalos. Si los echas juntos, se cuecen en su jugo en vez de dorarse."},
+    {"accion": "camaron", "dur": 9.7, "texto": "Los camarones van solo un par de minutos, hasta que se pongan rosados. Si los dejas más, se ponen chiclosos. Apártalos también."},
+    {"accion": "huevofrito", "dur": 7.2, "texto": "Bate los huevos, échalos al sartén y revuélvelos rompiéndolos en pedacitos. Apártalos."},
+    {"accion": "verduras", "dur": 7.5, "texto": "Sofríe el ajo, la zanahoria, los chícharos y la parte blanca de la cebollita, unos tres minutos."},
+    {"accion": "arrozwok", "dur": 9.8, "texto": "Ahora el secreto: agrega el arroz frío, extiéndelo y déjalo un minuto sin moverlo, para que se tueste un poquito. Luego muévelo."},
+    {"accion": "juntawok", "dur": 10.8, "texto": "Regresa el pollo, la res, el camarón y el huevo. Echa la soya por la orilla del sartén, para que se caramelice, y el aceite de ajonjolí. Mezcla todo."},
+    {"accion": "serve", "dur": 5.0, "texto": "Sírvelo con la parte verde de la cebollita picada encima."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
