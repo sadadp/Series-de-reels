@@ -79,6 +79,7 @@ const POSES = {
     ["tamales-verdes", "TAMALES", "VERDES", "El secreto: la prueba del vaso", "fondo-tamales-verdes.png"],
     ["huevos-divorciados", "HUEVOS", "DIVORCIADOS", "El secreto: la yema líquida", "fondo-huevos-divorciados.png"],
     ["pasta-bolonesa", "PASTA A LA", "BOLOÑESA", "El secreto: una hora", "fondo-pasta-bolonesa.png"],
+    ["panqueques-galleta", "PANQUEQUES", "DE GALLETA", "El secreto: no batir de más", "fondo-panqueques-galleta.png"],
   ];
   if (etapa === "portadas" || etapa === "todo") {
     const dir = path.join(__dirname, "..", "portadas"); fs.mkdirSync(dir, { recursive: true });

@@ -14,8 +14,8 @@
   - CIERRE hablado SIEMPRE: "¿Qué quieres que cocine después? ¡Comenta!" (o una variante igual de clara).
     La pregunta que divide opiniones (ej. "¿verdes o rojos?") ya NO va en la voz: va en las descripciones/captions.
   - CONTINUIDAD: cada video empieza con Michi comiéndose lo del video anterior (plato en una mano, bocados con la
-    otra, como en la lasaña o el mostachón). Solo se VE, no se dice en la voz. El último video hecho fue pasta a la boloñesa:
-    el siguiente video nuevo empieza comiendo pasta a la boloñesa (si el usuario dice otro orden de publicación, se sigue ese). Al terminar cada video, actualiza aquí con lo que corresponda.
+    otra, como en la lasaña o el mostachón). Solo se VE, no se dice en la voz. El último video hecho fue panqueques de galleta con crema:
+    el siguiente video nuevo empieza comiendo panqueques de galleta (si el usuario dice otro orden de publicación, se sigue ese). Al terminar cada video, actualiza aquí con lo que corresponda.
 - Habla en español. Nada de palabras en inglés en los videos (ej. "panqueques", no "hot cakes").
 - Cada vez que entregues un video terminado, entrega también su portada (`portadas/<video>-portada.png`
   1080×1920 y `portadas/<video>-youtube.png` 1280×720, con `node marca/generar.js portadas`) y sus captions para cada red

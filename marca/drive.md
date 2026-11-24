@@ -27,6 +27,7 @@ https://drive.google.com/drive/folders/1XxQg5edEApI8PEcpXCak4AMwHBJR1tqz
 | Tamales verdes | 18BMVnO16OMvIkoaOIrh28EF35GA__tIL |
 | Huevos divorciados | 1SG3muklU2E5GEorlqY8vhacE_sYhhGkf |
 | Pasta a la boloñesa | 1SKFFZAGCMNVUWooUNbiI3tbJp0VPuBQI |
+| Panqueques de galleta con crema | 1DsImfJK2t7jLKOXeg4b9XRf1vsBeFmeg |
 
 Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí caben;
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.
