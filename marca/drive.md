@@ -33,3 +33,4 @@ Límite del conector: ~3 MB por archivo. Portadas, miniaturas y captions sí cab
 los videos no (13-60 MB): se suben a mano desde el teléfono o la computadora.
 | Doc TikTok | 1B1OQsNTay6_LSx7XBaEeCxOvNkcNBD3h0wGWlqAbGCM |
 | Doc Facebook | (ver Drive: 'Facebook — Chef Michi (página y captions)') |
+| Arroz frito mar y tierra | 1qXYJhAti4f76DEyQOTPJ5dBK5Y7vwwAO |
