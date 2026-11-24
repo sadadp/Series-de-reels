@@ -1,0 +1,26 @@
+// Panqueques de galleta con crema. Visual, sin voz: al inicio Michi se termina su pasta a la boloñesa (video anterior)
+window.RECETA = {
+  platillo: "galletas",
+  titulo: ["PANQUEQUES", "DE GALLETA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["PANQUEQUES", "de galleta y crema"],
+  usuario: "@chefmichi",
+  toppings: ["miel"],
+  pasos: [
+    {"accion": "sobras", "dur": 6.6, "texto": "Le metí galletas de chocolate a la masa de los panqueques, y ya no hay vuelta atrás."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 10.1, "texto": "Son panqueques de galleta con crema, y el secreto para que queden esponjosos es no batir de más: unos grumitos en la masa están bien."},
+    {"accion": "presenta", "dur": 9.9, "ingrediente": "harina", "etiqueta": "harina, azúcar, polvo para hornear y sal", "texto": "Para ocho panqueques: una taza y media de harina, dos cucharadas de azúcar, una cucharada de polvo para hornear y una pizca de sal."},
+    {"accion": "presenta", "dur": 8.6, "ingrediente": "leche", "etiqueta": "leche, huevo, mantequilla y vainilla", "texto": "Una taza y cuarto de leche, un huevo, tres cucharadas de mantequilla derretida y una cucharadita de vainilla."},
+    {"accion": "presenta", "dur": 8.7, "ingrediente": "galleta", "etiqueta": "10 galletas de chocolate con crema", "texto": "Diez galletas de chocolate rellenas de crema, y para encima, una taza de crema para batir y jarabe de chocolate."},
+    {"accion": "drop", "dur": 5.7, "ingredientes": ["harina", "sal"], "color": "#f6f0e2", "cantidad": 0.3, "texto": "En un tazón, mezcla la harina, el azúcar, el polvo para hornear y la sal."},
+    {"accion": "drop", "dur": 7.3, "ingredientes": ["leche", "huevo", "mantequilla"], "color": "#f3e2b0", "cantidad": 0.3, "texto": "Haz un hueco en el centro y agrega la leche, el huevo, la mantequilla derretida y la vainilla."},
+    {"accion": "stir", "dur": 9.0, "color": "#efd9a0", "texto": "Ahora el secreto: mezcla con una cuchara solo hasta que ya no veas harina seca. Si bates de más, quedan duros y planos."},
+    {"accion": "galletas", "dur": 10.7, "texto": "Troza ocho galletas con las manos en pedazos medianos, no en polvo, y agrégalas con movimientos suaves. Deja reposar la masa cinco minutos."},
+    {"accion": "pour", "dur": 7.8, "texto": "Calienta un sartén a fuego medio bajo con poquita mantequilla, y vierte un cuarto de taza de masa."},
+    {"accion": "flip", "dur": 7.2, "texto": "Cuando le salgan burbujitas y las orillas se vean secas, voltéalo, y déjalo un minuto más."},
+    {"accion": "crema", "dur": 7.7, "texto": "Mientras, bate la crema fría con dos cucharadas de azúcar glas, hasta que se formen picos suaves."},
+    {"accion": "serve", "dur": 7.6, "texto": "Apílalos con crema entre cada uno, y termina con galletas trozadas y un chorrito de chocolate."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
