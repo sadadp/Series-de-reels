@@ -32,6 +32,13 @@
 **Facebook:** `Mientras tanto, en el hotel… A) Rosa baja con Doña Carmen y corren a la capilla B) Suben a la azotea. Comenta y lo que gane, pasa. (Ficción animada)`
 **Fijado:** `🅰️ = bajan y corren a la capilla · 🅱️ = suben a la azotea. Gana el comentario con más likes.`
 
+## EP3 · La Capilla (Parte 3) — ganó B en la Parte 1
+**TikTok:** `Elegiste subir con Dani… y Lía se quedó atrás 💔 Ahora Don Chuy sube con algo amarillo en los brazos 👀 ¿Sales a ayudarlo o cierran la puerta? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Ustedes eligieron: subir con Dani 🌊 Llegaron a la capilla… pero Don Chuy viene subiendo con algo amarillo en los brazos. ¿Es Lía? 🅰️ Sales a ayudar a Don Chuy 🅱️ Te quedas y cierran la puerta. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `¿Qué trae Don Chuy en los brazos? 🌊 ¿Sales o cierras la puerta? #shorts` · descripción `Parte 3 de "El Mar se Fue". Ganó B: subiste con Dani. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Ganó B: subiste con Dani… y Lía se quedó atrás. Don Chuy viene con algo amarillo en los brazos. A) Sales a ayudarlo B) Te quedas y cierran la puerta. Comenta. (Ficción animada)`
+**Fijado:** `🅰️ = sales a ayudar a Don Chuy · 🅱️ = te quedas y cierran la puerta. Gana el comentario con más likes.`
+
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
 - Portada con texto: `EL MAR SE FUE · PARTE 1` / `PARTE 2`.
