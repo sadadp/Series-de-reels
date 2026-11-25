@@ -1,0 +1,25 @@
+// Pollo a la naranja. Visual, sin voz: al inicio Michi se termina sus huevos benedictinos (video anterior)
+window.RECETA = {
+  platillo: "pollonaranja",
+  titulo: ["POLLO", "A LA NARANJA"],
+  letrero: "RECETA DEL CHEF MICHI",
+  pizarron: ["POLLO", "a la naranja"],
+  usuario: "@chefmichi",
+  pasos: [
+    {"accion": "sobras", "dur": 7.4, "texto": "¿Por qué el pollo a la naranja del restaurante queda crujiente y el de tu casa no? Hoy te lo digo."},
+    {"accion": "rewind", "dur": 1.0, "texto": ""},
+    {"accion": "secreto", "dur": 11.7, "texto": "El secreto es doble: el pollo se cubre con maicena para que quede crujiente, y la salsa se le pone hasta el final, justo antes de servir, para que no se aguade."},
+    {"accion": "presenta", "dur": 5.7, "ingrediente": "pollo", "etiqueta": "2 pechugas en cubos", "texto": "Para cuatro personas: dos pechugas de pollo en cubos, sal y pimienta."},
+    {"accion": "presenta", "dur": 5.8, "ingrediente": "harina", "etiqueta": "1 huevo y ½ taza de maicena", "texto": "Un huevo batido, media taza de maicena, y una taza de aceite para freír."},
+    {"accion": "presenta", "dur": 8.4, "ingrediente": "naranja", "etiqueta": "1 taza de jugo de naranja y ralladura", "texto": "Para la salsa: una taza de jugo de naranja natural, la ralladura de una naranja y tres cucharadas de azúcar."},
+    {"accion": "presenta", "dur": 9.0, "ingrediente": "vinagre", "etiqueta": "soya, vinagre, ajo y jengibre", "texto": "Tres cucharadas de salsa de soya, dos de vinagre, dos dientes de ajo picados y una cucharadita de jengibre rallado."},
+    {"accion": "presenta", "dur": 5.3, "ingrediente": "harina", "etiqueta": "1 cucharada de maicena en agua", "texto": "Y una cucharada de maicena disuelta en dos cucharadas de agua."},
+    {"accion": "empaniza", "dur": 10.2, "texto": "Sazona el pollo con sal y pimienta. Revuélvelo con el huevo batido, y luego con la maicena, hasta que cada pedazo quede bien cubierto."},
+    {"accion": "friepollo", "dur": 16.5, "texto": "Calienta el aceite a fuego medio alto y fríe el pollo en tandas, sin amontonarlo, unos cinco o seis minutos, hasta que esté dorado. Si echas todo junto, el aceite se enfría y el pollo queda aguado. Sácalo a un papel absorbente."},
+    {"accion": "salsanar", "dur": 9.1, "texto": "En otro sartén pon el jugo, la ralladura, el azúcar, la soya, el vinagre, el ajo y el jengibre, y déjalo hervir dos minutos."},
+    {"accion": "espesa", "dur": 8.8, "texto": "Agrega la maicena disuelta sin dejar de mover, para que no se hagan grumos. En un minuto espesa y queda brillante."},
+    {"accion": "revuelve", "dur": 6.5, "texto": "Ahora sí: echa el pollo a la salsa y revuelve rápido, solo hasta que se cubra todo."},
+    {"accion": "serve", "dur": 5.3, "texto": "Sírvelo con arroz blanco, ajonjolí y cebollita picada encima."},
+    {"accion": "outro", "dur": 3.8, "texto": "¿Qué quieres que cocine después? ¡Comenta!"},
+  ],
+};
