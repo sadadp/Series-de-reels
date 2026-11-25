@@ -39,6 +39,13 @@
 **Facebook:** `Ganó B: subiste con Dani… y Lía se quedó atrás. Don Chuy viene con algo amarillo en los brazos. A) Sales a ayudarlo B) Te quedas y cierran la puerta. Comenta. (Ficción animada)`
 **Fijado:** `🅰️ = sales a ayudar a Don Chuy · 🅱️ = te quedas y cierran la puerta. Gana el comentario con más likes.`
 
+## EP4 · La Azotea (Parte 4) — ganó B en la Parte 2
+**TikTok:** `Ustedes eligieron la azotea… y la ola llegó 🌊🏨 Ahora flota una lancha vacía junto al hotel. ¿Bajan por ella o esperan ayuda? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Ustedes eligieron: subir a la azotea 🏨 Rosa cargó a Doña Carmen 7 pisos, Beto las ayudó… y la ola golpeó el hotel 🌊 El agua sigue subiendo y aparece la lancha de Don Chuy, vacía. 🅰️ Bajan por la lancha y van a la capilla 🅱️ Se quedan a esperar ayuda. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `La ola golpeó el hotel… ¿bajan por la lancha o esperan ayuda? 🌊 #shorts` · descripción `Parte 4 de "El Mar se Fue". Ganó B: subieron a la azotea. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Ganó B: subieron a la azotea… y la ola llegó. Ahora flota una lancha vacía. A) Bajan por la lancha y van a la capilla B) Se quedan a esperar ayuda. Comenta. (Ficción animada)`
+**Fijado:** `🅰️ = bajan por la lancha · 🅱️ = se quedan a esperar ayuda. Gana el comentario con más likes.`
+
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
 - Portada con texto: `EL MAR SE FUE · PARTE 1` / `PARTE 2`.
