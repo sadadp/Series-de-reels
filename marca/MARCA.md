@@ -46,6 +46,13 @@
 **Facebook:** `Ganó B: subieron a la azotea… y la ola llegó. Ahora flota una lancha vacía. A) Bajan por la lancha y van a la capilla B) Se quedan a esperar ayuda. Comenta. (Ficción animada)`
 **Fijado:** `🅰️ = bajan por la lancha · 🅱️ = se quedan a esperar ayuda. Gana el comentario con más likes.`
 
+## EP5 · Lo que traía (Parte 5) — ganó A en la Parte 3
+**TikTok:** `Ustedes eligieron salir… y Don Chuy traía a Lía 😭 Pero el agua sube y él ya no puede caminar. ¿Cargas a Lía o a Don Chuy? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Ustedes eligieron: salir a ayudar a Don Chuy 🌊 Lo que traía en los brazos era Lía. ¡Está viva! 😭 Pero el agua sube por la colina y Don Chuy ya no puede caminar. 🅰️ Cargas a Lía y corren a la capilla 🅱️ Cargas a Don Chuy y Lía corre sola adelante. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `¡Don Chuy traía a Lía! Pero solo puedes cargar a uno… 🌊 #shorts` · descripción `Parte 5 de "El Mar se Fue". Ganó A: saliste a ayudar a Don Chuy. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Ganó A: saliste a ayudar a Don Chuy… y traía a Lía, ¡viva! Pero solo puedes cargar a uno. A) Cargas a Lía B) Cargas a Don Chuy. Comenta. (Ficción animada)`
+**Fijado:** `🅰️ = cargas a Lía y corren · 🅱️ = cargas a Don Chuy. Gana el comentario con más likes.`
+
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
 - Portada con texto: `EL MAR SE FUE · PARTE 1` / `PARTE 2`.
