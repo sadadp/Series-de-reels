@@ -53,6 +53,13 @@
 **Facebook:** `Ganó A: saliste a ayudar a Don Chuy… y traía a Lía, ¡viva! Pero solo puedes cargar a uno. A) Cargas a Lía B) Cargas a Don Chuy. Comenta. (Ficción animada)`
 **Fijado:** `🅰️ = cargas a Lía y corren · 🅱️ = cargas a Don Chuy. Gana el comentario con más likes.`
 
+## EP6 · La Lancha (Parte 6) — ganó A en la Parte 4
+**TikTok:** `Ustedes eligieron la lancha 🚤 Ya casi llegan a la capilla… pero un hombre que no sabe nadar pide ayuda. Si sube, se pueden hundir 😰 ¿Lo suben o siguen? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Ustedes eligieron: bajar por la lancha 🚤 Rosa, Beto y Doña Carmen cruzan la inundación rumbo a la capilla… y ven gente en la colina 👀 Pero un hombre en el agua grita que no sabe nadar. 🅰️ Lo suben a la lancha (se pueden hundir) 🅱️ Siguen remando. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `Si lo suben, la lancha se hunde… ¿qué harías? 🌊 #shorts` · descripción `Parte 6 de "El Mar se Fue". Ganó A: bajaron por la lancha. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Ganó A: bajaron por la lancha… pero un hombre que no sabe nadar pide ayuda. A) Lo suben (se pueden hundir) B) Siguen remando. Comenta. (Ficción animada)`
+**Fijado:** `🅰️ = lo suben a la lancha · 🅱️ = siguen remando. Gana el comentario con más likes.`
+
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
 - Portada con texto: `EL MAR SE FUE · PARTE 1` / `PARTE 2`.
