@@ -60,6 +60,13 @@
 **Facebook:** `Ganó A: bajaron por la lancha… pero un hombre que no sabe nadar pide ayuda. A) Lo suben (se pueden hundir) B) Siguen remando. Comenta. (Ficción animada)`
 **Fijado:** `🅰️ = lo suben a la lancha · 🅱️ = siguen remando. Gana el comentario con más likes.`
 
+## EP7 · La Capilla por dentro (Parte 7) — ganó A en la Parte 5
+**TikTok:** `Ustedes eligieron cargar a Lía 😭 Llegaron a la capilla y la familia está junta… pero Don Chuy sigue allá afuera. ¿Sales por él o te quedas? A o B 👇 #elmarsefue #donchuy #tudecides #animacion #historias #fyp`
+**Instagram:** `Ustedes eligieron: cargar a Lía ❤️ Por fin la familia está junta dentro de la capilla… pero desde la ventana se ve a Don Chuy, con el agua a la cintura. 🅰️ Sales otra vez por Don Chuy (Lía se queda con Dani) 🅱️ Te quedas con tu familia y confías en la lancha. Comenta 👇 — Ficción animada. #elmarsefue #loquecuentadonchuy #animacion3d #reels`
+**YouTube Shorts:** título `Don Chuy la salvó… ¿vas a ir por él? 🌊 #shorts` · descripción `Parte 7 de "El Mar se Fue". Ganó A: cargaste a Lía. Comenta A o B: lo que gane, pasa. Ficción animada. #elmarsefue #donchuy`
+**Facebook:** `Ganó A: cargaste a Lía y la familia está junta. Pero Don Chuy sigue afuera. A) Sales por él B) Te quedas con tu familia. Comenta. (Ficción animada)`
+**Fijado:** `🅰️ = sales por Don Chuy · 🅱️ = te quedas con tu familia. Gana el comentario con más likes.`
+
 ## Al publicar
 - Activa la etiqueta de **contenido generado con IA**.
 - Portada con texto: `EL MAR SE FUE · PARTE 1` / `PARTE 2`.
