@@ -190,6 +190,12 @@ def efectos(guion, dur):
             for n in range(8): poner(buf, pasa_altos(ruido(0.06, 45, 2600 + n), 0.9) * 0.25, t0 + 0.4 + n * 0.45)
             poner(buf, sfx_mezcla(d - 4.5) * 0.5, t0 + 4)
         elif a == "crema": poner(buf, sfx_mezcla(d - 1.6) * 0.6, t0 + 0.3); poner(buf, sfx_brillo(), t0 + d - 1.2)
+        elif a == "crutones": poner(buf, sfx_chisporroteo(d - 1) * 0.6, t0 + 1.2)
+        elif a == "pollopl": poner(buf, sfx_chisporroteo(d - 2.5) * 0.8, t0 + 2.3)
+        elif a == "aderezo": poner(buf, sfx_mezcla(2.0) * 0.4, t0 + 1.6); poner(buf, sfx_mezcla(d - 8.6) * 0.5, t0 + 8.6)
+        elif a == "lechugas":
+            for k in range(4): poner(buf, sfx_pop() * 0.35, t0 + 0.5 + k * 0.55)
+        elif a == "mezcla": poner(buf, sfx_mezcla(d - 1) * 0.5, t0 + 0.4)
         elif a == "empaniza": poner(buf, sfx_mezcla(d - 3) * 0.5, t0 + 3)
         elif a == "friepollo": poner(buf, sfx_chisporroteo(d - 2.4) * 0.9, t0 + 2.4)
         elif a == "salsanar": poner(buf, sfx_mezcla(1.6) * 0.5, t0 + 1.0); poner(buf, sfx_chisporroteo(d - 6) * 0.5, t0 + 6.5)
